@@ -1,0 +1,670 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account | Ova Store</title>
+  <meta name="description" content="Customer account access for Ova Store." />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#111111" />
+<link rel="canonical" href="https://ovaperfume.com/account.html" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="images/site-assets/logooo-2.jpeg" />
+<link rel="icon" type="image/jpeg" href="images/site-assets/logooo-2.jpeg" />
+<link rel="shortcut icon" href="images/site-assets/logooo-2.jpeg" />
+<meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Ova Store" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    .back,
+    .back-btn,
+    .back-link,
+    .cart-trigger,
+    .dropdown-link-btn,
+    .hero-btn,
+    .install-app-btn,
+    .modal-more-btn,
+    .modal-add-btn,
+    .modal-secondary-btn,
+    .checkout-btn,
+    .compare-secondary,
+    .compare-primary,
+    .close-search-btn,
+    .filter-tab,
+    .shop-all-btn,
+    .copy-wallet-btn,
+    .confirm-btn,
+    .paypal-btn,
+    .continue-shopping-btn,
+    .submit-btn,
+    .intro-enter-btn,
+    .topbar-back,
+    .topbar-cart {
+      border-radius: 0 !important;
+    }
+
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    .back,
+    .back-btn,
+    .back-link,
+    .cart-trigger,
+    .dropdown-link-btn,
+    .hero-btn,
+    .install-app-btn,
+    .modal-more-btn,
+    .modal-add-btn,
+    .modal-secondary-btn,
+    .checkout-btn,
+    .compare-secondary,
+    .compare-primary,
+    .close-search-btn,
+    .filter-tab,
+    .shop-all-btn,
+    .copy-wallet-btn,
+    .confirm-btn,
+    .paypal-btn,
+    .continue-shopping-btn,
+    .submit-btn,
+    .intro-enter-btn,
+    .topbar-back,
+    .topbar-cart,
+    .product-btn-label {
+      background: #ffffff !important;
+      background-image: none !important;
+      border-color: rgba(0, 0, 0, 0.14) !important;
+      color: #111111 !important;
+      text-shadow: 0 0 6px rgba(214, 179, 122, 0.12), 0 0 1px rgba(214, 179, 122, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-soft: #fbf6ef;
+      --gold: #8b6a33;
+      --gold-soft: #dbc59b;
+      --ink: #181311;
+      --muted: #6d5a51;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: linear-gradient(180deg, #fffdf9 0%, #fff8f1 48%, #ffffff 100%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .navbar-right {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      padding: 10px 16px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.25s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--gold);
+      color: #fff;
+      border-color: var(--gold);
+    }
+
+    .container {
+      width: min(100% - 40px, 900px);
+      margin: 40px auto;
+      padding: 40px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(139, 106, 51, 0.1);
+    }
+
+    .form-wrapper {
+      display: none;
+    }
+
+    .form-wrapper.active {
+      display: block;
+    }
+
+    .form-wrapper.account-view {
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 8px;
+      color: var(--ink);
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 32px;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.25s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(139, 106, 51, 0.02);
+    }
+
+    .form-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: all 0.25s ease;
+      margin-top: 20px;
+    }
+
+    .form-btn:hover {
+      background: #6d5225;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139, 106, 51, 0.3);
+    }
+
+    .form-toggle {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .form-toggle button {
+      background: none;
+      border: none;
+      color: var(--gold);
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      font-family: inherit;
+      font-size: 13px;
+    }
+
+    .form-toggle button:hover {
+      color: #6d5225;
+    }
+
+    /* Account View */
+    .account-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid rgba(139, 106, 51, 0.1);
+    }
+
+    .user-avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 16px;
+    }
+
+    .user-name {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .user-email {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .account-section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .order-item {
+      padding: 16px;
+      background: rgba(139, 106, 51, 0.05);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .order-item-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .order-item-details {
+      color: var(--muted);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .logout-btn {
+      width: 100%;
+      padding: 14px;
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.25s ease;
+    }
+
+    .logout-btn:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .navbar {
+        padding: 12px 16px;
+      }
+
+      .navbar-logo {
+        font-size: 18px;
+      }
+
+      .container {
+        width: min(100% - 20px, 100%);
+        margin: 20px auto;
+        padding: 24px 16px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .navbar-right {
+        gap: 8px;
+      }
+
+      .nav-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .user-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+      }
+
+      .user-name {
+        font-size: 22px;
+      }
+
+      .order-item-details {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .error-message {
+      background: rgba(220, 53, 69, 0.1);
+      border: 1px solid rgba(220, 53, 69, 0.3);
+      color: #c82333;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .success-message {
+      background: rgba(34, 177, 76, 0.1);
+      border: 1px solid rgba(34, 177, 76, 0.3);
+      color: #22b14c;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html" class="navbar-logo">Ova Store</a>
+    <div class="navbar-right">
+      <a href="all-perfume.html" class="nav-btn">Shop</a>
+      <a href="index.html" class="nav-btn">Home</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Login Form -->
+    <div class="form-wrapper login-form active">
+      <h1>Welcome Back</h1>
+      <p class="subtitle">Sign in to your account to view orders and manage your profile</p>
+      <div id="loginError"></div>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="form-btn">Sign In</button>
+      </form>
+      <div class="form-toggle">
+        Don't have an account? <button onclick="switchForm('register')">Create one</button>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form-wrapper register-form">
+      <h1>Create Account</h1>
+      <p class="subtitle">Join Ova Store and start shopping premium perfumes</p>
+      <div id="registerError"></div>
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="registerName">Full Name</label>
+          <input type="text" id="registerName" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email Address</label>
+          <input type="email" id="registerEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPhone">Phone Number</label>
+          <input type="tel" id="registerPhone" placeholder="01234567890" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="form-btn">Create Account</button>
+      </form>
+      <div class="form-toggle">
+        Already have an account? <button onclick="switchForm('login')">Sign in</button>
+      </div>
+    </div>
+
+    <!-- Account View (After Login) -->
+    <div class="form-wrapper account-view">
+      <div class="account-header" id="accountHeader" style="display: none;">
+        <div class="user-avatar" id="userInitial">👤</div>
+        <h1 class="user-name" id="userName"></h1>
+        <p class="user-email" id="userEmail"></p>
+      </div>
+
+      <div id="accountContent"></div>
+    </div>
+  </div>
+
+  <script src="js/features.js?v=20260419a"></script>
+  <script>
+    const AUTH_STORAGE_KEY = "ovaUser";
+    const ORDERS_STORAGE_KEY = "ovaOrders";
+
+    function getCurrentUser() {
+      return JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY));
+    }
+
+    function switchForm(formType) {
+      document.querySelectorAll('.form-wrapper').forEach(form => {
+        form.classList.remove('active');
+      });
+      
+      if (formType === 'login') {
+        document.querySelector('.login-form').classList.add('active');
+      } else if (formType === 'register') {
+        document.querySelector('.register-form').classList.add('active');
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const errorDiv = document.getElementById('loginError');
+
+      errorDiv.innerHTML = '';
+
+      if (!email || !password) {
+        errorDiv.innerHTML = '<div class="error-message">Please fill in all fields</div>';
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("ovaUsers") || "[]");
+      const user = users.find(u => u.email === email && u.password === password);
+
+      if (!user) {
+        errorDiv.innerHTML = '<div class="error-message">Invalid email or password</div>';
+        return;
+      }
+
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ name: user.name, email: user.email }));
+      showAccountView();
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value.trim();
+      const email = document.getElementById('registerEmail').value.trim();
+      const phone = document.getElementById('registerPhone').value.trim();
+      const password = document.getElementById('registerPassword').value.trim();
+      const errorDiv = document.getElementById('registerError');
+
+      errorDiv.innerHTML = '';
+
+      if (!name || !email || !phone || !password) {
+        errorDiv.innerHTML = '<div class="error-message">Please fill in all fields</div>';
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("ovaUsers") || "[]");
+      if (users.some(u => u.email === email)) {
+        errorDiv.innerHTML = '<div class="error-message">Email already registered</div>';
+        return;
+      }
+
+      users.push({ name, email, phone, password });
+      localStorage.setItem("ovaUsers", JSON.stringify(users));
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ name, email }));
+      
+      showAccountView();
+    }
+
+    function showAccountView() {
+      const user = getCurrentUser();
+      if (!user) {
+        switchForm('login');
+        return;
+      }
+
+      document.querySelectorAll('.form-wrapper').forEach(form => {
+        form.classList.remove('active');
+      });
+      document.querySelector('.account-view').classList.add('active');
+
+      const accountHeader = document.getElementById('accountHeader');
+      const userName = document.getElementById('userName');
+      const userEmail = document.getElementById('userEmail');
+      const userInitial = document.getElementById('userInitial');
+
+      accountHeader.style.display = 'block';
+      userName.innerText = user.name;
+      userEmail.innerText = user.email;
+      userInitial.innerText = user.name.charAt(0).toUpperCase();
+
+      loadOrderHistory();
+    }
+
+    function loadOrderHistory() {
+      const user = getCurrentUser();
+      if (!user) return;
+
+      const savedOrders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY) || "[]");
+      const allOrders = Array.isArray(savedOrders)
+        ? savedOrders
+        : Object.values(savedOrders && typeof savedOrders === 'object' ? savedOrders : {}).flat();
+      const userOrders = allOrders.filter(order =>
+        String(order && order.email || '').trim().toLowerCase() === String(user.email || '').trim().toLowerCase()
+      );
+      const accountContent = document.getElementById('accountContent');
+
+      let html = '<div class="account-section">';
+      html += '<h2 class="section-title">📦 Order History</h2>';
+
+      if (userOrders.length === 0) {
+        html += '<div class="empty-message">No orders yet. <a href="all-perfume.html" style="color: var(--gold); text-decoration: underline;">Start shopping</a></div>';
+      } else {
+        userOrders.forEach(order => {
+          const items = Array.isArray(order.items) ? order.items : [];
+          const itemCount = items.reduce((sum, item) => sum + Number(item && (item.quantity || item.qty) || 0), 0);
+          const orderDate = order.createdAt
+            ? new Date(order.createdAt).toLocaleDateString()
+            : (order.date || '—');
+          const orderId = order.id || order.orderId || '—';
+          const total = Number(order.totalPrice || order.total || 0);
+          html += `
+            <div class="order-item">
+              <div class="order-item-header">
+                <span>Order #${orderId}</span>
+                <span>${total} EGP</span>
+              </div>
+              <div class="order-item-details">
+                <div><strong>Date:</strong> ${orderDate}</div>
+                <div><strong>Items:</strong> ${itemCount}</div>
+              </div>
+            </div>
+          `;
+        });
+      }
+      html += '</div>';
+
+      html += `
+        <div class="account-section">
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+      `;
+
+      accountContent.innerHTML = html;
+    }
+
+    function logout() {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+      document.querySelectorAll('.form-wrapper').forEach(form => {
+        form.classList.remove('active');
+      });
+      document.querySelector('.login-form').classList.add('active');
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginError').innerHTML = '';
+    }
+
+    // Initialize on page load
+    window.addEventListener('load', () => {
+      const user = getCurrentUser();
+      if (user) {
+        showAccountView();
+      }
+    });
+  </script>
+  <script src="js/ova-analytics.js?v=20260424b"></script>
+  <script src="js/pwa.js?v=20260419a"></script>
+</body>
+</html>
+

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ovaperfume.com/sitemap.xml

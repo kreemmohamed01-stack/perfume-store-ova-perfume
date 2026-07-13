@@ -1,0 +1,1170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Ova Store</title>
+<meta name="description" content="Complete your perfume order securely at Ova Store checkout with delivery details and order summary." />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Ova Store" />
+<meta name="theme-color" content="#111111" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="images/site-assets/logooo-2.jpeg" />
+<link rel="icon" type="image/jpeg" href="images/site-assets/logooo-2.jpeg" />
+<link rel="shortcut icon" href="images/site-assets/logooo-2.jpeg" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Ova Store" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Checkout | Ova Store" />
+<meta property="og:description" content="Secure checkout for your Ova Store perfume order." />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"Checkout | Ova Store",
+  "description":"Secure perfume checkout page for Ova Store."
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.back,
+.back-btn,
+.back-link,
+.cart-trigger,
+.dropdown-link-btn,
+.hero-btn,
+.install-app-btn,
+.modal-more-btn,
+.modal-add-btn,
+.modal-secondary-btn,
+.checkout-btn,
+.compare-secondary,
+.compare-primary,
+.close-search-btn,
+.filter-tab,
+.shop-all-btn,
+.copy-wallet-btn,
+.confirm-btn,
+.paypal-btn,
+.continue-shopping-btn,
+.submit-btn,
+.intro-enter-btn,
+.topbar-back,
+.topbar-cart{
+  border-radius:0 !important;
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.back,
+.back-btn,
+.back-link,
+.cart-trigger,
+.dropdown-link-btn,
+.hero-btn,
+.install-app-btn,
+.modal-more-btn,
+.modal-add-btn,
+.modal-secondary-btn,
+.checkout-btn,
+.compare-secondary,
+.compare-primary,
+.close-search-btn,
+.filter-tab,
+.shop-all-btn,
+.copy-wallet-btn,
+.confirm-btn,
+.paypal-btn,
+.continue-shopping-btn,
+.submit-btn,
+.intro-enter-btn,
+.topbar-back,
+.topbar-cart,
+.product-btn-label{
+  background:#ffffff !important;
+  background-image:none !important;
+  border-color:rgba(0,0,0,.14) !important;
+  color:#111111 !important;
+  text-shadow:0 0 6px rgba(214,179,122,.12),0 0 1px rgba(214,179,122,.3);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Playfair Display', serif;
+  background:linear-gradient(180deg, #f8f2eb 0%, #ffffff 45%, #f4ede5 100%);
+  color:#111;
+}
+body.rtl{
+  direction:rtl;
+  text-align:right;
+  font-family:'Cairo', sans-serif;
+}
+body.rtl .checkout-header,
+body.rtl .summary-offer,
+body.rtl .summary-total,
+body.rtl .summary-item,
+body.rtl .phone-group,
+body.rtl .summary-actions{
+  direction:rtl;
+}
+body.rtl .checkout-header h1,
+body.rtl .checkout-header p,
+body.rtl .total-pill span,
+body.rtl .section-title,
+body.rtl .field label,
+body.rtl .summary-panel h2,
+body.rtl .success-screen h2,
+body.rtl .submit-btn,
+body.rtl .continue-shopping-btn{
+  letter-spacing:0;
+  text-transform:none;
+}
+body.rtl button,
+body.rtl input,
+body.rtl select,
+body.rtl textarea{
+  font-family:'Cairo', sans-serif;
+}
+body.rtl .delivery-banner,
+body.rtl .summary-item > div{
+  text-align:right;
+}
+body.rtl .field input,
+body.rtl .field select,
+body.rtl .field textarea{
+  text-align:right;
+}
+body.rtl #email,
+body.rtl #phoneNumber,
+body.rtl #countryCode{
+  direction:ltr;
+  text-align:left;
+}
+body.rtl .phone-group{
+  grid-template-columns:1fr 160px;
+}
+body.rtl .total-pill strong,
+body.rtl #headerTotal,
+body.rtl #summaryDiscount,
+body.rtl #summaryCouponDiscount,
+body.rtl #summaryShipping,
+body.rtl #summaryTotal{
+  direction:ltr;
+  unicode-bidi:embed;
+}
+
+body.rtl #couponCode{
+  direction:ltr;
+  text-align:left;
+}
+
+.checkout-shell{
+  width:min(1120px, calc(100% - 24px));
+  margin:0 auto;
+  padding:32px 0 60px;
+}
+
+.checkout-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  margin-bottom:28px;
+  flex-wrap:wrap;
+}
+
+.checkout-header h1{
+  font-size:clamp(34px, 5vw, 60px);
+  text-transform:uppercase;
+  letter-spacing:4px;
+}
+
+.back-btn{
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,0.72);
+  border:1px solid rgba(0,0,0,0.14);
+  border-radius:18px;
+  padding:8px 16px;
+  font-family:inherit;
+  font-size:14px;
+  cursor:pointer;
+  margin-bottom:12px;
+  backdrop-filter:blur(10px);
+  transition:transform .24s ease, box-shadow .24s ease, background .24s ease, border-color .24s ease;
+}
+
+.back-btn:hover{
+  background:#fffaf4;
+  border-color:rgba(139,106,51,0.24);
+  box-shadow:0 14px 24px rgba(91,60,31,0.08);
+  transform:translateY(-2px);
+}
+
+.checkout-header p{
+  font-size:14px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#7e6254;
+}
+
+.total-pill{
+  min-width:220px;
+  background:linear-gradient(135deg, #111111 0%, #2a2a2a 52%, #111111 100%);
+  color:#fff;
+  border-radius:24px;
+  padding:18px 22px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.16);
+  position:relative;
+  overflow:hidden;
+}
+
+.total-pill::after{
+  content:"";
+  position:absolute;
+  inset:-120% auto auto -18%;
+  width:66%;
+  height:240%;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.18) 48%, rgba(255,255,255,0) 100%);
+  transform:rotate(18deg) translate3d(0,0,0);
+  opacity:.7;
+  animation:checkoutShine 7s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.total-pill span{
+  display:block;
+  font-size:13px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:0.8;
+  margin-bottom:8px;
+}
+
+.total-pill strong{
+  font-size:28px;
+}
+
+.checkout-layout{
+  display:grid;
+  grid-template-columns:minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap:24px;
+}
+
+.panel{
+  background:rgba(255,255,255,0.94);
+  border:1px solid rgba(0,0,0,0.07);
+  border-radius:30px;
+  box-shadow:0 24px 50px rgba(0,0,0,0.08);
+  position:relative;
+  overflow:hidden;
+}
+
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.24) 0%, rgba(255,255,255,0) 28%);
+  pointer-events:none;
+}
+
+.form-panel{
+  padding:28px 22px;
+}
+
+.section-title{
+  font-size:27px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.fields{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:16px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.field.full{
+  grid-column:1 / -1;
+}
+
+.field label{
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#6a5448;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid rgba(0,0,0,0.12);
+  border-radius:18px;
+  padding:14px 16px;
+  font:inherit;
+  background:linear-gradient(180deg,#fffdfb 0%,#fff7f0 100%);
+  outline:none;
+  transition:border-color .24s ease, box-shadow .24s ease, transform .24s ease, background .24s ease;
+}
+
+.field textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover{
+  border-color:rgba(60,42,31,0.2);
+  box-shadow:0 10px 24px rgba(59,40,23,0.05);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#8b6a33;
+  box-shadow:0 0 0 4px rgba(139,106,51,0.12), 0 14px 26px rgba(80,56,36,0.08);
+  transform:translateY(-1px);
+  background:linear-gradient(180deg,#fffefe 0%,#fffaf4 100%);
+}
+
+.field input::placeholder,
+.field textarea::placeholder{
+  color:#9b8b7e;
+}
+
+.coupon-panel{
+  margin:12px 0 22px;
+  padding:18px;
+  border:1px solid rgba(139,106,51,.14);
+  background:linear-gradient(180deg,#fffdfb 0%,#f7efe5 100%);
+  box-shadow:0 18px 34px rgba(91,60,31,.06);
+}
+
+.coupon-panel h3{
+  font-size:18px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.coupon-panel p{
+  font-size:13px;
+  line-height:1.8;
+  color:#6f5b4f;
+  margin-bottom:14px;
+}
+
+.coupon-inline{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  align-items:end;
+}
+
+.coupon-apply-btn{
+  min-height:48px;
+  padding:0 18px;
+  border:1px solid rgba(0,0,0,.14);
+  font:inherit;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.coupon-status{
+  min-height:22px;
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.7;
+  color:#6f5b4f;
+}
+
+.coupon-status.success{
+  color:#17733c;
+}
+
+.coupon-status.error{
+  color:#9b2f2f;
+}
+
+.phone-group{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:12px;
+}
+
+.divider{
+  height:1px;
+  background:rgba(0,0,0,0.08);
+  margin:24px 0;
+}
+
+.submit-btn{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  margin-top:22px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(135deg,#111 0%,#242424 50%,#111 100%);
+  color:#fff;
+  padding:18px 20px;
+  font:inherit;
+  font-size:16px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+  transition:transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1), filter .28s ease;
+}
+
+.submit-btn::after{
+  content:"";
+  position:absolute;
+  inset:-140% auto auto -20%;
+  width:68%;
+  height:260%;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.26) 48%, rgba(255,255,255,0) 100%);
+  transform:rotate(18deg) translate3d(0,0,0);
+  opacity:0;
+  pointer-events:none;
+}
+
+.submit-btn:hover{
+  transform:translateY(-3px) scale(1.01);
+  box-shadow:0 24px 46px rgba(0,0,0,.2);
+  filter:brightness(1.03);
+}
+
+.submit-btn:hover::after{
+  opacity:1;
+  animation:checkoutShine 1.05s ease;
+}
+
+.delivery-banner{
+  margin:0 0 22px;
+  padding:16px 18px;
+  border-radius:20px;
+  background:linear-gradient(135deg, rgba(241,223,190,0.36) 0%, rgba(255,248,238,0.92) 100%);
+  border:1px solid rgba(139,106,51,0.18);
+  color:#5a4030;
+  font-size:14px;
+  line-height:1.8;
+  box-shadow:0 18px 32px rgba(139,106,51,0.08);
+  position:relative;
+  overflow:hidden;
+}
+
+.delivery-banner::after{
+  content:"";
+  position:absolute;
+  inset:auto -10% -34% auto;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(241,223,190,.42) 0%, rgba(241,223,190,0) 70%);
+  pointer-events:none;
+}
+
+.delivery-banner strong{
+  color:#8b6a33;
+}
+
+.summary-panel{
+  padding:24px 20px;
+  position:sticky;
+  top:24px;
+  height:fit-content;
+  background:linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(249,243,236,.96) 100%);
+}
+
+.summary-panel h2{
+  font-size:24px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.summary-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.summary-item img{
+  width:72px;
+  height:72px;
+  border-radius:16px;
+  object-fit:cover;
+  background:#f2ede7;
+}
+
+@keyframes checkoutShine{
+  0%{transform:rotate(18deg) translate3d(-180%,0,0)}
+  100%{transform:rotate(18deg) translate3d(235%,0,0)}
+}
+
+.summary-item h3{
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:4px;
+}
+
+.summary-item p{
+  font-size:13px;
+  color:#5d534c;
+}
+
+.summary-item .offer-line{
+  color:#1f8f44;
+  font-weight:700;
+}
+
+.summary-offer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:15px;
+  color:#1f8f44;
+  font-weight:700;
+  padding-top:14px;
+}
+
+.summary-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:18px;
+  font-weight:700;
+  padding-top:14px;
+  border-top:1px solid rgba(0,0,0,0.08);
+  margin-top:8px;
+}
+
+.summary-actions{
+  display:flex;
+  gap:12px;
+  margin-top:24px;
+  padding-top:24px;
+  border-top:1px solid rgba(0,0,0,0.08);
+  flex-direction:column;
+}
+
+.continue-shopping-btn{
+  width:100%;
+  border:2px solid #111;
+  background:transparent;
+  color:#111;
+  padding:14px 18px;
+  border-radius:18px;
+  font:inherit;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+
+.continue-shopping-btn:hover{
+  background:#111;
+  color:#fff;
+  box-shadow:0 12px 24px rgba(0,0,0,0.12);
+}
+
+.success-screen{
+  display:none;
+  margin-top:24px;
+  padding:30px 24px;
+  border-radius:28px;
+  background:linear-gradient(180deg, #effff3 0%, #d9f8e0 100%);
+  border:1px solid rgba(22,130,63,0.18);
+  text-align:center;
+  box-shadow:0 24px 50px rgba(34,139,34,0.12);
+}
+
+.success-screen h2{
+  font-size:clamp(34px, 6vw, 58px);
+  color:#1f8f44;
+  letter-spacing:3px;
+  margin-bottom:12px;
+  text-transform:uppercase;
+}
+
+.success-screen p{
+  font-size:16px;
+  line-height:1.9;
+  color:#1e5f34;
+  max-width:720px;
+  margin:0 auto 10px;
+}
+
+@media (max-width:860px){
+  .checkout-layout{
+    grid-template-columns:1fr;
+  }
+
+  .summary-panel{
+    position:static;
+  }
+
+  .coupon-inline{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:640px){
+  .fields{
+    grid-template-columns:1fr;
+  }
+
+  .phone-group{
+    grid-template-columns:1fr;
+  }
+
+  .checkout-shell{
+    padding-top:20px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="checkout-shell">
+  <div class="checkout-header">
+    <div>
+      <button class="back-btn" onclick="goBackToHome()" data-i18n="back">Back</button>
+      <p data-i18n="eyebrow">Secure Checkout</p>
+      <h1 data-i18n="title">Checkout</h1>
+    </div>
+    <div class="total-pill">
+      <span data-i18n="total">Total</span>
+      <strong id="headerTotal">0 EGP</strong>
+    </div>
+  </div>
+
+  <div class="checkout-layout">
+    <div class="panel form-panel">
+      <form id="checkoutForm">
+        <div class="delivery-banner" id="deliveryBanner"><strong>Free delivery:</strong> available for the first week on all orders.</div>
+        <h2 class="section-title" data-i18n="contactInfo">Contact Information</h2>
+        <div class="fields">
+          <div class="field">
+            <label for="fullName" data-i18n="fullName">Full Name</label>
+            <input id="fullName" name="fullName" type="text" required>
+          </div>
+          <div class="field">
+            <label for="email" data-i18n="email">Email Address</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div class="field full">
+            <label for="phoneNumber" data-i18n="phone">Phone Number</label>
+            <div class="phone-group">
+              <select id="countryCode" name="countryCode" required>
+                <option value="+20" selected>Egypt (+20)</option>
+                <option value="+971">UAE (+971)</option>
+                <option value="+966">Saudi Arabia (+966)</option>
+                <option value="+965">Kuwait (+965)</option>
+                <option value="+974">Qatar (+974)</option>
+                <option value="+973">Bahrain (+973)</option>
+                <option value="+968">Oman (+968)</option>
+                <option value="+962">Jordan (+962)</option>
+                <option value="+961">Lebanon (+961)</option>
+                <option value="+963">Syria (+963)</option>
+                <option value="+964">Iraq (+964)</option>
+                <option value="+213">Algeria (+213)</option>
+                <option value="+216">Tunisia (+216)</option>
+                <option value="+212">Morocco (+212)</option>
+                <option value="+218">Libya (+218)</option>
+                <option value="+249">Sudan (+249)</option>
+                <option value="+1">United States (+1)</option>
+                <option value="+1">Canada (+1)</option>
+                <option value="+44">United Kingdom (+44)</option>
+                <option value="+33">France (+33)</option>
+                <option value="+49">Germany (+49)</option>
+                <option value="+39">Italy (+39)</option>
+                <option value="+34">Spain (+34)</option>
+                <option value="+31">Netherlands (+31)</option>
+                <option value="+32">Belgium (+32)</option>
+                <option value="+41">Switzerland (+41)</option>
+                <option value="+43">Austria (+43)</option>
+                <option value="+46">Sweden (+46)</option>
+                <option value="+47">Norway (+47)</option>
+                <option value="+45">Denmark (+45)</option>
+                <option value="+48">Poland (+48)</option>
+                <option value="+30">Greece (+30)</option>
+                <option value="+90">Turkey (+90)</option>
+                <option value="+7">Russia (+7)</option>
+                <option value="+86">China (+86)</option>
+                <option value="+81">Japan (+81)</option>
+                <option value="+82">South Korea (+82)</option>
+                <option value="+91">India (+91)</option>
+                <option value="+92">Pakistan (+92)</option>
+                <option value="+880">Bangladesh (+880)</option>
+                <option value="+65">Singapore (+65)</option>
+                <option value="+60">Malaysia (+60)</option>
+                <option value="+62">Indonesia (+62)</option>
+                <option value="+63">Philippines (+63)</option>
+                <option value="+66">Thailand (+66)</option>
+                <option value="+61">Australia (+61)</option>
+                <option value="+64">New Zealand (+64)</option>
+                <option value="+27">South Africa (+27)</option>
+                <option value="+234">Nigeria (+234)</option>
+                <option value="+254">Kenya (+254)</option>
+                <option value="+55">Brazil (+55)</option>
+                <option value="+52">Mexico (+52)</option>
+                <option value="+54">Argentina (+54)</option>
+                <option value="+56">Chile (+56)</option>
+              </select>
+              <input id="phoneNumber" name="phoneNumber" type="tel" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="section-title" data-i18n="shippingInfo">Shipping Information</h2>
+        <div class="fields">
+          <div class="field full">
+            <label for="addressLine" data-i18n="address">Address</label>
+            <input id="addressLine" name="addressLine" type="text" required>
+          </div>
+          <div class="field">
+            <label for="city" data-i18n="city">City</label>
+            <input id="city" name="city" type="text" required>
+          </div>
+          <div class="field">
+            <label for="country" data-i18n="country">Country</label>
+            <input id="country" name="country" type="text" value="Egypt" data-i18n-value="countryDefault" required>
+          </div>
+          <div class="field full">
+            <label for="notes" data-i18n="notes">Notes</label>
+            <textarea id="notes" name="notes" data-i18n-placeholder="notesPlaceholder" placeholder="Add delivery notes or any helpful details"></textarea>
+          </div>
+        </div>
+
+        <div class="coupon-panel">
+          <h3 data-i18n="couponHeading">First Order Coupon</h3>
+          <p data-i18n="couponHint">Use OVA22 for 10% off on your first order.</p>
+          <div class="coupon-inline">
+            <div class="field" style="margin-bottom:0;">
+              <label for="couponCode" data-i18n="couponLabel">Coupon Code</label>
+              <input id="couponCode" name="couponCode" type="text" data-i18n-placeholder="couponPlaceholder" placeholder="Enter coupon code" autocomplete="off">
+            </div>
+            <button class="coupon-apply-btn" id="couponApplyBtn" type="button" data-i18n="applyCoupon">Apply</button>
+          </div>
+          <div class="coupon-status" id="couponStatus"></div>
+        </div>
+
+        <button class="submit-btn" type="submit" data-i18n="continue">Continue To Delivery</button>
+      </form>
+
+      <div class="success-screen" id="successScreen">
+        <h2 data-i18n="successTitle">Thank You</h2>
+        <p data-i18n="success1">Your order has been received successfully, and we are already preparing it with care just for you.</p>
+        <p data-i18n="success2">Our team will review your order details shortly, and delivery usually takes from 3 to 4 days.</p>
+        <p data-i18n="success3">We truly appreciate your trust in Ova Store and hope your order reaches you in the best condition.</p>
+      </div>
+    </div>
+
+    <aside class="panel summary-panel">
+      <h2 data-i18n="orderSummary">Order Summary</h2>
+      <div id="summaryItems"></div>
+      <div class="summary-offer">
+        <span data-i18n="offerDiscount">Offer Discount</span>
+        <span id="summaryDiscount">0 EGP</span>
+      </div>
+      <div class="summary-offer">
+        <span data-i18n="couponDiscount">Coupon Discount</span>
+        <span id="summaryCouponDiscount">0 EGP</span>
+      </div>
+      <div class="summary-offer">
+        <span id="summaryShippingLabel">Shipping</span>
+        <span id="summaryShipping">Free</span>
+      </div>
+      <div class="summary-total">
+        <span data-i18n="total">Total</span>
+        <span id="summaryTotal">0 EGP</span>
+      </div>
+      <div class="summary-actions">
+        <button class="continue-shopping-btn" type="button" onclick="continueShopping()" data-i18n="continueShopping">Continue Shopping</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="js/page-language.js?v=20260419a"></script>
+<script>
+const pageLang = applyPageLanguage({
+  en: {
+    pageTitle: "Checkout | Ova Store",
+    eyebrow: "Secure Checkout",
+    title: "Checkout",
+    back: "Back",
+    total: "Total",
+    contactInfo: "Contact Information",
+    fullName: "Full Name",
+    email: "Email Address",
+    phone: "Phone Number",
+    shippingInfo: "Shipping Information",
+    address: "Address",
+    city: "City",
+    country: "Country",
+    countryDefault: "Egypt",
+    notes: "Notes",
+    notesPlaceholder: "Add delivery notes or any helpful details",
+    continue: "Continue To Payment",
+    continueShopping: "Continue Shopping",
+    successTitle: "Thank You",
+    success1: "Your order has been received successfully, and we are already preparing it with care just for you.",
+    success2: "Our team will review your order details shortly, and delivery is free for the first week.",
+    success3: "We truly appreciate your trust in Ova Store and hope your order reaches you in the best condition.",
+    orderSummary: "Order Summary",
+    offerDiscount: "Offer Discount",
+    couponHeading: "First Order Coupon",
+    couponLabel: "Coupon Code",
+    couponPlaceholder: "Enter coupon code",
+    applyCoupon: "Apply",
+    couponHint: "Use OVA22 for 10% off on your first order.",
+    couponDiscount: "Coupon Discount",
+    couponApplied: "Coupon OVA22 applied. 10% discount added.",
+    couponInvalid: "This coupon is not valid.",
+    couponUsed: "This coupon is available for the first order only.",
+    shippingCost: "Shipping",
+    freeLabel: "Free",
+    freeDeliveryWeek: "<strong>Free delivery:</strong> available for the first week on all orders.",
+    freePiece: "free piece applied",
+    subtotal: "Subtotal",
+    cartEmpty: "Your cart is empty.",
+    noNotes: "No notes"
+  },
+  ar: {
+    pageTitle: "إتمام الطلب | Ova Store",
+    eyebrow: "إتمام شراء آمن",
+    title: "إتمام الطلب",
+    back: "رجوع",
+    total: "الإجمالي",
+    contactInfo: "بيانات التواصل",
+    fullName: "الاسم الكامل",
+    email: "البريد الإلكتروني",
+    phone: "رقم الهاتف",
+    shippingInfo: "بيانات الشحن",
+    address: "العنوان",
+    city: "المدينة",
+    country: "الدولة",
+    countryDefault: "مصر",
+    notes: "ملاحظات",
+    notesPlaceholder: "أضف ملاحظات التوصيل أو أي تفاصيل مفيدة",
+    continue: "المتابعة إلى الدفع",
+    continueShopping: "متابعة التسوق",
+    successTitle: "شكرًا لك",
+    success1: "تم استلام طلبك بنجاح، وبدأنا بالفعل في تجهيزه بعناية خاصة من أجلك.",
+    success2: "سيقوم فريقنا بمراجعة تفاصيل الطلب قريبًا، والتوصيل مجاني خلال أول أسبوع.",
+    success3: "نقدّر ثقتك في Ova Store ونتمنى أن يصلك طلبك بأفضل حالة.",
+    orderSummary: "ملخص الطلب",
+    offerDiscount: "خصم العرض",
+    couponHeading: "كوبون أول أوردر",
+    couponLabel: "كود الكوبون",
+    couponPlaceholder: "اكتب كود الكوبون",
+    applyCoupon: "تفعيل",
+    couponHint: "استخدم OVA22 للحصول على خصم 10% على أول أوردر.",
+    couponDiscount: "خصم الكوبون",
+    couponApplied: "تم تفعيل كوبون OVA22 وإضافة خصم 10%.",
+    couponInvalid: "هذا الكوبون غير صالح.",
+    couponUsed: "هذا الكوبون متاح لأول أوردر فقط.",
+    shippingCost: "الشحن",
+    freeLabel: "مجاني",
+    freeDeliveryWeek: "<strong>التوصيل مجاني:</strong> متاح خلال أول أسبوع على كل الطلبات.",
+    freePiece: "قطعة مجانية مضافة",
+    subtotal: "الإجمالي الفرعي",
+    cartEmpty: "السلة فارغة.",
+    noNotes: "لا توجد ملاحظات"
+  }
+});
+const currentLang = pageLang.lang;
+const t = pageLang.t;
+const savedCart = JSON.parse(localStorage.getItem("ovaCart") || "[]");
+const FIRST_ORDER_COUPON_CODE = "OVA22";
+const FIRST_ORDER_COUPON_RATE = 0.10;
+let appliedCouponCode = String(localStorage.getItem("ovaAppliedCouponCode") || "").trim().toUpperCase();
+
+function getCartOfferSummary(items){
+  const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
+  const freePieces = Math.floor(totalQty / 3);
+  const freeByName = {};
+  let discount = 0;
+
+  if(!freePieces){
+    return { freeByName, discount, freePieces, totalQty };
+  }
+
+  const units = [];
+  items.forEach((item) => {
+    for(let i = 0; i < item.qty; i += 1){
+      units.push({ name: item.name, price: item.price });
+    }
+  });
+
+  units
+    .sort((a, b) => a.price - b.price)
+    .slice(0, freePieces)
+    .forEach((unit) => {
+      freeByName[unit.name] = (freeByName[unit.name] || 0) + 1;
+      discount += unit.price;
+    });
+
+  return { freeByName, discount, freePieces, totalQty };
+}
+
+function getItemFreeUnits(item, offerSummary){
+  return offerSummary.freeByName[item.name] || 0;
+}
+
+function getItemSubtotal(item, offerSummary){
+  return item.price * (item.qty - getItemFreeUnits(item, offerSummary));
+}
+
+function isFirstOrderEligible(){
+  return JSON.parse(localStorage.getItem("ovaFirstOrderCompleted") || "false") !== true;
+}
+
+function getCouponDiscountAmount(totalBeforeCoupon){
+  return appliedCouponCode === FIRST_ORDER_COUPON_CODE && isFirstOrderEligible()
+    ? Math.round(totalBeforeCoupon * FIRST_ORDER_COUPON_RATE)
+    : 0;
+}
+
+function setCouponStatus(message = "", state = ""){
+  const couponStatus = document.getElementById("couponStatus");
+  if(!couponStatus) return;
+  couponStatus.className = "coupon-status" + (state ? " " + state : "");
+  couponStatus.textContent = message;
+}
+
+function applyCouponCode(){
+  const couponInput = document.getElementById("couponCode");
+  const couponValue = String(couponInput?.value || "").trim().toUpperCase();
+
+  if(couponInput){
+    couponInput.value = couponValue;
+  }
+
+  if(!couponValue){
+    appliedCouponCode = "";
+    localStorage.removeItem("ovaAppliedCouponCode");
+    setCouponStatus(t("couponHint"));
+    renderSummary();
+    return;
+  }
+
+  if(!isFirstOrderEligible()){
+    appliedCouponCode = "";
+    localStorage.removeItem("ovaAppliedCouponCode");
+    setCouponStatus(t("couponUsed"), "error");
+    renderSummary();
+    return;
+  }
+
+  if(couponValue !== FIRST_ORDER_COUPON_CODE){
+    appliedCouponCode = "";
+    localStorage.removeItem("ovaAppliedCouponCode");
+    setCouponStatus(t("couponInvalid"), "error");
+    renderSummary();
+    return;
+  }
+
+  appliedCouponCode = couponValue;
+  localStorage.setItem("ovaAppliedCouponCode", appliedCouponCode);
+  setCouponStatus(t("couponApplied"), "success");
+  renderSummary();
+}
+
+function syncCouponState(){
+  const couponInput = document.getElementById("couponCode");
+
+  if(!isFirstOrderEligible()){
+    appliedCouponCode = "";
+    localStorage.removeItem("ovaAppliedCouponCode");
+    if(couponInput){
+      couponInput.value = "";
+    }
+    setCouponStatus(t("couponUsed"), "error");
+    return;
+  }
+
+  if(couponInput){
+    couponInput.value = appliedCouponCode;
+  }
+
+  if(appliedCouponCode === FIRST_ORDER_COUPON_CODE){
+    setCouponStatus(t("couponApplied"), "success");
+  } else {
+    setCouponStatus(t("couponHint"));
+  }
+}
+
+function renderSummary(){
+  const summaryItems = document.getElementById("summaryItems");
+  const summaryTotal = document.getElementById("summaryTotal");
+  const summaryDiscount = document.getElementById("summaryDiscount");
+  const summaryCouponDiscount = document.getElementById("summaryCouponDiscount");
+  const summaryShipping = document.getElementById("summaryShipping");
+  const summaryShippingLabel = document.getElementById("summaryShippingLabel");
+  const deliveryBanner = document.getElementById("deliveryBanner");
+  const headerTotal = document.getElementById("headerTotal");
+  const offerSummary = getCartOfferSummary(savedCart);
+  summaryItems.innerHTML = "";
+
+  if (deliveryBanner) {
+    deliveryBanner.innerHTML = t("freeDeliveryWeek");
+  }
+
+  if (summaryShippingLabel) {
+    summaryShippingLabel.textContent = t("shippingCost");
+  }
+
+  let totalBeforeCoupon = 0;
+
+  savedCart.forEach((item) => {
+    const freeUnits = getItemFreeUnits(item, offerSummary);
+    const subtotal = getItemSubtotal(item, offerSummary);
+    totalBeforeCoupon += subtotal;
+
+    const row = document.createElement("div");
+    row.className = "summary-item";
+    row.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.qty} x ${item.price} EGP</p>
+        ${freeUnits ? `<p class="offer-line">${freeUnits} ${t("freePiece")}</p>` : ``}
+        <p>${t("subtotal")}: ${subtotal} EGP</p>
+      </div>
+    `;
+    summaryItems.appendChild(row);
+  });
+
+  const couponDiscount = getCouponDiscountAmount(totalBeforeCoupon);
+  const finalTotal = totalBeforeCoupon - couponDiscount;
+  summaryDiscount.innerText = offerSummary.discount + " EGP";
+  summaryCouponDiscount.innerText = couponDiscount + " EGP";
+  summaryShipping.innerText = t("freeLabel");
+  summaryTotal.innerText = finalTotal + " EGP";
+  headerTotal.innerText = finalTotal + " EGP";
+}
+
+document.getElementById("checkoutForm").addEventListener("submit", function(event){
+  event.preventDefault();
+  if(!savedCart.length){
+    alert(t("cartEmpty"));
+    return;
+  }
+
+  const checkoutDetails = {
+    fullName: document.getElementById("fullName").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    countryCode: document.getElementById("countryCode").value.trim(),
+    phoneNumber: document.getElementById("phoneNumber").value.trim(),
+    addressLine: document.getElementById("addressLine").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    country: document.getElementById("country").value.trim(),
+    notes: document.getElementById("notes").value.trim() || t("noNotes"),
+    couponCode: appliedCouponCode
+  };
+
+  // إرسال البيانات إلى Google Apps Script
+  const orderData = {
+    fullName: checkoutDetails.fullName,
+    email: checkoutDetails.email,
+    phone: checkoutDetails.countryCode + checkoutDetails.phoneNumber,
+    address: checkoutDetails.addressLine,
+    city: checkoutDetails.city,
+    country: checkoutDetails.country,
+    notes: checkoutDetails.notes,
+    shippingCost: 0,
+    shippingOffer: currentLang === "ar" ? "التوصيل مجاني خلال أول أسبوع على كل الطلبات." : "Free delivery is available for the first week on all orders.",
+    cartItems: savedCart,
+    timestamp: new Date().toLocaleString('ar-EG')
+  };
+
+  // حفظ التفاصيل في localStorage
+  localStorage.setItem("ovaCheckoutDetails", JSON.stringify(checkoutDetails));
+  // الانتقال إلى صفحة الدفع
+  window.location.href = "payment.html";
+});
+
+document.getElementById("couponApplyBtn").addEventListener("click", applyCouponCode);
+document.getElementById("couponCode").addEventListener("keydown", function(event){
+  if(event.key === "Enter"){
+    event.preventDefault();
+    applyCouponCode();
+  }
+});
+
+syncCouponState();
+renderSummary();
+
+function goBackToHome() {
+  window.location.href = "index.html";
+}
+
+function continueShopping() {
+  // Save form data to localStorage before leaving
+  const checkoutDetails = {
+    fullName: document.getElementById("fullName").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    countryCode: document.getElementById("countryCode").value.trim(),
+    phoneNumber: document.getElementById("phoneNumber").value.trim(),
+    addressLine: document.getElementById("addressLine").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    country: document.getElementById("country").value.trim(),
+    notes: document.getElementById("notes").value.trim()
+  };
+  
+  localStorage.setItem("ovaCheckoutDetails", JSON.stringify(checkoutDetails));
+  window.location.href = "index.html";
+}
+
+function loadCheckoutDetails() {
+  const saved = JSON.parse(localStorage.getItem("ovaCheckoutDetails") || "{}");
+  if (saved.fullName) document.getElementById("fullName").value = saved.fullName;
+  if (saved.email) document.getElementById("email").value = saved.email;
+  if (saved.countryCode) document.getElementById("countryCode").value = saved.countryCode;
+  if (saved.phoneNumber) document.getElementById("phoneNumber").value = saved.phoneNumber;
+  if (saved.addressLine) document.getElementById("addressLine").value = saved.addressLine;
+  if (saved.city) document.getElementById("city").value = saved.city;
+  if (saved.country) document.getElementById("country").value = saved.country;
+  if (saved.notes) document.getElementById("notes").value = saved.notes;
+}
+
+loadCheckoutDetails();
+</script>
+<script src="js/ova-analytics.js?v=20260424b"></script>
+<script src="js/pwa.js?v=20260419a"></script>
+</body>
+</html>
+
