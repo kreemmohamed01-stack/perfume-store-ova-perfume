@@ -667,6 +667,13 @@
       pointer-events: auto;
     }
 
+    /* Keep the footer fully visible when the visitor reaches the end of the page. */
+    .bottom-navbar.is-footer-visible {
+      transform: translate(-50%, calc(100% + 24px));
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .bottom-navbar .dropdown {
       position: relative;
       width: auto;
@@ -12257,6 +12264,15 @@
     // Make bottom navbar always visible on mobile
     if (window.innerWidth <= 700) {
       bottomNavbar.classList.add("is-visible");
+    }
+
+    // Hide the fixed bottom navigation only while the footer is on screen.
+    const pageFooter = document.querySelector("footer");
+    if (bottomNavbar && pageFooter && "IntersectionObserver" in window) {
+      const footerObserver = new IntersectionObserver(([entry]) => {
+        bottomNavbar.classList.toggle("is-footer-visible", entry.isIntersecting);
+      }, { threshold: 0.08 });
+      footerObserver.observe(pageFooter);
     }
 
     let secretTapCount = 0;
