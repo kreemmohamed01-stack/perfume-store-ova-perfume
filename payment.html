@@ -1,0 +1,1061 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment | Ova Store</title>
+<meta name="description" content="Choose your payment method and complete your order securely at Ova Store." />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Ova Store" />
+<meta name="theme-color" content="#111111" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="images/site-assets/logooo-2.jpeg" />
+<link rel="icon" type="image/jpeg" href="images/site-assets/logooo-2.jpeg" />
+<link rel="shortcut icon" href="images/site-assets/logooo-2.jpeg" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Ova Store" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Payment | Ova Store" />
+<meta property="og:description" content="Secure payment page for completing fragrance orders at Ova Store." />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"Payment | Ova Store",
+  "description":"Secure perfume payment page for Ova Store."
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.back,
+.back-btn,
+.back-link,
+.cart-trigger,
+.dropdown-link-btn,
+.hero-btn,
+.install-app-btn,
+.modal-more-btn,
+.modal-add-btn,
+.modal-secondary-btn,
+.checkout-btn,
+.compare-secondary,
+.compare-primary,
+.close-search-btn,
+.filter-tab,
+.shop-all-btn,
+.copy-wallet-btn,
+.confirm-btn,
+.paypal-btn,
+.continue-shopping-btn,
+.submit-btn,
+.intro-enter-btn,
+.topbar-back,
+.topbar-cart{
+  border-radius:0 !important;
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.back,
+.back-btn,
+.back-link,
+.cart-trigger,
+.dropdown-link-btn,
+.hero-btn,
+.install-app-btn,
+.modal-more-btn,
+.modal-add-btn,
+.modal-secondary-btn,
+.checkout-btn,
+.compare-secondary,
+.compare-primary,
+.close-search-btn,
+.filter-tab,
+.shop-all-btn,
+.copy-wallet-btn,
+.confirm-btn,
+.paypal-btn,
+.continue-shopping-btn,
+.submit-btn,
+.intro-enter-btn,
+.topbar-back,
+.topbar-cart,
+.product-btn-label{
+  background:#ffffff !important;
+  background-image:none !important;
+  border-color:rgba(0,0,0,.14) !important;
+  color:#111111 !important;
+  text-shadow:0 0 6px rgba(214,179,122,.12),0 0 1px rgba(214,179,122,.3);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Playfair Display',serif;background:linear-gradient(180deg,#f8f2eb 0%,#ffffff 48%,#f3ece4 100%);color:#111}
+body.rtl{direction:rtl;text-align:right;font-family:'Cairo',sans-serif}
+body.rtl .header,body.rtl .summary-offer,body.rtl .summary-total,body.rtl .summary-item,body.rtl .wallet-logos,body.rtl .wallet-option-head,body.rtl .methods,body.rtl .wallet-options,body.rtl .method-meta,body.rtl .wallet-method-meta,body.rtl .wallet-feature-list,body.rtl .wallet-option-actions,body.rtl .wallet-copy-wrap{direction:rtl}
+body.rtl .header h1,body.rtl .header p,body.rtl .total-box span,body.rtl .section-title,body.rtl .field label,body.rtl .summary-panel h2,body.rtl .success-screen h2,body.rtl .confirm-btn,body.rtl .paypal-chip,body.rtl .method-chip,body.rtl .wallet-method-chip,body.rtl .wallet-option-kicker,body.rtl .wallet-option-badge,body.rtl .wallet-feature,body.rtl .wallet-number-label{letter-spacing:0;text-transform:none}
+body.rtl button,body.rtl input,body.rtl select{font-family:'Cairo',sans-serif}
+body.rtl .section-note,body.rtl .method-card p,body.rtl .wallet-subtitle,body.rtl .wallet-option-caption,body.rtl .wallet-option-note,body.rtl .upload-note,body.rtl .paypal-box p,body.rtl .summary-item p,body.rtl .success-screen p{font-family:'Cairo',sans-serif}
+body.rtl .field input,body.rtl .field select{text-align:right}
+body.rtl .summary-item > div,body.rtl .method-card,body.rtl .payment-box,body.rtl .wallet-option-body{text-align:right}
+body.rtl .field input[type="file"]::file-selector-button{margin-right:0;margin-left:12px}
+body.rtl #payerPhone{direction:ltr;text-align:left}
+body.rtl .wallet-option-number,body.rtl #headerTotal,body.rtl #summaryDiscount,body.rtl #summaryCouponDiscount,body.rtl #summaryTotal{direction:ltr;unicode-bidi:embed}
+.shell{width:min(1120px,calc(100% - 24px));margin:0 auto;padding:32px 0 60px}
+.header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:28px}
+.header h1{font-size:clamp(34px,5vw,58px);letter-spacing:4px;text-transform:uppercase}
+.back-btn{background:none;border:1px solid rgba(0,0,0,0.2);border-radius:18px;padding:8px 16px;font-family:inherit;font-size:14px;cursor:pointer;margin-bottom:12px;transition:0.2s}
+.back-btn:hover{background:#f0f0f0}
+.header p{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#7e6254}
+.total-box{min-width:220px;background:#111;color:#fff;border-radius:24px;padding:18px 22px;box-shadow:0 18px 40px rgba(0,0,0,.16)}
+.total-box span{display:block;font-size:13px;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:8px}
+.total-box strong{font-size:28px}
+.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:24px}
+.panel{background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.07);border-radius:30px;box-shadow:0 24px 50px rgba(0,0,0,.08)}
+.payment-panel{padding:28px 22px}
+.section-title{font-size:26px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.section-note{font-size:14px;line-height:1.8;color:#6a5448;margin-bottom:18px}
+.methods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.method-card{position:relative;border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:18px 16px;background:#fffdfb;cursor:pointer;overflow:hidden;transform:translateY(0) scale(1);transition:transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s cubic-bezier(.22,1,.36,1), border-color .28s ease, filter .28s ease}
+.method-card::after{content:"";position:absolute;inset:-120% auto auto -20%;width:70%;height:240%;background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.28) 48%, rgba(255,255,255,0) 100%);transform:rotate(18deg) translate3d(0,0,0);opacity:0;pointer-events:none}
+.method-card:hover{transform:translateY(-4px) scale(1.012)}
+.method-card:hover::after{opacity:1;animation:methodShine 1.05s ease}
+.method-card.active{border-color:#1f8f44;box-shadow:0 16px 30px rgba(31,143,68,.14);transform:translateY(-5px) scale(1.018);filter:saturate(1.03)}
+.method-card.active::after{opacity:1;animation:methodShine 1.15s ease}
+.method-card.active .method-badge{transform:translateY(-1px) scale(1.04)}
+.method-badge{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;margin-bottom:12px;font-size:22px;background:#f3eee8}
+.method-card h3{font-size:18px;margin-bottom:8px}
+.method-card p{font-size:14px;line-height:1.8;color:#5e534c}
+.method-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.method-chip{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase}
+.cash-method-card{position:relative;overflow:hidden;background:radial-gradient(circle at top right, rgba(248,231,197,.7) 0%, rgba(248,231,197,0) 30%),linear-gradient(180deg,#fffdfa 0%,#f6ecdf 100%);border-color:rgba(166,120,59,.18);box-shadow:0 18px 32px rgba(91,60,31,.08)}
+.cash-method-card::before{content:"";position:absolute;inset:auto -16px -30px auto;width:110px;height:110px;border-radius:28px;background:linear-gradient(135deg, rgba(139,106,51,.12) 0%, rgba(139,106,51,0) 100%);transform:rotate(24deg)}
+.cash-method-card .method-badge{position:relative;z-index:1;background:linear-gradient(135deg,#f1dfbe 0%,#c79f62 100%);color:#1f140d;box-shadow:0 12px 24px rgba(120,85,42,.18)}
+.cash-method-card h3,.cash-method-card p,.cash-method-card .method-meta{position:relative;z-index:1}
+.cash-method-card .method-chip{background:#fff7eb;border:1px solid rgba(139,106,51,.18);color:#6b4b28}
+.cash-method-card.active{border-color:#b78d55;box-shadow:0 22px 36px rgba(120,85,42,.14),0 0 0 1px rgba(183,141,85,.14) inset}
+.cash-method-card.active .method-chip{background:#fffdf7;box-shadow:0 10px 18px rgba(139,106,51,.12)}
+.wallet-method-card{position:relative;overflow:hidden;background:radial-gradient(circle at top right, rgba(48,255,230,.18) 0%, rgba(48,255,230,0) 28%),linear-gradient(145deg,#182148 0%,#213063 48%,#305784 100%);border-color:rgba(47,215,197,.22);color:#fff;box-shadow:0 18px 34px rgba(18,28,61,.18)}
+.wallet-method-card::before{content:"";position:absolute;inset:-36% auto auto -8%;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.1);filter:blur(10px)}
+.wallet-method-card .method-badge{position:relative;z-index:1;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px)}
+.wallet-method-card h3,.wallet-method-card p{position:relative;z-index:1;color:#fff}
+.wallet-method-card p{color:rgba(255,255,255,.82)}
+.wallet-method-meta{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.wallet-method-chip{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#fff}
+.wallet-method-card.active{border-color:#67f2dc;box-shadow:0 22px 40px rgba(22,46,90,.28),0 0 0 1px rgba(103,242,220,.18) inset}
+.wallet-method-card.active .wallet-method-chip{background:rgba(255,255,255,.16);box-shadow:0 12px 20px rgba(8,20,49,.18)}
+.paypal-method-card{position:relative;overflow:hidden;background:radial-gradient(circle at top right, rgba(125,195,255,.24) 0%, rgba(125,195,255,0) 34%),linear-gradient(145deg,#0f2d63 0%,#005ea6 54%,#00a7e1 100%);border-color:rgba(125,195,255,.24);color:#fff;box-shadow:0 18px 34px rgba(6,47,95,.18)}
+.paypal-method-card::before{content:"";position:absolute;inset:-34% auto auto -10%;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.09);filter:blur(10px)}
+.paypal-method-card .method-badge{position:relative;z-index:1;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px)}
+.paypal-method-card h3,.paypal-method-card p,.paypal-method-card .method-meta{position:relative;z-index:1;color:#fff}
+.paypal-method-card p{color:rgba(255,255,255,.84)}
+.paypal-method-card .method-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff}
+.paypal-method-card.active{border-color:#8ad8ff;box-shadow:0 22px 40px rgba(6,47,95,.24),0 0 0 1px rgba(138,216,255,.18) inset}
+.paypal-method-card.active .method-chip{background:rgba(255,255,255,.16);box-shadow:0 12px 20px rgba(6,47,95,.18)}
+@keyframes methodShine{0%{transform:rotate(18deg) translate3d(-180%,0,0)}100%{transform:rotate(18deg) translate3d(230%,0,0)}}
+@keyframes buttonShine{0%{transform:rotate(18deg) translate3d(-180%,0,0)}100%{transform:rotate(18deg) translate3d(235%,0,0)}}
+.payment-box{margin-top:22px;padding:20px;border-radius:24px;background:#fff;display:none}
+.payment-box.active{display:block}
+.wallet-box{background:linear-gradient(180deg,#fffdfb 0%,#f7f2ed 100%);border:1px solid rgba(94,67,48,.12);box-shadow:0 22px 40px rgba(40,25,18,.08)}
+.wallet-title{font-size:22px;margin-bottom:8px}
+.wallet-subtitle{font-size:14px;line-height:1.9;color:#6f5a4d;margin-bottom:18px}
+.wallet-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:18px}
+.wallet-option{position:relative;overflow:hidden;padding:18px;border-radius:28px;border:1px solid rgba(255,255,255,.18);box-shadow:0 22px 38px rgba(14,18,38,.16);isolation:isolate;min-height:240px}
+.wallet-option::before{content:"";position:absolute;inset:-30% auto auto -10%;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.12);filter:blur(8px);z-index:0}
+.wallet-option::after{content:"";position:absolute;inset:auto 18px 18px 18px;height:1px;background:rgba(255,255,255,.22);z-index:0}
+.wallet-option.instapay-option{background:radial-gradient(circle at top right, rgba(48,255,230,.24) 0%, rgba(48,255,230,0) 34%),linear-gradient(145deg,#121637 0%,#1a2360 46%,#174e76 100%)}
+.wallet-option.vodafone-option{background:radial-gradient(circle at top right, rgba(255,186,186,.2) 0%, rgba(255,186,186,0) 34%),linear-gradient(145deg,#4c0612 0%,#980b20 46%,#d81e34 100%)}
+.wallet-option > *{position:relative;z-index:1}
+.wallet-option-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.wallet-option-kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.1);color:#fff;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;border:1px solid rgba(255,255,255,.14)}
+.wallet-option-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:#9fffe6;box-shadow:0 0 0 6px rgba(159,255,230,.12)}
+.vodafone-option .wallet-option-kicker::before{background:#ffd1d1;box-shadow:0 0 0 6px rgba(255,209,209,.12)}
+.wallet-option-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}
+.wallet-option-badge{display:inline-flex;align-items:center;justify-content:center;min-width:108px;padding:7px 12px;border-radius:999px;font-size:11px;letter-spacing:1.7px;text-transform:uppercase;font-weight:700;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px)}
+.wallet-logos{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:0}
+.wallet-logo{display:inline-flex;align-items:center;gap:12px;padding:12px 16px;border-radius:20px;color:#fff;font-size:15px;font-weight:700;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);box-shadow:0 18px 34px rgba(3,7,18,.16);backdrop-filter:blur(10px)}
+.wallet-option-body{display:flex;flex-direction:column;gap:10px}
+.wallet-option-name{font-size:24px;font-weight:800;color:#fff;letter-spacing:.4px}
+.wallet-option-caption{font-size:13px;line-height:1.8;color:rgba(255,255,255,.78);max-width:34ch}
+.wallet-feature-list{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 14px}
+.wallet-feature{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#fff}
+.wallet-option-actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:10px}
+.wallet-number-block{display:flex;flex-direction:column;gap:8px}
+.wallet-number-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:700}
+.wallet-option-number{display:block;padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);font-size:30px;font-weight:800;letter-spacing:2px;line-height:1;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.wallet-copy-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.copy-wallet-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border:none;border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.95);color:#111;font:inherit;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease, filter .25s ease;box-shadow:0 10px 18px rgba(8,10,24,.18)}
+.copy-wallet-btn::after{content:"";position:absolute;inset:-140% auto auto -24%;width:70%;height:260%;background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.7) 48%, rgba(255,255,255,0) 100%);transform:rotate(18deg) translate3d(0,0,0);opacity:0;pointer-events:none}
+.copy-wallet-btn:hover{transform:translateY(-1px) scale(1.02);box-shadow:0 14px 22px rgba(8,10,24,.22);filter:brightness(1.01)}
+.copy-wallet-btn:hover::after{opacity:1;animation:buttonShine .95s ease}
+.copy-wallet-btn.copied{background:#d8ffe6;color:#0f6a35}
+.copy-wallet-btn svg{width:12px;height:12px;display:block}
+.copy-status{min-height:16px;font-size:11px;color:#f3fff7;font-weight:700;opacity:.94}
+.wallet-option-note{font-size:13px;line-height:1.9;color:rgba(255,255,255,.82);margin-bottom:0;max-width:34ch}
+.wallet-icon{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:14px;background:rgba(255,255,255,.96);box-shadow:0 10px 24px rgba(0,0,0,.16)}
+.wallet-icon svg{width:18px;height:18px;display:block}
+.orange .wallet-icon{border-radius:8px}
+.orange .wallet-icon svg{width:22px;height:22px}
+.orange .wallet-icon .orange-word{font:700 6px/1 Arial,sans-serif;letter-spacing:.2px;fill:#ff7900}
+.vodafone .wallet-icon .vodafone-ring{fill:none;stroke:#e60000;stroke-width:3.1;stroke-linecap:round}
+.vodafone .wallet-icon .vodafone-comma{fill:#e60000}
+.etisalat .wallet-icon .etisalat-mark{fill:none;stroke:#00a651;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.instapay .wallet-icon svg{width:20px;height:20px}
+.instapay .wallet-icon .instapay-left{fill:#5f48ff}
+.instapay .wallet-icon .instapay-right{fill:#18c6c8}
+.instapay .wallet-icon .instapay-center{fill:#ffffff}
+.orange{background:#ff7900}
+.vodafone{background:#e60000}
+.etisalat{background:#00a651}
+.instapay{background:linear-gradient(135deg,rgba(95,72,255,.9) 0%,rgba(24,198,200,.9) 100%)}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.field label{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#6a5448}
+.field input,.field select{width:100%;border:1px solid rgba(0,0,0,.12);border-radius:18px;padding:14px 16px;font:inherit;outline:none;background:linear-gradient(180deg,#fffdfb 0%,#fff7f0 100%);transition:border-color .24s ease, box-shadow .24s ease, transform .24s ease, background .24s ease}
+.field input:hover,.field select:hover{border-color:rgba(60,42,31,.2);box-shadow:0 10px 24px rgba(59,40,23,.05)}
+.field input:focus,.field select:focus{border-color:#8b6a33;box-shadow:0 0 0 4px rgba(139,106,51,.12),0 14px 26px rgba(80,56,36,.08);transform:translateY(-1px);background:linear-gradient(180deg,#fffefe 0%,#fffaf4 100%)}
+.field input::placeholder{color:#9b8b7e;transition:color .2s ease}
+.field input:focus::placeholder{color:#b7a89a}
+.field input[type="file"]{padding:12px 14px;border-style:dashed;background:linear-gradient(180deg,#fffdfb 0%,#faf3ea 100%);cursor:pointer}
+.field input[type="file"]::file-selector-button{margin-right:12px;border:none;border-radius:12px;padding:10px 14px;background:linear-gradient(135deg,#111 0%,#2c2c2c 100%);color:#fff;font:inherit;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:transform .24s ease, box-shadow .24s ease, filter .24s ease;box-shadow:0 12px 22px rgba(0,0,0,.12)}
+.field input[type="file"]:hover::file-selector-button{transform:translateY(-1px);box-shadow:0 16px 24px rgba(0,0,0,.16);filter:brightness(1.03)}
+.upload-note{font-size:13px;line-height:1.8;color:#7b665a}
+.paypal-box{background:#f4f8ff;border:1px solid rgba(0,85,170,.12)}
+.paypal-box h3{font-size:22px;margin-bottom:10px}
+.paypal-box p{font-size:14px;line-height:1.8;color:#345}
+.paypal-btn{margin-top:14px;padding:12px 18px;border:none;border-radius:18px;background:#0070ba;color:#fff;font:inherit;cursor:pointer}
+.paypal-chip{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;padding:10px 14px;border-radius:999px;background:#fff;color:#0070ba;font-weight:700}
+.confirm-btn{position:relative;overflow:hidden;width:100%;margin-top:16px;padding:18px 20px;border:none;border-radius:22px;background:linear-gradient(135deg,#111 0%,#242424 50%,#111 100%);color:#fff;font:inherit;font-size:16px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1), filter .28s ease;box-shadow:0 20px 40px rgba(0,0,0,.15)}
+.confirm-btn::before{content:"";position:absolute;inset:1px;border-radius:21px;background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 42%);pointer-events:none}
+.confirm-btn::after{content:"";position:absolute;inset:-140% auto auto -20%;width:68%;height:260%;background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.26) 48%, rgba(255,255,255,0) 100%);transform:rotate(18deg) translate3d(0,0,0);opacity:0;pointer-events:none}
+.confirm-btn:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 24px 46px rgba(0,0,0,.2);filter:brightness(1.03)}
+.confirm-btn:hover::after{opacity:1;animation:buttonShine 1.05s ease}
+.confirm-btn:active,.copy-wallet-btn:active{transform:translateY(-1px) scale(.995)}
+.summary-panel{padding:24px 20px;position:sticky;top:24px;height:fit-content}
+.summary-panel h2{font-size:24px;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+.summary-item{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.summary-item img{width:72px;height:72px;border-radius:16px;object-fit:cover;background:#f2ede7}
+.summary-item h3{font-size:14px;line-height:1.5;margin-bottom:4px}
+.summary-item p{font-size:13px;color:#5d534c}
+.summary-item .offer-line{color:#1f8f44;font-weight:700}
+.summary-offer{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:#1f8f44;font-weight:700;padding-top:14px}
+.summary-total{display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:700;padding-top:14px;border-top:1px solid rgba(0,0,0,.08);margin-top:8px}
+.success-screen{display:none;margin-top:24px;padding:30px 24px;border-radius:28px;background:linear-gradient(180deg,#effff3 0%,#d9f8e0 100%);border:1px solid rgba(22,130,63,.18);text-align:center;box-shadow:0 24px 50px rgba(34,139,34,.12)}
+.success-screen h2{font-size:clamp(34px,6vw,58px);color:#1f8f44;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase}
+.success-screen p{font-size:16px;line-height:1.9;color:#1e5f34;max-width:720px;margin:0 auto 10px}
+@media (max-width:860px){.layout{grid-template-columns:1fr}.summary-panel{position:static}.methods{grid-template-columns:1fr}.wallet-options{grid-template-columns:1fr}}
+@media (max-width:640px){.shell{padding-top:20px}.method-card{padding:14px 12px}.wallet-options{gap:12px}.wallet-logo{padding:10px 12px;font-size:13px}.wallet-option{padding:16px;min-height:auto;border-radius:24px}.wallet-option-topline,.wallet-option-head{flex-direction:column;align-items:flex-start}.wallet-option-badge{min-width:auto}.wallet-option-name{font-size:21px}.wallet-feature-list{gap:6px}.wallet-option-number{font-size:22px;padding:14px 16px}.copy-wallet-btn{width:auto;padding:7px 10px}.wallet-icon{width:28px;height:28px}.wallet-icon svg{width:15px;height:15px}.orange .wallet-icon svg{width:19px;height:19px}.confirm-btn{font-size:14px;padding:16px 18px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="header">
+    <div>
+      <button class="back-btn" onclick="goBackToCheckout()" data-i18n="back">Back</button>
+      <p data-i18n="eyebrow">Secure Payment</p>
+      <h1 data-i18n="title">Payment</h1>
+    </div>
+    <div class="total-box">
+      <span data-i18n="total">Total</span>
+      <strong id="headerTotal">0 EGP</strong>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="panel payment-panel">
+      <h2 class="section-title" data-i18n="chooseMethod">Choose Payment Method</h2>
+      <p class="section-note" data-i18n="chooseMethodNote">Choose the payment option that suits you best, then complete the required details before confirming your order.</p>
+
+      <div class="methods">
+        <div class="method-card cash-method-card active" data-method="cash" onclick="selectMethod('cash', this)">
+          <div class="method-badge">COD</div>
+          <h3 data-i18n="cashTitle">Cash On Delivery</h3>
+          <p data-i18n="cashText">Pay in cash when your order reaches you. This option is simple and available for local delivery.</p>
+          <div class="method-meta">
+            <span class="method-chip" data-i18n="cashMethodChip1">Pay Later</span>
+            <span class="method-chip" data-i18n="cashMethodChip2">Door Delivery</span>
+            <span class="method-chip" data-i18n="cashMethodChip3">No Transfer</span>
+          </div>
+        </div>
+
+        <div class="method-card wallet-method-card" data-method="wallet" onclick="selectMethod('wallet', this)">
+          <div class="method-badge">WLT</div>
+          <h3 data-i18n="walletTitle">Electronic Wallet</h3>
+          <p data-i18n="walletText">Transfer using InstaPay or Vodafone Cash below, then add your phone number and upload your transfer screenshot.</p>
+          <div class="wallet-method-meta">
+            <span class="wallet-method-chip" data-i18n="walletMethodChip1">InstaPay</span>
+            <span class="wallet-method-chip" data-i18n="walletMethodChip2">Vodafone Cash</span>
+            <span class="wallet-method-chip" data-i18n="walletMethodChip3">Proof Upload</span>
+          </div>
+        </div>
+
+        <div class="method-card paypal-method-card" data-method="paypal" onclick="selectMethod('paypal', this)">
+          <div class="method-badge">PP</div>
+          <h3 data-i18n="paypalTitle">PayPal</h3>
+          <p data-i18n="paypalText">Choose PayPal if you want to proceed with an online payment method and keep your order marked as prepaid.</p>
+          <div class="method-meta">
+            <span class="method-chip" data-i18n="paypalMethodChip1">Online</span>
+            <span class="method-chip" data-i18n="paypalMethodChip2">Prepaid</span>
+            <span class="method-chip" data-i18n="paypalMethodChip3">Global</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-box wallet-box" id="walletBox">
+        <h3 class="wallet-title" data-i18n="walletNumberTitle">Choose Transfer Number</h3>
+        <p class="wallet-subtitle" data-i18n="walletTransferNote">You can transfer to any of the two numbers below, then upload the transfer screenshot to complete your order.</p>
+        <div class="wallet-options">
+          <div class="wallet-option instapay-option">
+            <div class="wallet-option-topline">
+              <span class="wallet-option-kicker" data-i18n="instapayKicker">Recommended</span>
+            </div>
+            <div class="wallet-option-head">
+              <div class="wallet-option-body">
+                <div class="wallet-logo instapay">
+                  <span class="wallet-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img" aria-label="InstaPay">
+                      <path class="instapay-left" d="M4 7.2C4 5.4 5.4 4 7.2 4h4.4L9 10.2H4V7.2z"/>
+                      <path class="instapay-right" d="M20 16.8c0 1.8-1.4 3.2-3.2 3.2h-4.4l2.6-6.2H20v3z"/>
+                      <path class="instapay-center" d="M11.4 4h4.1l-2.9 6.8H8.6L11.4 4zm0 9.2h4l-2.8 6.8H8.6l2.8-6.8z"/>
+                    </svg>
+                  </span>
+                  InstaPay
+                </div>
+                <div class="wallet-option-name">InstaPay</div>
+                <p class="wallet-option-caption" data-i18n="instapayCaption">Fastest confirmation for transferred orders.</p>
+              </div>
+              <span class="wallet-option-badge" data-i18n="instapayBadge">Instant Transfer</span>
+            </div>
+            <div class="wallet-feature-list">
+              <span class="wallet-feature" data-i18n="instapayFeature1">24/7 transfer</span>
+              <span class="wallet-feature" data-i18n="instapayFeature2">Instant review</span>
+            </div>
+            <div class="wallet-option-actions">
+              <div class="wallet-number-block">
+                <span class="wallet-number-label" data-i18n="walletNumberLabel">Send to this number</span>
+                <strong class="wallet-option-number">01151446372</strong>
+              </div>
+              <div class="wallet-copy-wrap">
+                <button class="copy-wallet-btn" type="button" onclick="copyWalletNumber('01151446372', this)">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="9" y="9" width="10" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M7 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                  <span class="copy-wallet-btn-label">Copy</span>
+                </button>
+                <div class="copy-status" aria-live="polite"></div>
+              </div>
+            </div>
+            <p class="wallet-option-note" data-i18n="instapayOptionNote">Use this number if you want to transfer through InstaPay.</p>
+          </div>
+          <div class="wallet-option vodafone-option">
+            <div class="wallet-option-topline">
+              <span class="wallet-option-kicker" data-i18n="vodafoneKicker">Cash Wallet</span>
+            </div>
+            <div class="wallet-option-head">
+              <div class="wallet-option-body">
+                <div class="wallet-logo vodafone">
+                  <span class="wallet-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img" aria-label="Vodafone">
+                      <path class="vodafone-ring" d="M17.2 5.7c-3.2-1.9-7.4-.9-9.3 2.4-1.9 3.2-.9 7.4 2.4 9.3 2.7 1.6 6.1 1.1 8.3-1.1"/>
+                      <path class="vodafone-comma" d="M14.9 4.4c1.6 0 2.8 1.3 2.8 2.8 0 1.3-.9 2.4-2.1 2.7-.6.1-1 .6-1 1.2 0 .9-.8 1.7-1.7 1.7-1.2 0-2-.9-2-2 0-3 2.1-6.4 4-6.4z"/>
+                    </svg>
+                  </span>
+                  Vodafone Cash
+                </div>
+                <div class="wallet-option-name">Vodafone Cash</div>
+                <p class="wallet-option-caption" data-i18n="vodafoneCaption">Great for local mobile-wallet transfers inside Egypt.</p>
+              </div>
+              <span class="wallet-option-badge" data-i18n="vodafoneBadge">Mobile Wallet</span>
+            </div>
+            <div class="wallet-feature-list">
+              <span class="wallet-feature" data-i18n="vodafoneFeature1">Local wallet</span>
+              <span class="wallet-feature" data-i18n="vodafoneFeature2">Easy cash-out</span>
+            </div>
+            <div class="wallet-option-actions">
+              <div class="wallet-number-block">
+                <span class="wallet-number-label" data-i18n="walletNumberLabel">Send to this number</span>
+                <strong class="wallet-option-number">01099136720</strong>
+              </div>
+              <div class="wallet-copy-wrap">
+                <button class="copy-wallet-btn" type="button" onclick="copyWalletNumber('01099136720', this)">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="9" y="9" width="10" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M7 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                  <span class="copy-wallet-btn-label">Copy</span>
+                </button>
+                <div class="copy-status" aria-live="polite"></div>
+              </div>
+            </div>
+            <p class="wallet-option-note" data-i18n="vodafoneOptionNote">Use this number if you want to transfer through Vodafone Cash.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="payerPhone" data-i18n="walletPhone">Wallet Phone Number</label>
+          <input id="payerPhone" type="tel" data-i18n-placeholder="walletPhonePlaceholder" placeholder="Enter the number you transferred from">
+        </div>
+
+        <div class="field">
+          <label for="proofImage" data-i18n="proofImage">Transfer Screenshot</label>
+          <input id="proofImage" type="file" accept="image/*">
+        </div>
+        <p class="upload-note" data-i18n="uploadNote">Upload the screenshot after transferring so the proof file name is included with your order details.</p>
+      </div>
+
+      <div class="payment-box paypal-box" id="paypalBox">
+        <div class="paypal-chip" data-i18n="paypalAvailable">PayPal Available</div>
+        <h3 data-i18n="paypalTitle">PayPal</h3>
+        <p data-i18n="paypalBoxText">You can continue with PayPal if you prefer online payment. Once you confirm the order, the payment method will be saved with your order details.</p>
+        <button class="paypal-btn" type="button" onclick="selectMethod('paypal')" data-i18n="usePaypal">Use PayPal</button>
+      </div>
+
+      <button class="confirm-btn" type="button" onclick="confirmPayment()" data-i18n="confirmPayment">Confirm Payment</button>
+
+      <div class="success-screen" id="successScreen">
+        <h2 data-i18n="successTitle">Thank You</h2>
+        <p data-i18n="success1">Your order has been confirmed successfully, and our team will start preparing it with care.</p>
+        <p data-i18n="success2">Delivery usually takes from 3 to 4 days, and we will contact you if we need any extra detail.</p>
+        <p data-i18n="success3">We truly appreciate your trust in Ova Store and hope your order reaches you in the best condition.</p>
+      </div>
+    </div>
+
+    <aside class="panel summary-panel">
+      <h2 data-i18n="orderSummary">Order Summary</h2>
+      <div id="summaryItems"></div>
+      <div class="summary-offer">
+        <span data-i18n="offerDiscount">Offer Discount</span>
+        <span id="summaryDiscount">0 EGP</span>
+      </div>
+      <div class="summary-offer">
+        <span data-i18n="couponDiscount">Coupon Discount</span>
+        <span id="summaryCouponDiscount">0 EGP</span>
+      </div>
+      <div class="summary-total">
+        <span data-i18n="total">Total</span>
+        <span id="summaryTotal">0 EGP</span>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="js/page-language.js?v=20260419a"></script>
+<script src="js/orders-config.js?v=20260419a"></script>
+<script src="js/orders-store.js?v=20260419a"></script>
+<script>
+const pageLang = applyPageLanguage({
+  en: {
+    pageTitle: "Payment | Ova Store",
+    eyebrow: "Secure Payment",
+    title: "Payment",
+    back: "Back",
+    total: "Total",
+    chooseMethod: "Choose Payment Method",
+    chooseMethodNote: "Choose the payment option that suits you best, then complete the required details before confirming your order.",
+    cashTitle: "Cash On Delivery",
+    cashText: "Pay in cash when your order reaches you. This option is simple and available for local delivery.",
+    cashMethodChip1: "Pay Later",
+    cashMethodChip2: "Door Delivery",
+    cashMethodChip3: "No Transfer",
+    walletTitle: "Electronic Wallet",
+    walletText: "Transfer using InstaPay or Vodafone Cash below, then add your phone number and upload your transfer screenshot.",
+    walletMethodChip1: "InstaPay",
+    walletMethodChip2: "Vodafone Cash",
+    walletMethodChip3: "Proof Upload",
+    paypalTitle: "PayPal",
+    paypalText: "Choose PayPal if you want to proceed with an online payment method and keep your order marked as prepaid.",
+    paypalMethodChip1: "Online",
+    paypalMethodChip2: "Prepaid",
+    paypalMethodChip3: "Global",
+    walletNumberTitle: "Choose Transfer Number",
+    walletTransferNote: "You can transfer to any of the two numbers below, then upload the transfer screenshot to complete your order.",
+    instapayKicker: "Recommended",
+    vodafoneKicker: "Cash Wallet",
+    instapayBadge: "Instant Transfer",
+    vodafoneBadge: "Mobile Wallet",
+    walletNumberLabel: "Send to this number",
+    instapayCaption: "Fastest confirmation for transferred orders.",
+    vodafoneCaption: "Great for local mobile-wallet transfers inside Egypt.",
+    instapayFeature1: "24/7 transfer",
+    instapayFeature2: "Instant review",
+    vodafoneFeature1: "Local wallet",
+    vodafoneFeature2: "Easy cash-out",
+    instapayOptionNote: "Use this number if you want to transfer through InstaPay.",
+    vodafoneOptionNote: "Use this number if you want to transfer through Vodafone Cash.",
+    walletPhone: "Wallet Phone Number",
+    walletPhonePlaceholder: "Enter the number you transferred from",
+    proofImage: "Transfer Screenshot",
+    uploadNote: "Upload the screenshot after transferring so the proof file name is included with your order details.",
+    paypalAvailable: "PayPal Available",
+    paypalBoxText: "You can continue with PayPal if you prefer online payment. Once you confirm the order, the payment method will be saved with your order details.",
+    usePaypal: "Use PayPal",
+    confirmPayment: "Confirm Payment",
+    loading: "Loading...",
+    successTitle: "Thank You",
+    success1: "Your order has been confirmed successfully, and our team will start preparing it with care.",
+    success2: "Delivery usually takes from 3 to 4 days, and we will contact you if we need any extra detail.",
+    success3: "We truly appreciate your trust in Ova Store and hope your order reaches you in the best condition.",
+    orderSummary: "Order Summary",
+    offerDiscount: "Offer Discount",
+    couponDiscount: "Coupon Discount",
+    freePiece: "free piece applied",
+    subtotal: "Subtotal",
+    cartEmpty: "Your cart is empty.",
+    notProvided: "Not provided",
+    noAttachment: "No attachment uploaded",
+    enterWallet: "Please enter the wallet number you transferred from.",
+    uploadScreenshot: "Please upload the transfer screenshot first.",
+    methodCash: "Cash On Delivery",
+    methodWallet: "Electronic Wallet",
+    methodPaypal: "PayPal",
+    newOrder: "New Ova Order Payment",
+    customerName: "Customer Name",
+    email: "Email",
+    phone: "Phone",
+    address: "Address",
+    city: "City",
+    country: "Country",
+    notes: "Notes",
+    walletUsed: "Wallet Number Used",
+    proofName: "Proof Image File Name",
+    orderDetails: "Order Details",
+    noNotes: "No notes",
+    qty: "Qty",
+    free: "Free",
+    copyLabel: "Copy",
+    copiedLabel: "Copied",
+    copyFailed: "Couldn't copy automatically. Please copy the number manually."
+  },
+  ar: {
+    pageTitle: "الدفع | Ova Store",
+    eyebrow: "دفع آمن",
+    title: "الدفع",
+    back: "رجوع",
+    total: "الإجمالي",
+    chooseMethod: "اختر وسيلة الدفع",
+    chooseMethodNote: "اختر وسيلة الدفع المناسبة لك، ثم أكمل البيانات المطلوبة قبل تأكيد طلبك.",
+    cashTitle: "الدفع عند الاستلام",
+    cashText: "ادفع نقدًا عند وصول الطلب إليك. هذه الطريقة بسيطة ومتاحة للتوصيل المحلي.",
+    cashMethodChip1: "ادفع بعدين",
+    cashMethodChip2: "عند الباب",
+    cashMethodChip3: "بدون تحويل",
+    walletTitle: "المحفظة الإلكترونية",
+    walletText: "حوّل من خلال إنستا باي أو فودافون كاش من الأرقام الموجودة بالأسفل، ثم أضف رقم الهاتف الذي حوّلت منه وارفع صورة التحويل.",
+    walletMethodChip1: "إنستا باي",
+    walletMethodChip2: "فودافون كاش",
+    walletMethodChip3: "رفع الإثبات",
+    paypalTitle: "باي بال",
+    paypalText: "اختر باي بال إذا كنت تريد إكمال الدفع أونلاين مع تسجيل طلبك كمدفوع مسبقًا.",
+    paypalMethodChip1: "أونلاين",
+    paypalMethodChip2: "مدفوع مسبقًا",
+    paypalMethodChip3: "عالمي",
+    walletNumberTitle: "اختر رقم التحويل",
+    walletTransferNote: "يمكنك التحويل على أي رقم من الرقمين الموجودين بالأسفل، ثم ارفع صورة التحويل لإكمال الطلب.",
+    instapayKicker: "الأسرع",
+    vodafoneKicker: "محفظة كاش",
+    instapayBadge: "تحويل فوري",
+    vodafoneBadge: "محفظة موبايل",
+    walletNumberLabel: "حوّل على الرقم ده",
+    instapayCaption: "أفضل اختيار لو عايز تأكيد أسرع للطلب بعد التحويل.",
+    vodafoneCaption: "مناسب جدًا للتحويلات المحلية من محافظ الموبايل داخل مصر.",
+    instapayFeature1: "تحويل 24/7",
+    instapayFeature2: "مراجعة سريعة",
+    vodafoneFeature1: "محفظة محلية",
+    vodafoneFeature2: "سهل الاستخدام",
+    instapayOptionNote: "استخدم هذا الرقم لو هتتحول عن طريق إنستا باي.",
+    vodafoneOptionNote: "استخدم هذا الرقم لو هتتحول عن طريق فودافون كاش.",
+    walletPhone: "رقم الهاتف المستخدم في التحويل",
+    walletPhonePlaceholder: "أدخل الرقم الذي تم التحويل منه",
+    proofImage: "صورة التحويل",
+    uploadNote: "ارفع لقطة الشاشة بعد التحويل حتى يتم إرفاق اسم الملف مع تفاصيل طلبك.",
+    paypalAvailable: "باي بال متاح",
+    paypalBoxText: "يمكنك المتابعة باستخدام باي بال إذا كنت تفضل الدفع الإلكتروني. بمجرد تأكيد الطلب سيتم حفظ وسيلة الدفع ضمن بيانات الطلب.",
+    usePaypal: "استخدام باي بال",
+    confirmPayment: "تأكيد الدفع",
+    loading: "جارٍ التحميل...",
+    successTitle: "شكرًا لك",
+    success1: "تم تأكيد طلبك بنجاح، وسيبدأ فريقنا في تجهيزه بعناية.",
+    success2: "عادة يستغرق التوصيل من 3 إلى 4 أيام، وسنتواصل معك إذا احتجنا أي تفاصيل إضافية.",
+    success3: "نقدّر ثقتك في Ova Store ونتمنى أن يصلك طلبك بأفضل حالة.",
+    orderSummary: "ملخص الطلب",
+    offerDiscount: "خصم العرض",
+    couponDiscount: "خصم الكوبون",
+    freePiece: "قطعة مجانية مضافة",
+    subtotal: "الإجمالي الفرعي",
+    cartEmpty: "السلة فارغة.",
+    notProvided: "غير متوفر",
+    noAttachment: "لم يتم رفع ملف",
+    enterWallet: "من فضلك أدخل رقم المحفظة الذي تم التحويل منه.",
+    uploadScreenshot: "من فضلك ارفع صورة التحويل أولًا.",
+    methodCash: "الدفع عند الاستلام",
+    methodWallet: "المحفظة الإلكترونية",
+    methodPaypal: "باي بال",
+    newOrder: "دفع طلب جديد من Ova",
+    customerName: "اسم العميل",
+    email: "البريد الإلكتروني",
+    phone: "الهاتف",
+    address: "العنوان",
+    city: "المدينة",
+    country: "الدولة",
+    notes: "الملاحظات",
+    walletUsed: "رقم المحفظة المستخدم",
+    proofName: "اسم ملف إثبات التحويل",
+    orderDetails: "تفاصيل الطلب",
+    noNotes: "لا توجد ملاحظات",
+    qty: "الكمية",
+    free: "المجاني",
+    copyLabel: "نسخ",
+    copiedLabel: "تم النسخ",
+    copyFailed: "ماقدرناش ننسخ تلقائي. انسخ الرقم بشكل يدوي."
+  }
+});
+const currentLang = pageLang.lang;
+const t = pageLang.t;
+const savedCart = JSON.parse(localStorage.getItem("ovaCart") || "[]");
+const checkoutDetails = JSON.parse(localStorage.getItem("ovaCheckoutDetails") || "{}");
+const FIRST_ORDER_COUPON_CODE = "OVA22";
+const FIRST_ORDER_COUPON_RATE = 0.10;
+const appliedCouponCode = String(localStorage.getItem("ovaAppliedCouponCode") || "").trim().toUpperCase();
+const STORE_NOTIFICATION_EMAIL = window.OVA_STORE_NOTIFICATION_EMAIL || "a.salem8812@gmail.com";
+let selectedMethod = "cash";
+
+function goBackToCheckout() {
+  const referrer = document.referrer || "";
+  if (window.history.length > 1 && /checkout\.html/i.test(referrer)) {
+    window.history.back();
+    return;
+  }
+  window.location.href = "checkout.html";
+}
+
+function escapeHtml(value){
+  return String(value == null ? "" : value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+
+function getCartOfferSummary(items){
+  const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
+  const freePieces = Math.floor(totalQty / 3);
+  const freeByName = {};
+  let discount = 0;
+
+  if(!freePieces){
+    return { freeByName, discount, freePieces, totalQty };
+  }
+
+  const units = [];
+  items.forEach((item) => {
+    for(let i = 0; i < item.qty; i += 1){
+      units.push({ name: item.name, price: item.price });
+    }
+  });
+
+  units
+    .sort((a, b) => a.price - b.price)
+    .slice(0, freePieces)
+    .forEach((unit) => {
+      freeByName[unit.name] = (freeByName[unit.name] || 0) + 1;
+      discount += unit.price;
+    });
+
+  return { freeByName, discount, freePieces, totalQty };
+}
+
+function getItemFreeUnits(item, offerSummary){
+  return offerSummary.freeByName[item.name] || 0;
+}
+
+function getItemSubtotal(item, offerSummary){
+  return item.price * (item.qty - getItemFreeUnits(item, offerSummary));
+}
+
+function isFirstOrderEligible(){
+  return JSON.parse(localStorage.getItem("ovaFirstOrderCompleted") || "false") !== true;
+}
+
+function getCouponDiscountAmount(totalBeforeCoupon){
+  return appliedCouponCode === FIRST_ORDER_COUPON_CODE && isFirstOrderEligible()
+    ? Math.round(totalBeforeCoupon * FIRST_ORDER_COUPON_RATE)
+    : 0;
+}
+
+function setConfirmButtonBusy(isBusy){
+  const confirmBtn = document.querySelector(".confirm-btn");
+  if(!confirmBtn) return;
+  confirmBtn.disabled = isBusy;
+  confirmBtn.textContent = isBusy ? (t("loading") || "Loading...") : t("confirmPayment");
+  confirmBtn.style.opacity = isBusy ? "0.6" : "1";
+}
+
+function getWebhookMissingMessage(){
+  return currentLang === "ar"
+    ? "رابط إرسال الأوردرات غير متضبط."
+    : "Order webhook is not configured.";
+}
+
+function getOrderSendFailedMessage(){
+  return currentLang === "ar"
+    ? "ماقدرناش نأكد إرسال رسالة الأوردر على الجيميل. حاول مرة تانية وسيب الصفحة مفتوحة."
+    : "We couldn't verify sending the order email to Gmail. Please try again and keep this page open.";
+}
+
+async function parseWebhookResponse(response){
+  if(!response.ok){
+    throw new Error(`Webhook HTTP ${response.status}`);
+  }
+
+  const rawText = await response.text();
+  if(!rawText){
+    throw new Error("Webhook returned an empty response.");
+  }
+
+  try {
+    const data = JSON.parse(rawText);
+    if(data && data.ok === false){
+      throw new Error(data.error || "Webhook rejected the order.");
+    }
+    if(!data || data.ok !== true){
+      throw new Error("Webhook did not confirm successful email delivery.");
+    }
+
+    const sentToList = Array.isArray(data.sentTo)
+      ? data.sentTo
+      : (data && data.sentTo ? [data.sentTo] : []);
+    const normalizedSentTo = sentToList.map((value) => String(value || "").trim().toLowerCase());
+    const expectedEmail = String(STORE_NOTIFICATION_EMAIL || "").trim().toLowerCase();
+
+    if(!expectedEmail || !normalizedSentTo.includes(expectedEmail)){
+      throw new Error(`Webhook did not confirm delivery to ${STORE_NOTIFICATION_EMAIL}.`);
+    }
+
+    return data;
+  } catch (error) {
+    const normalizedText = rawText.trim().toLowerCase();
+    const looksLikeHtml = normalizedText.startsWith("<!doctype html") || normalizedText.startsWith("<html");
+    if(looksLikeHtml){
+      throw new Error("Webhook returned an unreadable response.");
+    }
+    throw error;
+  }
+}
+
+async function postOrderJson(order){
+  const response = await fetch(window.OVA_ORDERS_WEBHOOK, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(order)
+  });
+
+  return parseWebhookResponse(response);
+}
+
+async function postOrderForm(order){
+  const response = await fetch(window.OVA_ORDERS_WEBHOOK, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      "Accept": "application/json"
+    },
+    body: new URLSearchParams({
+      payload: JSON.stringify(order)
+    }).toString()
+  });
+
+  return parseWebhookResponse(response);
+}
+
+async function sendOrderToWebhook(order){
+  if(!window.OVA_ORDERS_WEBHOOK){
+    throw new Error(getWebhookMissingMessage());
+  }
+
+  const errors = [];
+
+  try {
+    return await postOrderJson(order);
+  } catch (error) {
+    errors.push(`json: ${error.message || error}`);
+  }
+
+  try {
+    return await postOrderForm(order);
+  } catch (error) {
+    errors.push(`form: ${error.message || error}`);
+  }
+
+  throw new Error(errors.join(" | "));
+}
+
+
+function getCopyLabel(){
+  return t("copyLabel");
+}
+
+function getCopiedLabel(){
+  return t("copiedLabel");
+}
+
+function getCopyFailedMessage(){
+  return t("copyFailed");
+}
+
+function setCopyButtonLabel(button, label){
+  const labelNode = button.querySelector(".copy-wallet-btn-label");
+  if (labelNode) {
+    labelNode.textContent = label;
+    return;
+  }
+
+  button.textContent = label;
+}
+
+function syncCopyButtons(){
+  document.querySelectorAll(".copy-wallet-btn").forEach((button) => {
+    setCopyButtonLabel(button, getCopyLabel());
+  });
+}
+
+function triggerCopyVibration(){
+  if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+    navigator.vibrate(28);
+  }
+}
+
+async function copyWalletNumber(number, button){
+  const walletCard = button.closest(".wallet-option");
+  const status = walletCard ? walletCard.querySelector(".copy-status") : null;
+  const defaultLabel = getCopyLabel();
+  const copiedLabel = getCopiedLabel();
+  let copied = false;
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(number);
+      copied = true;
+    } else {
+      const helper = document.createElement("textarea");
+      helper.value = number;
+      helper.setAttribute("readonly", "");
+      helper.style.position = "fixed";
+      helper.style.opacity = "0";
+      document.body.appendChild(helper);
+      helper.focus();
+      helper.select();
+      copied = document.execCommand("copy");
+      document.body.removeChild(helper);
+    }
+  } catch (error) {
+    copied = false;
+  }
+
+  if (!copied) {
+    if (status) status.textContent = "";
+    alert(getCopyFailedMessage());
+    return;
+  }
+
+  triggerCopyVibration();
+  setCopyButtonLabel(button, copiedLabel);
+  button.classList.add("copied");
+  if (status) status.textContent = copiedLabel;
+
+  clearTimeout(button.copyResetTimer);
+  button.copyResetTimer = setTimeout(() => {
+    setCopyButtonLabel(button, defaultLabel);
+    button.classList.remove("copied");
+    if (status) status.textContent = "";
+  }, 1800);
+}
+
+function selectMethod(method, element){
+  selectedMethod = method;
+  document.querySelectorAll(".method-card").forEach((card) => {
+    card.classList.toggle("active", card.dataset.method === method);
+  });
+  document.getElementById("walletBox").classList.toggle("active", method === "wallet");
+  document.getElementById("paypalBox").classList.toggle("active", method === "paypal");
+}
+
+function renderSummary(){
+  const summaryItems = document.getElementById("summaryItems");
+  const summaryTotal = document.getElementById("summaryTotal");
+  const summaryDiscount = document.getElementById("summaryDiscount");
+  const summaryCouponDiscount = document.getElementById("summaryCouponDiscount");
+  const headerTotal = document.getElementById("headerTotal");
+  const offerSummary = getCartOfferSummary(savedCart);
+  summaryItems.innerHTML = "";
+
+  let totalBeforeCoupon = 0;
+
+  savedCart.forEach((item) => {
+    const freeUnits = getItemFreeUnits(item, offerSummary);
+    const subtotal = getItemSubtotal(item, offerSummary);
+    totalBeforeCoupon += subtotal;
+
+    const row = document.createElement("div");
+    row.className = "summary-item";
+    row.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.qty} x ${item.price} EGP</p>
+        ${freeUnits ? `<p class="offer-line">${freeUnits} ${t("freePiece")}</p>` : ``}
+        <p>${t("subtotal")}: ${subtotal} EGP</p>
+      </div>
+    `;
+    summaryItems.appendChild(row);
+  });
+
+  const couponDiscount = getCouponDiscountAmount(totalBeforeCoupon);
+  const finalTotal = totalBeforeCoupon - couponDiscount;
+  summaryDiscount.innerText = offerSummary.discount + " EGP";
+  summaryCouponDiscount.innerText = couponDiscount + " EGP";
+  summaryTotal.innerText = finalTotal + " EGP";
+  headerTotal.innerText = finalTotal + " EGP";
+  return finalTotal;
+}
+
+async function confirmPayment(){
+  setConfirmButtonBusy(true);
+
+  if(!savedCart.length){
+    setConfirmButtonBusy(false);
+    alert(t("cartEmpty"));
+    return;
+  }
+
+  const proofFile = document.getElementById("proofImage").files[0];
+  const payerPhoneValue = document.getElementById("payerPhone").value.trim();
+  const payerPhone = payerPhoneValue || t("notProvided");
+  const proofName = proofFile ? proofFile.name : t("noAttachment");
+  const offerSummary = getCartOfferSummary(savedCart);
+  const totalBeforeCoupon = savedCart.reduce((sum, item) => sum + getItemSubtotal(item, offerSummary), 0);
+  const couponDiscount = getCouponDiscountAmount(totalBeforeCoupon);
+  const total = totalBeforeCoupon - couponDiscount;
+
+  if(selectedMethod === "wallet"){
+    if(!payerPhoneValue){
+      setConfirmButtonBusy(false);
+      alert(t("enterWallet"));
+      return;
+    }
+
+    if(!proofFile){
+      setConfirmButtonBusy(false);
+      alert(t("uploadScreenshot"));
+      return;
+    }
+  }
+
+  const orderLines = savedCart.map((item) =>
+    `- ${item.name} | ${t("qty")}: ${item.qty} | ${t("free")}: ${getItemFreeUnits(item, offerSummary)} | ${t("subtotal")}: ${getItemSubtotal(item, offerSummary)} EGP`
+  ).join("\\n");
+
+  const methodLabel =
+    selectedMethod === "cash" ? t("methodCash") :
+    selectedMethod === "wallet" ? t("methodWallet") :
+    t("methodPaypal");
+  const customerName = String(checkoutDetails.fullName || "").trim();
+  const email = String(checkoutDetails.email || "").trim();
+  const countryCode = String(checkoutDetails.countryCode || "").trim();
+  const phoneNumber = String(checkoutDetails.phoneNumber || "").trim();
+  const addressLine = String(checkoutDetails.addressLine || "").trim();
+  const city = String(checkoutDetails.city || "").trim();
+  const country = String(checkoutDetails.country || "").trim();
+  const phone = [countryCode, phoneNumber].filter(Boolean).join(" ").trim();
+  const fullAddress = [addressLine, city, country].filter(Boolean).join(", ");
+
+  const orderPayload = {
+    customerName,
+    fullName: customerName,
+    name: customerName,
+    email,
+    phone,
+    address: addressLine,
+    addressLine,
+    city,
+    country,
+    fullAddress,
+    notes: checkoutDetails.notes || t("noNotes"),
+    paymentMethod: methodLabel,
+    payerPhone,
+    proofName,
+    items: savedCart.map((item) => ({
+      name: item.name,
+      price: item.price,
+      quantity: item.qty,
+      freeUnits: getItemFreeUnits(item, offerSummary),
+      subtotal: getItemSubtotal(item, offerSummary)
+    })),
+    notificationEmail: STORE_NOTIFICATION_EMAIL,
+    storeEmail: STORE_NOTIFICATION_EMAIL,
+    totalPrice: total,
+    couponCode: appliedCouponCode,
+    couponDiscount,
+    rawSummary: orderLines,
+    createdAt: new Date().toISOString(),
+    timestamp: new Date().toLocaleString('ar-EG')
+  };
+
+  const savedOrder = window.ovaOrdersStore.create(orderPayload);
+  window.ovaOrdersStore.update(savedOrder.id, {
+    emailDeliveryStatus: "pending"
+  });
+
+  try {
+    const webhookResult = await sendOrderToWebhook(savedOrder);
+    window.ovaOrdersStore.update(savedOrder.id, {
+      emailDeliveryStatus: "sent",
+      emailDeliveredAt: new Date().toISOString(),
+      webhookResult
+    });
+  } catch (error) {
+    window.ovaOrdersStore.update(savedOrder.id, {
+      emailDeliveryStatus: "failed",
+      emailDeliveryError: String(error && error.message ? error.message : error),
+      emailFailedAt: new Date().toISOString()
+    });
+    console.error(error);
+    setConfirmButtonBusy(false);
+    alert(`${getOrderSendFailedMessage()}\n${String(error && error.message ? error.message : error)}`);
+    return;
+  }
+
+  localStorage.setItem("ovaFirstOrderCompleted", "true");
+  localStorage.removeItem("ovaCart");
+  localStorage.removeItem("ovaCheckoutDetails");
+  localStorage.removeItem("ovaAppliedCouponCode");
+  
+  // Redirect to thank you page after successful order
+  setTimeout(() => {
+    window.location.href = "thank-you.html";
+  }, 1000);
+}
+
+renderSummary();
+selectMethod("cash");
+syncCopyButtons();
+</script>
+<script src="js/ova-analytics.js?v=20260424b"></script>
+<script src="js/pwa.js?v=20260419a"></script>
+</body>
+</html>
+
+
+
+

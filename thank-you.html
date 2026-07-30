@@ -1,0 +1,623 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | Ova Store</title>
+<meta name="description" content="Thank you for your order at Ova Store. Your luxury perfume order is being prepared." />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Ova Store" />
+<meta name="theme-color" content="#111111" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="images/site-assets/logooo-2.jpeg" />
+<link rel="icon" type="image/jpeg" href="images/site-assets/logooo-2.jpeg" />
+<link rel="shortcut icon" href="images/site-assets/logooo-2.jpeg" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Ova Store" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"Thank You | Ova Store",
+  "description":"Thank you page for Ova Store perfume orders."
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.back,
+.back-btn,
+.back-link,
+.cart-trigger,
+.dropdown-link-btn,
+.hero-btn,
+.install-app-btn,
+.modal-more-btn,
+.modal-add-btn,
+.modal-secondary-btn,
+.checkout-btn,
+.compare-secondary,
+.compare-primary,
+.close-search-btn,
+.filter-tab,
+.shop-all-btn,
+.copy-wallet-btn,
+.confirm-btn,
+.paypal-btn,
+.continue-shopping-btn,
+.submit-btn,
+.intro-enter-btn,
+.topbar-back,
+.topbar-cart{
+  border-radius:0 !important;
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.back,
+.back-btn,
+.back-link,
+.cart-trigger,
+.dropdown-link-btn,
+.hero-btn,
+.install-app-btn,
+.modal-more-btn,
+.modal-add-btn,
+.modal-secondary-btn,
+.checkout-btn,
+.compare-secondary,
+.compare-primary,
+.close-search-btn,
+.filter-tab,
+.shop-all-btn,
+.copy-wallet-btn,
+.confirm-btn,
+.paypal-btn,
+.continue-shopping-btn,
+.submit-btn,
+.intro-enter-btn,
+.topbar-back,
+.topbar-cart,
+.product-btn-label{
+  background:#ffffff !important;
+  background-image:none !important;
+  border-color:rgba(0,0,0,.14) !important;
+  color:#111111 !important;
+  text-shadow:0 0 6px rgba(214,179,122,.12),0 0 1px rgba(214,179,122,.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(216, 255, 230, 0.9) 0%, rgba(216, 255, 230, 0) 28%),
+    radial-gradient(circle at top right, rgba(255, 236, 205, 0.78) 0%, rgba(255, 236, 205, 0) 24%),
+    linear-gradient(180deg, #fffdf9 0%, #fff8f1 48%, #ffffff 100%);
+  color: #181311;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+body.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.thank-you-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 820px;
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0) 32%),
+    linear-gradient(180deg, #effff3 0%, #d9f8e0 100%);
+  border: 1px solid rgba(22, 130, 63, 0.18);
+  border-radius: 32px;
+  padding: 60px 40px;
+  box-shadow: 0 24px 50px rgba(34, 139, 34, 0.12);
+  text-align: center;
+  animation: slideUp 0.6s ease-out;
+}
+
+.thank-you-container::before {
+  content: "";
+  position: absolute;
+  inset: -12% auto auto -10%;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
+
+.thank-you-container::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% -18% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(31,143,68,0.12) 0%, rgba(31,143,68,0) 72%);
+  pointer-events: none;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px;
+  background: linear-gradient(135deg, #1f8f44 0%, #39ad61 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+  color: transparent;
+  box-shadow: 0 22px 34px rgba(31, 143, 68, 0.22);
+  animation: scaleIn 0.6s ease-out;
+}
+
+.success-icon::before {
+  content: "\2713";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.success-icon::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px solid rgba(31, 143, 68, 0.18);
+  box-shadow: 0 0 0 14px rgba(31, 143, 68, 0.08);
+  animation: pulseRing 2.4s ease-out infinite;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(36px, 6vw, 64px);
+  color: #1f8f44;
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.thank-you-content {
+  margin-bottom: 32px;
+}
+
+.thank-you-content p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #1e5f34;
+  margin-bottom: 16px;
+}
+
+.order-id {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 16px 20px;
+  border-radius: 18px;
+  margin: 24px 0;
+  border: 1px solid rgba(31, 143, 68, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.order-id label {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #0d5c2a;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
+.order-id strong {
+  display: block;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #1f8f44;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.order-overview {
+  display: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 26px 0 0;
+  text-align: left;
+}
+
+body.rtl .order-overview {
+  text-align: right;
+}
+
+.overview-card {
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px solid rgba(31, 143, 68, 0.12);
+  border-radius: 22px;
+  padding: 18px 16px;
+  box-shadow: 0 18px 32px rgba(31, 143, 68, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.overview-card small {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+  color: #2f6f44;
+  opacity: 0.8;
+}
+
+.overview-card strong {
+  display: block;
+  font-size: 20px;
+  color: #163c25;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.action-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 22px;
+  font-family: inherit;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.action-btn::after {
+  content: "";
+  position: absolute;
+  inset: -130% auto auto -22%;
+  width: 66%;
+  height: 250%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.28) 48%, rgba(255,255,255,0) 100%);
+  transform: rotate(18deg) translate3d(0,0,0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background: #1f8f44;
+  color: #fff;
+  box-shadow: 0 16px 32px rgba(31, 143, 68, 0.22);
+}
+
+.btn-primary:hover {
+  background: #0d5c2a;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(31, 143, 68, 0.28);
+}
+
+.action-btn:hover::after {
+  opacity: 1;
+  animation: thankYouShine 1s ease;
+}
+
+.btn-secondary {
+  background: rgba(31, 143, 68, 0.08);
+  color: #1f8f44;
+  border: 1px solid rgba(31, 143, 68, 0.18);
+}
+
+.btn-secondary:hover {
+  background: rgba(31, 143, 68, 0.15);
+  transform: translateY(-2px);
+}
+
+.divider {
+  height: 1px;
+  background: rgba(31, 143, 68, 0.15);
+  margin: 32px 0;
+}
+
+.contact-section {
+  background: rgba(255, 255, 255, 0.56);
+  padding: 24px;
+  border-radius: 20px;
+  margin-top: 24px;
+  border: 1px solid rgba(31, 143, 68, 0.12);
+  box-shadow: 0 18px 30px rgba(31, 143, 68, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.contact-section p {
+  font-size: 14px;
+  color: #1e5f34;
+  margin-bottom: 12px;
+}
+
+.contact-link {
+  color: #1f8f44;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+@keyframes thankYouShine {
+  0% {
+    transform: rotate(18deg) translate3d(-180%,0,0);
+  }
+  100% {
+    transform: rotate(18deg) translate3d(235%,0,0);
+  }
+}
+
+@media (max-width: 640px) {
+  .thank-you-container {
+    padding: 40px 20px;
+    border-radius: 24px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    width: 100%;
+  }
+
+  .order-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .thank-you-content p {
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="thank-you-container">
+  <div class="success-icon">✓</div>
+  
+  <h1 data-i18n="successTitle">Thank You</h1>
+  
+  <div class="thank-you-content">
+    <p data-i18n="success1">Your order has been confirmed successfully, and our team will start preparing it with care.</p>
+    <p data-i18n="success2">Delivery usually takes from 3 to 4 days, and we will contact you if we need any extra detail.</p>
+    <p data-i18n="success3">We truly appreciate your trust in Ova Store and hope your order reaches you in the best condition.</p>
+  </div>
+
+  <div class="order-id" id="orderIdBox" style="display:none;">
+    <label data-i18n="orderId">Order ID</label>
+    <strong id="orderId">ORD-0000</strong>
+  </div>
+
+  <div class="order-overview" id="orderOverview">
+    <div class="overview-card">
+      <small data-i18n="orderTotal">Order Total</small>
+      <strong id="overviewTotal">0 EGP</strong>
+    </div>
+    <div class="overview-card">
+      <small data-i18n="orderPayment">Payment Method</small>
+      <strong id="overviewPayment">-</strong>
+    </div>
+    <div class="overview-card">
+      <small data-i18n="orderItems">Items Count</small>
+      <strong id="overviewItems">0</strong>
+    </div>
+    <div class="overview-card">
+      <small data-i18n="orderDate">Order Date</small>
+      <strong id="overviewDate">-</strong>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="contact-section">
+    <p data-i18n="needHelp">Need help or have questions?</p>
+    <p>
+      <a href="https://wa.me/201099136720" target="_blank" class="contact-link" data-i18n="contactWhatsapp">Contact us on WhatsApp</a>
+    </p>
+  </div>
+
+  <div class="actions">
+    <a href="index.html" class="action-btn btn-primary" data-i18n="continueShpping">Continue Shopping</a>
+    <button class="action-btn btn-secondary" onclick="printOrder()" data-i18n="printOrder">Print Order</button>
+  </div>
+</div>
+
+<script src="js/page-language.js?v=20260419a"></script>
+<script src="js/orders-store.js?v=20260419a"></script>
+<script>
+const pageLang = applyPageLanguage({
+  en:{pageTitle:"Thank You | Ova Store",successTitle:"Thank You",success1:"Your order has been confirmed successfully, and our team will start preparing it with care.",success2:"Delivery usually takes from 3 to 4 days, and we will contact you if we need any extra detail.",success3:"We truly appreciate your trust in Ova Store and hope your order reaches you in the best condition.",orderId:"Order ID",orderTotal:"Order Total",orderPayment:"Payment Method",orderItems:"Items Count",orderDate:"Order Date",needHelp:"Need help or have questions?",contactWhatsapp:"Contact us on WhatsApp",continueShpping:"Continue Shopping",printOrder:"Print Order"},
+  ar:{pageTitle:"شكرًا لك | Ova Store",successTitle:"شكرًا لك",success1:"تم تأكيد طلبك بنجاح، وسيبدأ فريقنا في تجهيزه بعناية.",success2:"عادة يستغرق التوصيل من 3 إلى 4 أيام، وسنتواصل معك إذا احتجنا أي تفاصيل إضافية.",success3:"نقدّر ثقتك في Ova Store ونتمنى أن يصلك طلبك بأفضل حالة.",orderId:"رقم الطلب",orderTotal:"إجمالي الطلب",orderPayment:"طريقة الدفع",orderItems:"عدد المنتجات",orderDate:"تاريخ الطلب",needHelp:"هل تحتاج إلى مساعدة أو لديك أسئلة؟",contactWhatsapp:"تواصل معنا عبر WhatsApp",continueShpping:"متابعة التسوق",printOrder:"طباعة الطلب"}
+});
+
+const t = pageLang.t;
+
+// Get the last order
+function getLastOrder() {
+  const orders = window.ovaOrdersStore.getAll();
+  return orders.length > 0 ? orders[0] : null;
+}
+
+// Display order ID if available
+function displayOrderInfo() {
+  const lastOrder = getLastOrder();
+  if (lastOrder && lastOrder.id) {
+    document.getElementById("orderIdBox").style.display = "block";
+    document.getElementById("orderId").textContent = lastOrder.id;
+    document.getElementById("orderOverview").style.display = "grid";
+    document.getElementById("overviewTotal").textContent = `${lastOrder.totalPrice || 0} EGP`;
+    document.getElementById("overviewPayment").textContent = lastOrder.paymentMethod || "-";
+    document.getElementById("overviewItems").textContent = String(Array.isArray(lastOrder.items) ? lastOrder.items.length : 0);
+    document.getElementById("overviewDate").textContent = lastOrder.timestamp || "-";
+  }
+}
+
+// Print order
+function printOrder() {
+  const lastOrder = getLastOrder();
+  if (!lastOrder) {
+    alert("No order found to print.");
+    return;
+  }
+
+  let printContent = `
+    <html>
+    <head>
+      <title>Order ${lastOrder.id}</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; color: #1f8f44; }
+        .order-section { margin: 20px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .label { font-weight: bold; color: #333; }
+        .info-row { margin: 8px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #f5f5f5; }
+        .total { font-size: 18px; font-weight: bold; text-align: right; margin: 20px 0; }
+      </style>
+    </head>
+    <body>
+      <h1>Order Confirmation ${lastOrder.id}</h1>
+      
+      <div class="order-section">
+        <h3>Customer Information</h3>
+        <div class="info-row"><span class="label">Name:</span> ${lastOrder.fullName || 'N/A'}</div>
+        <div class="info-row"><span class="label">Email:</span> ${lastOrder.email || 'N/A'}</div>
+        <div class="info-row"><span class="label">Phone:</span> ${lastOrder.phone || 'N/A'}</div>
+        <div class="info-row"><span class="label">Address:</span> ${lastOrder.address || 'N/A'}</div>
+      </div>
+
+      <div class="order-section">
+        <h3>Order Items</h3>
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Free</th>
+            <th>Subtotal</th>
+          </tr>
+  `;
+
+  if (lastOrder.items && lastOrder.items.length > 0) {
+    lastOrder.items.forEach(item => {
+      printContent += `
+        <tr>
+          <td>${item.name}</td>
+          <td>${item.price} EGP</td>
+          <td>${item.quantity}</td>
+          <td>${item.freeUnits || 0}</td>
+          <td>${item.subtotal} EGP</td>
+        </tr>
+      `;
+    });
+  }
+
+  printContent += `
+        </table>
+      </div>
+
+      <div class="order-section">
+        <h3>Order Summary</h3>
+        <div class="info-row"><span class="label">Payment Method:</span> ${lastOrder.paymentMethod || 'N/A'}</div>
+        <div class="info-row"><span class="label">Quiz Discount:</span> ${lastOrder.quizDiscount || 0} EGP</div>
+        <div class="total">Total: ${lastOrder.totalPrice} EGP</div>
+        <div class="info-row"><span class="label">Order Date:</span> ${lastOrder.timestamp || 'N/A'}</div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const printWindow = window.open('', '', 'width=900,height=600');
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  setTimeout(() => {
+    printWindow.print();
+  }, 250);
+}
+
+// Initialize
+displayOrderInfo();
+</script>
+<script src="js/ova-analytics.js?v=20260424b"></script>
+<script src="js/pwa.js?v=20260419a"></script>
+</body>
+</html>
+

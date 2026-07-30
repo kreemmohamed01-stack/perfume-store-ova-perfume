@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Jean Paul Gaultier logo</title>
+  <desc id="desc">Stylized Jean Paul Gaultier text logo on a cream background.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fcf6ee"/>
+      <stop offset="100%" stop-color="#efe2d1"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="640" rx="56" fill="url(#bg)"/>
+  <rect x="44" y="44" width="552" height="552" rx="44" fill="none" stroke="#8b6a33" stroke-width="4" opacity=".22"/>
+  <text x="320" y="240" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="68" font-weight="700" fill="#201714" letter-spacing="3">JEAN PAUL</text>
+  <text x="320" y="334" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700" fill="#201714" letter-spacing="2">GAULTIER</text>
+  <text x="320" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#8b6a33" letter-spacing="7">PARFUMS</text>
+</svg>

@@ -1,0 +1,510 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 4 Best Seller | Ova Store</title>
+  <meta name="description" content="Discover the first 4 best seller perfumes from Ova Store with full details, price, longevity, sillage, and product images." />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#fbf6ef;
+      --panel:#fffdf9;
+      --line:rgba(45,32,25,.1);
+      --ink:#1d1714;
+      --muted:#6f5d52;
+      --gold:#8b6a33;
+      --gold-soft:#dbc59b;
+      --shadow:0 24px 50px rgba(63,42,24,.12);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Manrope",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(219,197,155,.22), transparent 26%),
+        linear-gradient(180deg, #fffdf9 0%, #f8f1e7 46%, #fff 100%);
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .shell{
+      width:min(1240px, calc(100% - 18px));
+      margin:0 auto;
+      padding:20px 0 42px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:26px 20px;
+      border-radius:30px;
+      border:1px solid rgba(139,106,51,.16);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.92), rgba(255,255,255,0) 34%),
+        linear-gradient(135deg, #f7efe4 0%, #efe2cf 100%);
+      box-shadow:var(--shadow);
+      margin-bottom:18px;
+    }
+
+    .hero-copy{
+      display:none;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:280px;
+      height:280px;
+      left:-80px;
+      bottom:-120px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(199,159,98,.2), transparent 70%);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#7d6857;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:40px;
+      height:1px;
+      background:rgba(29,23,20,.28);
+    }
+
+    h1{
+      margin:12px 0 10px;
+      font-family:"Cormorant Garamond",serif;
+      font-size:clamp(38px, 7vw, 70px);
+      line-height:.95;
+      letter-spacing:1px;
+    }
+
+    .hero p{
+      margin:0;
+      max-width:62ch;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:14px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .hero-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border:1px solid rgba(29,23,20,.12);
+      background:#fff;
+      color:#211913;
+      font-weight:800;
+      letter-spacing:.5px;
+      box-shadow:0 16px 28px rgba(58,39,22,.08);
+    }
+
+    .hero-btn.primary{
+      background:linear-gradient(135deg, #1d1714 0%, #463226 100%);
+      color:#fff7ee;
+      border-color:rgba(255,255,255,.08);
+    }
+
+    .featured-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .perfume-card{
+      display:grid;
+      gap:14px;
+      padding:16px;
+      border-radius:28px;
+      border:1px solid rgba(139,106,51,.14);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.96), rgba(255,255,255,0) 34%),
+        linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(247,240,230,.98) 100%);
+      box-shadow:0 22px 44px rgba(62,41,24,.1);
+      min-width:0;
+    }
+
+    .perfume-media{
+      display:grid;
+      gap:10px;
+      grid-template-rows:auto auto;
+    }
+
+    .perfume-main-image{
+      width:100%;
+      aspect-ratio:1 / 1.22;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(246,236,220,.92));
+      border:1px solid rgba(139,106,51,.1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px;
+    }
+
+    .perfume-main-image img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      filter:drop-shadow(0 24px 24px rgba(36,24,15,.18));
+    }
+
+    .perfume-alt-image{
+      width:100%;
+      aspect-ratio:1 / .78;
+      border-radius:20px;
+      background:#fffaf3;
+      border:1px solid rgba(139,106,51,.1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:10px;
+    }
+
+    .perfume-alt-image img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+
+    .perfume-body{
+      display:grid;
+      gap:12px;
+      min-width:0;
+    }
+
+    .perfume-kicker{
+      font-size:11px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      color:#8a6b49;
+    }
+
+    .perfume-title{
+      margin:0;
+      font-family:"Cormorant Garamond",serif;
+      font-size:clamp(24px, 3vw, 34px);
+      line-height:1;
+      color:#2c211c;
+    }
+
+    .perfume-price{
+      font-size:20px;
+      font-weight:800;
+      color:#241a14;
+    }
+
+    .perfume-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .perfume-tags span{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(139,106,51,.14);
+      background:rgba(255,255,255,.85);
+      color:#5d4a3d;
+      font-size:11px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+
+    .perfume-details{
+      display:grid;
+      gap:8px;
+      padding:14px;
+      border-radius:22px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(139,106,51,.12);
+    }
+
+    .perfume-details p{
+      margin:0;
+      color:#42342b;
+      line-height:1.9;
+      font-size:13px;
+    }
+
+    .perfume-details strong{
+      color:#7b5b33;
+    }
+
+    .perfume-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .perfume-actions a{
+      flex:1 1 180px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 14px;
+      border:1px solid rgba(29,23,20,.12);
+      background:#fff;
+      font-size:13px;
+      font-weight:800;
+      color:#211913;
+    }
+
+    .perfume-actions a.primary{
+      background:linear-gradient(135deg, #1d1714 0%, #463226 100%);
+      color:#fff8ef;
+    }
+
+    @media (max-width:780px){
+      .featured-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:12px;
+      }
+
+      .perfume-card{
+        padding:12px;
+        gap:12px;
+      }
+
+      .perfume-title{
+        font-size:24px;
+      }
+
+      .perfume-price{
+        font-size:17px;
+      }
+
+      .perfume-details{
+        padding:12px;
+      }
+
+      .perfume-details p{
+        font-size:12px;
+        line-height:1.8;
+      }
+
+      .perfume-main-image,
+      .perfume-alt-image{
+        aspect-ratio:1 / 1.16;
+      }
+
+      .perfume-main-image{
+        aspect-ratio:1 / 1.28;
+      }
+
+      .perfume-alt-image{
+        aspect-ratio:1 / .82;
+      }
+    }
+
+    @media (max-width:430px){
+      .shell{
+        width:min(100% - 12px, 100%);
+      }
+
+      .hero{
+        padding:22px 14px;
+        border-radius:24px;
+      }
+
+      .featured-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:10px;
+      }
+
+      .perfume-card{
+        border-radius:22px;
+        padding:10px;
+      }
+
+      .perfume-main-image,
+      .perfume-alt-image{
+        border-radius:18px;
+        padding:8px 6px;
+      }
+
+      .perfume-main-image{
+        aspect-ratio:1 / 1.34;
+      }
+
+      .perfume-alt-image{
+        aspect-ratio:1 / .86;
+      }
+
+      .perfume-title{
+        font-size:21px;
+      }
+
+      .perfume-tags span{
+        font-size:10px;
+        padding:6px 8px;
+      }
+
+      .perfume-actions{
+        flex-direction:column;
+      }
+
+      .perfume-actions a{
+        flex:1 1 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="hero-actions">
+        <a class="hero-btn primary" href="index.html#bestSellerSection">الرجوع للصفحة الرئيسية</a>
+        <a class="hero-btn" href="all-perfume.html">عرض كل البرفانات</a>
+      </div>
+    </section>
+
+    <section class="featured-grid" id="featuredGrid"></section>
+  </div>
+
+  <script>
+    const featuredPerfumes = [
+      {
+        name: "Diamond Emerald Soul 200ml",
+        price: 1050,
+        img: "emerald diamond.jpg",
+        img2: "images/site-assets/emerald-soul-diamond-ibrahim-al-qurashi-for-women-and-men.jpg",
+        type: "Fresh / Aromatic / Woody",
+        longevity: "Clean all day",
+        sillage: "Soft elegant trail",
+        rating: "4.9",
+        detailsHtml: `
+          <p><strong>النوع:</strong> Fresh / Aromatic / Woody خفيف</p>
+          <p><strong>الفيب:</strong> نظيف - شيك - رايق</p>
+          <p><strong>التفاصيل:</strong><br>غالبًا فيه نوتات خضرا + أخشاب خفيفة، وريحتُه قريبة من البرفانات الـ Fresh الراقية.</p>
+          <p><strong>مناسب جدًا:</strong><br>الصبح - الشغل / الجامعة - الصيف</p>
+          <p><strong>اللي يميزه:</strong><br>هادي ومش مزعج، ويدي إحساس clean smell طول اليوم.</p>
+        `
+      },
+      {
+        name: "Nude Coral Diamond",
+        price: 1200,
+        img: "nude coral dimond.jpg",
+        img2: "images/site-assets/nude-coral-diamond-ibrahim-al-qurashi.jpg",
+        type: "Sweet / Vanilla / Gourmand",
+        longevity: "Warm long lasting",
+        sillage: "Very noticeable",
+        rating: "4.9",
+        detailsHtml: `
+          <p><strong>النوع:</strong> Sweet / Vanilla / Gourmand</p>
+          <p><strong>الفيب:</strong> دافي - سكسي - ملفت</p>
+          <p><strong>التفاصيل:</strong><br>فيه فانيليا + كراميل + لمسة مسك، وداخل في جو البرفانات الحلوة اللي بتشد.</p>
+          <p><strong>مناسب لـ:</strong><br>خروجات بليل - ديت - شتاء / أماكن مكيفة</p>
+          <p><strong>اللي يميزه:</strong><br>ريحة ملفتة جدًا وبتسيب أثر واضح.</p>
+        `
+      },
+      {
+        name: "Lahab - Hersh",
+        price: 1050,
+        img: "lahab.jpg",
+        img2: "images/site-assets/hersh-lahab-100ml-edp-by-al-ezz-for-oud.jpg",
+        type: "Oriental / Spicy / Oud",
+        longevity: "Heavy signature",
+        sillage: "Strong royal trail",
+        rating: "5.0",
+        detailsHtml: `
+          <p><strong>النوع:</strong> Oriental / Spicy / Oud</p>
+          <p><strong>الفيب:</strong> فخم - تقيل - ملكي</p>
+          <p><strong>التفاصيل:</strong><br>فيه عود + عنبر + توابل + لمسة حلوة خفيفة.</p>
+          <p><strong>مناسب لـ:</strong><br>السهرات - المناسبات - الشتاء</p>
+          <p><strong>اللي يميزه:</strong><br>فخم جدًا وريحتك تبان من بعيد، وشخصيته قوية كـ signature scent.</p>
+        `
+      },
+      {
+        name: "Khamrah Classic",
+        price: 850,
+        img: "خمره.jpg",
+        img2: "images/site-assets/khamrah-lattafa-perfumes.jpg",
+        type: "Vanilla / Cinnamon / Musk / Dates",
+        longevity: "Very high",
+        sillage: "Strong",
+        rating: "5.0",
+        detailsHtml: `
+          <p><strong>الريحة:</strong><br>فانيليا + قرفة + مسك + تمر، بطابع شرقي تقيل وسويت دافئ.</p>
+          <p><strong>الإحساس:</strong><br>فخم جدًا، دافي ومغري، وشبه برفانات غالية جدًا من فئة niche.</p>
+          <p><strong>الاستخدام:</strong><br>سهر - مناسبات - شتوي</p>
+          <p><strong>الثبات:</strong> عالي جدًا</p>
+          <p><strong>الفوحان:</strong> قوي وبيسيب أثر واضح</p>
+          <p><strong>اللي يميزه:</strong><br>كلاسيك شرقي تقيل للي عايز ريحة فخمة ومميزة.</p>
+        `
+      }
+    ];
+
+    function renderFeaturedPerfumes() {
+      const root = document.getElementById("featuredGrid");
+      if (!root) return;
+
+      root.innerHTML = featuredPerfumes.map((product, index) => `
+        <article class="perfume-card">
+          <div class="perfume-media">
+            <div class="perfume-main-image">
+              <img src="${product.img}" alt="${product.name}" loading="${index === 0 ? "eager" : "lazy"}" decoding="async" />
+            </div>
+            <div class="perfume-alt-image">
+              <img src="${product.img2}" alt="${product.name} second image" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="perfume-body">
+            <span class="perfume-kicker">Best Seller ${String(index + 1).padStart(2, "0")}</span>
+            <h2 class="perfume-title">${product.name}</h2>
+            <div class="perfume-price">${Number(product.price).toLocaleString("en-US")} EGP</div>
+            <div class="perfume-tags">
+              <span>${product.type}</span>
+              <span>الثبات: ${product.longevity}</span>
+              <span>الفوحان: ${product.sillage}</span>
+              <span>Rating ${product.rating}</span>
+            </div>
+            <div class="perfume-details">${product.detailsHtml}</div>
+            <div class="perfume-actions">
+              <a class="primary" href="index.html#bestSellerSection">ارجع للقسم</a>
+              <a href="index.html?product_slug=${encodeURIComponent(String(product.slug || product.name).trim().toLowerCase().replace(/['"]/g, "").replace(/[^a-z0-9\u0600-\u06FF]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 120))}">افتح البرفان في الموقع</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    renderFeaturedPerfumes();
+  </script>
+  <script src="js/ova-analytics.js?v=20260424b"></script>
+  <script src="js/scroll-reveal.js?v=20260423b"></script>
+  <script src="js/pwa.js?v=20260423a"></script>
+</body>
+</html>
+

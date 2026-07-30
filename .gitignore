@@ -1,0 +1,11 @@
+# Windows files
+desktop.ini
+Thumbs.db
+
+# Local environment variables and credentials
+.env
+.env.*
+!.env.example
+
+# Contains a hard-coded password; do not publish it in the repository.
+google-apps-script-order-mail.gs
