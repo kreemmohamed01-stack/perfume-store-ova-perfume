@@ -513,140 +513,6 @@
       }
     }
 
-    /* ===== Scroll-scrubbed opening intro ===== */
-    html.intro-scrub-lock,
-    html.intro-scrub-lock body {
-      overflow-x: hidden;
-    }
-
-    body.intro-scrub-active .promo-topbar,
-    body.intro-scrub-active #navbar,
-    body.intro-scrub-active #bottomNavbar,
-    body.intro-scrub-active .whatsapp-float,
-    body.intro-scrub-active .ai-float {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      transition: opacity 0.3s ease !important;
-    }
-
-    .intro-scrub {
-      position: relative;
-      width: 100%;
-      height: 260vh;
-      background: #0c0a08;
-      z-index: 3000;
-    }
-
-    .intro-scrub-sticky {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100svh;
-      overflow: hidden;
-      background: #0c0a08;
-      z-index: 3000;
-    }
-
-    .intro-scrub.is-released .intro-scrub-sticky {
-      position: absolute;
-      top: auto;
-      bottom: 0;
-      left: 0;
-    }
-
-    .intro-scrub-sticky canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .intro-scrub-veil {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.05) 30%, rgba(0, 0, 0, 0.15) 70%, rgba(0, 0, 0, 0.55) 100%);
-      pointer-events: none;
-    }
-
-    .intro-scrub-hint {
-      position: absolute;
-      left: 50%;
-      bottom: 7%;
-      transform: translateX(-50%) translateY(0);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      opacity: 1;
-      transition: opacity 0.6s ease;
-      will-change: transform;
-    }
-
-    .intro-scrub-hint-mouse {
-      width: 22px;
-      height: 34px;
-      border: 2px solid rgba(246, 223, 183, 0.9);
-      border-radius: 12px;
-      position: relative;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), 0 0 14px rgba(246, 223, 183, 0.4);
-    }
-
-    .intro-scrub-hint-mouse::before {
-      content: "";
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      width: 4px;
-      height: 7px;
-      border-radius: 2px;
-      background: #f6dfb7;
-      transform: translateX(-50%);
-      animation: introScrubWheel 1.3s ease-in-out infinite;
-    }
-
-    @keyframes introScrubWheel {
-      0% { opacity: 1; transform: translate(-50%, 0); }
-      70% { opacity: 0; transform: translate(-50%, 11px); }
-      100% { opacity: 0; transform: translate(-50%, 11px); }
-    }
-
-    .intro-scrub-hint span {
-      display: inline-block;
-      font-family: "Manrope", sans-serif;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      background: linear-gradient(120deg, #f6dfb7 0%, #ffffff 30%, #fff3d6 50%, #f6dfb7 65%, #ffffff 100%);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 18px rgba(246, 223, 183, 0.6);
-      animation: hmlGoldShift 1.3s ease-in-out infinite, naPillFloat 2.2s ease-in-out infinite;
-    }
-
-    .intro-scrub-hint-arrow {
-      width: 11px;
-      height: 11px;
-      border-right: 2.5px solid rgba(246, 223, 183, 0.9);
-      border-bottom: 2.5px solid rgba(246, 223, 183, 0.9);
-      transform: rotate(45deg);
-      animation: introScrubArrow 1.3s ease-in-out infinite;
-    }
-
-    @keyframes introScrubArrow {
-      0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 0.55; }
-      50% { transform: rotate(45deg) translate(4px, 4px); opacity: 1; }
-    }
-
-    .intro-scrub-hint.is-fading {
-      opacity: 0;
-    }
-
     .promo-topbar {
       position: fixed;
       top: 0;
@@ -5805,7 +5671,6 @@
     body.product-page-mode .hero-mobile-luxury,
     body.product-page-mode .new-arrivals,
     body.product-page-mode .khamrah-video-section,
-    body.product-page-mode .intro-scrub,
     body.product-page-mode .promo {
       display: none !important;
     }
@@ -8770,138 +8635,6 @@
   </style>
 </head>
 <body>
-  <section class="intro-scrub" id="introScrub">
-    <div class="intro-scrub-sticky">
-      <canvas id="introScrubCanvas"></canvas>
-      <div class="intro-scrub-veil"></div>
-      <div class="intro-scrub-hint" id="introScrubHint">
-        <div class="intro-scrub-hint-mouse"></div>
-        <span id="introScrubHintText">Scroll</span>
-        <div class="intro-scrub-hint-arrow"></div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    (function () {
-      var section = document.getElementById("introScrub");
-      var canvas = document.getElementById("introScrubCanvas");
-      if (!section || !canvas || !canvas.getContext) return;
-
-      try {
-        if (sessionStorage.getItem("ovaIntroSeen") === "1") {
-          section.parentNode.removeChild(section);
-          return;
-        }
-      } catch (e) {}
-
-      var ctx = canvas.getContext("2d");
-      var hint = document.getElementById("introScrubHint");
-
-      var FRAME_COUNT = 66;
-      var frames = [];
-
-      function frameSrc(i) {
-        var n = ("000" + i).slice(-3);
-        return "images/site-assets/intro-frames/frame-" + n + ".jpg";
-      }
-
-      for (var i = 1; i <= FRAME_COUNT; i++) {
-        var img = new Image();
-        img.decoding = "async";
-        img.src = frameSrc(i);
-        frames.push(img);
-      }
-      frames[0].onload = function () { drawFrame(0); };
-
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-      function resizeCanvas() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.round(window.innerWidth * dpr);
-        canvas.height = Math.round(window.innerHeight * dpr);
-        drawFrame(currentFrame);
-      }
-
-      function drawFrame(index) {
-        var img = frames[Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(index)))];
-        if (!img || !img.complete || !img.naturalWidth) return;
-        var cw = canvas.width, ch = canvas.height;
-        var iw = img.naturalWidth, ih = img.naturalHeight;
-        var scale = Math.max(cw / iw, ch / ih);
-        var dw = iw * scale, dh = ih * scale;
-        var dx = (cw - dw) / 2, dy = (ch - dh) / 2;
-        ctx.clearRect(0, 0, cw, ch);
-        ctx.drawImage(img, dx, dy, dw, dh);
-      }
-
-      var targetFrame = 0;
-      var currentFrame = 0;
-      var rafId = null;
-      var wasActive = null;
-
-      function tick() {
-        currentFrame += (targetFrame - currentFrame) * 0.16;
-        if (Math.abs(targetFrame - currentFrame) < 0.04) currentFrame = targetFrame;
-        drawFrame(currentFrame);
-        if (Math.abs(targetFrame - currentFrame) > 0.015) {
-          rafId = requestAnimationFrame(tick);
-        } else {
-          rafId = null;
-        }
-      }
-
-      var introFinalized = false;
-      var hintWindowFrames = 10;
-
-      function finalizeIntro() {
-        if (introFinalized) return;
-        introFinalized = true;
-        try { sessionStorage.setItem("ovaIntroSeen", "1"); } catch (e) {}
-        var prevHeight = section.offsetHeight;
-        var prevScroll = window.scrollY || window.pageYOffset || 0;
-        document.body.classList.remove("intro-scrub-active");
-        section.style.display = "none";
-        window.scrollTo(0, Math.max(0, prevScroll - prevHeight));
-        window.removeEventListener("scroll", updateProgress);
-        if (window.ScrollTrigger) {
-          window.setTimeout(function () { window.ScrollTrigger.refresh(); }, 60);
-        }
-      }
-
-      function updateProgress() {
-        if (introFinalized) return;
-        var rect = section.getBoundingClientRect();
-        var scrollable = section.offsetHeight - window.innerHeight;
-        var scrolled = -rect.top;
-        var progress = scrollable > 0 ? Math.max(0, Math.min(1, scrolled / scrollable)) : 0;
-        targetFrame = progress * (FRAME_COUNT - 1);
-
-        var active = rect.bottom > 0 && progress < 0.999;
-        if (active !== wasActive) {
-          wasActive = active;
-          document.body.classList.toggle("intro-scrub-active", active);
-        }
-        section.classList.toggle("is-released", progress >= 0.999);
-
-        hint.style.transform = "translateX(-50%) translateY(" + (-progress * 46) + "px)";
-        if (targetFrame > hintWindowFrames) hint.classList.add("is-fading");
-        else hint.classList.remove("is-fading");
-
-        if (progress >= 0.999) {
-          finalizeIntro();
-        }
-
-        if (!rafId) rafId = requestAnimationFrame(tick);
-      }
-
-      resizeCanvas();
-      window.addEventListener("resize", resizeCanvas, { passive: true });
-      window.addEventListener("scroll", updateProgress, { passive: true });
-      updateProgress();
-    })();
-  </script>
-
   <div class="promo-topbar" id="promoTopbar" role="button" tabindex="0" onclick="copyFloatingCouponCode()" onkeydown="handlePromoTopbarKeydown(event)">
     <div class="promo-topbar__track">
       <div class="promo-topbar__group">
@@ -12066,7 +11799,6 @@
         addMoreItem: "Add <strong>{count} more item</strong> to unlock a free perfume.",
         addThreeHint: "Add <strong>3 perfumes</strong> and get 50% off.",
         continueShopping: "Continue Shopping",
-        introScrubHintText: "Scroll",
         khamrahVideoKicker: "The Film",
         khamrahVideoSub: "Tap to discover",
         offerActive: "Offer active: <strong>{count} free piece</strong> applied. {names}.",
@@ -12218,7 +11950,6 @@
         addMoreItem: "أضف <strong>{count} قطعة أخرى</strong> لتفعيل الهدية المجانية.",
         addThreeHint: "أضف <strong>3 برفانات</strong> واحصل على خصم 50%.",
         continueShopping: "أكمل التسوق",
-        introScrubHintText: "اسكرول",
         khamrahVideoKicker: "الفيلم",
         khamrahVideoSub: "دوس تكتشف",
         offerActive: "العرض متفعل: <strong>{count} قطعة مجانية</strong> اتطبقت. {names}.",
@@ -13253,7 +12984,6 @@
       document.getElementById("searchBack").innerText = String.fromCharCode(8592) + " " + t("back");
       document.getElementById("cartCheckoutBtn").innerText = t("checkout");
       document.getElementById("cartContinueBtn").innerText = t("continueShopping");
-      setText("introScrubHintText", t("introScrubHintText"));
       setText("khamrahVideoKicker", t("khamrahVideoKicker"));
       setText("khamrahVideoSub", t("khamrahVideoSub"));
       document.getElementById("searchTitle").innerText = t("searchTitle");
