@@ -647,38 +647,19 @@ function escapeHtml(value){
 
 function getCartOfferSummary(items){
   const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
-  const freePieces = Math.floor(totalQty / 3);
-  const freeByName = {};
-  let discount = 0;
-
-  if(!freePieces){
-    return { freeByName, discount, freePieces, totalQty };
-  }
-
-  const units = [];
-  items.forEach((item) => {
-    for(let i = 0; i < item.qty; i += 1){
-      units.push({ name: item.name, price: item.price });
-    }
-  });
-
-  units
-    .sort((a, b) => a.price - b.price)
-    .slice(0, freePieces)
-    .forEach((unit) => {
-      freeByName[unit.name] = (freeByName[unit.name] || 0) + 1;
-      discount += unit.price;
-    });
-
-  return { freeByName, discount, freePieces, totalQty };
+  const subtotalAll = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const qualifies = totalQty >= 3;
+  const discount = qualifies ? Math.round(subtotalAll * 0.5) : 0;
+  return { freeByName: {}, discount, freePieces: 0, totalQty, qualifies, subtotalAll };
 }
 
-function getItemFreeUnits(item, offerSummary){
-  return offerSummary.freeByName[item.name] || 0;
+function getItemFreeUnits(){
+  return 0;
 }
 
 function getItemSubtotal(item, offerSummary){
-  return item.price * (item.qty - getItemFreeUnits(item, offerSummary));
+  const base = item.price * item.qty;
+  return offerSummary && offerSummary.qualifies ? Math.round(base * 0.5) : base;
 }
 
 function isFirstOrderEligible(){

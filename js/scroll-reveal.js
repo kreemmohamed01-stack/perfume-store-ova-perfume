@@ -22,6 +22,10 @@
     ".service-card",
     ".category-card",
     ".shop-all-btn",
+    ".footer-top > *",
+    ".footer-follow",
+    ".footer-badge",
+    ".footer-newsletter",
     ".ova-reveal"
   ];
 

@@ -587,7 +587,7 @@ body.compare-modal-open .compare-floating-bar{opacity:0;pointer-events:none;tran
     <button class="modal-more-btn" id="modalMoreBtn" type="button" onclick="toggleModalDetails()">View Details</button>
     <div class="modal-details" id="modalDetails"></div>
     <div class="modal-compare-summary" id="modalCompareSummary"></div>
-    <div class="modal-offer">Buy 2 Get 1 Free</div>
+    <div class="modal-offer">Buy 3 Perfumes, Get 50% Off</div>
     <div class="qty-controls">
       <button type="button" onclick="changeModalQty(-1)">-</button>
       <span id="modalQty">1</span>
@@ -2090,38 +2090,19 @@ function updateCartBadge(){
 
 function getCartOfferSummary(items){
   const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
-  const freePieces = Math.floor(totalQty / 3);
-  const freeByName = {};
-  let discount = 0;
-
-  if(!freePieces){
-    return { freeByName, discount, freePieces, totalQty };
-  }
-
-  const units = [];
-  items.forEach((item) => {
-    for(let i = 0; i < item.qty; i += 1){
-      units.push({ name: item.name, price: item.price });
-    }
-  });
-
-  units
-    .sort((a, b) => a.price - b.price)
-    .slice(0, freePieces)
-    .forEach((unit) => {
-      freeByName[unit.name] = (freeByName[unit.name] || 0) + 1;
-      discount += unit.price;
-    });
-
-  return { freeByName, discount, freePieces, totalQty };
+  const subtotalAll = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const qualifies = totalQty >= 3;
+  const discount = qualifies ? Math.round(subtotalAll * 0.5) : 0;
+  return { freeByName: {}, discount, freePieces: 0, totalQty, qualifies, subtotalAll };
 }
 
-function getItemFreeUnits(item, offerSummary){
-  return offerSummary.freeByName[item.name] || 0;
+function getItemFreeUnits(){
+  return 0;
 }
 
 function getItemSubtotal(item, offerSummary){
-  return item.price * (item.qty - getItemFreeUnits(item, offerSummary));
+  const base = item.price * item.qty;
+  return offerSummary && offerSummary.qualifies ? Math.round(base * 0.5) : base;
 }
 
 function renderCart(){
@@ -2139,7 +2120,6 @@ function renderCart(){
   }
 
   cart.forEach((item, index) => {
-    const freeUnits = getItemFreeUnits(item, offerSummary);
     const subtotal = getItemSubtotal(item, offerSummary);
     total += subtotal;
     const row = document.createElement("div");
@@ -2153,7 +2133,7 @@ function renderCart(){
       <div class="cart-item-details">
         <h4>${item.name}</h4>
         <p>${item.qty} x ${item.price} EGP</p>
-        ${freeUnits ? `<p>${t("offer")}: ${item.qty - freeUnits} ${currentLang === "ar" ? "مدفوع" : "paid"} + ${freeUnits} ${currentLang === "ar" ? "مجاني" : "free"}</p>` : ``}
+        ${offerSummary.qualifies ? `<p>${t("offer")}: ${currentLang === "ar" ? "خصم 50%" : "50% OFF"}</p>` : ``}
         <p>${currentLang === "ar" ? "الإجمالي" : "Subtotal"}: ${subtotal} EGP</p>
         <button type="button" onclick="changeQty(${index}, -1)">-</button>
         <button type="button" onclick="changeQty(${index}, 1)">+</button>
@@ -2442,7 +2422,7 @@ const translations = {
     compareModalDesc: "Compare performance, style, and use case side by side.",
     closeCompare: "Close",
     checkout: "Checkout",
-    offer: "Buy 2 Get 1 Free",
+    offer: "Buy 3 Perfumes, Get 50% Off",
     empty: "No perfumes found for this search."
   },
   ar: {
@@ -2462,7 +2442,7 @@ const translations = {
     compareModalDesc: "قارن بين الأداء والستايل والاستخدام جنب بعض.",
     closeCompare: "إغلاق",
     checkout: "إتمام الطلب",
-    offer: "اشتري 2 وخد 1 مجانًا",
+    offer: "اشتري 3 برفانات واحصل على خصم 50%",
     empty: "لا توجد برفانات مطابقة لهذا البحث."
   }
 };

@@ -128,7 +128,47 @@
       { name: "Musk Powder", price: 850, img: "images/site-assets/misk-bawdar.png", img2: "images/site-assets/misk-bawdar.png" },
       { name: "Musk Al Khas", price: 850, img: "images/site-assets/ibrahim-alqurashi-special-eau-de-parfum-unisex-musk.jpg", img2: "images/site-assets/ibrahim-alqurashi-special-eau-de-parfum-unisex-musk.jpg" },
       { name: "Arabian Tobacco", price: 850, img: "images/site-assets/media-file.jpeg", img2: "images/site-assets/media-file.jpeg" },
-      { name: "Black Carbon", price: 950, img: "images/site-assets/ibraq-ibraheem-al-qurashi-black-carbon-diamond-eau-de-parfum-150ml.jpg", img2: "images/site-assets/black-carbon-notes.jpg" }
+      { name: "Black Carbon", price: 950, img: "images/site-assets/ibraq-ibraheem-al-qurashi-black-carbon-diamond-eau-de-parfum-150ml.jpg", img2: "images/site-assets/black-carbon-notes.jpg" },
+      { name: "Ibraq Balas Rose 150ml", price: 850, img: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.png", img2: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.png" },
+      { name: "Pink Diamond Sakura 200ml", price: 850, img: "images/site-assets/new-arrivals/Pink_Diamond_-_Sakura_200ML_by_Ibrahim_Al_Qurashi___Elegant_Floral_Fragrance_with_Long-Lasting_Freshness_-_عطر_بينك_دايموند_-_ساكورا_200_مل_من_إبراهيم_القرشي___لمسة_زهرية_راقية_وثبات_يدوم_طويلاً-remov.png", img2: "images/site-assets/new-arrivals/Pink_Diamond_-_Sakura_200ML_by_Ibrahim_Al_Qurashi___Elegant_Floral_Fragrance_with_Long-Lasting_Freshness_-_عطر_بينك_دايموند_-_ساكورا_200_مل_من_إبراهيم_القرشي___لمسة_زهرية_راقية_وثبات_يدوم_طويلاً-remov.png" }
+    ]
+  },
+  assaf: {
+    title: "Assaf",
+    subtitle: "A refined Assaf edit with modern signature bottles and long-lasting blends.",
+    products: [
+      { name: "Assaf Private Purple 200ml", price: 850, img: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png", img2: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png" },
+      { name: "Assaf Arrogate Pink", price: 850, img: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png", img2: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png" },
+      { name: "Assaf Arrogate Lipstick Perfume", price: 850, img: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png", img2: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png" },
+      { name: "Sherlock by Assaf", price: 850, img: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png", img2: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png" },
+      { name: "Assaf Angel 200ml", price: 1050, img: "images/site-assets/assaf-angel-main.jpg", img2: "images/site-assets/assaf-angel-alt.jpg" },
+      { name: "Assaf Pink Lady 200ml", price: 1050, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.jpg" }
+    ]
+  },
+  valentino: {
+    title: "Valentino",
+    subtitle: "Iconic Valentino studded bottles, from bold Uomo to radiant Donna editions.",
+    products: [
+      { name: "Valentino Uomo Rendez-Vous Ivory", price: 850, img: "images/site-assets/new-arrivals/Born_In_Roma_Uomo_Rendez-Vous_Ivory_Eau_de_-removebg-preview.png", img2: "images/site-assets/new-arrivals/Born_In_Roma_Uomo_Rendez-Vous_Ivory_Eau_de_-removebg-preview.png" },
+      { name: "Valentino Rendez-Vous Gold Donna", price: 850, img: "images/site-assets/new-arrivals/Valentino_Born_in_Roma_Rendez-Vous_The_Gold_Donna_Eau_de_Parfum-removebg-preview.png", img2: "images/site-assets/new-arrivals/Valentino_Born_in_Roma_Rendez-Vous_The_Gold_Donna_Eau_de_Parfum-removebg-preview.png" },
+      { name: "Valentino Donna Born In Roma Intense 30ml", price: 850, img: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.png", img2: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.png" },
+      { name: "Valentino Uomo Born In Roma Intense", price: 850, img: "images/best-seller/valentino-uomo-born-in-roma-intense.jpg", img2: "images/site-assets/valentino-uomo-born-in-roma-extradose-for-men.jpg" },
+      { name: "Valentino Donna Born in Roma", price: 850, img: "images/site-assets/valentino-2.jpg", img2: "images/site-assets/valentino-donna-born-in-roma.jpg" }
+    ]
+  },
+  afnan: {
+    title: "Afnan",
+    subtitle: "Bold Afnan extrait de parfum creations for standout evenings.",
+    products: [
+      { name: "Afnan 9pm Night Out", price: 850, img: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.png", img2: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.png" }
+    ]
+  },
+  laverne: {
+    title: "Laverne",
+    subtitle: "Delicate Laverne fragrances with soft floral-musk character.",
+    products: [
+      { name: "Laverne Sense Tassel Edition", price: 850, img: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.png", img2: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.png" },
+      { name: "Laverne Sense", price: 850, img: "images/site-assets/georgina-sense-perfume-by-laverne-75ml-perfume-powder-pack-perfume-bag-ebay.jpg", img2: "images/site-assets/sense-laverne.jpg" }
     ]
   },
   givenchy: {
