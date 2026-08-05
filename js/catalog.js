@@ -137,12 +137,12 @@
     title: "Assaf",
     subtitle: "A refined Assaf edit with modern signature bottles and long-lasting blends.",
     products: [
-      { name: "Assaf Private Purple 200ml", price: 850, img: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png", img2: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png" },
-      { name: "Assaf Arrogate Pink", price: 850, img: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png", img2: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png" },
-      { name: "Assaf Arrogate Lipstick Perfume", price: 850, img: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png", img2: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png" },
-      { name: "Sherlock by Assaf", price: 850, img: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png", img2: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png" },
-      { name: "Assaf Angel 200ml", price: 1050, img: "images/site-assets/assaf-angel-main.jpg", img2: "images/site-assets/assaf-angel-alt.jpg" },
-      { name: "Assaf Pink Lady 200ml", price: 1050, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.jpg" }
+      { name: "Assaf Private Purple 200ml", price: 1200, img: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png", img2: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png" },
+      { name: "Assaf Arrogate Pink", price: 1200, img: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png", img2: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png" },
+      { name: "Assaf Arrogate Lipstick Perfume", price: 1200, img: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png", img2: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png" },
+      { name: "Sherlock by Assaf", price: 1200, img: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png", img2: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png" },
+      { name: "Assaf Angel 200ml", price: 1200, img: "images/site-assets/assaf-angel-main.jpg", img2: "images/site-assets/assaf-angel-alt.jpg" },
+      { name: "Assaf Pink Lady 200ml", price: 1200, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.jpg" }
     ]
   },
   valentino: {

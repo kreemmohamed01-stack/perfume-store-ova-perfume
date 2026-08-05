@@ -67,13 +67,13 @@ const extraUnisexProducts = [
   },
   {
     name: "Assaf Angel 200ml",
-    price: 1050,
+    price: 1200,
     img: "images/site-assets/assaf-angel-main.jpg",
     img2: "images/site-assets/assaf-angel-alt.jpg"
   },
   {
     name: "Assaf Pink Lady 200ml",
-    price: 1050,
+    price: 1200,
     img: "images/site-assets/assaf-pink-lady-main.jpg",
     img2: "images/site-assets/assaf-pink-lady-alt.jpg"
   },
