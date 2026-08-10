@@ -8815,9 +8815,9 @@
       <div class="hml-glow"></div>
       <div class="hml-podium"></div>
       <div class="hml-shadow"></div>
-      <button type="button" class="hml-box hml-product" data-hml-product data-name="Ibraq Tobacco Collection" data-price="850" aria-label="Ibraq Tobacco Collection">
-        <img src="images/site-assets/توباكو_كوليكشن-removebg-preview.png" alt="Ibraq Tobacco Collection" loading="lazy" decoding="async" />
-        <span class="hml-product-label"><strong>Ibraq Tobacco Collection</strong><em>850 EGP</em></span>
+      <button type="button" class="hml-box hml-product" data-hml-product data-name="Ibraq Tobacco Collection" data-price="1700" aria-label="Ibraq Tobacco Collection">
+        <img src="images/site-assets/ibraqtobbacocollection-removebg-preview.png" alt="Ibraq Tobacco Collection" loading="lazy" decoding="async" />
+        <span class="hml-product-label"><strong>Ibraq Tobacco Collection</strong><em>1700 EGP</em></span>
       </button>
       <button type="button" class="hml-bottle hml-product" data-hml-product data-name="Khamrah Waha" data-price="850" aria-label="Khamrah Waha">
         <img src="images/site-assets/خمره_واحه-removebg-preview.png" alt="Khamrah Waha" loading="lazy" decoding="async" fetchpriority="high" />
@@ -9898,7 +9898,7 @@
   <script>
       const bestSellerProducts = [
         { name: "Khamrah Waha", price: 850, img: "images/site-assets/خمره_واحه-removebg-preview.png", img2: "images/site-assets/خمره واحه نوت.jpeg" },
-        { name: "Ibraq Tobacco Collection", price: 850, img: "images/site-assets/توباكو_كوليكشن-removebg-preview.png", img2: "images/site-assets/توباكو كوليكشن نوت.jpeg" },
+        { name: "Ibraq Tobacco Collection", price: 1700, img: "images/site-assets/ibraqtobbacocollection-removebg-preview.png", img2: "images/site-assets/توباكو_كوليكشن-removebg-preview.png" },
         { name: "Diamond Emerald Soul 200ml", price:1050, img: "images/site-assets/ibraheem-alqurashi-emerald-soul-diamond-unisex-100ml-experience-elevated-scent-ebay.jpg", img2: "images/site-assets/emerald-soul-diamond-ibrahim-al-qurashi-for-women-and-men.jpg" },
         { name: "Nude Coral Diamond", price:1200, img: "images/site-assets/nude-coral-diamond.webp", img2: "images/site-assets/nude-coral-diamond-ibrahim-al-qurashi.jpg" },
         { name: "Lahab - Hersh", price:1050, img: "images/site-assets/lahab-by-hersh-alezz-3-4oz-edp-spray-long-lasting.jpg", img2: "images/site-assets/hersh-lahab-100ml-edp-by-al-ezz-for-oud.jpg" },
@@ -13423,9 +13423,12 @@
       return merged;
     }
 
+    const offerExcludedNames = new Set(["Ibraq Tobacco Collection"]);
+
     function getCartOfferSummary(items) {
-      const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
-      const subtotalAll = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const eligibleItems = items.filter((item) => !offerExcludedNames.has(item.name));
+      const totalQty = eligibleItems.reduce((sum, item) => sum + item.qty, 0);
+      const subtotalAll = eligibleItems.reduce((sum, item) => sum + item.price * item.qty, 0);
       const qualifies = totalQty >= 3;
       const discount = qualifies ? Math.round(subtotalAll * 0.5) : 0;
       return { freeByName: {}, discount, freePieces: 0, totalQty, qualifies, subtotalAll };
@@ -13437,6 +13440,7 @@
 
     function getItemSubtotal(item, offerSummary = getCartOfferSummary(cart)) {
       const base = item.price * item.qty;
+      if (offerExcludedNames.has(item.name)) return base;
       return offerSummary.qualifies ? Math.round(base * 0.5) : base;
     }
 
