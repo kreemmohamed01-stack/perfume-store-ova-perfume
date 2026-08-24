@@ -9232,7 +9232,7 @@
   </section>
 
   <section class="khamrah-video-section" id="khamrahVideoSection">
-    <video class="khamrah-video" id="khamrahVideoEl" src="images/site-assets/videos/khamrah-video.mp4" muted loop playsinline preload="auto" aria-label="Khamrah Waha film"></video>
+    <video class="khamrah-video" id="khamrahVideoEl" data-src="images/site-assets/videos/khamrah-video.mp4" muted loop playsinline preload="none" aria-label="Khamrah Waha film"></video>
     <div class="khamrah-video-veil"></div>
     <div class="khamrah-video-copy">
       <p class="khamrah-video-kicker" id="khamrahVideoKicker">The Film</p>
@@ -9257,15 +9257,23 @@
           var vObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
               if (entry.isIntersecting) {
+                if (vEl.dataset.src) {
+                  vEl.src = vEl.dataset.src;
+                  delete vEl.dataset.src;
+                }
                 vSection.classList.add("is-visible");
                 vEl.play().catch(function () {});
               } else {
                 vEl.pause();
               }
             });
-          }, { threshold: 0.3 });
+          }, { threshold: 0.3, rootMargin: "600px 0px" });
           vObserver.observe(vSection);
         } else {
+          if (vEl.dataset.src) {
+            vEl.src = vEl.dataset.src;
+            delete vEl.dataset.src;
+          }
           vSection.classList.add("is-visible");
         }
       }
@@ -9500,9 +9508,8 @@
       <img
         src="ولد.jpg"
         alt="Perfume banner"
-        loading="eager"
+        loading="lazy"
         decoding="async"
-        fetchpriority="high"
         onerror="this.onerror=null;this.src='images/site-assets/men-banner.jpg?v=20260423b';"
       />
       <div class="promo-copy">
@@ -9543,9 +9550,8 @@
       <img
         src="بنت.jpg"
         alt="Perfume banner"
-        loading="eager"
+        loading="lazy"
         decoding="async"
-        fetchpriority="high"
         onerror="this.onerror=null;this.src='images/site-assets/women-banner.jpg?v=20260423b';"
       />
       <div class="promo-copy">
