@@ -12,8 +12,8 @@
   <meta name="theme-color" content="#111111" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="image" href="images/site-assets/sora-5alfya.jpg" fetchpriority="high" />
-  <link rel="preload" as="image" href="images/site-assets/logooo-2.jpeg" fetchpriority="high" />
+  <link rel="preload" as="image" href="images/site-assets/sora-5alfya.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="images/site-assets/logooo-2.webp" fetchpriority="high" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png" />
@@ -27,8 +27,8 @@
   <meta id="ogTitle" property="og:title" content="Ova Perfume Egypt | Original Perfumes Online In Egypt" />
   <meta id="ogDescription" property="og:description" content="Shop original perfumes online in Egypt from Ova Store with delivery to Alexandria, Cairo, Giza, and all governorates across Egypt." />
   <meta id="ogUrl" property="og:url" content="https://ovaperfume.com/" />
-  <meta id="ogImage" property="og:image" content="https://ovaperfume.com/images/site-assets/logooo-2.jpeg" />
-  <meta id="ogImageSecure" property="og:image:secure_url" content="https://ovaperfume.com/images/site-assets/logooo-2.jpeg" />
+  <meta id="ogImage" property="og:image" content="https://ovaperfume.com/images/site-assets/logooo-2.webp" />
+  <meta id="ogImageSecure" property="og:image:secure_url" content="https://ovaperfume.com/images/site-assets/logooo-2.webp" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1600" />
   <meta property="og:image:height" content="1600" />
@@ -38,7 +38,7 @@
   <meta id="twitterCard" name="twitter:card" content="summary_large_image" />
   <meta id="twitterTitle" name="twitter:title" content="Ova Perfume Egypt | Original Perfumes Online In Egypt" />
   <meta id="twitterDescription" name="twitter:description" content="Shop original perfumes online in Egypt from Ova Store with delivery to Alexandria, Cairo, Giza, and all governorates across Egypt." />
-  <meta id="twitterImage" name="twitter:image" content="https://ovaperfume.com/images/site-assets/logooo-2.jpeg" />
+  <meta id="twitterImage" name="twitter:image" content="https://ovaperfume.com/images/site-assets/logooo-2.webp" />
   <meta name="twitter:image:alt" content="Ova Store logo" />
   <script type="application/ld+json">
     {
@@ -81,13 +81,13 @@
       "logo": {
         "@type": "ImageObject",
         "@id": "https://ovaperfume.com/#logo",
-        "url": "https://ovaperfume.com/images/site-assets/logooo-2.jpeg",
-        "contentUrl": "https://ovaperfume.com/images/site-assets/logooo-2.jpeg",
+        "url": "https://ovaperfume.com/images/site-assets/logooo-2.webp",
+        "contentUrl": "https://ovaperfume.com/images/site-assets/logooo-2.webp",
         "width": 1600,
         "height": 1600,
         "caption": "Ova Store logo"
       },
-      "image": "https://ovaperfume.com/images/site-assets/logooo-2.jpeg",
+      "image": "https://ovaperfume.com/images/site-assets/logooo-2.webp",
       "identifier": "@ova_store.11",
       "sameAs": [
         "https://www.facebook.com/share/1BQfQ7iagG/",
@@ -264,14 +264,56 @@
       .offer-strip,
       .countdown-timer,
       .best-seller-banner,
-      #bestSellerSection,
-      .brands-section,
       .promo,
       .perfumes-section,
-      .quiz-section,
       footer {
         content-visibility: auto;
         contain-intrinsic-size: 1px 900px;
+      }
+    }
+
+    /* ===== Section snapping =====
+       `proximity` (not `mandatory`) so a section gently settles into place when the
+       flick ends near a boundary, but long scrolls and short sections are never
+       trapped. Snapping is disabled where it would fight the user: reduced motion,
+       and while a modal/cart/search overlay owns the scroll. */
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-snap-type: y proximity;
+        /* keeps a snapped section clear of the fixed navbar */
+        scroll-padding-top: 76px;
+      }
+
+      .hero-mobile-luxury,
+      .best-seller-v2,
+      .khamrah-video-section,
+      .brand-rails,
+      .promo,
+      .perfumes-section {
+        scroll-snap-align: start;
+        /* a section taller than the viewport must still be scrollable past */
+        scroll-snap-stop: normal;
+      }
+
+      /* brand rails are tall and read as a list - snap only at the top of the block */
+      .brand-rails {
+        scroll-snap-align: start;
+      }
+
+      body.modal-open,
+      body.cart-open,
+      body.search-open,
+      body.intro-active,
+      body.product-page-mode {
+        scroll-snap-type: none;
+      }
+
+      body.modal-open html,
+      html:has(body.modal-open),
+      html:has(body.cart-open),
+      html:has(body.search-open),
+      html:has(body.product-page-mode) {
+        scroll-snap-type: none;
       }
     }
 
@@ -1713,10 +1755,12 @@
       display: block;
       position: relative;
       min-height: 100svh;
-      padding: 182px 22px 46px;
+      padding: 182px 22px 0;
       box-sizing: border-box;
       overflow: hidden;
-      background: #f4ede2 url("images/site-assets/background-ova.jpeg") center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      background: #f4ede2 url("images/site-assets/background-ova.webp") center / cover no-repeat;
       isolation: isolate;
       direction: ltr;
       text-align: left;
@@ -1755,12 +1799,12 @@
     .hml-actions { animation-delay: 0.8s; }
 
     .hml-kicker {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 6px;
       text-transform: uppercase;
       color: #b78a4a;
-      margin: 0 0 10px;
+      margin: 0 0 14px;
       background: linear-gradient(120deg, #8a6a3a 0%, #f1d9a8 40%, #b6874a 60%, #f1d9a8 100%);
       background-size: 240% 100%;
       -webkit-background-clip: text;
@@ -1777,15 +1821,19 @@
     .hml-title {
       margin: 0;
       font-family: "Playfair Display", "Georgia", serif;
-      font-size: clamp(38px, 11.5vw, 50px);
-      line-height: 1.05;
+      font-size: clamp(42px, 13vw, 60px);
+      line-height: 0.98;
       font-weight: 700;
       color: #171310;
       text-transform: uppercase;
+      letter-spacing: -0.5px;
+      text-wrap: balance;
     }
 
     .hml-title-main {
       display: block;
+      font-weight: 500;
+      letter-spacing: 1px;
       background: linear-gradient(120deg, #171310 0%, #4a3a26 30%, #171310 55%, #4a3a26 80%, #171310 100%);
       background-size: 240% 100%;
       -webkit-background-clip: text;
@@ -1796,10 +1844,14 @@
 
     .hml-title em {
       display: block;
-      font-style: normal;
+      font-style: italic;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -1px;
+      margin-top: 2px;
       color: #c79a56;
-      background: linear-gradient(120deg, #b6874a 0%, #e8c98a 45%, #b6874a 100%);
-      background-size: 220% 100%;
+      background: linear-gradient(115deg, #9c6f34 0%, #e8c98a 42%, #fff0d0 52%, #d9ae63 62%, #9c6f34 100%);
+      background-size: 240% 100%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1807,25 +1859,34 @@
     }
 
     .hml-rule {
-      width: 56px;
-      height: 2px;
-      margin: 16px 0 18px;
-      background: linear-gradient(90deg, #c79a56, rgba(199, 154, 86, 0));
+      width: 72px;
+      height: 1px;
+      margin: 20px 0 20px;
+      background: linear-gradient(90deg, #c79a56 0%, rgba(199, 154, 86, 0.35) 60%, rgba(199, 154, 86, 0));
     }
 
     .hml-subtitle {
-      margin: 0 0 26px;
-      max-width: 260px;
-      font-size: 14.5px;
-      line-height: 1.6;
-      color: #3a332c;
+      margin: 0 0 30px;
+      max-width: 272px;
+      font-size: 14px;
+      line-height: 1.72;
+      letter-spacing: 0.2px;
+      color: #4a4139;
     }
 
     .hml-actions {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hml-actions .hml-btn {
+      width: auto;
+      flex: 1 1 0;
+      min-width: 138px;
+      max-width: 190px;
     }
 
     .hml-btn {
@@ -1836,51 +1897,71 @@
       width: 100%;
       max-width: 250px;
       justify-content: center;
-      padding: 15px 22px;
-      border-radius: 3px;
+      padding: 16px 26px;
+      border-radius: 2px;
       font-family: "Manrope", sans-serif;
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 2px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 2.6px;
       text-transform: uppercase;
       cursor: pointer;
       overflow: hidden;
       isolation: isolate;
-      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease, filter 0.32s ease;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.34s ease, filter 0.34s ease;
       box-sizing: border-box;
       background:
-        linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.16) 45%, rgba(255, 255, 255, 0) 60%) 0 0 / 220% 100%,
-        linear-gradient(160deg, #221c14 0%, #0e0b08 55%, #1c1712 100%) !important;
+        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.42) 50%, rgba(255, 255, 255, 0) 66%) 0 0 / 220% 100%,
+        linear-gradient(150deg, #6d4c1d 0%, #b98f45 26%, #e8c98a 50%, #b98f45 74%, #6d4c1d 100%) !important;
       background-image:
-        linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.16) 45%, rgba(255, 255, 255, 0) 60%),
-        linear-gradient(160deg, #221c14 0%, #0e0b08 55%, #1c1712 100%) !important;
-      color: #fdf8ef !important;
-      border: 1px solid #2a2115 !important;
-      box-shadow: 0 16px 30px rgba(10, 8, 5, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      animation: hmlBtnSheen 4.5s linear infinite;
+        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.42) 50%, rgba(255, 255, 255, 0) 66%),
+        linear-gradient(150deg, #6d4c1d 0%, #b98f45 26%, #e8c98a 50%, #b98f45 74%, #6d4c1d 100%) !important;
+      color: #1a1409 !important;
+      border: 1px solid rgba(120, 88, 38, 0.55) !important;
+      box-shadow:
+        0 14px 30px rgba(120, 88, 38, 0.34),
+        inset 0 1px 0 rgba(255, 245, 220, 0.55),
+        inset 0 -1px 0 rgba(90, 62, 22, 0.35);
+      animation: hmlBtnSheen 5s linear infinite;
       text-shadow: none !important;
     }
 
     .hml-btn.secondary {
       background:
-        linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.14) 45%, rgba(255, 255, 255, 0) 60%) 0 0 / 220% 100%,
-        linear-gradient(160deg, #17130e 0%, #050403 55%, #14100b 100%) !important;
+        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 66%) 0 0 / 220% 100%,
+        linear-gradient(150deg, rgba(255, 253, 248, 0.9) 0%, rgba(248, 241, 230, 0.82) 100%) !important;
       background-image:
-        linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.14) 45%, rgba(255, 255, 255, 0) 60%),
-        linear-gradient(160deg, #17130e 0%, #050403 55%, #14100b 100%) !important;
-      border-color: #3a2f1e !important;
-      animation-delay: -2.2s;
+        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 66%),
+        linear-gradient(150deg, rgba(255, 253, 248, 0.9) 0%, rgba(248, 241, 230, 0.82) 100%) !important;
+      color: #2a2115 !important;
+      border: 1px solid rgba(160, 124, 62, 0.42) !important;
+      box-shadow:
+        0 10px 24px rgba(40, 30, 15, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      animation-delay: -2.5s;
     }
 
     .hml-btn:hover,
     .hml-btn:active {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 40px rgba(10, 8, 5, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-      filter: brightness(1.12);
+      transform: translateY(-3px);
+      box-shadow:
+        0 20px 40px rgba(120, 88, 38, 0.42),
+        inset 0 1px 0 rgba(255, 245, 220, 0.65);
+      filter: brightness(1.06);
+    }
+
+    .hml-btn.secondary:hover,
+    .hml-btn.secondary:active {
+      box-shadow:
+        0 16px 32px rgba(40, 30, 15, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      border-color: rgba(160, 124, 62, 0.7) !important;
     }
 
     .hml-btn:active {
-      transform: translateY(-1px) scale(0.99);
+      transform: translateY(-1px) scale(0.985);
     }
 
     @keyframes hmlBtnSheen {
@@ -1895,10 +1976,11 @@
     .hml-stage {
       position: relative;
       z-index: 1;
-      margin: 22px -22px -46px;
-      height: 42vh;
-      min-height: 260px;
-      max-height: 400px;
+      margin: 18px -22px 0;
+      flex: 1 1 auto;
+      height: auto;
+      min-height: 240px;
+      max-height: 420px;
       opacity: 0;
       animation: hmlFadeUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards;
     }
@@ -2092,7 +2174,8 @@
 
       .hml-stage {
         max-width: 420px;
-        height: 50vh;
+        min-height: 320px;
+        max-height: 480px;
       }
     }
 
@@ -2103,7 +2186,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 4vw;
-        padding: 150px 6vw 60px;
+        padding: 150px 6vw 0;
       }
 
       .hml-copy {
@@ -2512,7 +2595,9 @@
     .best-seller-v2 {
       position: relative;
       width: 100%;
-      margin: 34px 0 0;
+      margin: 0;
+      /* overrides the generic `.section` padding so this sits flush under the hero */
+      padding: 0;
       overflow: hidden;
       background: #fffdfa;
       opacity: 0;
@@ -2528,7 +2613,7 @@
     .bs-stage {
       position: relative;
       width: 100%;
-      background: #fbf6ee url("images/site-assets/باك جروند بيست سيلر.jpeg") top center / cover no-repeat;
+      background: #fbf6ee url("images/site-assets/باك جروند بيست سيلر.webp") top center / cover no-repeat;
       padding: 56px 22px 30px;
       box-sizing: border-box;
       isolation: isolate;
@@ -2986,12 +3071,19 @@
       display: flex;
       gap: 16px;
       overflow-x: auto;
+      overflow-y: hidden;
       scroll-snap-type: x proximity;
       scrollbar-width: none;
       padding: 18px 6px 8px;
       cursor: grab;
-      scroll-behavior: smooth;
+      /* NOTE: no `scroll-behavior: smooth` here - it hijacks native touch momentum
+         and was the main cause of the stuttering/sticking on mobile. Programmatic
+         scrolls pass behavior:"smooth" per call instead. */
       -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      /* promote the strip to its own layer so scrolling never repaints the section */
+      will-change: scroll-position;
+      transform: translateZ(0);
     }
 
     .best-seller-v2 .best-seller-slider.is-dragging,
@@ -3020,6 +3112,9 @@
       border: 1px solid rgba(199, 154, 86, 0.14);
       box-shadow: 0 14px 26px rgba(60, 44, 24, 0.08);
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      /* contain paint so a card's shadow/scale never invalidates its neighbours */
+      contain: paint;
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
     }
 
@@ -3059,13 +3154,21 @@
       object-fit: contain;
       margin-bottom: 10px;
       filter: drop-shadow(0 14px 14px rgba(30, 20, 8, 0.18));
-      transition: transform 0.4s ease, filter 0.4s ease;
+      /* transform only - animating `filter` forces a repaint of the whole card */
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .best-seller-v2 .best-seller-slider .product-card:hover img,
     .best-seller-v2 .best-seller-slider .product-card.is-active img {
-      animation: naCardImgFloat 3.6s ease-in-out infinite;
-      filter: drop-shadow(0 16px 16px rgba(30, 20, 8, 0.24)) drop-shadow(0 0 12px rgba(232, 201, 138, 0.3));
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    /* the looping float animation only runs on devices that can hover (desktop),
+       so touch scrolling never competes with an always-on animation */
+    @media (hover: hover) and (pointer: fine) {
+      .best-seller-v2 .best-seller-slider .product-card:hover img {
+        animation: naCardImgFloat 3.6s ease-in-out infinite;
+      }
     }
 
     .best-seller-v2 .best-seller-slider .product-card h4 {
@@ -3140,132 +3243,6 @@
       }
     }
 
-    /* ===== New Arrivals ===== */
-    .new-arrivals {
-      position: relative;
-      width: 100%;
-      margin: 34px 0 0;
-      overflow: hidden;
-      background: #fffdfa;
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .new-arrivals.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .na-stage {
-      position: relative;
-      width: 100%;
-      min-height: 640px;
-      background: #fbf6ee url("images/site-assets/new-arrivals/باك-جروند-نيو-اريف.jpeg") top center / cover no-repeat;
-      padding: 64px 24px 40px;
-      box-sizing: border-box;
-      text-align: center;
-      isolation: isolate;
-    }
-
-    .na-header {
-      position: relative;
-      z-index: 2;
-      opacity: 0;
-      transform: translateY(-14px);
-      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .new-arrivals.is-visible .na-header {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.1s;
-    }
-
-    .na-kicker {
-      margin: 0 0 8px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #b78a4a;
-    }
-
-    .na-kicker::before,
-    .na-kicker::after {
-      content: "—";
-      margin: 0 10px;
-      color: #d9b877;
-    }
-
-    .na-title {
-      margin: 0;
-      font-family: "Playfair Display", "Georgia", serif;
-      font-size: clamp(40px, 12vw, 56px);
-      line-height: 1.05;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #1c1512;
-    }
-
-    .na-title span {
-      display: block;
-      font-size: clamp(46px, 14vw, 66px);
-      letter-spacing: 6px;
-    }
-
-    .na-diamond {
-      margin: 14px auto;
-      width: 60px;
-      color: #c79a56;
-      font-size: 13px;
-      position: relative;
-    }
-
-    .na-diamond::before,
-    .na-diamond::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      width: 22px;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(199, 154, 86, 0), #c79a56);
-    }
-
-    .na-diamond::before { left: 0; }
-    .na-diamond::after { right: 0; transform: scaleX(-1); }
-
-    .na-subtitle {
-      max-width: 320px;
-      margin: 0 auto;
-      font-size: 13.5px;
-      line-height: 1.7;
-      color: #6b5c4d;
-    }
-
-    .na-pill {
-      position: absolute;
-      left: 8%;
-      top: 40%;
-      z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid #c79a56;
-      color: #a9773a;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      background: rgba(255, 253, 248, 0.6);
-      backdrop-filter: blur(4px);
-      opacity: 0;
-      animation: naPillFade 0.7s ease 0.6s forwards, naPillFloat 4s ease-in-out 1.4s infinite;
-    }
-
     @keyframes naPillFade {
       to { opacity: 1; }
     }
@@ -3273,33 +3250,6 @@
     @keyframes naPillFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
-    }
-
-    .na-podium {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 340px;
-      height: 380px;
-      margin: 26px auto 0;
-    }
-
-    .na-hero-img {
-      position: absolute;
-      left: 50%;
-      bottom: 34%;
-      transform: translateX(-50%);
-      width: 58%;
-      max-height: 78%;
-      object-fit: contain;
-      filter: drop-shadow(0 30px 34px rgba(30, 20, 8, 0.32)) drop-shadow(0 0 26px rgba(232, 201, 138, 0.35));
-      animation: naHeroFloat 3s ease-in-out infinite, naHeroFadeIn 0.6s ease;
-      transition: opacity 0.35s ease, filter 0.35s ease, scale 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      scale: 1;
-    }
-
-    .na-stage:hover .na-hero-img {
-      scale: 1.07;
     }
 
     @keyframes naHeroFadeIn {
@@ -3312,195 +3262,14 @@
       50% { transform: translateX(-50%) translateY(-16px) rotate(1.5deg); }
     }
 
-    .na-carousel-wrap {
-      position: relative;
-      z-index: 2;
-      margin-top: -34px;
-      padding: 30px 0 26px;
-      background: #fffdfa;
-      border-radius: 34px 34px 0 0;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: 0.3s;
-    }
-
-    .new-arrivals.is-visible .na-carousel-wrap {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .na-carousel {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 10px 22vw 12px;
-      scrollbar-width: none;
-      cursor: grab;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .na-carousel::-webkit-scrollbar {
-      display: none;
-    }
-
-    .na-card {
-      position: relative;
-      flex: 0 0 auto;
-      width: 62vw;
-      max-width: 258px;
-      scroll-snap-align: center;
-      background: #fff;
-      border-radius: 22px;
-      padding: 20px 16px 22px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 18px 30px rgba(60, 44, 24, 0.08);
-      opacity: 0.55;
-      transform: scale(0.86) translateY(10px);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, box-shadow 0.45s ease;
-    }
-
-    .na-card.is-active {
-      opacity: 1;
-      transform: scale(1) translateY(-14px);
-      box-shadow: 0 28px 46px rgba(60, 44, 24, 0.18);
-      z-index: 2;
-    }
-
-    .na-card-tag {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid #c79a56;
-      color: #a9773a;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .na-card img {
-      width: 100%;
-      height: 168px;
-      object-fit: contain;
-      filter: drop-shadow(0 16px 18px rgba(30, 20, 8, 0.16));
-      transition: transform 0.4s ease, filter 0.4s ease;
-    }
-
-    .na-card.is-active img {
-      animation: naCardImgFloat 4s ease-in-out infinite;
-      filter: drop-shadow(0 18px 20px rgba(30, 20, 8, 0.22)) drop-shadow(0 0 16px rgba(232, 201, 138, 0.3));
-    }
-
     @keyframes naCardImgFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
 
-    .na-card h3 {
-      margin: 10px 0 2px;
-      font-family: "Playfair Display", "Georgia", serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: #1c1512;
-    }
-
-    .na-card .na-card-type {
-      margin: 0 0 8px;
-      font-size: 9.5px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #9c8a76;
-    }
-
-    .na-card .na-card-price {
-      margin: 0 0 12px;
-      font-size: 15px;
-      font-weight: 800;
-      color: #1c1512;
-    }
-
-    .na-card-add {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid #c79a56;
-      color: #a9773a;
-      font-size: 16px;
-      background: transparent;
-      cursor: pointer;
-      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-    }
-
-    .na-card-add:hover {
-      background: #1c1512;
-      border-color: #1c1512;
-      color: #fff;
-      transform: scale(1.08);
-    }
-
-    .na-dots {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .na-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(199, 154, 86, 0.28);
-      transition: width 0.3s ease, background 0.3s ease;
-    }
-
-    .na-dot.is-active {
-      width: 20px;
-      border-radius: 4px;
-      background: #c79a56;
-    }
-
-    .na-swipe-hint {
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 2.4px;
-      text-transform: uppercase;
-      color: #a9773a;
-    }
-
-    .na-swipe-hint span {
-      animation: naArrowPulse 1.6s ease-in-out infinite;
-    }
-
-    .na-swipe-hint span:last-child {
-      animation-delay: 0.3s;
-    }
-
     @keyframes naArrowPulse {
       0%, 100% { opacity: 0.4; transform: translateX(0); }
       50% { opacity: 1; transform: translateX(-3px); }
-    }
-
-    .na-swipe-hint span:last-child.is-r,
-    .na-swipe-hint span:last-child {
-      animation-name: naArrowPulseR;
     }
 
     @keyframes naArrowPulseR {
@@ -3633,199 +3402,383 @@
       color: rgba(253, 248, 239, 0.75);
     }
 
-    .brands-section {
-      --brand-card-width: clamp(220px, 24vw, 300px);
+    /* ===== Brand rails: one titled row per brand, products scroll horizontally ===== */
+    .brand-rails {
       position: relative;
-      width: min(1220px, calc(100% - 24px));
-      margin: 26px auto 0;
-      min-height: clamp(520px, 72vh, 760px);
-      padding: 20px 22px 28px;
-      border-radius: 36px;
-      overflow: hidden;
+      width: 100%;
+      padding: 46px 0 40px;
       background:
-        linear-gradient(180deg, rgba(19, 14, 10, 0.28) 0%, rgba(19, 14, 10, 0.76) 100%),
-        radial-gradient(circle at top, rgba(226, 190, 126, 0.18) 0%, rgba(226, 190, 126, 0) 34%),
-        url("brand pic.jpg") center center / cover no-repeat;
-      border: 1px solid rgba(197, 156, 88, 0.18);
-      box-shadow: 0 30px 54px rgba(31, 19, 12, 0.24);
+        radial-gradient(120% 60% at 50% 0%, rgba(226, 190, 126, 0.14) 0%, rgba(226, 190, 126, 0) 60%),
+        linear-gradient(180deg, #fffdfa 0%, #faf4ea 100%);
+      content-visibility: auto;
+      contain-intrinsic-size: auto 1400px;
     }
 
-    .brands-section::before,
-    .brands-section::after {
-      content: "";
-      position: absolute;
-      top: 88px;
-      bottom: 20px;
-      width: clamp(34px, 6vw, 74px);
-      z-index: 4;
-      pointer-events: none;
+    .br-head {
+      text-align: center;
+      padding: 0 22px 6px;
     }
 
-    .brands-section::before {
-      left: 0;
-      background: linear-gradient(90deg, rgba(255, 252, 247, 0.98) 0%, rgba(255, 252, 247, 0) 100%);
+    .br-eyebrow {
+      margin: 0 0 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #b78a4a;
     }
 
-    .brands-section::after {
-      right: 0;
-      background: linear-gradient(270deg, rgba(255, 252, 247, 0.98) 0%, rgba(255, 252, 247, 0) 100%);
+    .br-eyebrow span::before,
+    .br-eyebrow span::after {
+      content: "\2726";
+      margin: 0 10px;
+      font-size: 9px;
+      color: #d9b877;
     }
 
-    .brands-grid {
+    .br-heading {
+      margin: 0;
+      font-family: "Playfair Display", "Georgia", serif;
+      font-size: clamp(38px, 11vw, 60px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(120deg, #2a2115 0%, #6b5330 40%, #2a2115 70%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .br-diamond {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: #d9b877;
+    }
+
+    /* --- one brand row --- */
+    .br-row {
+      margin-top: 34px;
+      /* keeps offscreen rows out of layout/paint until they're near the viewport */
+      content-visibility: auto;
+      contain-intrinsic-size: auto 420px;
+    }
+
+    .br-row-head {
       display: flex;
-      align-items: stretch;
-      gap: 22px;
-      overflow-x: auto;
-      overflow-y: visible;
-      scrollbar-width: none;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding:
-        28px
-        calc(max(16px, 50% - (var(--brand-card-width) / 2)))
-        14px;
-      position: relative;
-      z-index: 2;
-      cursor: grab;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 20px 14px;
     }
 
-    .brands-grid::-webkit-scrollbar {
+    .br-row-title {
+      margin: 0;
+      font-family: "Playfair Display", "Georgia", serif;
+      font-size: clamp(23px, 6vw, 31px);
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #1f1911;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .br-row-title::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 3px;
+      height: 22px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #e8c98a, #b6874a);
+    }
+
+    .br-row-count {
+      font-family: "Manrope", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      color: #9a8b78;
+    }
+
+    .br-row-link {
+      flex: 0 0 auto;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #96712f;
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(150, 113, 47, 0.34);
+      padding-bottom: 2px;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .br-row-link:hover {
+      color: #6d4c1d;
+      border-color: #b6874a;
+    }
+
+    /* --- the scroller --- */
+    .br-rail-wrap {
+      position: relative;
+    }
+
+    .br-rail {
+      display: flex;
+      gap: 14px;
+      padding: 6px 20px 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      /* one GPU layer for the whole strip - keeps mobile scrolling smooth */
+      will-change: scroll-position;
+      transform: translateZ(0);
+    }
+
+    .br-rail::-webkit-scrollbar {
       display: none;
     }
 
-    .brand-card {
-      position: relative;
-      display: block;
-      flex: 0 0 var(--brand-card-width);
-      width: var(--brand-card-width);
-      background:
-        linear-gradient(180deg, rgba(60, 43, 29, 0.92) 0%, rgba(24, 17, 12, 0.98) 100%);
-      border: 1px solid rgba(224, 190, 120, 0.22);
-      border-radius: 30px;
-      padding: 22px 18px 20px;
-      text-align: center;
+    .br-card {
+      flex: 0 0 auto;
+      width: 158px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid rgba(160, 124, 62, 0.16);
+      border-radius: 14px;
       overflow: hidden;
-      scroll-snap-align: center;
-      scroll-snap-stop: always;
-      backdrop-filter: blur(14px);
-      box-shadow:
-        0 18px 34px rgba(8, 4, 2, 0.28),
-        inset 0 1px 0 rgba(255, 234, 194, 0.08);
-      transform: scale(0.82);
-      transform-origin: center center;
-      opacity: 0.42;
-      filter: saturate(0.82) brightness(0.82);
-      transition:
-        transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-        border-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.52s ease,
-        filter 0.52s ease;
-      will-change: transform, opacity;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 6px 16px rgba(40, 30, 15, 0.06);
+      /* transform/opacity only - no layout-triggering properties */
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease, border-color 0.32s ease;
     }
 
-    .brand-card.is-near {
-      transform: scale(0.92);
-      opacity: 0.72;
-      filter: saturate(0.94) brightness(0.94);
-      border-color: rgba(227, 191, 123, 0.26);
+    .br-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(160, 124, 62, 0.4);
+      box-shadow: 0 16px 30px rgba(40, 30, 15, 0.14);
     }
 
-    .brand-card.is-active {
-      transform: scale(1.12);
-      opacity: 1;
-      filter: saturate(1.04) brightness(1.04);
-      border-color: rgba(248, 215, 151, 0.56);
-      box-shadow:
-        0 34px 66px rgba(8, 4, 2, 0.38),
-        0 0 0 1px rgba(255, 220, 150, 0.24),
-        0 0 28px rgba(233, 194, 118, 0.18);
-      z-index: 3;
+    .br-card:active {
+      transform: translateY(-1px) scale(0.99);
     }
 
-    .brand-card:hover {
-      border-color: rgba(248, 215, 151, 0.38);
-    }
-
-    .brand-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(255, 223, 165, 0.22), transparent 46%),
-        linear-gradient(180deg, rgba(255, 244, 220, 0.08) 0%, rgba(255, 244, 220, 0) 38%);
-      pointer-events: none;
-    }
-
-    .brand-card::after {
-      content: "";
-      position: absolute;
-      inset: -35% auto -35% -60%;
-      width: 60%;
-      background: linear-gradient(110deg, transparent 0%, rgba(255, 229, 178, 0.22) 46%, transparent 100%);
-      transform: rotate(14deg) translateX(-120%);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .brand-card.is-active::after {
-      opacity: 1;
-      animation: brandCardShine 3.4s linear infinite;
-    }
-
-    .brand-card img {
+    .br-card-media {
       position: relative;
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(160deg, #fbf6ee 0%, #f3e9d8 100%);
+      overflow: hidden;
+    }
+
+    .br-card-media img {
       width: 100%;
-      height: 92px;
+      height: 100%;
       object-fit: contain;
-      margin: 0 auto 14px;
-      filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22));
-    }
-
-    .brand-card span {
+      padding: 12px;
+      box-sizing: border-box;
       display: block;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 24px;
-      letter-spacing: 1.5px;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .br-card:hover .br-card-media img {
+      transform: scale(1.06);
+    }
+
+    .br-card-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
-      color: #fff3dd;
-      text-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+      color: #1a1409;
+      background: linear-gradient(140deg, #e8c98a, #b6874a);
     }
 
-    .brand-card small,
-    .brand-card strong {
-      position: relative;
-      display: block;
+    .br-card-body {
+      padding: 10px 12px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1 1 auto;
     }
 
-    .brand-card small {
-      margin-top: 6px;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255, 232, 197, 0.72);
+    .br-card-name {
+      margin: 0;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #221c14;
+      /* two-line clamp keeps every card the same height */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .brand-card strong {
-      margin-top: 10px;
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #f0c77c;
+    .br-card-foot {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 4px;
     }
 
-    .brands-section .title span {
-      color: #fff4de;
-      text-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    .br-card-price {
+      font-size: 13px;
+      font-weight: 800;
+      color: #96712f;
+      white-space: nowrap;
     }
 
-    .brands-section .brands-title-wrap::before {
-      color: rgba(255, 230, 180, 0.08);
-      -webkit-text-stroke: 1px rgba(255, 220, 155, 0.16);
-      text-shadow:
-        0 6px 12px rgba(0, 0, 0, 0.18),
-        0 12px 20px rgba(255, 235, 198, 0.04);
+    .br-card-add {
+      flex: 0 0 auto;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+      color: #1a1409;
+      background: linear-gradient(140deg, #e8c98a, #b6874a);
+      transition: transform 0.22s ease, filter 0.22s ease;
+    }
+
+    .br-card-add:hover {
+      transform: scale(1.12);
+      filter: brightness(1.08);
+    }
+
+    .br-card-add:active {
+      transform: scale(0.94);
+    }
+
+    /* --- arrows (desktop only) --- */
+    .br-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      color: #4a3a26;
+      background: rgba(255, 253, 250, 0.94);
+      border: 1px solid rgba(160, 124, 62, 0.3);
+      box-shadow: 0 8px 20px rgba(40, 30, 15, 0.16);
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+
+    .br-arrow:hover {
+      background: #fff;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .br-arrow[hidden] {
+      display: none !important;
+    }
+
+    .br-arrow-left { left: 6px; }
+    .br-arrow-right { right: 6px; }
+
+    /* fade hint that the rail continues past the edge */
+    .br-rail-wrap::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 18px;
+      width: 46px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(252, 248, 241, 0) 0%, rgba(252, 248, 241, 0.92) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .br-rail-wrap.has-more::after {
+      opacity: 1;
+    }
+
+    @media (min-width: 701px) {
+      .br-card {
+        width: 196px;
+      }
+
+      .br-rail {
+        gap: 18px;
+        padding-inline: 34px;
+      }
+
+      .br-row-head {
+        padding-inline: 36px;
+      }
+
+      .br-arrow {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .br-rail,
+      .br-row-head {
+        padding-inline: max(34px, calc((100vw - 1240px) / 2));
+      }
+    }
+
+    /* RTL: mirror the rails, keep the arrows pointing the right way */
+    html[dir="rtl"] .br-row-head,
+    html[dir="rtl"] .br-rail {
+      direction: rtl;
+    }
+
+    html[dir="rtl"] .br-card {
+      text-align: right;
+    }
+
+    html[dir="rtl"] .br-card-tag {
+      left: auto;
+      right: 8px;
+    }
+
+    html[dir="rtl"] .br-rail-wrap::after {
+      right: auto;
+      left: 0;
+      background: linear-gradient(270deg, rgba(252, 248, 241, 0) 0%, rgba(252, 248, 241, 0.92) 100%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .br-card,
+      .br-card-media img,
+      .br-card-add,
+      .br-arrow {
+        transition: none !important;
+      }
+      .br-rail {
+        scroll-behavior: auto !important;
+      }
     }
 
     @keyframes brandCardShine {
@@ -4573,7 +4526,7 @@
       background:
         linear-gradient(180deg, rgba(21, 15, 11, 0.28), rgba(21, 15, 11, 0.46)),
         radial-gradient(circle at top left, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 28%),
-        url("timer.jpg") center/cover no-repeat;
+        url("timer.webp") center/cover no-repeat;
       border: 1px solid rgba(139, 106, 51, 0.16);
       border-radius: 28px;
       box-shadow: 0 24px 44px rgba(78, 53, 34, 0.1);
@@ -4700,128 +4653,6 @@
       padding: 12px 18px;
       border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 999px;
-    }
-
-    .quiz-section {
-      width: min(1220px, calc(100% - 24px));
-      margin: 34px auto 0;
-      padding: 28px 24px;
-      border-radius: 34px;
-      background:
-        radial-gradient(circle at top, rgba(219, 197, 155, 0.24), transparent 34%),
-        linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(247,240,230,0.98) 100%);
-      border: 1px solid rgba(139, 106, 51, 0.14);
-      box-shadow: var(--shadow-soft);
-      text-align: center;
-    }
-
-    .quiz-section h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(34px, 4vw, 48px);
-      color: #2d2019;
-      margin-bottom: 10px;
-    }
-
-    .quiz-section p {
-      max-width: 760px;
-      margin: 0 auto;
-      line-height: 1.8;
-      color: #5f4d43;
-    }
-
-    .quiz-details {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .quiz-details span {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid rgba(139, 106, 51, 0.14);
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #5b4a41;
-      font-weight: 700;
-    }
-
-    .quiz-image {
-      width: min(260px, 100%);
-      margin: 22px auto 16px;
-      padding: 18px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 22px 44px rgba(24, 17, 14, 0.12);
-    }
-
-    .quiz-image img {
-      width: 100%;
-      height: 240px;
-      object-fit: contain;
-      filter: drop-shadow(0 20px 22px rgba(34, 20, 13, 0.18));
-    }
-
-    .quiz-timer {
-      margin-top: 8px;
-      font-size: 18px;
-      font-weight: 800;
-      color: #8b6a33;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .quiz-form {
-      max-width: 460px;
-      margin: 18px auto 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .quiz-form input,
-    .quiz-form select {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: #fff;
-      text-align: center;
-      outline: none;
-      font-family: inherit;
-      font-size: 14px;
-    }
-
-    .quiz-form button {
-      width: 100%;
-      padding: 13px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #1c1715 0%, #453126 100%);
-      color: #fff;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .quiz-message {
-      min-height: 24px;
-      margin-top: 10px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    #quizResults {
-      margin-top: 18px;
-    }
-
-    .quiz-message.success {
-      color: #1f8f44;
-    }
-
-    .quiz-message.error {
-      color: #b64835;
     }
 
     .offer-box .offer-copy {
@@ -6502,7 +6333,7 @@
     }
 
     .ai-float::before {
-      background-image: url("images/site-assets/ai-logo-2.png");
+      background-image: url("images/site-assets/ai-logo-2.webp");
       width: 22px;
       height: 22px;
     }
@@ -7393,8 +7224,8 @@
         padding: 22px 10px 24px;
         background:
           linear-gradient(180deg, rgba(13, 9, 7, 0.18) 0%, rgba(13, 9, 7, 0.82) 100%),
-          url("brand pic.jpg") center top / contain no-repeat,
-          url("brand pic.jpg") center top / cover no-repeat;
+          url("brand pic.webp") center top / contain no-repeat,
+          url("brand pic.webp") center top / cover no-repeat;
       }
 
       .brands-section::before,
@@ -8817,11 +8648,11 @@
       <div class="hml-podium"></div>
       <div class="hml-shadow"></div>
       <button type="button" class="hml-box hml-product" data-hml-product data-name="Ibraq Tobacco Collection" data-price="1700" aria-label="Ibraq Tobacco Collection">
-        <img src="images/site-assets/ibraqtobbacocollection-removebg-preview.png" alt="Ibraq Tobacco Collection" loading="lazy" decoding="async" />
+        <img src="images/site-assets/ibraqtobbacocollection-removebg-preview.webp" alt="Ibraq Tobacco Collection" loading="lazy" decoding="async" />
         <span class="hml-product-label"><strong>Ibraq Tobacco Collection</strong><em>1700 EGP</em></span>
       </button>
       <button type="button" class="hml-bottle hml-product" data-hml-product data-name="Khamrah Waha" data-price="850" aria-label="Khamrah Waha">
-        <img src="images/site-assets/خمره_واحه-removebg-preview.png" alt="Khamrah Waha" loading="lazy" decoding="async" fetchpriority="high" />
+        <img src="images/site-assets/خمره_واحه-removebg-preview.webp" alt="Khamrah Waha" loading="lazy" decoding="async" fetchpriority="high" />
         <span class="hml-product-label"><strong>Khamrah Waha</strong><em>850 EGP</em></span>
       </button>
     </div>
@@ -9088,35 +8919,71 @@
           });
         }
 
+        /* Cheap part of setActive: only toggles classes on the card that changed,
+           so a scroll frame touches 2 elements instead of all of them. */
+        var highlightIndex = -1;
+        function setActiveHighlightOnly(index) {
+          if (index === highlightIndex || index < 0 || index >= cards.length) return;
+          if (cards[highlightIndex]) cards[highlightIndex].classList.remove("is-active");
+          if (dots[highlightIndex]) dots[highlightIndex].classList.remove("is-active");
+          cards[index].classList.add("is-active");
+          if (dots[index]) dots[index].classList.add("is-active");
+          highlightIndex = index;
+        }
+
         function setActive(index) {
           if (index === activeIndex || index < 0 || index >= cards.length) return;
           activeIndex = index;
-          cards.forEach(function (card, i) { card.classList.toggle("is-active", i === index); });
-          dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
+          setActiveHighlightOnly(index);
           setFeatured(readProductFromCard(cards[index]), true);
         }
 
+        /* Card geometry is measured once (and on resize) instead of calling
+           getBoundingClientRect() on every card on every scroll frame - that
+           forced a full layout per frame and was what made this slider stick. */
+        var metrics = null;
+        function measureCards() {
+          metrics = cards.map(function (card) {
+            return card.offsetLeft + card.offsetWidth / 2;
+          });
+        }
+
         function getCenterMostCardIndex() {
-          var wrapRect = slider.getBoundingClientRect();
-          var center = wrapRect.left + wrapRect.width / 2;
+          if (!metrics || metrics.length !== cards.length) measureCards();
+          // scrollLeft is negative in RTL; abs() keeps the math direction-agnostic
+          var center = Math.abs(slider.scrollLeft) + slider.clientWidth / 2;
           var closestIndex = 0;
           var closestDist = Infinity;
-          cards.forEach(function (card, i) {
-            var rect = card.getBoundingClientRect();
-            var dist = Math.abs((rect.left + rect.width / 2) - center);
+          for (var i = 0; i < metrics.length; i++) {
+            var dist = Math.abs(metrics[i] - center);
             if (dist < closestDist) { closestDist = dist; closestIndex = i; }
-          });
+          }
           return closestIndex;
         }
 
+        var resizeTimer = 0;
+        window.addEventListener("resize", function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = window.setTimeout(measureCards, 150);
+        }, { passive: true });
+
+        /* During a flick we only move the highlight (cheap class toggles). The
+           featured panel - which swaps the big hero image - is updated once the
+           scroll has settled, so image decoding never lands mid-gesture. */
         var scrollTicking = false;
+        var settleTimer = 0;
         slider.addEventListener("scroll", function () {
-          if (scrollTicking) return;
-          scrollTicking = true;
-          window.requestAnimationFrame(function () {
+          if (!scrollTicking) {
+            scrollTicking = true;
+            window.requestAnimationFrame(function () {
+              setActiveHighlightOnly(getCenterMostCardIndex());
+              scrollTicking = false;
+            });
+          }
+          clearTimeout(settleTimer);
+          settleTimer = window.setTimeout(function () {
             setActive(getCenterMostCardIndex());
-            scrollTicking = false;
-          });
+          }, 110);
         }, { passive: true });
 
         slider.addEventListener("click", function (event) {
@@ -9210,26 +9077,6 @@
     })();
   </script>
 
-  <section class="new-arrivals" id="newArrivalsSection">
-    <div class="na-stage" id="naStage">
-      <div class="na-header">
-        <p class="na-kicker">Discover Our</p>
-        <h2 class="na-title">New<span>Arrivals</span></h2>
-        <div class="na-diamond">✦</div>
-        <p class="na-subtitle">The latest additions to our collection crafted for those who appreciate the extraordinary.</p>
-      </div>
-      <div class="na-pill">NEW <span>✦</span></div>
-      <div class="na-podium">
-        <img class="na-hero-img" id="naHeroImg" src="" alt="" />
-      </div>
-    </div>
-
-    <div class="na-carousel-wrap">
-      <div class="na-carousel" id="naCarousel"></div>
-      <div class="na-dots" id="naDots"></div>
-      <div class="na-swipe-hint"><span>&larr;</span> Swipe to explore <span>&rarr;</span></div>
-    </div>
-  </section>
 
   <section class="khamrah-video-section" id="khamrahVideoSection">
     <video class="khamrah-video" id="khamrahVideoEl" data-src="images/site-assets/videos/khamrah-video.mp4" muted loop playsinline preload="none" aria-label="Khamrah Waha film"></video>
@@ -9424,93 +9271,24 @@
     });
   </script>
 
-  <section class="brands-section" id="brandsSection">
-    <div class="title brands-title-wrap" id="brandsTitleWrap" data-ghost="BRANDS"><span id="brandsTitle">Brands</span></div>
-    <div class="brands-grid">
-      <a class="brand-card" href="brand.html?brand=dior">
-        <img src="images/brands/dior-vector-logo.jpg" alt="Dior" loading="lazy" decoding="async" />
-        <span>Dior</span>
-        <small>Paris Signature</small>
-        <strong>Bold Lasting Icons</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=armani">
-        <img src="images/brands/giorgio-armani.jpg" alt="Giorgio Armani" loading="lazy" decoding="async" />
-        <span>Armani</span>
-        <small>Italian Elegance</small>
-        <strong>Modern Smooth Scents</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=lattafa">
-        <img src="images/site-assets/logo-lattafa.jpg" alt="Lattafa" loading="lazy" decoding="async" />
-        <span>Lattafa</span>
-        <small>Oriental Icons</small>
-        <strong>Sweet Warm Signatures</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=kayali">
-        <img src="images/site-assets/kayali-logo.png" alt="Kayali" loading="lazy" decoding="async" />
-        <span>Kayali</span>
-        <small>Modern Sweetness</small>
-        <strong>Soft Chic Favorites</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=jeanpaulgaultier">
-        <img src="images/brands/jean-paul-gaultier-logo-2.svg" alt="Jean Paul Gaultier" loading="lazy" decoding="async" />
-        <span>Jean Paul Gaultier</span>
-        <small>Le Male Icons</small>
-        <strong>Bold Magnetic Warmth</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=tomford">
-        <img src="images/brands/m-2.jpg" alt="Tom Ford" loading="lazy" decoding="async" />
-        <span>Tom Ford</span>
-        <small>Private Blend</small>
-        <strong>Deep Rich Statements</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=xerjoff">
-        <img src="images/site-assets/top-xerjoff-travel-box-2.jpg" alt="Xerjoff" loading="lazy" decoding="async" />
-        <span>Xerjoff</span>
-        <small>Niche Luxury</small>
-        <strong>Elegant Travel Selection</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=rarescents">
-        <img src="images/site-assets/rarescents-niche-perfume-discovery-middle-eastern-french.jpg" alt="RareScents" loading="lazy" decoding="async" />
-        <span>Ibrahim Al Qurashi</span>
-        <small>Luxury Blends</small>
-        <strong>Elegant Signature Scents</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=assaf">
-        <img src="images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png" alt="Assaf" loading="lazy" decoding="async" />
-        <span>Assaf</span>
-        <small>Modern Signatures</small>
-        <strong>Bold New Editions</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=valentino">
-        <img src="images/site-assets/new-arrivals/Valentino_Born_in_Roma_Rendez-Vous_The_Gold_Donna_Eau_de_Parfum-removebg-preview.png" alt="Valentino" loading="lazy" decoding="async" />
-        <span>Valentino</span>
-        <small>Studded Icons</small>
-        <strong>Uomo &amp; Donna Editions</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=afnan">
-        <img src="images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.png" alt="Afnan" loading="lazy" decoding="async" />
-        <span>Afnan</span>
-        <small>Extrait De Parfum</small>
-        <strong>Bold Night Editions</strong>
-      </a>
-      <a class="brand-card" href="brand.html?brand=laverne">
-        <img src="images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.png" alt="Laverne" loading="lazy" decoding="async" />
-        <span>Laverne</span>
-        <small>Soft Florals</small>
-        <strong>Delicate Musk Notes</strong>
-      </a>
+  <section class="brand-rails" id="brandsSection">
+    <div class="br-head">
+      <p class="br-eyebrow"><span id="brandsKicker">Shop By</span></p>
+      <h2 class="br-heading" id="brandsTitle">Brands</h2>
+      <div class="br-diamond">&#10022;</div>
     </div>
+    <div id="brandRailsHost"></div>
   </section>
 
   <section class="promo">
     <div class="video-box">
       <div class="promo-badge" id="menPromoTag">3 for 50% Off</div>
       <img
-        src="ولد.jpg"
+        src="ولد.webp"
         alt="Perfume banner"
         loading="lazy"
         decoding="async"
-        onerror="this.onerror=null;this.src='images/site-assets/men-banner.jpg?v=20260423b';"
+        onerror="this.onerror=null;this.src='images/site-assets/men-banner.webp?v=20260423b';"
       />
       <div class="promo-copy">
         <div class="promo-kicker" id="menPromoCaption">قسم رجالي</div>
@@ -9548,11 +9326,11 @@
     <div class="video-box">
       <div class="promo-badge" id="womenPromoTag">3 for 50% Off</div>
       <img
-        src="بنت.jpg"
+        src="بنت.webp"
         alt="Perfume banner"
         loading="lazy"
         decoding="async"
-        onerror="this.onerror=null;this.src='images/site-assets/women-banner.jpg?v=20260423b';"
+        onerror="this.onerror=null;this.src='images/site-assets/women-banner.webp?v=20260423b';"
       />
       <div class="promo-copy">
         <div class="promo-kicker" id="womenPromoCaption">قسم حريمي</div>
@@ -9586,41 +9364,6 @@
     <div class="shop-all-btn" id="womenShopAllBtn" onclick="showWomenPerfumes()">Shop All</div>
   </section>
 
-  <section class="quiz-section" id="quizSection">
-    <h3 id="quizTitle">Smart Perfume Finder</h3>
-    <p id="quizDesc">
-      Tell us the mood, occasion, and scent style you want, and we will instantly recommend the best perfumes for you.
-    </p>
-    <div class="quiz-details">
-      <span id="quizDetailOne">Mood Match</span>
-      <span id="quizDetailTwo">Occasion Match</span>
-      <span id="quizDetailThree">Instant Picks</span>
-    </div>
-    <div class="quiz-form">
-      <select id="quizMood">
-        <option value="luxury">Luxury</option>
-        <option value="sweet">Sweet</option>
-        <option value="fresh">Fresh</option>
-        <option value="woody">Woody</option>
-      </select>
-      <select id="quizOccasion">
-        <option value="evening">Evening</option>
-        <option value="daily">Daily</option>
-        <option value="date">Date Night</option>
-        <option value="office">Office</option>
-      </select>
-      <select id="quizScent">
-        <option value="sweet">Vanilla & Sweet</option>
-        <option value="fresh">Fresh & Clean</option>
-        <option value="woody">Woody & Deep</option>
-        <option value="spicy">Spicy & Warm</option>
-      </select>
-      <button type="button" id="quizConfirmBtn" onclick="submitQuizAnswer()">Find My Perfume</button>
-    </div>
-    <div class="quiz-timer" id="quizTimer">Get your recommendations in seconds</div>
-    <div class="quiz-message" id="quizMessage"></div>
-    <div class="product-grid" id="quizResults"></div>
-  </section>
 
   <section class="product-detail-page" id="productDetailPage" hidden>
     <div class="product-detail-shell">
@@ -9785,7 +9528,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="images/site-assets/logooo-2.jpeg" alt="Ova Store Logo" loading="lazy" decoding="async" class="bs-sr-only" />
+          <img src="images/site-assets/logooo-2.webp" alt="Ova Store Logo" loading="lazy" decoding="async" class="bs-sr-only" />
           <p class="footer-brand-logo">OVA</p>
           <p class="footer-brand-sub">Perfume</p>
           <p class="footer-brand-tagline">Luxury is in the details. Scent is your signature.</p>
@@ -9897,68 +9640,83 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- GSAP powers one optional scroll effect; `defer` keeps it off the critical path
+       (the code that uses it already no-ops when gsap is not yet defined). -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="js/catalog.js?v=20260419a"></script>
   <script src="js/remote-catalog.js?v=20260424a"></script>
   <script src="js/features.js?v=20260419a"></script>
   <script>
       const bestSellerProducts = [
-        { name: "Khamrah Waha", price: 850, img: "images/site-assets/خمره_واحه-removebg-preview.png", img2: "images/site-assets/خمره واحه نوت.jpeg" },
-        { name: "Ibraq Tobacco Collection", price: 1700, img: "images/site-assets/ibraqtobbacocollection-removebg-preview.png", img2: "images/site-assets/توباكو_كوليكشن-removebg-preview.png" },
-        { name: "Diamond Emerald Soul 200ml", price:1050, img: "images/site-assets/ibraheem-alqurashi-emerald-soul-diamond-unisex-100ml-experience-elevated-scent-ebay.jpg", img2: "images/site-assets/emerald-soul-diamond-ibrahim-al-qurashi-for-women-and-men.jpg" },
-        { name: "Nude Coral Diamond", price:1200, img: "images/site-assets/nude-coral-diamond.webp", img2: "images/site-assets/nude-coral-diamond-ibrahim-al-qurashi.jpg" },
-        { name: "Lahab - Hersh", price:1050, img: "images/site-assets/lahab-by-hersh-alezz-3-4oz-edp-spray-long-lasting.jpg", img2: "images/site-assets/hersh-lahab-100ml-edp-by-al-ezz-for-oud.jpg" },
-        { name: "Khamrah Classic", price:850, img: "images/site-assets/lattafa-khamrah.jpg", img2: "images/site-assets/khamrah-lattafa-perfumes.jpg" },
-        { name: "Eclaire", price:850, img: "images/site-assets/eclaire-by-lattafa-perfumes.jpg", img2: "images/site-assets/lattafa-eclaire.jpg" },
-        { name: "Qissa Imperial Valley 200ml", price:850, img: "images/site-assets/gissah-imperial-valley-perfume-premium-edp-200ml-pewangi-arab.jpg", img2: "images/site-assets/imp-valley.jpeg" },
-        { name: "Imagination", price:850, img: "images/site-assets/products-by-louis-vuitton-imagination.jpg", img2: "images/site-assets/imagination-notes.jpg" },
-        { name: "Tom Ford Tobacco Vanille", price:850, img: "images/site-assets/tom-ford-private-blend-tobacco-vanille-eau-de-parfum-spray-nordstrom.jpg", img2: "images/site-assets/tom-ford-tobacco-vanille-2.jpg" },
-        { name: "Spicebomb Extreme", price:850, img: "images/site-assets/spicebomb-extreme-eau-de-parfum-90-ml.jpg", img2: "images/site-assets/viktor-rolf-spicebomb-extreme-eau-de-parfum-woody-spicy-cologne-for-men-with-notes-of-amber-vanilla-3-fl-oz.jpg" },
-        { name: "Baccarat Rouge Master Box Original", price:850, img: "images/site-assets/amazon-com-fragrance-world-barakkat-rouge-540.jpg", img2: "images/site-assets/maison-francis-kurkdjian-baccarat-rouge-540-extrait-de-parfum.jpg" },
-        { name: "Burberry Her Box", price:850, img: "images/site-assets/burberry-her-eau-de-parfum-edp-3-3-oz-in-box-sealed.jpg", img2: "images/site-assets/ori-burb-erry-her-edp-for-girls-100ml-long-lasting-8-10-hours.jpg" },
-        { name: "Si Red (Armani Si)", price:850, img: "images/site-assets/si-passione-eau-de-parfum.jpg", img2: "images/site-assets/giorgio-armani-si-passione.jpg" },
-        { name: "Gucci Bloom", price:850, img: "images/site-assets/gucci-gucci-bloom-edp-100ml.jpg", img2: "images/site-assets/gucci-bloom-eau-de-toilette.jpg" },
+        { name: "Khamrah Waha", price: 850, img: "images/site-assets/خمره_واحه-removebg-preview.webp", img2: "images/site-assets/خمره واحه نوت.webp" },
+        { name: "Ibraq Tobacco Collection", price: 1700, img: "images/site-assets/ibraqtobbacocollection-removebg-preview.webp", img2: "images/site-assets/توباكو_كوليكشن-removebg-preview.webp" },
+        { name: "Diamond Emerald Soul 200ml", price:1050, img: "images/site-assets/ibraheem-alqurashi-emerald-soul-diamond-unisex-100ml-experience-elevated-scent-ebay.webp", img2: "images/site-assets/emerald-soul-diamond-ibrahim-al-qurashi-for-women-and-men.webp" },
+        { name: "Nude Coral Diamond", price:1200, img: "images/site-assets/nude-coral-diamond.webp", img2: "images/site-assets/nude-coral-diamond-ibrahim-al-qurashi.webp" },
+        { name: "Lahab - Hersh", price:1050, img: "images/site-assets/lahab-by-hersh-alezz-3-4oz-edp-spray-long-lasting.webp", img2: "images/site-assets/hersh-lahab-100ml-edp-by-al-ezz-for-oud.webp" },
+        { name: "Khamrah Classic", price:850, img: "images/site-assets/lattafa-khamrah.webp", img2: "images/site-assets/khamrah-lattafa-perfumes.webp" },
+        { name: "Eclaire", price:850, img: "images/site-assets/eclaire-by-lattafa-perfumes.webp", img2: "images/site-assets/lattafa-eclaire.webp" },
+        { name: "Qissa Imperial Valley 200ml", price:850, img: "images/site-assets/gissah-imperial-valley-perfume-premium-edp-200ml-pewangi-arab.webp", img2: "images/site-assets/imp-valley.webp" },
+        { name: "Imagination", price:850, img: "images/site-assets/products-by-louis-vuitton-imagination.webp", img2: "images/site-assets/imagination-notes.webp" },
+        { name: "Tom Ford Tobacco Vanille", price:850, img: "images/site-assets/tom-ford-private-blend-tobacco-vanille-eau-de-parfum-spray-nordstrom.webp", img2: "images/site-assets/tom-ford-tobacco-vanille-2.webp" },
+        { name: "Spicebomb Extreme", price:850, img: "images/site-assets/spicebomb-extreme-eau-de-parfum-90-ml.webp", img2: "images/site-assets/viktor-rolf-spicebomb-extreme-eau-de-parfum-woody-spicy-cologne-for-men-with-notes-of-amber-vanilla-3-fl-oz.webp" },
+        { name: "Baccarat Rouge Master Box Original", price:850, img: "images/site-assets/amazon-com-fragrance-world-barakkat-rouge-540.webp", img2: "images/site-assets/maison-francis-kurkdjian-baccarat-rouge-540-extrait-de-parfum.webp" },
+        { name: "Burberry Her Box", price:850, img: "images/site-assets/burberry-her-eau-de-parfum-edp-3-3-oz-in-box-sealed.webp", img2: "images/site-assets/ori-burb-erry-her-edp-for-girls-100ml-long-lasting-8-10-hours.webp" },
+        { name: "Si Red (Armani Si)", price:850, img: "images/site-assets/si-passione-eau-de-parfum.webp", img2: "images/site-assets/giorgio-armani-si-passione.webp" },
+        { name: "Gucci Bloom", price:850, img: "images/site-assets/gucci-gucci-bloom-edp-100ml.webp", img2: "images/site-assets/gucci-bloom-eau-de-toilette.webp" },
       ];
 
       const extraBestSellerProducts = [
-        { name: "Valentino Uomo Born In Roma Intense", price:850, img: "images/best-seller/valentino-uomo-born-in-roma-intense.jpg", img2: "images/site-assets/valentino-uomo-born-in-roma-extradose-for-men.jpg" },
-        { name: "Prada Paradoxe Intense", price:850, img: "images/best-seller/prada-paradoxe-intense-eau-de-parfum-spray-3-oz.jpg", img2: "images/site-assets/prada-paradoxe-prada.jpg" },
-        { name: "Stronger With You Intensely", price:850, img: "images/men/you-int.jpeg", img2: "images/site-assets/emporio-armani-stronger-with-you-intensely-giorgio.jpg" },
-        { name: "Jean Paul Gaultier Le Male Le Parfum", price:850, img: "images/men/le-male-eau-de-parfum-intense-200-ml.jpg", img2: "images/site-assets/le-male-le-parfum-notes.jpg" },
-        { name: "Sauvage", price:850, img: "images/site-assets/sauvage-eau-de-parfum.jpg", img2: "images/site-assets/sauvage-notes.jpg" },
-        { name: "Bleu de Chanel Eau de Parfum", price:850, img: "images/best-seller/bleu-de-chanel-eau-de-parfum-spray-3-4-oz.jpg", img2: "images/site-assets/chanel-bleu-de-chanel-eau-de-parfum.jpg" },
-        { name: "Le Male Elixir", price:850, img: "images/men/la-male-elixir.jpeg", img2: "images/site-assets/le-male-elixir-notes.jpg" },
-        { name: "Khamrah Qahwa", price:850, img: "images/site-assets/lattafa-khamrah-qahwa-eau-de-parfum-100ml.jpg", img2: "images/site-assets/lattafa-khamrah-qahwa-notes-breakdown.jpg" },
-        { name: "Assaf Angel 200ml", price:1200, img: "images/site-assets/assaf-angel-main.jpg", img2: "images/site-assets/assaf-angel-alt.jpg" },
-        { name: "Assaf Pink Lady 200ml", price:1200, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.jpg" },
-        { name: "Diamond Pink Score 200ml", price:1050, img: "images/site-assets/diamond-pink-score-main.jpg", img2: "images/site-assets/diamond-pink-score-alt.jpg" },
+        { name: "Valentino Uomo Born In Roma Intense", price:850, img: "images/best-seller/valentino-uomo-born-in-roma-intense.webp", img2: "images/site-assets/valentino-uomo-born-in-roma-extradose-for-men.webp" },
+        { name: "Prada Paradoxe Intense", price:850, img: "images/best-seller/prada-paradoxe-intense-eau-de-parfum-spray-3-oz.webp", img2: "images/site-assets/prada-paradoxe-prada.webp" },
+        { name: "Stronger With You Intensely", price:850, img: "images/men/you-int.jpeg", img2: "images/site-assets/emporio-armani-stronger-with-you-intensely-giorgio.webp" },
+        { name: "Jean Paul Gaultier Le Male Le Parfum", price:850, img: "images/men/le-male-eau-de-parfum-intense-200-ml.webp", img2: "images/site-assets/le-male-le-parfum-notes.webp" },
+        { name: "Sauvage", price:850, img: "images/site-assets/sauvage-eau-de-parfum.webp", img2: "images/site-assets/sauvage-notes.webp" },
+        { name: "Bleu de Chanel Eau de Parfum", price:850, img: "images/best-seller/bleu-de-chanel-eau-de-parfum-spray-3-4-oz.webp", img2: "images/site-assets/chanel-bleu-de-chanel-eau-de-parfum.webp" },
+        { name: "Le Male Elixir", price:850, img: "images/men/la-male-elixir.webp", img2: "images/site-assets/le-male-elixir-notes.webp" },
+        { name: "Khamrah Qahwa", price:850, img: "images/site-assets/lattafa-khamrah-qahwa-eau-de-parfum-100ml.webp", img2: "images/site-assets/lattafa-khamrah-qahwa-notes-breakdown.webp" },
+        { name: "Assaf Angel 200ml", price:1200, img: "images/site-assets/assaf-angel-main.webp", img2: "images/site-assets/assaf-angel-alt.webp" },
+        { name: "Assaf Pink Lady 200ml", price:1200, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.webp" },
+        { name: "Diamond Pink Score 200ml", price:1050, img: "images/site-assets/diamond-pink-score-main.webp", img2: "images/site-assets/diamond-pink-score-alt.webp" },
       ];
 
       const bestSellerHeroProducts = [
         { ...bestSellerProducts[0] },
         { ...bestSellerProducts[1] },
-        { ...bestSellerProducts[2], img: "emerald diamond.jpg" },
-        { ...bestSellerProducts[3], img: "nude coral dimond.jpg" }
+        { ...bestSellerProducts[2], img: "emerald diamond.webp" },
+        { ...bestSellerProducts[3], img: "nude coral dimond.webp" }
       ];
 
       const newArrivalProducts = [
-        { name: "Valentino Donna", price: 850, img: "images/site-assets/new-arrivals/valentino-donna-new.png", img2: "images/site-assets/new-arrivals/valentino-donna-new.png" },
-        { name: "Valentino Uomo Rendez-Vous Ivory", price: 850, img: "images/site-assets/new-arrivals/Born_In_Roma_Uomo_Rendez-Vous_Ivory_Eau_de_-removebg-preview.png", img2: "images/site-assets/new-arrivals/Born_In_Roma_Uomo_Rendez-Vous_Ivory_Eau_de_-removebg-preview.png" },
+        { name: "Valentino Donna", price: 850, img: "images/site-assets/new-arrivals/valentino-donna-new.webp", img2: "images/site-assets/new-arrivals/valentino-donna-new.webp" },
+        { name: "Valentino Uomo Rendez-Vous Ivory", price: 850, img: "images/site-assets/new-arrivals/Born_In_Roma_Uomo_Rendez-Vous_Ivory_Eau_de_-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Born_In_Roma_Uomo_Rendez-Vous_Ivory_Eau_de_-removebg-preview.webp" },
         { ...bestSellerProducts[0] },
         { ...bestSellerProducts[1] },
-        { name: "Valentino Rendez-Vous Gold Donna", price: 850, img: "images/site-assets/new-arrivals/Valentino_Born_in_Roma_Rendez-Vous_The_Gold_Donna_Eau_de_Parfum-removebg-preview.png", img2: "images/site-assets/new-arrivals/Valentino_Born_in_Roma_Rendez-Vous_The_Gold_Donna_Eau_de_Parfum-removebg-preview.png" },
-        { name: "Valentino Donna Born In Roma Intense 30ml", price: 850, img: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.png", img2: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.png" },
-        { name: "Assaf Private Purple 200ml", price: 1200, img: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png", img2: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.png" },
-        { name: "Afnan 9pm Night Out", price: 850, img: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.png", img2: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.png" },
-        { name: "Assaf Arrogate Pink", price: 1200, img: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png", img2: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.png" },
-        { name: "Ibraq Balas Rose 150ml", price: 850, img: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.png", img2: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.png" },
-        { name: "Pink Diamond Sakura 200ml", price: 850, img: "images/site-assets/new-arrivals/pink-diamond-sakura-200ml.png", img2: "images/site-assets/new-arrivals/pink-diamond-sakura-200ml.png" },
-        { name: "Laverne Sense Tassel Edition", price: 850, img: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.png", img2: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.png" },
-        { name: "Assaf Arrogate Lipstick Perfume", price: 1200, img: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png", img2: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.png" },
-        { name: "Pink Queen Eau de Parfum", price: 850, img: "images/site-assets/new-arrivals/pink queen-removebg-preview.png", img2: "images/site-assets/new-arrivals/pink queen-removebg-preview.png" },
-        { name: "Sherlock by Assaf", price: 1200, img: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png", img2: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.png" }
+        { name: "Valentino Rendez-Vous Gold Donna", price: 850, img: "images/site-assets/new-arrivals/Valentino_Born_in_Roma_Rendez-Vous_The_Gold_Donna_Eau_de_Parfum-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Valentino_Born_in_Roma_Rendez-Vous_The_Gold_Donna_Eau_de_Parfum-removebg-preview.webp" },
+        { name: "Valentino Donna Born In Roma Intense 30ml", price: 850, img: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.webp" },
+        { name: "Assaf Private Purple 200ml", price: 1200, img: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.webp", img2: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.webp" },
+        { name: "Afnan 9pm Night Out", price: 850, img: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.webp", img2: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.webp" },
+        { name: "Assaf Arrogate Pink", price: 1200, img: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.webp" },
+        { name: "Ibraq Balas Rose 150ml", price: 850, img: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.webp" },
+        { name: "Pink Diamond Sakura 200ml", price: 850, img: "images/site-assets/new-arrivals/pink-diamond-sakura-200ml.webp", img2: "images/site-assets/new-arrivals/pink-diamond-sakura-200ml.webp" },
+        { name: "Laverne Sense Tassel Edition", price: 850, img: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.webp" },
+        { name: "Assaf Arrogate Lipstick Perfume", price: 1200, img: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.webp", img2: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.webp" },
+        { name: "Pink Queen Eau de Parfum", price: 850, img: "images/site-assets/new-arrivals/pink queen-removebg-preview.webp", img2: "images/site-assets/new-arrivals/pink queen-removebg-preview.webp" },
+        { name: "Sherlock by Assaf", price: 1200, img: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.webp", img2: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.webp" }
       ];
+
+      /* New Arrivals section was removed; its products now live inside Best Seller.
+         Merge by name so the two shared entries (indexes 2 and 3) are not duplicated. */
+      (function mergeNewArrivalsIntoBestSellers() {
+        var seen = Object.create(null);
+        bestSellerProducts.forEach(function (p) { seen[p.name] = true; });
+        extraBestSellerProducts.forEach(function (p) { seen[p.name] = true; });
+        newArrivalProducts.forEach(function (p) {
+          if (seen[p.name]) return;
+          seen[p.name] = true;
+          extraBestSellerProducts.push({ name: p.name, price: p.price, img: p.img, img2: p.img2, isNew: true });
+        });
+      })();
 
     const sectionBrandCatalog = window.ovaBrandCatalog || {};
     const sectionBrandKeys = ["dior", "armani", "lattafa", "kayali", "jeanpaulgaultier", "tomford", "xerjoff", "rarescents", "assaf", "valentino", "afnan", "laverne"];
@@ -10111,35 +9869,188 @@
       }));
     });
 
+    /* ===== Brand rails =====
+       Replaces the old brand logo grid: one titled row per brand, with that brand's
+       products laid out side by side in a horizontal scroller. Cards are built once
+       and re-rendered only on language change. */
+    function renderBrandRails() {
+      const host = document.getElementById("brandRailsHost");
+      if (!host) return;
+
+      const isAr = typeof currentLang !== "undefined" && currentLang === "ar";
+      const frag = document.createDocumentFragment();
+
+      sectionBrandKeys.forEach((brandKey, rowIndex) => {
+        const brand = sectionBrandCatalog[brandKey];
+        const items = (brand && brand.products) || [];
+        if (!items.length) return;
+
+        const row = document.createElement("div");
+        row.className = "br-row";
+        // first two rows are likely near the fold, so let them lay out immediately
+        if (rowIndex < 2) row.style.contentVisibility = "visible";
+
+        const head = document.createElement("div");
+        head.className = "br-row-head";
+
+        const title = document.createElement("h3");
+        title.className = "br-row-title";
+        title.textContent = (brand && brand.title) || brandKey;
+
+        const link = document.createElement("a");
+        link.className = "br-row-link";
+        link.href = "brand.html?brand=" + encodeURIComponent(brandKey);
+        link.textContent = isAr ? "شاهد الكل" : "View All";
+
+        head.append(title, link);
+
+        const wrap = document.createElement("div");
+        wrap.className = "br-rail-wrap";
+
+        const rail = document.createElement("div");
+        rail.className = "br-rail";
+        rail.setAttribute("role", "list");
+        rail.setAttribute("aria-label", ((brand && brand.title) || brandKey) + " products");
+
+        items.forEach((product, i) => {
+          const card = document.createElement("button");
+          card.type = "button";
+          card.className = "br-card";
+          card.setAttribute("role", "listitem");
+          card.setAttribute("aria-label", product.name);
+
+          const media = document.createElement("div");
+          media.className = "br-card-media";
+
+          const img = document.createElement("img");
+          img.src = product.img;
+          img.alt = product.name;
+          // decode off the main thread; only the first couple per rail load eagerly
+          img.decoding = "async";
+          img.loading = rowIndex < 1 && i < 3 ? "eager" : "lazy";
+          media.appendChild(img);
+
+          if (product.isNew) {
+            const tag = document.createElement("span");
+            tag.className = "br-card-tag";
+            tag.textContent = isAr ? "جديد" : "New";
+            media.appendChild(tag);
+          }
+
+          const body = document.createElement("div");
+          body.className = "br-card-body";
+
+          const name = document.createElement("p");
+          name.className = "br-card-name";
+          name.textContent = product.name;
+
+          const foot = document.createElement("div");
+          foot.className = "br-card-foot";
+
+          const price = document.createElement("span");
+          price.className = "br-card-price";
+          price.textContent = product.price + (isAr ? " ج.م" : " EGP");
+
+          const add = document.createElement("button");
+          add.type = "button";
+          add.className = "br-card-add";
+          add.textContent = "+";
+          add.setAttribute("aria-label", (isAr ? "أضف " : "Add ") + product.name);
+          add.addEventListener("click", (event) => {
+            event.stopPropagation();
+            if (typeof addToCart === "function") addToCart(product.name, img);
+          });
+
+          foot.append(price, add);
+          body.append(name, foot);
+          card.append(media, body);
+
+          card.addEventListener("click", () => {
+            if (typeof openModal === "function") openModal(product.name);
+          });
+
+          rail.appendChild(card);
+        });
+
+        const prev = document.createElement("button");
+        prev.type = "button";
+        prev.className = "br-arrow br-arrow-left";
+        prev.setAttribute("aria-label", "Previous");
+        prev.textContent = "‹";
+
+        const next = document.createElement("button");
+        next.type = "button";
+        next.className = "br-arrow br-arrow-right";
+        next.setAttribute("aria-label", "Next");
+        next.textContent = "›";
+
+        function page(dir) {
+          const card = rail.querySelector(".br-card");
+          const step = card ? (card.offsetWidth + 16) * 2 : rail.clientWidth * 0.8;
+          rail.scrollBy({ left: dir * step, behavior: "smooth" });
+        }
+
+        prev.addEventListener("click", () => page(-1));
+        next.addEventListener("click", () => page(1));
+
+        // arrow/fade state, recomputed on scroll but throttled to one rAF per frame
+        let ticking = false;
+        function syncEdges() {
+          const max = rail.scrollWidth - rail.clientWidth;
+          const x = Math.abs(rail.scrollLeft);
+          prev.hidden = x <= 4;
+          next.hidden = x >= max - 4;
+          wrap.classList.toggle("has-more", x < max - 4);
+          ticking = false;
+        }
+        rail.addEventListener("scroll", () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(syncEdges);
+        }, { passive: true });
+
+        wrap.append(prev, rail, next);
+        row.append(head, wrap);
+        frag.appendChild(row);
+
+        // initial state once layout has settled
+        requestAnimationFrame(syncEdges);
+
+        if (typeof window.enableDragScroll === "function") window.enableDragScroll(rail);
+      });
+
+      host.replaceChildren(frag);
+    }
+
     const standaloneSectionProducts = [
-      { name: "Wild Cold 200ml", price: 1050, img: "images/site-assets/wild-cold.jpeg", img2: "images/site-assets/wild-colt-alt-2.jpg" },
-      { name: "Assaf Angel 200ml", price: 1200, img: "images/site-assets/assaf-angel-main.jpg", img2: "images/site-assets/assaf-angel-alt.jpg" },
-      { name: "Assaf Pink Lady 200ml", price: 1200, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.jpg" },
-      { name: "Diamond Pink Score 200ml", price: 1050, img: "images/site-assets/diamond-pink-score-main.jpg", img2: "images/site-assets/diamond-pink-score-alt.jpg" },
-      { name: "One & Only 200ml", price: 850, img: "images/site-assets/one-and-only-main-2.jpg", img2: "images/site-assets/one-and-only-notes-2.jpg" },
-      { name: "La Luna 200ml", price: 850, img: "images/site-assets/la-luna-main-2.jpg", img2: "images/site-assets/la-luna-notes-2.jpg" },
-      { name: "Issey Miyake", price: 850, img: "images/site-assets/issey-miyake-main-2.jpg", img2: "images/site-assets/issey-miyake-notes-2.jpg" },
-      { name: "Spanish Tobacco", price: 850, img: "images/site-assets/spanish-tobacco-main-2.jpg", img2: "images/site-assets/spanish-tobacco-main-2.jpg" },
-      { name: "Arabian Tobacco", price: 850, img: "images/site-assets/arabian-tobacco-alt-2.jpg", img2: "images/site-assets/arabian-tobacco-alt-2.jpg" },
-      { name: "Khamrah 40ml", price: 300, img: "images/site-assets/khamrah-40ml-main-2.jpg", img2: "images/site-assets/khamrah-40ml-notes-2.jpg" },
-      { name: "Acqua di Giò Eau de Toilette", price: 850, img: "images/site-assets/acqua-di-gio-homme-eau-de-toilette-50ml.jpg", img2: "images/site-assets/acqua-di-gio-homme-eau-de-toilette-50ml.jpg" },
-      { name: "Lattafa His Confession", price: 950, img: "images/site-assets/unleash-the-mystery-lattafa-his-confession.jpg", img2: "images/site-assets/his-confession-lattafa.jpg" },
-      { name: "Hugo Boss Bottled Elixir", price: 850, img: "images/site-assets/hugo-boss-bottled-elixir-white.jpg", img2: "images/site-assets/hugo-boss-bottled-elixir-notes.jpg" },
-      { name: "Versace Eros Eau de Toilette", price: 850, img: "images/site-assets/versace-eros-eau-de-toilette-200ml.jpg", img2: "images/site-assets/versace-eros-for-men-3-4-oz-eau-de-toilette-spray.jpg" },
-      { name: "Versace Eros Flame", price: 850, img: "images/site-assets/versace-versace-eros-flame-for-men-eau-de-parfume.jpg", img2: "images/site-assets/versace-eros-flame.jpg" },
-      { name: "Dolce & Gabbana The One Eau de Parfum", price: 850, img: "images/site-assets/dolce-gabbana-the-one-for-eau-de-parfum-5-oz-no-color.jpg", img2: "images/site-assets/s-cak-bir-karizman-n-imzas-dolce-gabbana-the-one-for-men.jpg" },
-      { name: "Hudson Valley Perfume", price: 850, img: "images/site-assets/hudson-valley-by-gissah-fragrances-200ml-spray-free-express-shipping-original.jpg", img2: "images/site-assets/hudson.png" },
-      { name: "Baccarat Rouge 540 40ml", price: 850, img: "images/site-assets/baccarat-rouge-540-extrait-de-parfum-spray-70ml.jpg", img2: "images/site-assets/baccarat-rouge-master-box-2.jpg" },
-      { name: "Amira Al Arab", price: 850, img: "images/site-assets/amirat-al-arab.jpg", img2: "images/site-assets/amirat-al-arab.jpg" },
-      { name: "Laverne Sense", price: 850, img: "images/site-assets/georgina-sense-perfume-by-laverne-75ml-perfume-powder-pack-perfume-bag-ebay.jpg", img2: "images/site-assets/sense-laverne.jpg" },
-      { name: "Carolina Herrera 212 VIP Rose", price: 850, img: "images/site-assets/carolina-herrera-212-vip-rose-eau-de-parfum-80ml.jpg", img2: "images/site-assets/basically-new-carolina-herrera-212-vip-rose-edp.jpg" },
-      { name: "Hugo Boss The Scent Elixir For Her", price: 850, img: "images/site-assets/hugo-boss-boss-the-scent-for-her-elixir-parfum-intense-50ml.jpg", img2: "images/site-assets/boss-the-scent-elixir-for-her-hugo-boss-edp.jpg" },
-      { name: "Valentino Donna Born in Roma", price: 850, img: "images/site-assets/valentino-2.jpg", img2: "images/site-assets/valentino-donna-born-in-roma.jpg" },
-      { name: "Elie Saab Girl of Now", price: 850, img: "images/site-assets/girl-of-now-by-elie-saab.jpg", img2: "images/site-assets/girl-of-now-notes.jpg" },
-      { name: "Paco Rabanne Olympea", price: 850, img: "images/site-assets/paco-rabanne-olympea-solar-eau-de-parfum-intense-spray.jpg", img2: "images/site-assets/paco-rabanne-olympea-solar-eau-de-parfum-intense-spray.jpg" },
-      { name: "Victoria's Secret Bombshell", price: 850, img: "images/site-assets/victorias-secret-bombshell-white.jpg", img2: "images/site-assets/victorias-secret-bombshell-notes.jpg" },
-      { name: "Victoria's Secret Very Sexy", price: 850, img: "images/site-assets/very-sexy-perfume.jpg", img2: "images/site-assets/very-sexy-victoria-s-secret.jpg" },
-      { name: "Victoria's Secret Noir Tease", price: 850, img: "images/site-assets/victorias-secret-noir-tease-white.jpg", img2: "images/site-assets/victorias-secret-noir-tease-notes.jpg" }
+      { name: "Wild Cold 200ml", price: 1050, img: "images/site-assets/wild-cold.webp", img2: "images/site-assets/wild-colt-alt-2.webp" },
+      { name: "Assaf Angel 200ml", price: 1200, img: "images/site-assets/assaf-angel-main.webp", img2: "images/site-assets/assaf-angel-alt.webp" },
+      { name: "Assaf Pink Lady 200ml", price: 1200, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.webp" },
+      { name: "Diamond Pink Score 200ml", price: 1050, img: "images/site-assets/diamond-pink-score-main.webp", img2: "images/site-assets/diamond-pink-score-alt.webp" },
+      { name: "One & Only 200ml", price: 850, img: "images/site-assets/one-and-only-main-2.webp", img2: "images/site-assets/one-and-only-notes-2.webp" },
+      { name: "La Luna 200ml", price: 850, img: "images/site-assets/la-luna-main-2.webp", img2: "images/site-assets/la-luna-notes-2.webp" },
+      { name: "Issey Miyake", price: 850, img: "images/site-assets/issey-miyake-main-2.webp", img2: "images/site-assets/issey-miyake-notes-2.webp" },
+      { name: "Spanish Tobacco", price: 850, img: "images/site-assets/spanish-tobacco-main-2.webp", img2: "images/site-assets/spanish-tobacco-main-2.webp" },
+      { name: "Arabian Tobacco", price: 850, img: "images/site-assets/arabian-tobacco-alt-2.webp", img2: "images/site-assets/arabian-tobacco-alt-2.webp" },
+      { name: "Khamrah 40ml", price: 300, img: "images/site-assets/khamrah-40ml-main-2.webp", img2: "images/site-assets/khamrah-40ml-notes-2.webp" },
+      { name: "Acqua di Giò Eau de Toilette", price: 850, img: "images/site-assets/acqua-di-gio-homme-eau-de-toilette-50ml.webp", img2: "images/site-assets/acqua-di-gio-homme-eau-de-toilette-50ml.webp" },
+      { name: "Lattafa His Confession", price: 950, img: "images/site-assets/unleash-the-mystery-lattafa-his-confession.jpg", img2: "images/site-assets/his-confession-lattafa.webp" },
+      { name: "Hugo Boss Bottled Elixir", price: 850, img: "images/site-assets/hugo-boss-bottled-elixir-white.webp", img2: "images/site-assets/hugo-boss-bottled-elixir-notes.webp" },
+      { name: "Versace Eros Eau de Toilette", price: 850, img: "images/site-assets/versace-eros-eau-de-toilette-200ml.webp", img2: "images/site-assets/versace-eros-for-men-3-4-oz-eau-de-toilette-spray.webp" },
+      { name: "Versace Eros Flame", price: 850, img: "images/site-assets/versace-versace-eros-flame-for-men-eau-de-parfume.webp", img2: "images/site-assets/versace-eros-flame.webp" },
+      { name: "Dolce & Gabbana The One Eau de Parfum", price: 850, img: "images/site-assets/dolce-gabbana-the-one-for-eau-de-parfum-5-oz-no-color.webp", img2: "images/site-assets/s-cak-bir-karizman-n-imzas-dolce-gabbana-the-one-for-men.webp" },
+      { name: "Hudson Valley Perfume", price: 850, img: "images/site-assets/hudson-valley-by-gissah-fragrances-200ml-spray-free-express-shipping-original.webp", img2: "images/site-assets/hudson.webp" },
+      { name: "Baccarat Rouge 540 40ml", price: 850, img: "images/site-assets/baccarat-rouge-540-extrait-de-parfum-spray-70ml.webp", img2: "images/site-assets/baccarat-rouge-master-box-2.webp" },
+      { name: "Amira Al Arab", price: 850, img: "images/site-assets/amirat-al-arab.webp", img2: "images/site-assets/amirat-al-arab.webp" },
+      { name: "Laverne Sense", price: 850, img: "images/site-assets/georgina-sense-perfume-by-laverne-75ml-perfume-powder-pack-perfume-bag-ebay.webp", img2: "images/site-assets/sense-laverne.webp" },
+      { name: "Carolina Herrera 212 VIP Rose", price: 850, img: "images/site-assets/carolina-herrera-212-vip-rose-eau-de-parfum-80ml.jpg", img2: "images/site-assets/basically-new-carolina-herrera-212-vip-rose-edp.webp" },
+      { name: "Hugo Boss The Scent Elixir For Her", price: 850, img: "images/site-assets/hugo-boss-boss-the-scent-for-her-elixir-parfum-intense-50ml.webp", img2: "images/site-assets/boss-the-scent-elixir-for-her-hugo-boss-edp.jpg" },
+      { name: "Valentino Donna Born in Roma", price: 850, img: "images/site-assets/valentino-2.webp", img2: "images/site-assets/valentino-donna-born-in-roma.webp" },
+      { name: "Elie Saab Girl of Now", price: 850, img: "images/site-assets/girl-of-now-by-elie-saab.webp", img2: "images/site-assets/girl-of-now-notes.webp" },
+      { name: "Paco Rabanne Olympea", price: 850, img: "images/site-assets/paco-rabanne-olympea-solar-eau-de-parfum-intense-spray.webp", img2: "images/site-assets/paco-rabanne-olympea-solar-eau-de-parfum-intense-spray.webp" },
+      { name: "Victoria's Secret Bombshell", price: 850, img: "images/site-assets/victorias-secret-bombshell-white.webp", img2: "images/site-assets/victorias-secret-bombshell-notes.webp" },
+      { name: "Victoria's Secret Very Sexy", price: 850, img: "images/site-assets/very-sexy-perfume.webp", img2: "images/site-assets/very-sexy-victoria-s-secret.webp" },
+      { name: "Victoria's Secret Noir Tease", price: 850, img: "images/site-assets/victorias-secret-noir-tease-white.webp", img2: "images/site-assets/victorias-secret-noir-tease-notes.webp" }
     ];
 
     const sectionSourceProducts = uniqueSectionProductsByName([
@@ -12117,11 +12028,11 @@
 
     function buildAbsoluteAssetUrl(value) {
       const raw = String(value || "").trim();
-      if (!raw) return `${getSiteOrigin()}/images/site-assets/logooo-2.jpeg`;
+      if (!raw) return `${getSiteOrigin()}/images/site-assets/logooo-2.webp`;
       try {
         return new URL(raw, `${getSiteOrigin()}/`).href;
       } catch (error) {
-        return `${getSiteOrigin()}/images/site-assets/logooo-2.jpeg`;
+        return `${getSiteOrigin()}/images/site-assets/logooo-2.webp`;
       }
     }
 
@@ -12811,8 +12722,7 @@
     function initDeferredSectionRendering() {
       const targets = [
         { key: "men", element: document.getElementById("perfumesSection") },
-        { key: "women", element: document.getElementById("womensPerfumesSection") },
-        { key: "quiz", element: document.getElementById("quizSection") }
+        { key: "women", element: document.getElementById("womensPerfumesSection") }
       ];
 
       if ("IntersectionObserver" in window) {
@@ -12948,27 +12858,10 @@
       document.getElementById("womenFilterNote").innerText = t("womenFilterNote");
       document.getElementById("menShopAllBtn").innerText = t("shopAll");
       document.getElementById("womenShopAllBtn").innerText = t("shopAll");
-      document.getElementById("quizTitle").innerText = t("quizTitle");
-      document.getElementById("quizDesc").innerText = t("quizDesc");
-      document.getElementById("quizDetailOne").innerText = t("quizDetailOne");
-      document.getElementById("quizDetailTwo").innerText = t("quizDetailTwo");
-      document.getElementById("quizDetailThree").innerText = t("quizDetailThree");
-      document.getElementById("quizConfirmBtn").innerText = t("quizConfirm");
       setPromoBannerCopyState(false);
       setFloatingCouponButtonState(false);
-      document.getElementById("quizTimer").innerText = t("quizTimeOver");
-      document.getElementById("quizMood").options[0].text = currentLang === "ar" ? "فاخر" : "Luxury";
-      document.getElementById("quizMood").options[1].text = currentLang === "ar" ? "حلو" : "Sweet";
-      document.getElementById("quizMood").options[2].text = currentLang === "ar" ? "منعش" : "Fresh";
-      document.getElementById("quizMood").options[3].text = currentLang === "ar" ? "خشبي" : "Woody";
-      document.getElementById("quizOccasion").options[0].text = currentLang === "ar" ? "سهرات" : "Evening";
-      document.getElementById("quizOccasion").options[1].text = currentLang === "ar" ? "يومي" : "Daily";
-      document.getElementById("quizOccasion").options[2].text = currentLang === "ar" ? "ديت" : "Date Night";
-      document.getElementById("quizOccasion").options[3].text = currentLang === "ar" ? "شغل" : "Office";
-      document.getElementById("quizScent").options[0].text = currentLang === "ar" ? "فانيليا وسويت" : "Vanilla & Sweet";
-      document.getElementById("quizScent").options[1].text = currentLang === "ar" ? "منعش ونضيف" : "Fresh & Clean";
-      document.getElementById("quizScent").options[2].text = currentLang === "ar" ? "خشبي وعميق" : "Woody & Deep";
-      document.getElementById("quizScent").options[3].text = currentLang === "ar" ? "سبايسي ودافي" : "Spicy & Warm";
+      setText("brandsKicker", currentLang === "ar" ? "تسوق حسب" : "Shop By");
+      renderBrandRails();
       const modalOfferText = document.getElementById("modalOfferText");
       const modalAddBtn = document.getElementById("modalAddBtn");
       const modalBuyNowBtn = document.getElementById("modalBuyNowBtn");
@@ -13495,6 +13388,7 @@
 
     function updateQuizStatus(message = "", state = "") {
       const quizMessage = document.getElementById("quizMessage");
+      if (!quizMessage) return;
       quizMessage.className = "quiz-message" + (state ? " " + state : "");
       quizMessage.innerText = message;
     }
@@ -13524,8 +13418,8 @@
     function renderQuizState() {
       const quizTimer = document.getElementById("quizTimer");
       const quizButton = document.querySelector(".quiz-form button");
-      quizButton.disabled = false;
-      quizTimer.innerText = t("quizTimeOver");
+      if (quizButton) quizButton.disabled = false;
+      if (quizTimer) quizTimer.innerText = t("quizTimeOver");
     }
 
     function startQuizTimer() {
@@ -14241,12 +14135,12 @@
       setMetaContent("ogTitle", "Ova Perfume Egypt | Ova Store Official Website");
       setMetaContent("ogDescription", "Shop luxury perfumes, best sellers, and premium fragrance collections for women, men, and unisex at the official Ova Perfume Egypt website.");
       setMetaContent("ogUrl", "https://ovaperfume.com/");
-      setMetaContent("ogImage", "https://ovaperfume.com/images/site-assets/logooo-2.jpeg");
-      setMetaContent("ogImageSecure", "https://ovaperfume.com/images/site-assets/logooo-2.jpeg");
+      setMetaContent("ogImage", "https://ovaperfume.com/images/site-assets/logooo-2.webp");
+      setMetaContent("ogImageSecure", "https://ovaperfume.com/images/site-assets/logooo-2.webp");
       setMetaContent("twitterCard", "summary_large_image");
       setMetaContent("twitterTitle", "Ova Perfume Egypt | Ova Store Official Website");
       setMetaContent("twitterDescription", "Explore luxury perfumes, best sellers, and signature fragrance collections at the official Ova Perfume Egypt website.");
-      setMetaContent("twitterImage", "https://ovaperfume.com/images/site-assets/logooo-2.jpeg");
+      setMetaContent("twitterImage", "https://ovaperfume.com/images/site-assets/logooo-2.webp");
       removeDynamicProductSchema();
     }
 
@@ -15298,16 +15192,7 @@
     document.getElementById("womenSearchInput").addEventListener("input", () => applyFilters("women"));
     document.getElementById("womenTypeFilter").addEventListener("change", () => applyFilters("women"));
     document.getElementById("womenPriceFilter").addEventListener("change", () => applyFilters("women"));
-    ["quizMood", "quizOccasion", "quizScent"].forEach((id) => {
-      document.getElementById(id).addEventListener("change", () => updateQuizStatus("", ""));
-    });
-
-    const quizObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) startQuizTimer();
-      });
-    }, { threshold: 0.55 });
-    quizObserver.observe(document.getElementById("quizSection"));
+    /* Smart Perfume Finder section was removed - its listeners/observer are no longer wired. */
 
     // Promotion Toast Notification Handler
     function initPromoToast() {
@@ -15381,6 +15266,7 @@
         initCountdownTimer();
         initBestSellerHero();
         initBrandsCarousel();
+        renderBrandRails();
         initDeferredSectionRendering();
         scheduleIdleWork(() => initPromoToast(), 1400);
         scheduleIdleWork(() => hydrateHomepageSharedBrandDetails(), 2200);

@@ -62,68 +62,68 @@ const extraUnisexProducts = [
   {
     name: "Wild Cold 200ml",
     price: 1050,
-    img: "images/site-assets/wild-cold.jpeg",
-    img2: "images/site-assets/wild-colt-alt-2.jpg"
+    img: "images/site-assets/wild-cold.webp",
+    img2: "images/site-assets/wild-colt-alt-2.webp"
   },
   {
     name: "Assaf Angel 200ml",
     price: 1200,
-    img: "images/site-assets/assaf-angel-main.jpg",
-    img2: "images/site-assets/assaf-angel-alt.jpg"
+    img: "images/site-assets/assaf-angel-main.webp",
+    img2: "images/site-assets/assaf-angel-alt.webp"
   },
   {
     name: "Assaf Pink Lady 200ml",
     price: 1200,
     img: "images/site-assets/assaf-pink-lady-main.jpg",
-    img2: "images/site-assets/assaf-pink-lady-alt.jpg"
+    img2: "images/site-assets/assaf-pink-lady-alt.webp"
   },
   {
     name: "Diamond Pink Score 200ml",
     price: 1050,
-    img: "images/site-assets/diamond-pink-score-main.jpg",
-    img2: "images/site-assets/diamond-pink-score-alt.jpg"
+    img: "images/site-assets/diamond-pink-score-main.webp",
+    img2: "images/site-assets/diamond-pink-score-alt.webp"
   },
   {
     name: "One & Only 200ml",
     price: 850,
-    img: "images/site-assets/one-and-only-main-2.jpg",
-    img2: "images/site-assets/one-and-only-notes-2.jpg"
+    img: "images/site-assets/one-and-only-main-2.webp",
+    img2: "images/site-assets/one-and-only-notes-2.webp"
   },
   {
     name: "Qissa Imperial Valley 200ml",
     price: 850,
-    img: "images/site-assets/gissah-imperial-valley-perfume-premium-edp-200ml-pewangi-arab.jpg",
-    img2: "images/site-assets/imp-valley.jpeg"
+    img: "images/site-assets/gissah-imperial-valley-perfume-premium-edp-200ml-pewangi-arab.webp",
+    img2: "images/site-assets/imp-valley.webp"
   },
   {
     name: "Imagination",
     price: 850,
-    img: "images/site-assets/products-by-louis-vuitton-imagination.jpg",
-    img2: "images/site-assets/imagination-notes.jpg"
+    img: "images/site-assets/products-by-louis-vuitton-imagination.webp",
+    img2: "images/site-assets/imagination-notes.webp"
   },
   {
     name: "Baccarat Rouge Master Box Original",
     price: 850,
-    img: "images/site-assets/baccarat-rouge-master-box-2.jpg",
-    img2: "images/site-assets/maison-francis-kurkdjian-baccarat-rouge-540-extrait-de-parfum.jpg"
+    img: "images/site-assets/baccarat-rouge-master-box-2.webp",
+    img2: "images/site-assets/maison-francis-kurkdjian-baccarat-rouge-540-extrait-de-parfum.webp"
   },
   {
     name: "Spanish Tobacco",
     price: 850,
-    img: "images/site-assets/spanish-tobacco-main-2.jpg",
-    img2: "images/site-assets/spanish-tobacco-main-2.jpg"
+    img: "images/site-assets/spanish-tobacco-main-2.webp",
+    img2: "images/site-assets/spanish-tobacco-main-2.webp"
   },
   {
     name: "Arabian Tobacco",
     price: 850,
-    img: "images/site-assets/arabian-tobacco-alt-2.jpg",
-    img2: "images/site-assets/arabian-tobacco-alt-2.jpg"
+    img: "images/site-assets/arabian-tobacco-alt-2.webp",
+    img2: "images/site-assets/arabian-tobacco-alt-2.webp"
   },
   {
     name: "Khamrah 40ml",
     price: 850,
-    img: "images/site-assets/khamrah-40ml-main-2.jpg",
-    img2: "images/site-assets/khamrah-40ml-notes-2.jpg"
+    img: "images/site-assets/khamrah-40ml-main-2.webp",
+    img2: "images/site-assets/khamrah-40ml-notes-2.webp"
   }
 ];
 
