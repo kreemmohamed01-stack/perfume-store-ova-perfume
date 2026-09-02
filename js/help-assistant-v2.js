@@ -89,8 +89,19 @@
   function egy(t) { return /(عايز|عاوزه|عاوز|محتاج|فين|بكام|كام|ايه|إيه|ده|دي|عندك|قولي|رشحلي|وريني|برفان)/.test(n(t)); }
   function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
 
+  /* n() is the hottest function on the page - the same handful of product strings
+     are normalised over and over while the index is built. Cache the results;
+     the mapping is pure so the cache can never go stale. */
+  const N_CACHE = new Map();
+  const N_CACHE_MAX = 4000;
+
   function n(t) {
-    return String(t || "")
+    const s0 = String(t || "");
+    if (s0.length < 512) {
+      const hit = N_CACHE.get(s0);
+      if (hit !== undefined) return hit;
+    }
+    const out = s0
       .toLowerCase()
       .replace(/[\u064B-\u065F\u0670]/g, "")
       .replace(/\u0640/g, "")
@@ -102,17 +113,36 @@
       .replace(/[(){}[\]%#_.,/\\|:+*&!?;=\-]+/g, " ")
       .replace(/\s+/g, " ")
       .trim();
+    if (s0.length < 512 && N_CACHE.size < N_CACHE_MAX) N_CACHE.set(s0, out);
+    return out;
+  }
+
+  /* ALIASES and TAG_RULES are constants, but ex() used to re-normalise every one
+     of them (9 regexes each) on every single call - hundreds of thousands of
+     times while the product index is built. Normalise them once, lazily. */
+  let NORM_ALIASES = null;
+  let NORM_TAG_RULES = null;
+
+  function normTables() {
+    if (NORM_ALIASES) return;
+    NORM_ALIASES = ALIASES.map(([from, to]) => [n(from), n(to)]).filter(([a]) => a);
+    NORM_TAG_RULES = TAG_RULES.map((rule) => ({
+      key: rule.key,
+      words: rule.words.map(n).filter(Boolean)
+    }));
   }
 
   function ex(t) {
+    normTables();
     let v = n(t);
-    ALIASES.forEach(([from, to]) => {
-      const a = n(from), b = n(to);
-      if (a && v.includes(a)) v = v.split(a).join(b);
-    });
-    TAG_RULES.forEach((rule) => {
-      if (rule.words.some((w) => v.includes(n(w))) && !v.includes(rule.key)) v += " " + rule.key;
-    });
+    for (let i = 0; i < NORM_ALIASES.length; i++) {
+      const a = NORM_ALIASES[i][0];
+      if (v.includes(a)) v = v.split(a).join(NORM_ALIASES[i][1]);
+    }
+    for (let i = 0; i < NORM_TAG_RULES.length; i++) {
+      const rule = NORM_TAG_RULES[i];
+      if (!v.includes(rule.key) && rule.words.some((w) => v.includes(w))) v += " " + rule.key;
+    }
     return n(v);
   }
 
@@ -275,7 +305,11 @@
       Object.assign(copy, info(copy.detailsHtml || ""));
       copy.brandTitle = copy.brandTitle || copy.source || "";
       copy.gender = copy.group === "men" ? "men" : copy.group === "women" ? "women" : (copy.group === "unisex" ? "unisex" : "");
-      copy.tags = TAG_RULES.filter((rule) => ex([copy.name, copy.brandTitle, copy.type, copy.typeNote, copy.text, copy.usage].join(" ")).includes(rule.key)).map((rule) => rule.key);
+      /* ex() is expensive (regex-heavy normalisation over every alias/tag rule) and
+         its argument does not change across the filter, so compute it once per
+         product instead of once per TAG_RULE. */
+      const tagHaystack = ex([copy.name, copy.brandTitle, copy.type, copy.typeNote, copy.text, copy.usage].join(" "));
+      copy.tags = TAG_RULES.filter((rule) => tagHaystack.includes(rule.key)).map((rule) => rule.key);
       if (copy.gender && !copy.tags.includes(copy.gender)) copy.tags.push(copy.gender);
       if (copy.group === "best") copy.tags.push("best");
       const base = n(copy.name);
