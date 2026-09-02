@@ -132,8 +132,8 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
-<link rel="preload" as="style" href="css/home.css?v=118a0117" />
-  <link rel="stylesheet" href="css/home.css?v=118a0117" />
+<link rel="preload" as="style" href="css/home.css?v=a5a6fbd2" />
+  <link rel="stylesheet" href="css/home.css?v=a5a6fbd2" />
 </head>
 <body>
   <div class="promo-topbar" id="promoTopbar" role="button" tabindex="0" onclick="copyFloatingCouponCode()" onkeydown="handlePromoTopbarKeydown(event)">
@@ -370,6 +370,35 @@
         });
       });
     });
+  </script>
+
+  <script>
+    /* Marks the page as actively scrolling so the CSS can pause a handful of
+       always-running, filter+transform hero/best-seller animations (they
+       re-rasterise their drop-shadow every animation frame, which competed
+       with the browser's scroll compositing and was the main source of the
+       stutter/sticking on mobile). Uses a scroll-end timer rather than a
+       per-event class toggle, and the scroll listener itself is passive and
+       does no layout work - it only flips a class. */
+    (function () {
+      var body = document.body;
+      var scrollEndTimer = 0;
+      var isScrolling = false;
+
+      function onScroll() {
+        if (!isScrolling) {
+          isScrolling = true;
+          body.classList.add("is-scrolling");
+        }
+        clearTimeout(scrollEndTimer);
+        scrollEndTimer = window.setTimeout(function () {
+          isScrolling = false;
+          body.classList.remove("is-scrolling");
+        }, 200);
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
   </script>
 
   <script>

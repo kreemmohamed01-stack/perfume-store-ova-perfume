@@ -1757,11 +1757,11 @@
     }
 
     /* ===== Glass hero buttons =====
-       True frosted glass: a translucent tinted fill + backdrop-filter blur, so
-       the hero photo behind shows through softly. The primary button carries a
-       warm gold tint to stay the visual lead; the secondary is a neutral glass.
-       A radial "glow" tracks the pointer (set via --mx/--my by JS below) and
-       fades in on proximity/hover for a magnetic, lit-from-within feel. */
+       Very transparent frosted glass on every side (primary and secondary look
+       the same at rest) with black letters, so the hero photo reads clearly
+       through the button at all times. A radial glow (positioned via --mx/--my,
+       updated by JS on pointermove/proximity) sweeps in a warm light-beige tint
+       on approach/hover - the glass itself sits nearly invisible until then. */
     .hml-btn {
       position: relative;
       display: inline-flex;
@@ -1770,51 +1770,50 @@
       width: 100%;
       max-width: 250px;
       justify-content: center;
-      padding: 16px 26px;
+      padding: 17px 28px;
       /* the site-wide `button { border-radius: 0 !important }` reset otherwise
          wins over a plain declaration here, since both are !important and the
          reset rule happens to be more specific (multi-selector list). */
       border-radius: 12px !important;
       font-family: "Manrope", sans-serif;
-      font-size: 11.5px;
-      font-weight: 800;
-      letter-spacing: 2.6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
       text-transform: uppercase;
       cursor: pointer;
       overflow: hidden;
       isolation: isolate;
       -webkit-tap-highlight-color: transparent;
-      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.34s ease, border-color 0.34s ease, background-color 0.34s ease;
+      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.34s ease, border-color 0.5s ease, background 0.5s ease;
       box-sizing: border-box;
       --mx: 50%;
       --my: 50%;
-      /* Darkened enough to stay legible over the light marble hero at every
-         breakpoint - a light glass tint here let the bright background wash
-         through and made the label hard to read, which is the one thing this
-         button can't be. */
-      background: linear-gradient(150deg, rgba(46, 32, 12, 0.74) 0%, rgba(46, 32, 12, 0.58) 100%) !important;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%) !important;
       background-image: none !important;
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      color: #fffdf8 !important;
-      border: 1px solid rgba(232, 201, 138, 0.7) !important;
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      color: #16130d !important;
+      border: 1px solid rgba(255, 255, 255, 0.45) !important;
       box-shadow:
-        0 14px 30px rgba(30, 20, 8, 0.3),
-        inset 0 1px 0 rgba(255, 245, 220, 0.45),
-        inset 0 -1px 0 rgba(30, 20, 8, 0.2);
-      text-shadow: 0 1px 4px rgba(6, 3, 0, 0.95), 0 0 12px rgba(6, 3, 0, 0.6);
+        0 14px 30px rgba(30, 20, 8, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(30, 20, 8, 0.08);
+      /* a soft light halo behind the black letters is what keeps them legible
+         over a bright, moving marble background without adding a solid fill */
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 0 14px rgba(255, 255, 255, 0.7);
     }
 
-    /* the proximity glow itself - a soft radial highlight positioned under the
-       pointer, invisible until hover/focus/near-approach raises its opacity */
+    /* the proximity glow itself - a warm light-beige highlight positioned under
+       the pointer, invisible until hover/focus/near-approach raises its opacity.
+       This is the "lights up as you get close" animation. */
     .hml-btn::before {
       content: "";
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: radial-gradient(160px circle at var(--mx) var(--my), rgba(255, 245, 220, 0.55), transparent 68%);
+      background: radial-gradient(220px circle at var(--mx) var(--my), rgba(240, 224, 195, 0.85), rgba(240, 224, 195, 0.25) 55%, transparent 78%);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
     }
 
@@ -1829,41 +1828,15 @@
       z-index: 1;
     }
 
-    .hml-btn.secondary {
-      /* A near-white glass panel over a near-white marble hero has almost no
-         visible edge on its own; a firmer border + soft outer shadow is what
-         actually separates it from the background, at any scroll position. */
-      background: linear-gradient(150deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.16) 100%) !important;
-      color: #201a10 !important;
-      border: 1px solid rgba(120, 92, 48, 0.4) !important;
-      box-shadow:
-        0 10px 26px rgba(40, 30, 15, 0.16),
-        inset 0 1px 0 rgba(255, 255, 255, 0.75),
-        inset 0 -1px 0 rgba(40, 30, 15, 0.12);
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.65);
-    }
-
-    .hml-btn.secondary::before {
-      background: radial-gradient(160px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.6), transparent 68%);
-    }
-
     .hml-btn:hover,
     .hml-btn:active,
     .hml-btn.is-near {
       transform: translateY(-3px);
-      border-color: rgba(255, 245, 220, 0.85) !important;
+      border-color: rgba(240, 224, 195, 0.9) !important;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.12) 100%) !important;
       box-shadow:
-        0 20px 40px rgba(30, 20, 8, 0.3),
-        inset 0 1px 0 rgba(255, 245, 220, 0.55);
-    }
-
-    .hml-btn.secondary:hover,
-    .hml-btn.secondary:active,
-    .hml-btn.secondary.is-near {
-      border-color: rgba(120, 92, 48, 0.65) !important;
-      box-shadow:
-        0 16px 32px rgba(40, 30, 15, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+        0 20px 40px rgba(30, 20, 8, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
     }
 
     .hml-btn:active {
@@ -1874,11 +1847,7 @@
       /* fallback for the rare browser without backdrop-filter support: a
          slightly more opaque fill keeps the text readable without the blur */
       .hml-btn {
-        background: linear-gradient(150deg, rgba(70, 52, 24, 0.82) 0%, rgba(70, 52, 24, 0.7) 100%) !important;
-      }
-      .hml-btn.secondary {
-        background: linear-gradient(150deg, rgba(255, 253, 248, 0.88) 0%, rgba(248, 241, 230, 0.8) 100%) !important;
-        color: #2a2115 !important;
+        background: linear-gradient(150deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.55) 100%) !important;
       }
     }
 
@@ -2011,6 +1980,17 @@
       z-index: 1;
       filter: drop-shadow(0 22px 26px rgba(20, 14, 6, 0.28));
       animation: hmlFloatBox 7.5s ease-in-out infinite;
+      /* pin to its own compositor layer up front - animating transform on an
+         element with a `filter` otherwise re-rasterises the drop-shadow every
+         frame, which is expensive and was competing with page scroll since
+         this loop runs continuously in the very first viewport. */
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    body.is-scrolling .hml-box,
+    body.is-scrolling .hml-bottle {
+      animation-play-state: paused;
     }
 
     .hml-box.is-blurred {
@@ -2032,6 +2012,8 @@
       filter: drop-shadow(0 26px 30px rgba(20, 14, 6, 0.32));
       animation: hmlFloatBottle 6s ease-in-out infinite;
       transform-origin: 50% 85%;
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     .hml-bottle.is-blurred {
@@ -2071,7 +2053,10 @@
       animation: hmlScrollLine 2.2s ease-in-out infinite;
     }
 
-    /* ---- Desktop layout (side-by-side); tablets keep the stacked mobile layout, scaled up ---- */
+    /* ---- Tablet and laptop/desktop both keep the mobile layout - stacked,
+       centered, same order top-to-bottom - just scaled up for the wider
+       viewport. (Previously laptop switched to a side-by-side row; that is
+       intentionally gone now so laptop matches mobile exactly.) ---- */
     @media (min-width: 701px) and (max-width: 960px) {
       .hero-mobile-luxury {
         padding-top: 210px;
@@ -2090,31 +2075,20 @@
 
     @media (min-width: 961px) {
       .hero-mobile-luxury {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 4vw;
-        padding: 150px 6vw 0;
+        padding-top: 220px;
       }
 
       .hml-copy {
         max-width: 460px;
-        flex: 0 0 auto;
-        /* text always on the left, flying perfumes always on the right on
-           desktop/laptop - explicit order so this never flips, in RTL or
-           otherwise (the section itself is force-ltr, this just makes the
-           intent unambiguous regardless of source order). */
-        order: 1;
       }
 
       .hml-kicker {
-        font-size: 14px;
+        font-size: 13px;
         letter-spacing: 5px;
       }
 
       .hml-title {
-        font-size: clamp(52px, 5.6vw, 76px);
+        font-size: clamp(52px, 6vw, 68px);
       }
 
       .hml-rule {
@@ -2124,75 +2098,12 @@
 
       .hml-subtitle {
         max-width: 380px;
-        font-size: 17px;
-      }
-
-      .hml-actions {
-        flex-direction: row;
-        align-items: center;
-        gap: 18px;
-      }
-
-      .hml-btn,
-      .hml-actions .hml-btn {
-        width: auto;
-        min-width: 0;
-        /* the mobile rule caps this at 190px, which clipped the longer
-           "Discover Collection" label at desktop widths - let content size it */
-        max-width: none;
-        white-space: nowrap;
-        padding: 17px 32px;
-        font-size: 13px;
       }
 
       .hml-stage {
-        position: relative;
-        flex: 1 1 auto;
-        margin: 0;
-        height: min(72vh, 720px);
-        max-height: none;
-        width: auto;
-        align-self: flex-end;
-        order: 2;
-      }
-
-      .hml-box {
-        right: 9%;
-        top: 20%;
-        width: 36%;
-      }
-
-      .hml-bottle {
-        left: 4%;
-        top: 10%;
-        width: 60%;
-      }
-
-      .hml-podium {
-        left: 8%;
-        bottom: 10%;
-        width: 58%;
-        height: 34px;
-      }
-
-      .hml-shadow {
-        left: 24%;
-        bottom: 9%;
-        width: 46%;
-        height: 28px;
-      }
-
-      .hml-scroll-hint {
-        left: 6vw;
-        bottom: 40px;
-        transform: none;
-        align-items: flex-start;
-      }
-    }
-
-    @media (min-width: 1200px) {
-      .hml-stage {
-        height: min(66vh, 680px);
+        max-width: 460px;
+        min-height: 360px;
+        max-height: 520px;
       }
     }
 
@@ -2806,6 +2717,22 @@
       animation: bsHeroFloat 3s ease-in-out infinite;
       transition: opacity 0.3s ease, scale 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       scale: 1;
+      /* animating `transform` on an element that also has a `filter` forces the
+         browser to re-rasterise the drop-shadow every animation frame unless
+         it is pinned to its own compositor layer up front - this loop runs
+         forever, so on a mid-range phone that repaint competed with page
+         scroll and was a real source of jank. */
+      will-change: transform;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    /* the float loop is a nice-to-have flourish, not core UX - pausing it
+       while the user is actively scrolling the page removes the single
+       biggest always-on cost during a scroll gesture, with no visible loss
+       (it resumes a beat after scrolling stops). */
+    body.is-scrolling .bs-hero-img {
+      animation-play-state: paused;
     }
 
     .bs-hero-wrap:hover .bs-hero-img {
@@ -3032,16 +2959,33 @@
       box-shadow: 0 14px 26px rgba(60, 44, 24, 0.08);
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-      /* contain paint so a card's shadow/scale never invalidates its neighbours */
+      /* contain paint so a card's shadow/scale never invalidates its neighbours,
+         and promote each card to its own compositor layer up front so the
+         is-active toggle (which fires on every card the finger crosses during
+         a flick) never triggers a fresh layer creation mid-scroll - that
+         promotion cost was the real stutter, not the transition itself. */
       contain: paint;
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+      transform: translateZ(0);
+      will-change: transform;
+      /* transform only by default - box-shadow/border-color are not
+         compositor-only and used to animate on every scroll-driven is-active
+         toggle, forcing a paint of the card on each one; they now only
+         transition on genuine pointer hover (see the (hover:hover) rule
+         below), and snap instantly for the touch/scroll-driven case. */
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .best-seller-v2 .best-seller-slider .product-card:hover,
     .best-seller-v2 .best-seller-slider .product-card.is-active {
-      transform: translateY(-6px) scale(1.04);
+      transform: translateY(-6px) scale(1.04) translateZ(0);
       box-shadow: 0 22px 34px rgba(60, 44, 24, 0.16);
       border-color: rgba(199, 154, 86, 0.5);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .best-seller-v2 .best-seller-slider .product-card {
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+      }
     }
 
     .best-seller-v2 .best-seller-slider .product-card .stock-badge,
