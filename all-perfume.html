@@ -1707,10 +1707,10 @@ body{
   <button class="checkout-btn" onclick="checkout()">Checkout</button>
 </aside>
 
-<script src="js/catalog.js?v=20260419a"></script>
-<script src="js/remote-catalog.js?v=20260424a"></script>
-<script src="js/unisex-catalog.js?v=20260419a"></script>
-<script src="js/features.js?v=20260419a"></script>
+<script src="js/catalog.js?v=7217601b"></script>
+<script src="js/remote-catalog.js?v=91302d9a"></script>
+<script src="js/unisex-catalog.js?v=ee98eb6e"></script>
+<script src="js/features.js?v=197cb98a"></script>
 <script>
 let allProducts = [];
 
@@ -2289,7 +2289,11 @@ let currentProduct = null;
 const pendingProductQuery = new URLSearchParams(window.location.search).get("product") || "";
 
 function formatTypeLabel(typeValue){
-  const translated = translations[currentLang]?.[typeValue];
+  /* `translations` is declared later in this script, so this function can run
+     before it is initialised (temporal dead zone). Guard the lookup and fall
+     through to the title-case path below, which is what happened anyway. */
+  let translated;
+  try { translated = translations[currentLang]?.[typeValue]; } catch (e) { translated = undefined; }
   if(translated) return translated;
   return String(typeValue || "")
     .split(/[-_\s]+/)
@@ -2983,11 +2987,11 @@ if (searchInput) {
 
 openPendingProductFromQuery();
 </script>
-<script src="js/ova-analytics.js?v=20260424b"></script>
-<script src="js/help-assistant.js?v=20260419a"></script>
-<script src="js/all-products-rescue.js?v=20260419a"></script>
-<script src="js/scroll-reveal.js?v=20260423b"></script>
-<script src="js/pwa.js?v=20260423a"></script>
+<script src="js/ova-analytics.js?v=0bf6dc7f"></script>
+<script src="js/help-assistant.js?v=3317fa5a"></script>
+<script src="js/all-products-rescue.js?v=19003107"></script>
+<script src="js/scroll-reveal.js?v=47ef797d"></script>
+<script src="js/pwa.js?v=a21d062d"></script>
 </body>
 </html>
 
