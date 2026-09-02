@@ -132,8 +132,8 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
-<link rel="preload" as="style" href="css/home.css?v=c05a3673" />
-  <link rel="stylesheet" href="css/home.css?v=c05a3673" />
+<link rel="preload" as="style" href="css/home.css?v=118a0117" />
+  <link rel="stylesheet" href="css/home.css?v=118a0117" />
 </head>
 <body>
   <div class="promo-topbar" id="promoTopbar" role="button" tabindex="0" onclick="copyFloatingCouponCode()" onkeydown="handlePromoTopbarKeydown(event)">
@@ -311,8 +311,8 @@
       <div class="hml-rule"></div>
       <p class="hml-subtitle">Experience the art of fine fragrances crafted to leave a lasting impression.</p>
       <div class="hml-actions">
-        <button type="button" class="hml-btn primary" onclick="window.location.href='all-perfume.html';">Discover Collection</button>
-        <button type="button" class="hml-btn secondary" onclick="document.getElementById('bestSellerSection').scrollIntoView({ behavior: 'smooth' });">Explore</button>
+        <button type="button" class="hml-btn primary" onclick="window.location.href='all-perfume.html';"><span>Discover Collection</span></button>
+        <button type="button" class="hml-btn secondary" onclick="document.getElementById('bestSellerSection').scrollIntoView({ behavior: 'smooth' });"><span>Explore</span></button>
       </div>
     </div>
     <div class="hml-stage" id="heroMobileStage">
@@ -369,6 +369,59 @@
           }, 260);
         });
       });
+    });
+  </script>
+
+  <script>
+    /* Hero glass buttons: track the pointer position (as CSS vars) so the
+       radial glow in .hml-btn::before sits under the cursor, and detect
+       "approach" - the pointer coming near a button, not just landing on it -
+       so the glow eases in a beat before the hover state itself. Touch
+       devices skip the proximity math entirely (no hover concept there); the
+       CSS :hover/:active states already cover them. */
+    window.addEventListener("DOMContentLoaded", function () {
+      var buttons = Array.prototype.slice.call(document.querySelectorAll(".hml-btn"));
+      if (!buttons.length) return;
+
+      function setGlowPosition(btn, clientX, clientY) {
+        var rect = btn.getBoundingClientRect();
+        btn.style.setProperty("--mx", (clientX - rect.left) + "px");
+        btn.style.setProperty("--my", (clientY - rect.top) + "px");
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("pointermove", function (event) {
+          if (event.pointerType === "touch") return;
+          setGlowPosition(btn, event.clientX, event.clientY);
+        });
+      });
+
+      if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+      var PROXIMITY_PX = 90;
+      var ticking = false;
+
+      function updateProximity(clientX, clientY) {
+        buttons.forEach(function (btn) {
+          var rect = btn.getBoundingClientRect();
+          var dx = Math.max(rect.left - clientX, 0, clientX - rect.right);
+          var dy = Math.max(rect.top - clientY, 0, clientY - rect.bottom);
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          var near = dist < PROXIMITY_PX;
+          btn.classList.toggle("is-near", near);
+          if (near) setGlowPosition(btn, clientX, clientY);
+        });
+        ticking = false;
+      }
+
+      document.addEventListener("pointermove", function (event) {
+        if (event.pointerType === "touch") return;
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          updateProximity(event.clientX, event.clientY);
+        });
+      }, { passive: true });
     });
   </script>
 

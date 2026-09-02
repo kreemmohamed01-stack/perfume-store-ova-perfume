@@ -1756,6 +1756,12 @@
       max-width: 190px;
     }
 
+    /* ===== Glass hero buttons =====
+       True frosted glass: a translucent tinted fill + backdrop-filter blur, so
+       the hero photo behind shows through softly. The primary button carries a
+       warm gold tint to stay the visual lead; the secondary is a neutral glass.
+       A radial "glow" tracks the pointer (set via --mx/--my by JS below) and
+       fades in on proximity/hover for a magnetic, lit-from-within feel. */
     .hml-btn {
       position: relative;
       display: inline-flex;
@@ -1765,7 +1771,10 @@
       max-width: 250px;
       justify-content: center;
       padding: 16px 26px;
-      border-radius: 2px;
+      /* the site-wide `button { border-radius: 0 !important }` reset otherwise
+         wins over a plain declaration here, since both are !important and the
+         reset rule happens to be more specific (multi-selector list). */
+      border-radius: 12px !important;
       font-family: "Manrope", sans-serif;
       font-size: 11.5px;
       font-weight: 800;
@@ -1775,68 +1784,101 @@
       overflow: hidden;
       isolation: isolate;
       -webkit-tap-highlight-color: transparent;
-      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.34s ease, filter 0.34s ease;
+      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.34s ease, border-color 0.34s ease, background-color 0.34s ease;
       box-sizing: border-box;
-      background:
-        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.42) 50%, rgba(255, 255, 255, 0) 66%) 0 0 / 220% 100%,
-        linear-gradient(150deg, #6d4c1d 0%, #b98f45 26%, #e8c98a 50%, #b98f45 74%, #6d4c1d 100%) !important;
-      background-image:
-        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.42) 50%, rgba(255, 255, 255, 0) 66%),
-        linear-gradient(150deg, #6d4c1d 0%, #b98f45 26%, #e8c98a 50%, #b98f45 74%, #6d4c1d 100%) !important;
-      color: #1a1409 !important;
-      border: 1px solid rgba(120, 88, 38, 0.55) !important;
+      --mx: 50%;
+      --my: 50%;
+      /* Darkened enough to stay legible over the light marble hero at every
+         breakpoint - a light glass tint here let the bright background wash
+         through and made the label hard to read, which is the one thing this
+         button can't be. */
+      background: linear-gradient(150deg, rgba(46, 32, 12, 0.74) 0%, rgba(46, 32, 12, 0.58) 100%) !important;
+      background-image: none !important;
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      color: #fffdf8 !important;
+      border: 1px solid rgba(232, 201, 138, 0.7) !important;
       box-shadow:
-        0 14px 30px rgba(120, 88, 38, 0.34),
-        inset 0 1px 0 rgba(255, 245, 220, 0.55),
-        inset 0 -1px 0 rgba(90, 62, 22, 0.35);
-      animation: hmlBtnSheen 5s linear infinite;
-      text-shadow: none !important;
+        0 14px 30px rgba(30, 20, 8, 0.3),
+        inset 0 1px 0 rgba(255, 245, 220, 0.45),
+        inset 0 -1px 0 rgba(30, 20, 8, 0.2);
+      text-shadow: 0 1px 4px rgba(6, 3, 0, 0.95), 0 0 12px rgba(6, 3, 0, 0.6);
+    }
+
+    /* the proximity glow itself - a soft radial highlight positioned under the
+       pointer, invisible until hover/focus/near-approach raises its opacity */
+    .hml-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(160px circle at var(--mx) var(--my), rgba(255, 245, 220, 0.55), transparent 68%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .hml-btn.is-near::before,
+    .hml-btn:hover::before,
+    .hml-btn:focus-visible::before {
+      opacity: 1;
+    }
+
+    .hml-btn span {
+      position: relative;
+      z-index: 1;
     }
 
     .hml-btn.secondary {
-      background:
-        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 66%) 0 0 / 220% 100%,
-        linear-gradient(150deg, rgba(255, 253, 248, 0.9) 0%, rgba(248, 241, 230, 0.82) 100%) !important;
-      background-image:
-        linear-gradient(115deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 66%),
-        linear-gradient(150deg, rgba(255, 253, 248, 0.9) 0%, rgba(248, 241, 230, 0.82) 100%) !important;
-      color: #2a2115 !important;
-      border: 1px solid rgba(160, 124, 62, 0.42) !important;
+      /* A near-white glass panel over a near-white marble hero has almost no
+         visible edge on its own; a firmer border + soft outer shadow is what
+         actually separates it from the background, at any scroll position. */
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.16) 100%) !important;
+      color: #201a10 !important;
+      border: 1px solid rgba(120, 92, 48, 0.4) !important;
       box-shadow:
-        0 10px 24px rgba(40, 30, 15, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      animation-delay: -2.5s;
+        0 10px 26px rgba(40, 30, 15, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75),
+        inset 0 -1px 0 rgba(40, 30, 15, 0.12);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.65);
+    }
+
+    .hml-btn.secondary::before {
+      background: radial-gradient(160px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.6), transparent 68%);
     }
 
     .hml-btn:hover,
-    .hml-btn:active {
+    .hml-btn:active,
+    .hml-btn.is-near {
       transform: translateY(-3px);
+      border-color: rgba(255, 245, 220, 0.85) !important;
       box-shadow:
-        0 20px 40px rgba(120, 88, 38, 0.42),
-        inset 0 1px 0 rgba(255, 245, 220, 0.65);
-      filter: brightness(1.06);
+        0 20px 40px rgba(30, 20, 8, 0.3),
+        inset 0 1px 0 rgba(255, 245, 220, 0.55);
     }
 
     .hml-btn.secondary:hover,
-    .hml-btn.secondary:active {
+    .hml-btn.secondary:active,
+    .hml-btn.secondary.is-near {
+      border-color: rgba(120, 92, 48, 0.65) !important;
       box-shadow:
-        0 16px 32px rgba(40, 30, 15, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-      border-color: rgba(160, 124, 62, 0.7) !important;
+        0 16px 32px rgba(40, 30, 15, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
     }
 
     .hml-btn:active {
       transform: translateY(-1px) scale(0.985);
     }
 
-    @keyframes hmlBtnSheen {
-      0% {
-        background-position: 130% 0, 0 0;
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      /* fallback for the rare browser without backdrop-filter support: a
+         slightly more opaque fill keeps the text readable without the blur */
+      .hml-btn {
+        background: linear-gradient(150deg, rgba(70, 52, 24, 0.82) 0%, rgba(70, 52, 24, 0.7) 100%) !important;
       }
-      100% {
-        background-position: -130% 0, 0 0;
+      .hml-btn.secondary {
+        background: linear-gradient(150deg, rgba(255, 253, 248, 0.88) 0%, rgba(248, 241, 230, 0.8) 100%) !important;
+        color: #2a2115 !important;
       }
     }
 
@@ -2059,6 +2101,11 @@
       .hml-copy {
         max-width: 460px;
         flex: 0 0 auto;
+        /* text always on the left, flying perfumes always on the right on
+           desktop/laptop - explicit order so this never flips, in RTL or
+           otherwise (the section itself is force-ltr, this just makes the
+           intent unambiguous regardless of source order). */
+        order: 1;
       }
 
       .hml-kicker {
@@ -2086,9 +2133,13 @@
         gap: 18px;
       }
 
-      .hml-btn {
+      .hml-btn,
+      .hml-actions .hml-btn {
         width: auto;
         min-width: 0;
+        /* the mobile rule caps this at 190px, which clipped the longer
+           "Discover Collection" label at desktop widths - let content size it */
+        max-width: none;
         white-space: nowrap;
         padding: 17px 32px;
         font-size: 13px;
@@ -2102,6 +2153,7 @@
         max-height: none;
         width: auto;
         align-self: flex-end;
+        order: 2;
       }
 
       .hml-box {
