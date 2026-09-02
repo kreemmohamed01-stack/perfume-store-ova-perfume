@@ -76,6 +76,19 @@
     runEarly();
   }
 
+  /* Fallback path for a device whose cached shell is old enough that THIS
+     script (with the cleanup logic above) never runs at all - only an old
+     service worker registration does. sw.js self-destructs on activate and
+     tries client.navigate() directly; if that throws, it falls back to
+     postMessage, which any currently-loaded page - old or new - can still
+     receive and act on since addEventListener itself needs no cleanup logic
+     to already be present. */
+  navigator.serviceWorker.addEventListener("message", function (event) {
+    if (event.data && event.data.type === "ova-sw-cleared") {
+      window.location.reload();
+    }
+  });
+
   /* Idle-time safety net for the (rare) case above missed anything - e.g. a
      registration that appears slightly after first paint. */
   function scheduleIdleSweep() {
