@@ -2034,6 +2034,10 @@
         womenPromoCaption: "Women's Section",
         menVideoText: "For Him",
         womenVideoText: "For Her",
+        menSectionKicker: "The Collection",
+        womenSectionKicker: "The Collection",
+        menSectionTitle: "Men's Perfumes",
+        womenSectionTitle: "Women's Perfumes",
         menFilterNote: "Filter by type and price to reach the right scent faster.",
         womenFilterNote: "Narrow the collection by mood and budget in one step.",
         shopAll: "Shop All",
@@ -2185,6 +2189,10 @@
         womenPromoCaption: "قسم حريمي",
         menVideoText: "برفانات رجالي",
         womenVideoText: "برفانات حريمي",
+        menSectionKicker: "المجموعة",
+        womenSectionKicker: "المجموعة",
+        menSectionTitle: "برفانات رجالي",
+        womenSectionTitle: "برفانات حريمي",
         menFilterNote: "فلتر حسب النوع والسعر للوصول للعطر المناسب أسرع.",
         womenFilterNote: "فلتر حسب المود والميزانية بخطوة واحدة.",
         shopAll: "عرض الكل",
@@ -3212,6 +3220,10 @@
       setText("womenPromoTag", t("promoBadgeOffer"));
       setText("menVideoText", t("menVideoText"));
       setText("womenVideoText", t("womenVideoText"));
+      setText("menSectionKicker", t("menSectionKicker"));
+      setText("womenSectionKicker", t("womenSectionKicker"));
+      setText("menSectionTitle", t("menSectionTitle"));
+      setText("womenSectionTitle", t("womenSectionTitle"));
       document.getElementById("menFilterNote").innerText = t("menFilterNote");
       document.getElementById("womenFilterNote").innerText = t("womenFilterNote");
       document.getElementById("menShopAllBtn").innerText = t("shopAll");
