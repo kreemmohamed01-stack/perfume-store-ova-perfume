@@ -8706,3 +8706,230 @@
         transition: none;
       }
     }
+
+    /* =========================================================
+       Product card, second pass.
+       Earlier rules in this file override the card internals with
+       cold slate tones (#0f172a title, #475569 / #f8fafc type chip)
+       set via !important, which fought the warm gold palette used
+       everywhere else. This block re-tones them and rebuilds the
+       buttons. Specificity is raised with .product-card so these
+       land last without needing !important everywhere.
+       ========================================================= */
+
+    .perfumes-section .product-grid {
+      gap: 26px 18px;
+    }
+
+    /* --- shell --- */
+    .product-card {
+      padding: 20px 16px 20px;
+      border: 1px solid rgba(160, 124, 62, 0.24);
+      box-shadow:
+        0 16px 34px rgba(60, 40, 22, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    .product-card:hover {
+      border-color: rgba(160, 124, 62, 0.5);
+      box-shadow:
+        0 30px 56px rgba(60, 40, 22, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    /* --- imagery: give the bottle room and a grounded shadow --- */
+    .product-card img {
+      filter: drop-shadow(0 16px 22px rgba(58, 38, 20, 0.2));
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+    }
+
+    .product-card:hover img {
+      filter: drop-shadow(0 22px 30px rgba(58, 38, 20, 0.28));
+    }
+
+    /* --- title --- */
+    .product-card h4 {
+      color: #26201a !important;
+      font-family: "Cormorant Garamond", "Georgia", serif;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: 0.2px !important;
+    }
+
+    /* --- price: gold, with the strike-through kept quiet --- */
+    .product-card .product-price {
+      font-size: 15px;
+      font-weight: 800;
+      color: #96712f;
+      letter-spacing: 0.3px;
+    }
+
+    .product-card .product-price .product-old-price {
+      color: #ad9c8c;
+      font-weight: 600;
+      font-size: 0.85em;
+    }
+
+    /* --- type chip: warm parchment instead of the cold slate --- */
+    .product-card .product-type {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px auto 0;
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 250, 242, 0.98) 0%, rgba(246, 236, 222, 0.98) 100%) !important;
+      border: 1px solid rgba(160, 124, 62, 0.24) !important;
+      color: #8a6a42 !important;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+    }
+
+    /* --- stock badge: softer, tinted to sit on parchment --- */
+    .product-card .stock-badge {
+      top: 14px;
+      right: 14px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 9.5px;
+      letter-spacing: 1.2px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 18px rgba(60, 40, 22, 0.12);
+    }
+
+    html[dir="rtl"] .product-card .stock-badge {
+      right: auto;
+      left: 14px;
+    }
+
+    .product-card .in-stock {
+      background: rgba(238, 251, 243, 0.94) !important;
+      border: 1px solid rgba(21, 115, 71, 0.22) !important;
+      color: #157347 !important;
+    }
+
+    .product-card .low-stock {
+      background: rgba(255, 248, 219, 0.94) !important;
+      border: 1px solid rgba(161, 98, 7, 0.24) !important;
+      color: #a16207 !important;
+    }
+
+    .product-card .out-stock {
+      background: rgba(255, 241, 242, 0.94) !important;
+      border: 1px solid rgba(190, 18, 60, 0.2) !important;
+      color: #be123c !important;
+    }
+
+    /* --- "most requested" ribbon --- */
+    .product-card .product-highlight-badge {
+      top: 14px;
+      left: 14px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f3e3c2 0%, #d6ae6f 46%, #b6874a 100%);
+      color: #2a1d0e;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 9.5px;
+      letter-spacing: 1.1px;
+      box-shadow: 0 10px 22px rgba(96, 69, 42, 0.24);
+    }
+
+    html[dir="rtl"] .product-card .product-highlight-badge {
+      left: auto;
+      right: 14px;
+    }
+
+    /* --- actions --- */
+    .product-card .product-card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .product-card .product-card-actions button {
+      min-height: 46px;
+      padding: 12px 10px;
+      border-radius: 999px !important;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 1.2px !important;
+      text-transform: uppercase !important;
+      cursor: pointer;
+      text-shadow: none !important;
+      transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.26s ease, filter 0.26s ease;
+    }
+
+    /* primary: the site's gold */
+    .product-card .product-buy-btn {
+      border: 1px solid rgba(160, 124, 62, 0.5) !important;
+      background-image: linear-gradient(135deg, #f3e3c2 0%, #d6ae6f 46%, #b6874a 100%) !important;
+      color: #241708 !important;
+      box-shadow: 0 14px 26px rgba(96, 69, 42, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+    }
+
+    .product-card .product-buy-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow: 0 20px 34px rgba(96, 69, 42, 0.3), 0 0 22px rgba(232, 201, 138, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+    }
+
+    /* secondary: outlined so the primary stays dominant */
+    .product-card .product-add-btn {
+      width: auto !important;
+      border: 1px solid rgba(160, 124, 62, 0.42) !important;
+      background-image: linear-gradient(180deg, #fffdf9 0%, #f8f0e4 100%) !important;
+      color: #6b4f2c !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .product-card .product-add-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(160, 124, 62, 0.72) !important;
+      background-image: linear-gradient(180deg, #fffefb 0%, #f4e9d8 100%) !important;
+      box-shadow: 0 14px 26px rgba(96, 69, 42, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .product-card .product-card-actions button:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* --- offer note --- */
+    .product-card .product-action-note {
+      margin-top: 11px;
+      padding: 7px 13px;
+      background: linear-gradient(180deg, rgba(255, 250, 241, 0.98) 0%, rgba(244, 232, 214, 0.98) 100%);
+      border: 1px solid rgba(160, 124, 62, 0.24);
+      color: #8a6338;
+      font-size: 9.5px;
+      letter-spacing: 1.2px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    /* narrow phones: stack the actions so labels never truncate */
+    @media (max-width: 380px) {
+      .product-card .product-card-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .product-card img,
+      .product-card .product-card-actions button {
+        transition: none;
+      }
+    }
+
+    /* the earlier card rule sets a cold slate border with !important,
+       so the warm one has to match that weight to win. */
+    .product-card {
+      border: 1px solid rgba(160, 124, 62, 0.28) !important;
+    }
+
+    .product-card:hover {
+      border-color: rgba(160, 124, 62, 0.55) !important;
+    }
