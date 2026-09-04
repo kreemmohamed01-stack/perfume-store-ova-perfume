@@ -4215,117 +4215,17 @@
         window.refreshOvaScrollReveal();
       }
       if (id === "bestSellerSlider") {
-        window.setTimeout(initKhamrahFlight, 30);
         window.setTimeout(function () {
           if (typeof window.initBestSellerCarousel === "function") window.initBestSellerCarousel();
         }, 30);
       }
     }
 
-    let khamrahFlightTrigger = null;
-    let khamrahFlyerEl = null;
-
-    function initKhamrahFlight() {
-      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-      if (window.innerWidth < 320) return;
-      gsap.registerPlugin(ScrollTrigger);
-
-      const heroSection = document.querySelector(".hero-mobile-luxury");
-      const heroBottleBtn = document.querySelector('.hml-bottle[data-name="Khamrah Waha"]');
-      const bestSellerSection = document.getElementById("bestSellerSection");
-      if (!heroSection || !heroBottleBtn || !bestSellerSection) return;
-      const heroImg = heroBottleBtn.querySelector("img");
-      if (!heroImg) return;
-
-      const getCard = () => Array.from(document.querySelectorAll("#bestSellerSlider .product-card"))
-        .find((card) => {
-          const h4 = card.querySelector("h4");
-          return h4 && h4.textContent.trim() === "Khamrah Waha";
-        });
-
-      const card = getCard();
-      const cardImg = card ? card.querySelector("img") : null;
-      if (cardImg) cardImg.style.opacity = "0";
-
-      if (!khamrahFlyerEl) {
-        khamrahFlyerEl = document.createElement("img");
-        khamrahFlyerEl.alt = "";
-        khamrahFlyerEl.setAttribute("aria-hidden", "true");
-        Object.assign(khamrahFlyerEl.style, {
-          position: "fixed",
-          top: "0",
-          left: "0",
-          zIndex: "3500",
-          pointerEvents: "none",
-          opacity: "0",
-          willChange: "transform, width, height, opacity",
-          filter: "drop-shadow(0 20px 26px rgba(20,14,6,.32))"
-        });
-        document.body.appendChild(khamrahFlyerEl);
-      }
-      khamrahFlyerEl.src = heroImg.currentSrc || heroImg.src;
-
-      if (khamrahFlightTrigger) {
-        khamrahFlightTrigger.kill();
-        khamrahFlightTrigger = null;
-      }
-
-      let startRect = null;
-
-      khamrahFlightTrigger = ScrollTrigger.create({
-        trigger: heroSection,
-        start: "top top",
-        endTrigger: bestSellerSection,
-        end: "top 25%",
-        scrub: 0.35,
-        onRefresh: () => {
-          startRect = heroImg.getBoundingClientRect();
-        },
-        onUpdate: (self) => {
-          if (!startRect) startRect = heroImg.getBoundingClientRect();
-          const liveCard = getCard();
-          const liveCardImg = liveCard ? liveCard.querySelector("img") : null;
-          const p = self.progress;
-
-          if (!liveCardImg) {
-            khamrahFlyerEl.style.opacity = "0";
-            heroImg.style.opacity = "1";
-            return;
-          }
-
-          if (p <= 0.01) {
-            khamrahFlyerEl.style.opacity = "0";
-            heroImg.style.opacity = "1";
-            liveCardImg.style.opacity = "0";
-            return;
-          }
-
-          heroImg.style.opacity = String(Math.max(0, 1 - p * 6));
-
-          if (p > 0.96) {
-            khamrahFlyerEl.style.opacity = "0";
-            liveCardImg.style.opacity = "1";
-            return;
-          }
-
-          liveCardImg.style.opacity = "0";
-          khamrahFlyerEl.style.opacity = String(Math.min(1, p * 6));
-
-          const endRect = liveCardImg.getBoundingClientRect();
-          const w = startRect.width + (endRect.width - startRect.width) * p;
-          const h = startRect.height + (endRect.height - startRect.height) * p;
-          const x = startRect.left + (endRect.left - startRect.left) * p;
-          const y = startRect.top + (endRect.top - startRect.top) * p;
-          const rot = (1 - p) * -8;
-
-          khamrahFlyerEl.style.width = w + "px";
-          khamrahFlyerEl.style.height = h + "px";
-          khamrahFlyerEl.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-        }
-      });
-
-      ScrollTrigger.refresh();
-    }
+    /* The scroll-scrubbed "Khamrah flight" effect was removed: it ran a
+       GSAP ScrollTrigger that called getBoundingClientRect() and wrote
+       width/height on every scroll frame, forcing synchronous layout and
+       making scrolling stutter. Dropping it also removed the GSAP +
+       ScrollTrigger downloads from every page. */
 
     let bestSellerHeroAutoTimer = null;
     let bestSellerHeroResumeTimer = null;

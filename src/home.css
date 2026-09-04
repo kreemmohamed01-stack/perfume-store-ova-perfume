@@ -8933,3 +8933,146 @@
     .product-card:hover {
       border-color: rgba(160, 124, 62, 0.55) !important;
     }
+
+    /* =========================================================
+       Performance pass.
+
+       The page carried ~40 infinite animations. Most animate
+       background-position or box-shadow, neither of which can be
+       composited, so each one repainted every frame for as long
+       as the element existed - the compositor never went idle
+       even while the user was just reading. The rules below stop
+       the always-on repaint loops and skip offscreen work. The
+       site looks the same at rest; only ambient motion is gone.
+       ========================================================= */
+
+    /* --- 1. Skip layout/paint for sections that are offscreen --- */
+    .promo,
+    .brand-rails,
+    .perfumes-section,
+    .best-seller-v2,
+    footer {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 900px;
+    }
+
+    /* --- 2. Retire the permanent box-shadow repaint loops.
+       The static shadow is kept; only the animation stops. --- */
+    .whatsapp-float,
+    .product-card .product-highlight-badge,
+    .cart-footer button,
+    .promo-topbar__code,
+    .bs-off-badge {
+      animation: none !important;
+    }
+
+    .whatsapp-float {
+      box-shadow:
+        0 0 0 2px rgba(255, 255, 255, 0.96),
+        0 0 22px rgba(39, 223, 112, 0.66),
+        0 14px 26px rgba(37, 211, 102, 0.32);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.06);
+      box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 0.96),
+        0 0 30px rgba(39, 223, 112, 0.85),
+        0 18px 34px rgba(37, 211, 102, 0.36);
+    }
+
+    /* --- 3. background-position sheens sweeping forever --- */
+    footer::before,
+    footer::after,
+    .promo-topbar,
+    .hml-kicker,
+    .hml-title-main,
+    .hml-title em,
+    .cart-footer p,
+    .cart-info p:nth-child(2),
+    .side-panel .search-result small .product-current-price {
+      animation: none !important;
+    }
+
+    /* those gradient-clipped headings need a solid fill once the
+       sweep stops, or they would render as transparent text */
+    .cart-footer p,
+    .cart-info p:nth-child(2),
+    .side-panel .search-result small .product-current-price {
+      background: none !important;
+      -webkit-text-fill-color: #f1dfbe !important;
+      color: #f1dfbe !important;
+    }
+
+    .hml-kicker,
+    .hml-title-main,
+    .hml-title em {
+      background-position: 0 0 !important;
+    }
+
+    /* --- 4. will-change was pinned on always-present elements,
+       holding a compositor layer and its memory for the whole
+       session. Release it - the browser promotes these on demand
+       when the transition actually runs. --- */
+    .product-card,
+    .br-card,
+    .side-panel {
+      will-change: auto;
+    }
+
+    /* --- 5. backdrop-filter is the most expensive effect here and
+       sat on cards that scroll past constantly. The cards sit on
+       an opaque parchment ground, so the blur was never visible. */
+    .product-card {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    /* --- 6. Honour the OS reduced-motion setting across the board */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* --- Second perf pass: ambient loops on always-visible chrome.
+       The bottom navbar is fixed on every mobile pageview, so its 14
+       icon animations plus the bar's own glow repainted forever - the
+       single biggest remaining source of idle compositor work.
+       The hero glow/shadow loops are large blurred surfaces, which are
+       expensive to repaint for motion nobody is looking at.
+       The promo ticker is deliberately left running: it is a marquee
+       carrying the offer text, so stopping it would hide content. --- */
+    #bottomNavbar .bottom-nav-btn .nav-icon,
+    #bottomNavbar .cart-btn .nav-icon,
+    #bottomNavbar .bottom-nav-btn .nav-icon *,
+    #bottomNavbar .cart-btn .nav-icon *,
+    .bottom-navbar,
+    .hml-glow,
+    .bs-hero-glow,
+    .hml-shadow,
+    .hml-scroll-hint,
+    .bs-stars,
+    .khamrah-video-title,
+    .hml-box,
+    .hml-bottle {
+      animation: none !important;
+    }
+
+    /* remaining ambient loops: the top navbar icons (the bottom-bar
+       selectors above missed the #navbar half of the same rule), the
+       gradient-text sweeps, and the scroll-hint line pseudo-element. */
+    #navbar .cart-btn .nav-icon,
+    #navbar .bottom-nav-btn .nav-icon,
+    #navbar .cart-btn .nav-icon *,
+    .hml-scroll-hint::after,
+    .bs-title-gold,
+    .promo-topbar-repeat-couponFloatTitle {
+      animation: none !important;
+    }
