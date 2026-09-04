@@ -1,16 +1,19 @@
-/* Warms same-origin pages before the user commits to the tap.
+/* Warms a page only once the user shows real intent to open it.
 
-   Navigation felt slow because nothing about the next page was fetched
-   until the click landed - the HTML, its CSS and its JS all started from
-   cold at that moment. Here we prefetch a page's HTML as soon as the user
-   shows intent (hover on desktop, touchstart / near-viewport on mobile),
-   so the click usually resolves from cache.
+   Tuned for a metered bandwidth budget: this must never fetch a page the
+   visitor was not already heading to. So there is NO speculative
+   prefetching - nothing is fetched just because a link scrolled into
+   view, and the nav is not warmed up front. A page is fetched only on
+   hover / touch-start / keyboard focus, which on desktop still buys the
+   ~100-300ms before the click lands, and on mobile buys the gap between
+   finger-down and finger-up.
 
-   Deliberately conservative:
+   Guards:
    - same-origin document links only, no downloads or hash jumps
-   - at most PREFETCH_BUDGET pages per pageview
-   - skipped entirely on save-data or slow connections
-   - <link rel="prefetch"> is low priority, so it yields to real traffic */
+   - at most PREFETCH_BUDGET distinct pages per pageview
+   - each URL fetched at most once
+   - skipped entirely on save-data or 2G/3G
+   - <link rel="prefetch"> is lowest priority, so it yields to real traffic */
 (function () {
   if (window.__ovaNavPrefetch) return;
   window.__ovaNavPrefetch = true;
@@ -18,19 +21,20 @@
   var conn = navigator.connection;
   if (conn) {
     if (conn.saveData) return;
-    if (/(^|-)2g$/.test(conn.effectiveType || "")) return;
+    // only prefetch on genuinely fast links - on anything slower the
+    // spare request costs the visitor data and costs us quota
+    if (!/^4g$/.test(conn.effectiveType || "4g")) return;
   }
 
-  var PREFETCH_BUDGET = 8;
+  var PREFETCH_BUDGET = 4;
   var done = Object.create(null);
   var used = 0;
 
   function eligible(a) {
     if (!a || !a.href || a.origin !== location.origin) return false;
     if (a.hasAttribute("download") || a.target === "_blank") return false;
-    // ignore in-page anchors
-    if (a.pathname === location.pathname && a.hash) return false;
-    return /\.html$/.test(a.pathname) || a.pathname === "/" || !/\.[a-z0-9]+$/i.test(a.pathname);
+    if (a.pathname === location.pathname) return false;
+    return /\.html$/.test(a.pathname) || a.pathname === "/";
   }
 
   function prefetch(url) {
@@ -44,48 +48,12 @@
     document.head.appendChild(l);
   }
 
-  function fromEvent(e) {
+  function onIntent(e) {
     var a = e.target && e.target.closest && e.target.closest("a[href]");
     if (a && eligible(a)) prefetch(a.href);
   }
 
-  document.addEventListener("pointerenter", fromEvent, { capture: true, passive: true });
-  document.addEventListener("touchstart", fromEvent, { capture: true, passive: true });
-  document.addEventListener("focusin", fromEvent, { capture: true, passive: true });
-
-  // On mobile there is no hover, so warm the links that scroll into view.
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      for (var i = 0; i < entries.length; i++) {
-        var en = entries[i];
-        if (!en.isIntersecting) continue;
-        io.unobserve(en.target);
-        if (eligible(en.target)) prefetch(en.target.href);
-      }
-    }, { rootMargin: "200px" });
-
-    var start = function () {
-      // The nav is how people actually move around, so warm those
-      // destinations immediately rather than waiting for them to be
-      // scrolled into view (a fixed bottom bar never "enters" the
-      // viewport, so observing it would never fire).
-      var navLinks = document.querySelectorAll(
-        "#navbar a[href], #bottomNavbar a[href], nav a[href], .dropdown-link-btn[href]"
-      );
-      for (var n = 0; n < navLinks.length; n++) {
-        if (eligible(navLinks[n])) prefetch(navLinks[n].href);
-      }
-
-      var links = document.querySelectorAll("a[href]");
-      for (var i = 0; i < links.length && i < 60; i++) {
-        if (eligible(links[i])) io.observe(links[i]);
-      }
-    };
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", start);
-    } else {
-      start();
-    }
-  }
+  document.addEventListener("pointerenter", onIntent, { capture: true, passive: true });
+  document.addEventListener("touchstart", onIntent, { capture: true, passive: true });
+  document.addEventListener("focusin", onIntent, { capture: true, passive: true });
 })();

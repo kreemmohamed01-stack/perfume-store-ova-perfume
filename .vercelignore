@@ -1,0 +1,45 @@
+# Keep the deployment to only what the live site actually serves.
+# Everything listed here stays in the repo - it just is not uploaded,
+# so it cannot be requested and cannot spend bandwidth.
+
+# Unminified sources. js/ and css/ hold the built files the pages load.
+src/
+
+# Repo-only material
+docs/
+scripts/
+supabase/
+*.md
+google-apps-script-order-mail.gs
+_orphans.txt
+_used.txt
+
+# Original full-size art kept at the repo root. The site serves the
+# optimised copies under images/, so these were dead weight on the CDN.
+- Best Fragrances for 40s - Le Male Le Parfum Jean Paul Gaultier.jpg
+Black Carbon Diamond Ibrahim Al Qurashi.jpg
+Christian Dior Sauvage Eau de Toilette.jpg
+DECAN ASSAF PINK LADY _ MISS GRISS _ MISS ARROGATE Original Saudi.jpg
+Elie Saab - Girl of Now Perfume.jpg
+Imagination Louis Vuitton.jpg
+J'Adore Absolu Dior.jpg
+Jean Paul Gaultier Scandal Eau de Toilette For Him 100ml.jpg
+Jean Paul Gaultier Scandal Pour Homme Eau De Toilette 100ml Edt Spray- Brand.jpg
+Le Male Elixir Jean Paul Gaultier.jpg
+Pink Diamond Sakura Edp Perfume Spray By Ibraheem Al Qurashi 200ml - Usa Seller.jpg
+Pink Lady Intense (Decant) by Assaf Perfumes.jpg
+Pink Queen _ Eau De Parfum _ Huia Scent _ Regal, Gourmand & Ultra-Feminin.jpg
+Scandal Jean Paul Gaultier.jpg
+Ultra Male Rating.jpg
+angel 1.jpeg
+angel 2.jpeg
+pink Queen 200ml.jpg
+pink dai.jpg
+باك-جروند-بيست-سيلر.jpeg
+باكجروند اوفا.jpeg
+توباكو كوليكشن نوت.jpeg
+توباكو_كوليكشن-removebg-preview.png
+خمره واحه نوت.jpeg
+خمره_واحه_-removebg-preview.png
+فلانتينو دونا.png
+نوتس يو ابس.jpg
