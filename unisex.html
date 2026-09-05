@@ -73,7 +73,7 @@
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 button,
 input[type="button"],
@@ -873,7 +873,7 @@ function renderProducts(){
     card.innerHTML = `
       ${mostRequestedProductNames.has(product.name) ? '<div class="product-highlight-badge">&#1575;&#1604;&#1571;&#1603;&#1579;&#1585; &#1591;&#1604;&#1576;&#1575;</div>' : ""}
       <div class="stock-badge ${stockClass}">${stockText}</div>
-      <img src="${product.img || ""}" alt="${product.name}">
+      <img src="${product.img || ""}" alt="${product.name}" loading="lazy" decoding="async">
       <h3>${product.name}</h3>
       <p class="product-price">${getPriceMarkup(product)}</p>
       <div class="product-rating">${getStars(product.rating)} ${product.rating}</div>

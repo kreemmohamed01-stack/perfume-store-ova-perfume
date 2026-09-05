@@ -129,7 +129,7 @@
     }
   </script>
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
 <link rel="preload" as="style" href="css/home.css?v=3f0be560" />
@@ -868,7 +868,10 @@
                 vEl.pause();
               }
             });
-          }, { threshold: 0.3, rootMargin: "600px 0px" });
+          // No rootMargin: the clip is ~0.9MB, so it is fetched only once the
+          // section is genuinely on screen, not 600px before it. Visitors who
+          // never scroll this far never pay for it.
+          }, { threshold: 0.3 });
           vObserver.observe(vSection);
         } else {
           if (vEl.dataset.src) {
