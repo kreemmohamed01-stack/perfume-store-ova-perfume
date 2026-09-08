@@ -118,31 +118,31 @@
     },
     {
       name: "Imagination",
-      price: 850,
+      price: 1000,
       img: "images/site-assets/products-by-louis-vuitton-imagination.webp",
       img2: "images/site-assets/imagination-notes.webp"
     },
     {
       name: "Baccarat Rouge Master Box Original",
-      price: 850,
+      price: 1000,
       img: "images/site-assets/baccarat-rouge-master-box-2.webp",
       img2: "images/site-assets/maison-francis-kurkdjian-baccarat-rouge-540-extrait-de-parfum.webp"
     },
     {
       name: "Spanish Tobacco",
-      price: 850,
+      price: 1000,
       img: "images/site-assets/spanish-tobacco-main-2.webp",
       img2: "images/site-assets/spanish-tobacco-main-2.webp"
     },
     {
       name: "Arabian Tobacco",
-      price: 850,
+      price: 1000,
       img: "images/site-assets/arabian-tobacco-alt-2.webp",
       img2: "images/site-assets/arabian-tobacco-alt-2.webp"
     },
     {
       name: "Khamrah 40ml",
-      price: 850,
+      price: 1000,
       img: "images/site-assets/khamrah-40ml-main-2.webp",
       img2: "images/site-assets/khamrah-40ml-notes-2.webp"
     }
