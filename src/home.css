@@ -3169,6 +3169,339 @@
       }
     }
 
+    /* ===== New Arrivals (2026 Assaf drop) =====
+       Its own stage + coverflow carousel, sitting between the Khamrah film
+       and the brand rails. The keyframes it uses follow this block. */
+    .new-arrivals {
+      position: relative;
+      width: 100%;
+      margin: 34px 0 0;
+      overflow: hidden;
+      background: #fffdfa;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .new-arrivals.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .na-stage {
+      position: relative;
+      width: 100%;
+      min-height: 640px;
+      background: #fbf6ee url("../images/site-assets/new-arrivals/باك-جروند-نيو-اريف.webp") top center / cover no-repeat;
+      padding: 64px 24px 40px;
+      box-sizing: border-box;
+      text-align: center;
+      isolation: isolate;
+    }
+
+    .na-header {
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(-14px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .new-arrivals.is-visible .na-header {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.1s;
+    }
+
+    .na-kicker {
+      margin: 0 0 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #b78a4a;
+    }
+
+    .na-kicker::before,
+    .na-kicker::after {
+      content: "—";
+      margin: 0 10px;
+      color: #d9b877;
+    }
+
+    .na-title {
+      margin: 0;
+      font-family: "Playfair Display", "Georgia", serif;
+      font-size: clamp(40px, 12vw, 56px);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #1c1512;
+    }
+
+    .na-title span {
+      display: block;
+      font-size: clamp(46px, 14vw, 66px);
+      letter-spacing: 6px;
+    }
+
+    .na-diamond {
+      margin: 14px auto;
+      width: 60px;
+      color: #c79a56;
+      font-size: 13px;
+      position: relative;
+    }
+
+    .na-diamond::before,
+    .na-diamond::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(199, 154, 86, 0), #c79a56);
+    }
+
+    .na-diamond::before { left: 0; }
+    .na-diamond::after { right: 0; transform: scaleX(-1); }
+
+    .na-subtitle {
+      max-width: 320px;
+      margin: 0 auto;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #6b5c4d;
+    }
+
+    .na-pill {
+      position: absolute;
+      left: 8%;
+      top: 40%;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid #c79a56;
+      color: #a9773a;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(255, 253, 248, 0.6);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      animation: naPillFade 0.7s ease 0.6s forwards, naPillFloat 4s ease-in-out 1.4s infinite;
+    }
+
+    .na-podium {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 340px;
+      height: 380px;
+      margin: 26px auto 0;
+    }
+
+    .na-hero-img {
+      position: absolute;
+      left: 50%;
+      bottom: 34%;
+      transform: translateX(-50%);
+      width: 58%;
+      max-height: 78%;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 34px rgba(30, 20, 8, 0.32)) drop-shadow(0 0 26px rgba(232, 201, 138, 0.35));
+      animation: naHeroFloat 3s ease-in-out infinite, naHeroFadeIn 0.6s ease;
+      transition: opacity 0.35s ease, filter 0.35s ease, scale 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      scale: 1;
+    }
+
+    .na-stage:hover .na-hero-img {
+      scale: 1.07;
+    }
+
+    .na-carousel-wrap {
+      position: relative;
+      z-index: 2;
+      margin-top: -34px;
+      padding: 30px 0 26px;
+      background: #fffdfa;
+      border-radius: 34px 34px 0 0;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: 0.3s;
+    }
+
+    .new-arrivals.is-visible .na-carousel-wrap {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .na-carousel {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 10px 22vw 12px;
+      scrollbar-width: none;
+      cursor: grab;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .na-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .na-card {
+      position: relative;
+      flex: 0 0 auto;
+      width: 62vw;
+      max-width: 258px;
+      scroll-snap-align: center;
+      background: #fff;
+      border-radius: 22px;
+      padding: 20px 16px 22px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 18px 30px rgba(60, 44, 24, 0.08);
+      opacity: 0.55;
+      transform: scale(0.86) translateY(10px);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, box-shadow 0.45s ease;
+    }
+
+    .na-card.is-active {
+      opacity: 1;
+      transform: scale(1) translateY(-14px);
+      box-shadow: 0 28px 46px rgba(60, 44, 24, 0.18);
+      z-index: 2;
+    }
+
+    .na-card-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #c79a56;
+      color: #a9773a;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .na-card img {
+      width: 100%;
+      height: 168px;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 18px rgba(30, 20, 8, 0.16));
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .na-card.is-active img {
+      animation: naCardImgFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 18px 20px rgba(30, 20, 8, 0.22)) drop-shadow(0 0 16px rgba(232, 201, 138, 0.3));
+    }
+
+    .na-card h3 {
+      margin: 10px 0 2px;
+      font-family: "Playfair Display", "Georgia", serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #1c1512;
+    }
+
+    .na-card .na-card-type {
+      margin: 0 0 8px;
+      font-size: 9.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9c8a76;
+    }
+
+    .na-card .na-card-price {
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #1c1512;
+    }
+
+    .na-card-add {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid #c79a56;
+      color: #a9773a;
+      font-size: 16px;
+      background: transparent;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+    }
+
+    .na-card-add:hover {
+      background: #1c1512;
+      border-color: #1c1512;
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    .na-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .na-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(199, 154, 86, 0.28);
+      cursor: pointer;
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .na-dot.is-active {
+      width: 20px;
+      border-radius: 4px;
+      background: #c79a56;
+    }
+
+    .na-swipe-hint {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: #a9773a;
+    }
+
+    /* Only the two arrows pulse; the middle span holds the translated label. */
+    .na-swipe-hint span:first-child {
+      animation: naArrowPulse 1.6s ease-in-out infinite;
+    }
+
+    .na-swipe-hint span:last-child {
+      animation: naArrowPulseR 1.6s ease-in-out 0.3s infinite;
+    }
+
     @keyframes naPillFade {
       to { opacity: 1; }
     }
@@ -9075,4 +9408,254 @@
     .bs-title-gold,
     .promo-topbar-repeat-couponFloatTitle {
       animation: none !important;
+    }
+
+    /* =====================================================================
+       Gallery theme: white canvas + floating product cards
+       ---------------------------------------------------------------------
+       Everything from the New Arrivals section down to (but NOT including)
+       the footer sits on flat white, and the product cards lose their box:
+       no panel background, no border, no card shadow. Only the bottle keeps
+       a shadow, so it reads as floating on the page. Buttons become glossy
+       black with a sheen that sweeps across on hover/proximity.
+       ===================================================================== */
+
+    /* --- 1. White canvas from New Arrivals to just before the footer --- */
+    .new-arrivals,
+    .new-arrivals .na-stage,
+    .new-arrivals .na-carousel-wrap,
+    .brand-rails,
+    .perfumes-section,
+    .promo,
+    .offer-strip,
+    .section.best-seller-v2 ~ .perfumes-section {
+      background: #fff !important;
+    }
+
+    /* The page's own warm gradient is what showed through the sections above,
+       so the canvas itself goes flat white. The footer paints its own ground. */
+    body {
+      background: #fff !important;
+    }
+
+    /* The panels that framed the men's / women's blocks and their search rows. */
+    .perfumes-section .ps-head,
+    .search-row {
+      background: #fff !important;
+      border-color: rgba(139, 106, 51, 0.10) !important;
+      box-shadow: none !important;
+    }
+
+    /* The gilded frame drawn behind each collection tinted the canvas cream.
+       Best Seller sits above New Arrivals, so it keeps its original look. */
+    .perfumes-section::before,
+    .perfumes-section::after,
+    .brand-rails::before,
+    .brand-rails::after {
+      display: none !important;
+    }
+
+    /* The stage keeps its marble art; only the tint underneath goes white. */
+    .new-arrivals .na-stage {
+      background:
+        #fff url("../images/site-assets/new-arrivals/باك-جروند-نيو-اريف.webp")
+        top center / cover no-repeat !important;
+    }
+
+    /* --- 2. Cards stop being boxes and start floating --- */
+    .product-card,
+    .br-card,
+    .na-card {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      overflow: visible !important;
+    }
+
+    /* The two decorative gradient washes were part of the "box" look. */
+    .product-card::before,
+    .product-card::after,
+    .na-card::before,
+    .na-card::after {
+      display: none !important;
+    }
+
+    /* Hover lifts the card without re-introducing a panel. */
+    .product-card:hover,
+    .br-card:hover {
+      background: transparent !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      transform: translateY(-14px) scale(1.03);
+    }
+
+    /* The bottle carries the only shadow, so it looks airborne. The image also
+       sheds the white plate some cards draw behind it. */
+    .product-card img,
+    .br-card img,
+    .na-card img {
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      filter: drop-shadow(0 26px 30px rgba(38, 24, 14, 0.22))
+              drop-shadow(0 6px 12px rgba(38, 24, 14, 0.10));
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.55s ease;
+    }
+
+    /* Any wrapper that framed the bottle goes flat too. */
+    .product-card .product-img-wrap,
+    .product-card .product-image,
+    .product-card .product-media,
+    .br-card .br-card-media,
+    .br-card-thumb {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .product-card:hover img,
+    .br-card:hover img,
+    .na-card.is-active img {
+      filter: drop-shadow(0 38px 42px rgba(38, 24, 14, 0.26))
+              drop-shadow(0 0 26px rgba(232, 201, 138, 0.34));
+    }
+
+    /* --- 3. Strip the clutter: keep name, price and the two buttons --- */
+    .product-card .product-stats,
+    .product-card .product-type,
+    .product-card .product-rating,
+    .product-card .product-rating-count,
+    .product-card .offer-note,
+    .product-card .product-action-note,
+    .product-card .stock-badge,
+    .product-card .product-highlight-badge,
+    .na-card .na-card-type {
+      display: none !important;
+    }
+
+    /* --- 4. Glossy black buttons with a sweeping sheen --- */
+    .product-card button,
+    .product-card .product-more-btn,
+    .product-card .product-add-btn,
+    .product-card .product-buy-btn,
+    .na-card-add {
+      position: relative;
+      overflow: hidden;
+      border-radius: 999px !important;
+      background-color: #131110 !important;
+      /* background-image rather than the shorthand: the gold button rules
+         earlier set background-image with !important, and only the same
+         property can override them. */
+      background-image: linear-gradient(140deg, #23201e 0%, #0d0b0a 46%, #2c2724 100%) !important;
+      color: #fff !important;
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      box-shadow: 0 14px 26px rgba(12, 9, 7, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.4s ease, filter 0.4s ease;
+    }
+
+    /* The sheen: a diagonal highlight parked off-frame until the card is neared. */
+    .product-card button::after,
+    .product-card .product-more-btn::after,
+    .na-card-add::after {
+      content: "";
+      position: absolute;
+      top: -60%;
+      left: -75%;
+      width: 45%;
+      height: 220%;
+      background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.42) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(14deg);
+      transition: left 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    /* Proximity: hovering anywhere on the card sweeps the sheen across. */
+    .product-card:hover button::after,
+    .product-card:hover .product-more-btn::after,
+    .product-card button:hover::after,
+    .na-card:hover .na-card-add::after,
+    .na-card.is-active .na-card-add::after {
+      left: 130%;
+    }
+
+    .product-card:hover button,
+    .product-card:hover .product-more-btn,
+    .product-card:hover .product-add-btn,
+    .product-card:hover .product-buy-btn,
+    .product-card .product-add-btn:hover,
+    .product-card .product-buy-btn:hover,
+    .na-card:hover .na-card-add {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.18) !important;
+      background-image: linear-gradient(140deg, #2b2724 0%, #131110 46%, #35302c 100%) !important;
+      color: #fff !important;
+      box-shadow: 0 20px 34px rgba(12, 9, 7, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      filter: brightness(1.06);
+    }
+
+    .na-card-add {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    /* --- 5. Bigger New Arrivals cards: two side by side, rest on scroll --- */
+    .na-carousel {
+      /* Half the viewport per card minus the gap, so exactly two sit in view
+         and the third peeks in to signal that the row scrolls. */
+      padding: 14px calc(25vw - 12px) 16px !important;
+    }
+
+    .na-card {
+      width: calc(50vw - 26px) !important;
+      max-width: none !important;
+      padding: 22px 18px 24px !important;
+    }
+
+    .na-card img {
+      height: 260px !important;
+    }
+
+    .na-card h3 {
+      font-size: 19px;
+    }
+
+    .na-card .na-card-price {
+      font-size: 17px;
+    }
+
+    /* Laptop / desktop: same white treatment, two larger cards in view. */
+    @media (min-width: 701px) {
+      .na-carousel {
+        padding: 16px calc(50% - 430px) 18px !important;
+      }
+
+      .na-card {
+        width: 420px !important;
+      }
+
+      .na-card img {
+        height: 340px !important;
+      }
+
+      .na-card h3 {
+        font-size: 22px;
+      }
+
+      .na-card .na-card-price {
+        font-size: 19px;
+      }
+    }
+
+    /* The footer keeps its own dark treatment - the white canvas stops here. */
+    footer {
+      background: initial;
     }

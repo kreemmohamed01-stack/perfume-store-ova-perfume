@@ -424,6 +424,126 @@ button,input,select{font:inherit}
     border-radius:16px !important;
   }
 }
+
+
+/* ===== Gallery theme: white canvas + floating product cards =====
+   Cards lose their panel, border and shadow; only the bottle keeps a shadow
+   so it reads as floating. Buttons are glossy black with a sweeping sheen.
+   The chip row (fresh / oud / spicy) is dropped - it repeats the description. */
+body,
+.products-section,
+.products-grid,
+.brand-products,
+.product-grid {
+  background: #fff !important;
+}
+
+.product-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  overflow: visible !important;
+}
+
+.product-card::before,
+.product-card::after {
+  display: none !important;
+}
+
+.product-card:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: translateY(-14px) scale(1.03);
+}
+
+.product-card img {
+  filter: drop-shadow(0 26px 30px rgba(38, 24, 14, 0.22))
+          drop-shadow(0 6px 12px rgba(38, 24, 14, 0.10));
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.55s ease;
+}
+
+.product-card:hover img {
+  filter: drop-shadow(0 38px 42px rgba(38, 24, 14, 0.26))
+          drop-shadow(0 0 26px rgba(232, 201, 138, 0.34));
+}
+
+
+.product-card img {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.product-card .product-img-wrap,
+.product-card .product-image,
+.product-card .product-media {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep only the name, the price and the two buttons. */
+.product-card .product-stats,
+.product-card .product-type,
+.product-card .product-rating,
+.product-card .product-rating-count,
+.product-card .offer-note,
+.product-card .product-action-note,
+.product-card .stock-badge,
+.product-card .product-highlight-badge {
+  display: none !important;
+}
+
+.product-card button,
+.product-card .product-more-btn,
+.product-card .product-add-btn,
+.product-card .product-buy-btn {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px !important;
+  background-color: #131110 !important;
+  background-image: linear-gradient(140deg, #23201e 0%, #0d0b0a 46%, #2c2724 100%) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 14px 26px rgba(12, 9, 7, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, filter 0.4s ease;
+}
+
+.product-card button::after,
+.product-card .product-more-btn::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -75%;
+  width: 45%;
+  height: 220%;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 50%, rgba(255,255,255,0) 100%);
+  transform: rotate(14deg);
+  transition: left 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+/* Proximity: hovering the card sweeps the sheen across its buttons. */
+.product-card:hover button::after,
+.product-card:hover .product-more-btn::after,
+.product-card button:hover::after {
+  left: 130%;
+}
+
+.product-card:hover button,
+.product-card:hover .product-more-btn,
+.product-card:hover .product-add-btn,
+.product-card:hover .product-buy-btn,
+.product-card .product-add-btn:hover,
+.product-card .product-buy-btn:hover {
+  transform: translateY(-3px);
+  background-image: linear-gradient(140deg, #2b2724 0%, #131110 46%, #35302c 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 20px 34px rgba(12, 9, 7, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  filter: brightness(1.06);
+}
 </style>
 </head>
 <body>
@@ -497,9 +617,9 @@ button,input,select{font:inherit}
   <button class="checkout-btn" id="checkoutBtn" type="button" onclick="goToCheckout()">Checkout</button>
 </aside>
 
-<script src="js/catalog.js?v=c014b23a"></script>
+<script src="js/catalog.js?v=9bd39767"></script>
 <script src="js/remote-catalog.js?v=9816d387"></script>
-<script src="js/unisex-catalog.js?v=ee98eb6e"></script>
+<script src="js/unisex-catalog.js?v=2f9c22d7"></script>
 <script src="js/features.js?v=197cb98a"></script>
 <script>
 const unisexProducts = Array.isArray(window.ovaUnisexProducts) ? window.ovaUnisexProducts : [];

@@ -5,6 +5,19 @@
    page's inline script. Only window.ovaUnisexProducts is exported. */
 (function () {
   const unisexNames = new Set([
+    /* 2026 Assaf drop */
+    "Assaf Frankel Silver",
+    "Assaf Frankel Aventus",
+    "Assaf Frankel Imagination Intense",
+    "Assaf Wild Colt",
+    "Assaf Wild Colt Bakhur",
+    "Assaf Arrogate Addict",
+    "Assaf Arrogate Comete",
+    "Assaf Gris Eris Luxury",
+    "Assaf Miss Flora",
+    "Assaf Miss Sakura",
+    "Assaf Miss Arrogate",
+    "Assaf Miss Arrogate Diva",
     "Diamond Emerald Soul 200ml",
     "Nude Coral Diamond",
     "Lahab - Hersh",
@@ -54,7 +67,9 @@
   }
 
   const brandCatalog = window.ovaBrandCatalog || {};
-  const featuredBrandKeys = ["dior", "armani", "lattafa", "kayali", "jeanpaulgaultier", "tomford", "xerjoff", "rarescents"];
+  /* "assaf" is here so the 2026 drop reaches this page; only the names listed
+     in unisexNames above are actually kept, so the other brands are unaffected. */
+  const featuredBrandKeys = ["dior", "armani", "lattafa", "kayali", "jeanpaulgaultier", "tomford", "xerjoff", "rarescents", "assaf"];
   const brandUnisexProducts = featuredBrandKeys.flatMap((brandKey) => {
     const brand = brandCatalog[brandKey];
     return (brand?.products || []).map((product) => ({
@@ -73,15 +88,15 @@
     },
     {
       name: "Assaf Angel 200ml",
-      price: 1200,
-      img: "images/site-assets/assaf-angel-main.webp",
-      img2: "images/site-assets/assaf-angel-alt.webp"
+      price: 1400,
+      img: "images/site-assets/new-arrivals-2026/assaf-angel.webp",
+      img2: "images/site-assets/new-arrivals-2026/assaf-angel.webp"
     },
     {
       name: "Assaf Pink Lady 200ml",
-      price: 1200,
-      img: "images/site-assets/assaf-pink-lady-main.jpg",
-      img2: "images/site-assets/assaf-pink-lady-alt.webp"
+      price: 1400,
+      img: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp",
+      img2: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp"
     },
     {
       name: "Diamond Pink Score 200ml",

@@ -14,6 +14,10 @@ google-apps-script-order-mail.gs
 _orphans.txt
 _used.txt
 
+# Raw PNG screenshots of the 2026 Assaf drop. The site serves the WebP
+# copies under images/site-assets/new-arrivals-2026/.
+new arr/
+
 # Original full-size art kept at the repo root. The site serves the
 # optimised copies under images/, so these were dead weight on the CDN.
 - Best Fragrances for 40s - Le Male Le Parfum Jean Paul Gaultier.jpg

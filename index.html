@@ -132,8 +132,8 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
-<link rel="preload" as="style" href="css/home.css?v=3f0be560" />
-  <link rel="stylesheet" href="css/home.css?v=3f0be560" />
+<link rel="preload" as="style" href="css/home.css?v=a7a5dd7f" />
+  <link rel="stylesheet" href="css/home.css?v=a7a5dd7f" />
 </head>
 <body>
   <div class="promo-topbar" id="promoTopbar" role="button" tabindex="0" onclick="copyFloatingCouponCode()" onkeydown="handlePromoTopbarKeydown(event)">
@@ -889,13 +889,17 @@
       var dotsWrap = document.getElementById("naDots");
       var heroImg = document.getElementById("naHeroImg");
       if (!section || !carousel || !dotsWrap || !heroImg) return;
-      if (typeof newArrivalProducts === "undefined" || !newArrivalProducts.length) return;
 
+      // The 2026 Assaf drop, exported by js/home.js.
+      var naProducts = window.ovaNewArrivals || [];
+      if (!naProducts.length) return;
+
+      var isAr = document.documentElement.lang === "ar";
       var cards = [];
       var dots = [];
       var activeIndex = -1;
 
-      newArrivalProducts.forEach(function (product, index) {
+      naProducts.forEach(function (product, index) {
         var card = document.createElement("div");
         card.className = "na-card";
         card.dataset.index = String(index);
@@ -904,7 +908,7 @@
           '<img src="' + product.img + '" alt="' + product.name + '" loading="lazy" decoding="async">' +
           '<h3>' + product.name + '</h3>' +
           '<p class="na-card-type">Eau De Parfum</p>' +
-          '<p class="na-card-price">' + product.price + ' EGP</p>' +
+          '<p class="na-card-price">' + product.price + (isAr ? ' ج.م' : ' EGP') + '</p>' +
           '<button type="button" class="na-card-add" aria-label="Add ' + product.name + '">+</button>';
 
         card.addEventListener("click", function (event) {
@@ -937,12 +941,13 @@
       });
 
       function setActiveIndex(index) {
-        if (index === activeIndex || index < 0 || index >= newArrivalProducts.length) return;
+        if (index === activeIndex || index < 0 || index >= naProducts.length) return;
         activeIndex = index;
         cards.forEach(function (card, i) { card.classList.toggle("is-active", i === index); });
         dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
 
-        var product = newArrivalProducts[index];
+        var product = naProducts[index];
+        heroImg.hidden = false;
         if (heroImg.src !== new URL(product.img, window.location.href).href) {
           heroImg.style.opacity = "0";
           window.setTimeout(function () {
@@ -1027,6 +1032,29 @@
       }
     });
   </script>
+
+  <section class="new-arrivals" id="newArrivalsSection">
+    <div class="na-stage" id="naStage">
+      <div class="na-header">
+        <p class="na-kicker" id="naKicker">Discover Our</p>
+        <h2 class="na-title">New<span>Arrivals</span></h2>
+        <div class="na-diamond">&#10022;</div>
+        <p class="na-subtitle" id="naSubtitle">The latest Assaf additions to our collection, crafted for those who appreciate the extraordinary.</p>
+      </div>
+      <div class="na-pill">NEW <span>&#10022;</span></div>
+      <div class="na-podium">
+        <!-- src is set by the carousel script; start hidden so the browser is
+             never asked to fetch an empty URL. -->
+        <img class="na-hero-img" id="naHeroImg" alt="" decoding="async" hidden />
+      </div>
+    </div>
+
+    <div class="na-carousel-wrap">
+      <div class="na-carousel" id="naCarousel"></div>
+      <div class="na-dots" id="naDots"></div>
+      <div class="na-swipe-hint"><span>&larr;</span> <span id="naSwipeHint">Swipe to explore</span> <span>&rarr;</span></div>
+    </div>
+  </section>
 
   <section class="brand-rails" id="brandsSection">
     <div class="br-head">
@@ -1407,13 +1435,13 @@
     </div>
   </footer>
 
-  <script defer src="js/catalog.js?v=c014b23a"></script>
+  <script defer src="js/catalog.js?v=9bd39767"></script>
   <script defer src="js/remote-catalog.js?v=9816d387"></script>
   <script defer src="js/features.js?v=197cb98a"></script>
   <!-- Product detail copy shared with brand.html. Deferred: it is only needed for
        modal/detail content, never for first paint. -->
-  <script defer src="js/product-details.js?v=2d5fba0f"></script>
-  <script defer src="js/home.js?v=8646c410"></script>
+  <script defer src="js/product-details.js?v=128bc9da"></script>
+  <script defer src="js/home.js?v=5ba0ecee"></script>
 <script defer src="js/ova-analytics.js?v=2fc3055f"></script>
 <script defer src="js/help-assistant-v2.js?v=1242f617"></script>
 <script defer src="js/scroll-reveal.js?v=47ef797d"></script>

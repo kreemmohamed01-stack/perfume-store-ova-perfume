@@ -20,14 +20,14 @@
       const extraBestSellerProducts = [
         { name: "Valentino Uomo Born In Roma Intense", price:850, img: "images/best-seller/valentino-uomo-born-in-roma-intense.webp", img2: "images/site-assets/valentino-uomo-born-in-roma-extradose-for-men.webp" },
         { name: "Prada Paradoxe Intense", price:850, img: "images/best-seller/prada-paradoxe-intense-eau-de-parfum-spray-3-oz.webp", img2: "images/site-assets/prada-paradoxe-prada.webp" },
-        { name: "Stronger With You Intensely", price:850, img: "images/men/you-int.jpeg", img2: "images/site-assets/emporio-armani-stronger-with-you-intensely-giorgio.webp" },
+        { name: "Stronger With You Intensely", price:850, img: "images/men/you-int.webp", img2: "images/site-assets/emporio-armani-stronger-with-you-intensely-giorgio.webp" },
         { name: "Jean Paul Gaultier Le Male Le Parfum", price:850, img: "images/men/le-male-eau-de-parfum-intense-200-ml.webp", img2: "images/site-assets/le-male-le-parfum-notes.webp" },
         { name: "Sauvage", price:850, img: "images/site-assets/sauvage-eau-de-parfum.webp", img2: "images/site-assets/sauvage-notes.webp" },
         { name: "Bleu de Chanel Eau de Parfum", price:850, img: "images/best-seller/bleu-de-chanel-eau-de-parfum-spray-3-4-oz.webp", img2: "images/site-assets/chanel-bleu-de-chanel-eau-de-parfum.webp" },
         { name: "Le Male Elixir", price:850, img: "images/men/la-male-elixir.webp", img2: "images/site-assets/le-male-elixir-notes.webp" },
         { name: "Khamrah Qahwa", price:850, img: "images/site-assets/lattafa-khamrah-qahwa-eau-de-parfum-100ml.webp", img2: "images/site-assets/lattafa-khamrah-qahwa-notes-breakdown.webp" },
-        { name: "Assaf Angel 200ml", price:1200, img: "images/site-assets/assaf-angel-main.webp", img2: "images/site-assets/assaf-angel-alt.webp" },
-        { name: "Assaf Pink Lady 200ml", price:1200, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.webp" },
+        { name: "Assaf Angel 200ml", price:1400, img: "images/site-assets/new-arrivals-2026/assaf-angel.webp", img2: "images/site-assets/new-arrivals-2026/assaf-angel.webp" },
+        { name: "Assaf Pink Lady 200ml", price:1400, img: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp", img2: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp" },
         { name: "Diamond Pink Score 200ml", price:1050, img: "images/site-assets/diamond-pink-score-main.webp", img2: "images/site-assets/diamond-pink-score-alt.webp" },
       ];
 
@@ -47,14 +47,57 @@
         { name: "Valentino Donna Born In Roma Intense 30ml", price: 850, img: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Valentino_Donna_Born_In_Roma_Intense_1_0_Oz___30_Ml_Eau_De_Parfum_Spray_For_Women-removebg-preview.webp" },
         { name: "Assaf Private Purple 200ml", price: 1200, img: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.webp", img2: "images/site-assets/new-arrivals/20599_ASSAF___Private_Purple___200ml_EDP_-_Fakhra_Perfumes-removebg-preview.webp" },
         { name: "Afnan 9pm Night Out", price: 850, img: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.webp", img2: "images/site-assets/new-arrivals/9pm_Night_Out_Perfume_100ml_Extrait_de_Parfum_Afnan____eBay_UK-removebg-preview.webp" },
-        { name: "Assaf Arrogate Pink", price: 1200, img: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Assaf_Pink_Arrogate_perfume-removebg-preview.webp" },
+        { name: "Assaf Arrogate Pink", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-arrogate-pink-new.webp", img2: "images/site-assets/new-arrivals-2026/assaf-arrogate-pink-new.webp" },
         { name: "Ibraq Balas Rose 150ml", price: 850, img: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Balas_Rose_Eau_de_Parfum___Ibraheem_Al_Qurashi___150ml_-_عطر_بالاس_روز___من_إبراهيم_القرشي__ابراق____150_مل-removebg-preview.webp" },
         { name: "Pink Diamond Sakura 200ml", price: 850, img: "images/site-assets/new-arrivals/pink-diamond-sakura-200ml.webp", img2: "images/site-assets/new-arrivals/pink-diamond-sakura-200ml.webp" },
         { name: "Laverne Sense Tassel Edition", price: 850, img: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.webp", img2: "images/site-assets/new-arrivals/Sense_perfume_and_powder_only_-_سينس_عطر_سينس_و_الباودر_-_3_Ml_perfume_only-removebg-preview.webp" },
-        { name: "Assaf Arrogate Lipstick Perfume", price: 1200, img: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.webp", img2: "images/site-assets/new-arrivals/lip_stick_arrogate_-removebg-preview.webp" },
+        { name: "Assaf Arrogate Lipstick Perfume", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-lip-stick-arrogate.webp", img2: "images/site-assets/new-arrivals-2026/assaf-lip-stick-arrogate.webp" },
         { name: "Pink Queen Eau de Parfum", price: 850, img: "images/site-assets/new-arrivals/pink queen-removebg-preview.webp", img2: "images/site-assets/new-arrivals/pink queen-removebg-preview.webp" },
         { name: "Sherlock by Assaf", price: 1200, img: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.webp", img2: "images/site-assets/new-arrivals/sherlock_assaf-removebg-preview.webp" }
       ];
+
+      /* The 2026 Assaf drop. These are the only products the New Arrivals
+         section on the homepage renders, so the section stays a single
+         focused collection rather than a mixed bag. They are also part of
+         the Assaf brand page (via js/catalog.js) and of search. */
+      const assafNewArrivals2026 = [
+        { name: "Assaf Frankel Silver", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-frankel-silver.webp", img2: "images/site-assets/new-arrivals-2026/assaf-frankel-silver.webp" },
+        { name: "Assaf Frankel Aventus", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-frankel-aventus.webp", img2: "images/site-assets/new-arrivals-2026/assaf-frankel-aventus.webp" },
+        { name: "Assaf Frankel Imagination Intense", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-frankel-imagination-intense.webp", img2: "images/site-assets/new-arrivals-2026/assaf-frankel-imagination-intense.webp" },
+        { name: "Assaf Wild Colt", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-wild-colt.webp", img2: "images/site-assets/new-arrivals-2026/assaf-wild-colt.webp" },
+        { name: "Assaf Wild Colt Bakhur", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-wild-colt-bakhur.webp", img2: "images/site-assets/new-arrivals-2026/assaf-wild-colt-bakhur.webp" },
+        { name: "Assaf Arrogate Addict", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-arrogate-addict.webp", img2: "images/site-assets/new-arrivals-2026/assaf-arrogate-addict.webp" },
+        { name: "Assaf Arrogate Comete", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-arrogate-comete.webp", img2: "images/site-assets/new-arrivals-2026/assaf-arrogate-comete.webp" },
+        { name: "Assaf Gris Eris Luxury", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-gris-eris-luxury.webp", img2: "images/site-assets/new-arrivals-2026/assaf-gris-eris-luxury.webp" },
+        { name: "Assaf Miss Flora", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-miss-flora.webp", img2: "images/site-assets/new-arrivals-2026/assaf-miss-flora.webp" },
+        { name: "Assaf Miss Sakura", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-miss-sakura.webp", img2: "images/site-assets/new-arrivals-2026/assaf-miss-sakura.webp" },
+        { name: "Assaf Miss Arrogate", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-miss-arrogate.webp", img2: "images/site-assets/new-arrivals-2026/assaf-miss-arrogate.webp" },
+        { name: "Assaf Miss Arrogate Diva", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-miss-arrogate-diva.webp", img2: "images/site-assets/new-arrivals-2026/assaf-miss-arrogate-diva.webp" },
+        { name: "Assaf Angel 200ml", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-angel.webp", img2: "images/site-assets/new-arrivals-2026/assaf-angel.webp" },
+        { name: "Assaf Pink Lady 200ml", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp", img2: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp" },
+        { name: "Assaf Arrogate Pink", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-arrogate-pink-new.webp", img2: "images/site-assets/new-arrivals-2026/assaf-arrogate-pink-new.webp" },
+        { name: "Assaf Arrogate Lipstick Perfume", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-lip-stick-arrogate.webp", img2: "images/site-assets/new-arrivals-2026/assaf-lip-stick-arrogate.webp" }
+      ];
+
+      /* index.html's New Arrivals carousel reads this. Exported explicitly so it
+         does not depend on top-level `const` being visible across script tags. */
+      window.ovaNewArrivals = assafNewArrivals2026;
+
+      /* The four bottles above that already existed under these names now carry
+         the real Assaf shot and the 1400 price everywhere else on the site too. */
+      (function adoptAssaf2026IntoExistingLists() {
+        var updates = Object.create(null);
+        assafNewArrivals2026.forEach(function (p) { updates[p.name] = p; });
+        [bestSellerProducts, newArrivalProducts].forEach(function (list) {
+          list.forEach(function (p) {
+            var next = updates[p.name];
+            if (!next) return;
+            p.price = next.price;
+            p.img = next.img;
+            p.img2 = next.img2;
+          });
+        });
+      })();
 
       /* New Arrivals section was removed; its products now live inside Best Seller.
          Merge by name so the two shared entries (indexes 2 and 3) are not duplicated. */
@@ -161,6 +204,20 @@
       "Scandal Le Parfum"
     ]);
     const unisexNames = new Set([
+      /* 2026 Assaf drop - listed as unisex so they surface under men, women
+         and unisex alike (see the sectionKey filter further down). */
+      "Assaf Frankel Silver",
+      "Assaf Frankel Aventus",
+      "Assaf Frankel Imagination Intense",
+      "Assaf Wild Colt",
+      "Assaf Wild Colt Bakhur",
+      "Assaf Arrogate Addict",
+      "Assaf Arrogate Comete",
+      "Assaf Gris Eris Luxury",
+      "Assaf Miss Flora",
+      "Assaf Miss Sakura",
+      "Assaf Miss Arrogate",
+      "Assaf Miss Arrogate Diva",
       "Khamrah Waha",
       "Ibraq Tobacco Collection",
       "Diamond Emerald Soul 200ml",
@@ -375,8 +432,8 @@
 
     const standaloneSectionProducts = [
       { name: "Wild Cold 200ml", price: 1050, img: "images/site-assets/wild-cold.webp", img2: "images/site-assets/wild-colt-alt-2.webp" },
-      { name: "Assaf Angel 200ml", price: 1200, img: "images/site-assets/assaf-angel-main.webp", img2: "images/site-assets/assaf-angel-alt.webp" },
-      { name: "Assaf Pink Lady 200ml", price: 1200, img: "images/site-assets/assaf-pink-lady-main.jpg", img2: "images/site-assets/assaf-pink-lady-alt.webp" },
+      { name: "Assaf Angel 200ml", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-angel.webp", img2: "images/site-assets/new-arrivals-2026/assaf-angel.webp" },
+      { name: "Assaf Pink Lady 200ml", price: 1400, img: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp", img2: "images/site-assets/new-arrivals-2026/assaf-pink-lady-for-her.webp" },
       { name: "Diamond Pink Score 200ml", price: 1050, img: "images/site-assets/diamond-pink-score-main.webp", img2: "images/site-assets/diamond-pink-score-alt.webp" },
       { name: "One & Only 200ml", price: 850, img: "images/site-assets/one-and-only-main-2.webp", img2: "images/site-assets/one-and-only-notes-2.webp" },
       { name: "La Luna 200ml", price: 850, img: "images/site-assets/la-luna-main-2.webp", img2: "images/site-assets/la-luna-notes-2.webp" },
@@ -385,7 +442,7 @@
       { name: "Arabian Tobacco", price: 850, img: "images/site-assets/arabian-tobacco-alt-2.webp", img2: "images/site-assets/arabian-tobacco-alt-2.webp" },
       { name: "Khamrah 40ml", price: 300, img: "images/site-assets/khamrah-40ml-main-2.webp", img2: "images/site-assets/khamrah-40ml-notes-2.webp" },
       { name: "Acqua di Giò Eau de Toilette", price: 850, img: "images/site-assets/acqua-di-gio-homme-eau-de-toilette-50ml.webp", img2: "images/site-assets/acqua-di-gio-homme-eau-de-toilette-50ml.webp" },
-      { name: "Lattafa His Confession", price: 950, img: "images/site-assets/unleash-the-mystery-lattafa-his-confession.jpg", img2: "images/site-assets/his-confession-lattafa.webp" },
+      { name: "Lattafa His Confession", price: 950, img: "images/site-assets/unleash-the-mystery-lattafa-his-confession.webp", img2: "images/site-assets/his-confession-lattafa.webp" },
       { name: "Hugo Boss Bottled Elixir", price: 850, img: "images/site-assets/hugo-boss-bottled-elixir-white.webp", img2: "images/site-assets/hugo-boss-bottled-elixir-notes.webp" },
       { name: "Versace Eros Eau de Toilette", price: 850, img: "images/site-assets/versace-eros-eau-de-toilette-200ml.webp", img2: "images/site-assets/versace-eros-for-men-3-4-oz-eau-de-toilette-spray.webp" },
       { name: "Versace Eros Flame", price: 850, img: "images/site-assets/versace-versace-eros-flame-for-men-eau-de-parfume.webp", img2: "images/site-assets/versace-eros-flame.webp" },
@@ -394,8 +451,8 @@
       { name: "Baccarat Rouge 540 40ml", price: 850, img: "images/site-assets/baccarat-rouge-540-extrait-de-parfum-spray-70ml.webp", img2: "images/site-assets/baccarat-rouge-master-box-2.webp" },
       { name: "Amira Al Arab", price: 850, img: "images/site-assets/amirat-al-arab.webp", img2: "images/site-assets/amirat-al-arab.webp" },
       { name: "Laverne Sense", price: 850, img: "images/site-assets/georgina-sense-perfume-by-laverne-75ml-perfume-powder-pack-perfume-bag-ebay.webp", img2: "images/site-assets/sense-laverne.webp" },
-      { name: "Carolina Herrera 212 VIP Rose", price: 850, img: "images/site-assets/carolina-herrera-212-vip-rose-eau-de-parfum-80ml.jpg", img2: "images/site-assets/basically-new-carolina-herrera-212-vip-rose-edp.webp" },
-      { name: "Hugo Boss The Scent Elixir For Her", price: 850, img: "images/site-assets/hugo-boss-boss-the-scent-for-her-elixir-parfum-intense-50ml.webp", img2: "images/site-assets/boss-the-scent-elixir-for-her-hugo-boss-edp.jpg" },
+      { name: "Carolina Herrera 212 VIP Rose", price: 850, img: "images/site-assets/carolina-herrera-212-vip-rose-eau-de-parfum-80ml.webp", img2: "images/site-assets/basically-new-carolina-herrera-212-vip-rose-edp.webp" },
+      { name: "Hugo Boss The Scent Elixir For Her", price: 850, img: "images/site-assets/hugo-boss-boss-the-scent-for-her-elixir-parfum-intense-50ml.webp", img2: "images/site-assets/boss-the-scent-elixir-for-her-hugo-boss-edp.webp" },
       { name: "Valentino Donna Born in Roma", price: 850, img: "images/site-assets/valentino-2.webp", img2: "images/site-assets/valentino-donna-born-in-roma.webp" },
       { name: "Elie Saab Girl of Now", price: 850, img: "images/site-assets/girl-of-now-by-elie-saab.webp", img2: "images/site-assets/girl-of-now-notes.webp" },
       { name: "Paco Rabanne Olympea", price: 850, img: "images/site-assets/paco-rabanne-olympea-solar-eau-de-parfum-intense-spray.webp", img2: "images/site-assets/paco-rabanne-olympea-solar-eau-de-parfum-intense-spray.webp" },
@@ -548,6 +605,7 @@
     decorateProducts(bestSellerProducts, "best");
     decorateProducts(extraBestSellerProducts, "best");
     decorateProducts(newArrivalProducts, "new");
+    decorateProducts(assafNewArrivals2026, "new");
     decorateProducts(menPerfumes, "men");
     decorateProducts(extraMenPerfumes, "men");
     decorateProducts(moreMenPerfumes, "men");
@@ -1733,6 +1791,7 @@
         ...bestSellerProducts,
         ...extraBestSellerProducts,
         ...newArrivalProducts,
+        ...assafNewArrivals2026,
         ...menPerfumes,
       ...extraMenPerfumes,
       ...moreMenPerfumes,
@@ -1746,6 +1805,7 @@
         bestSellerProducts,
         extraBestSellerProducts,
         newArrivalProducts,
+        assafNewArrivals2026,
         menPerfumes,
         extraMenPerfumes,
         moreMenPerfumes,
@@ -3231,6 +3291,14 @@
       setPromoBannerCopyState(false);
       setFloatingCouponButtonState(false);
       setText("brandsKicker", currentLang === "ar" ? "تسوق حسب" : "Shop By");
+      setText("naKicker", currentLang === "ar" ? "اكتشف" : "Discover Our");
+      setText(
+        "naSubtitle",
+        currentLang === "ar"
+          ? "أحدث إصدارات عساف في تشكيلتنا، لمحبي العطور المميزة والحضور المختلف."
+          : "The latest Assaf additions to our collection, crafted for those who appreciate the extraordinary."
+      );
+      setText("naSwipeHint", currentLang === "ar" ? "اسحب للاستكشاف" : "Swipe to explore");
       renderBrandRails();
       const modalOfferText = document.getElementById("modalOfferText");
       const modalAddBtn = document.getElementById("modalAddBtn");
@@ -3530,6 +3598,7 @@
         ...bestSellerProducts,
         ...extraBestSellerProducts,
         ...newArrivalProducts,
+        ...assafNewArrivals2026,
         ...menPerfumes,
         ...extraMenPerfumes,
         ...moreMenPerfumes,

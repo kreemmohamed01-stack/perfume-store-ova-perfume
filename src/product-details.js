@@ -988,5 +988,245 @@ window.sharedProductDetailMap = {
       <p><strong>الفوحان:</strong> من متوسط إلى عالي.</p>
       <p><strong>الاستخدام:</strong> ليل - شتاء - خروجات.</p>
     `
+  },
+  "Assaf Frankel Silver": {
+    type: "Aromatic / Fresh / Woody",
+    longevity: "7-9h",
+    sillage: "Moderate to high",
+    rating: "4.7",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر رجالي أنيق ونضيف، فريش من الأول بلمسة أروماتيك وقاعدة خشبية هادية بتديه رقي وثقة.</p>
+      <p><strong>النوع:</strong> رجالي</p>
+      <p><strong>النوتس:</strong><br>برغموت - لافندر - أروماتيك - مسك أبيض - أخشاب</p>
+      <p><strong>الثبات:</strong> من 7 إلى 9 ساعات.</p>
+      <p><strong>الفوحان:</strong> من متوسط إلى عالي.</p>
+      <p><strong>الاستخدام:</strong> شغل - يومي - مناسبات نهارية.</p>
+      <p><strong>اللي يميزه:</strong><br>نضيف ورسمي جدًا وبيمشي مع أي وقت.</p>
+    `
+  },
+  "Assaf Frankel Aventus": {
+    type: "Fruity / Smoky / Woody",
+    longevity: "8-10h",
+    sillage: "Strong",
+    rating: "4.9",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر رجالي قوي وجذاب بمزيج أناناس فاكهي مع لمسة سموكي وقاعدة خشبية، من أكتر الريح اللي بتلفت الانتباه.</p>
+      <p><strong>النوع:</strong> رجالي</p>
+      <p><strong>النوتس:</strong><br>أناناس - برغموت - سموك بيرش - مسك - أخشاب</p>
+      <p><strong>الثبات:</strong> من 8 إلى 10 ساعات.</p>
+      <p><strong>الفوحان:</strong> قوي.</p>
+      <p><strong>الاستخدام:</strong> خروجات - شغل - مناسبات.</p>
+      <p><strong>اللي يميزه:</strong><br>حضور طاغي وريحة بتتعرف من بعيد.</p>
+    `
+  },
+  "Assaf Frankel Imagination Intense": {
+    type: "Fresh / Citrus / Amber",
+    longevity: "8-10h",
+    sillage: "Strong",
+    rating: "4.8",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>نسخة إنتنس أقوى وأثبت، بتفتح فريش سيتروس وبتنزل على قاعدة عنبر دافئة تديك إحساس فخم.</p>
+      <p><strong>النوع:</strong> رجالي / يونيسكس</p>
+      <p><strong>النوتس:</strong><br>سيتروس - زنجبيل - عنبر - أخشاب دافئة</p>
+      <p><strong>الثبات:</strong> من 8 إلى 10 ساعات.</p>
+      <p><strong>الفوحان:</strong> قوي.</p>
+      <p><strong>الاستخدام:</strong> سهرات - شتاء - خروجات.</p>
+      <p><strong>اللي يميزه:</strong><br>فريش من فوق ودافي من تحت، تركيبة متوازنة جدًا.</p>
+    `
+  },
+  "Assaf Wild Colt": {
+    type: "Fresh / Green / Aquatic",
+    longevity: "6-8h",
+    sillage: "Moderate",
+    rating: "4.6",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر منعش وخفيف بطابع أخضر مائي، مريح جدًا في الجو الحر وبيدي إحساس نضافة وحيوية.</p>
+      <p><strong>النوع:</strong> يونيسكس</p>
+      <p><strong>النوتس:</strong><br>نعناع - أخضر - نوتة مائية - مسك</p>
+      <p><strong>الثبات:</strong> من 6 إلى 8 ساعات.</p>
+      <p><strong>الفوحان:</strong> متوسط.</p>
+      <p><strong>الاستخدام:</strong> صيف - يومي - شغل.</p>
+      <p><strong>اللي يميزه:</strong><br>منعش وخفيف على النفس ومناسب لكل يوم.</p>
+    `
+  },
+  "Assaf Wild Colt Bakhur": {
+    type: "Oud / Bakhour / Spicy",
+    longevity: "9-12h",
+    sillage: "Very strong",
+    rating: "4.9",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>نسخة البخور من وايلد كولت، عطر شرقي تقيل بعود وبخور وتوابل دافية، فخم جدًا وثابت.</p>
+      <p><strong>النوع:</strong> يونيسكس</p>
+      <p><strong>النوتس:</strong><br>بخور - عود - توابل - عنبر - مسك</p>
+      <p><strong>الثبات:</strong> من 9 إلى 12 ساعة.</p>
+      <p><strong>الفوحان:</strong> قوي جدًا.</p>
+      <p><strong>الاستخدام:</strong> شتاء - مناسبات - سهرات.</p>
+      <p><strong>اللي يميزه:</strong><br>ريحة بخور أصيلة وفخامة عربية واضحة.</p>
+    `
+  },
+  "Assaf Arrogate Addict": {
+    type: "Sweet / Amber / Woody",
+    longevity: "8-10h",
+    sillage: "Strong",
+    rating: "4.8",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر سويت دافي وإدماني بجد، بيجمع بين الحلاوة والعنبر مع قاعدة خشبية بتخليه جذاب ومميز.</p>
+      <p><strong>النوع:</strong> يونيسكس</p>
+      <p><strong>النوتس:</strong><br>فواكه حمراء - كراميل - عنبر - أخشاب - فانيليا</p>
+      <p><strong>الثبات:</strong> من 8 إلى 10 ساعات.</p>
+      <p><strong>الفوحان:</strong> قوي.</p>
+      <p><strong>الاستخدام:</strong> سهرات - ديت - شتاء.</p>
+      <p><strong>اللي يميزه:</strong><br>حلو ومغري وبيفضل معاك طول اليوم.</p>
+    `
+  },
+  "Assaf Arrogate Comete": {
+    type: "Green / Fresh / Woody",
+    longevity: "7-9h",
+    sillage: "Moderate to high",
+    rating: "4.7",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر أخضر منعش بلمسة خشبية راقية، هادي وأنيق ومناسب جدًا للنهار والشغل.</p>
+      <p><strong>النوع:</strong> يونيسكس</p>
+      <p><strong>النوتس:</strong><br>أخضر - برغموت - ياسمين - أخشاب - مسك</p>
+      <p><strong>الثبات:</strong> من 7 إلى 9 ساعات.</p>
+      <p><strong>الفوحان:</strong> من متوسط إلى عالي.</p>
+      <p><strong>الاستخدام:</strong> يومي - شغل - ربيع.</p>
+      <p><strong>اللي يميزه:</strong><br>أنيق وهادي ومن غير أي تقل.</p>
+    `
+  },
+  "Assaf Gris Eris Luxury": {
+    type: "Amber / Oud / Luxury",
+    longevity: "9-12h",
+    sillage: "Very strong",
+    rating: "4.9",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر فخم بتركيبة عنبر وعود غنية، إحساسه لوكشري بجد وحضوره واضح من أول رشة.</p>
+      <p><strong>النوع:</strong> يونيسكس</p>
+      <p><strong>النوتس:</strong><br>زعفران - عنبر - عود - جلد - فانيليا</p>
+      <p><strong>الثبات:</strong> من 9 إلى 12 ساعة.</p>
+      <p><strong>الفوحان:</strong> قوي جدًا.</p>
+      <p><strong>الاستخدام:</strong> مناسبات - سهرات - شتاء.</p>
+      <p><strong>اللي يميزه:</strong><br>أفخم عطر في التشكيلة وثباته ممتاز.</p>
+    `
+  },
+  "Assaf Miss Flora": {
+    type: "Floral / Fruity / Sweet",
+    longevity: "6-8h",
+    sillage: "Moderate",
+    rating: "4.7",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر حريمي زهري فاكهي ناعم، مرح وأنثوي وبيدي إحساس خفة ورقة.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>فواكه - ورد - فل - بيوني - مسك ناعم</p>
+      <p><strong>الثبات:</strong> من 6 إلى 8 ساعات.</p>
+      <p><strong>الفوحان:</strong> متوسط.</p>
+      <p><strong>الاستخدام:</strong> يومي - خروجات - ربيع.</p>
+      <p><strong>اللي يميزه:</strong><br>ناعم وأنثوي وبيليق على كل المناسبات النهارية.</p>
+    `
+  },
+  "Assaf Miss Sakura": {
+    type: "Floral / Powdery / Soft",
+    longevity: "6-8h",
+    sillage: "Moderate",
+    rating: "4.7",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر مستوحى من زهر الساكورا، ناعم وبودري وبيدي إحساس نظافة ودلع.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>زهر الكرز - بيوني - بودرة - مسك أبيض</p>
+      <p><strong>الثبات:</strong> من 6 إلى 8 ساعات.</p>
+      <p><strong>الفوحان:</strong> متوسط.</p>
+      <p><strong>الاستخدام:</strong> يومي - شغل - ربيع.</p>
+      <p><strong>اللي يميزه:</strong><br>ريحة ناعمة جدًا ومريحة وبتفضل ملتصقة باللبس.</p>
+    `
+  },
+  "Assaf Miss Arrogate": {
+    type: "Sweet / Fruity / Vanilla",
+    longevity: "7-9h",
+    sillage: "Moderate to high",
+    rating: "4.8",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر حريمي حلو وجذاب بمزيج فواكه وفانيليا، دافي ومناسب للخروجات والسهرات.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>فواكه حمراء - فانيليا - كراميل - مسك</p>
+      <p><strong>الثبات:</strong> من 7 إلى 9 ساعات.</p>
+      <p><strong>الفوحان:</strong> من متوسط إلى عالي.</p>
+      <p><strong>الاستخدام:</strong> خروجات - سهرات - شتاء.</p>
+      <p><strong>اللي يميزه:</strong><br>سويت ومغري وبيلفت الانتباه.</p>
+    `
+  },
+  "Assaf Miss Arrogate Diva": {
+    type: "Sweet / Amber / Intense",
+    longevity: "8-10h",
+    sillage: "Strong",
+    rating: "4.9",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>النسخة الأقوى من ميس أروجيت، أحلى وأدفى وأثبت، لستات بتحب الحضور القوي.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>فواكه - عنبر - فانيليا - أخشاب دافئة</p>
+      <p><strong>الثبات:</strong> من 8 إلى 10 ساعات.</p>
+      <p><strong>الفوحان:</strong> قوي.</p>
+      <p><strong>الاستخدام:</strong> سهرات - ديت - مناسبات.</p>
+      <p><strong>اللي يميزه:</strong><br>فخم وجذاب وثباته عالي جدًا.</p>
+    `
+  },
+  "Assaf Angel 200ml": {
+    type: "Sweet / Gourmand / Patchouli",
+    longevity: "8-10h",
+    sillage: "Strong",
+    rating: "4.8",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر حريمي حلو وغني بلمسة باتشولي مميزة، دافي وجذاب وبيفضل معاك ساعات طويلة.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>كراميل - شوكولاتة - باتشولي - فانيليا</p>
+      <p><strong>الثبات:</strong> من 8 إلى 10 ساعات.</p>
+      <p><strong>الفوحان:</strong> قوي.</p>
+      <p><strong>الاستخدام:</strong> شتاء - سهرات - مناسبات.</p>
+      <p><strong>اللي يميزه:</strong><br>ريحة دافية وحلوة وحضورها واضح.</p>
+    `
+  },
+  "Assaf Pink Lady 200ml": {
+    type: "Floral / Fruity / Sweet",
+    longevity: "7-9h",
+    sillage: "Moderate to high",
+    rating: "4.8",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر حريمي وردي مرح، فواكه وزهور مع لمسة حلوة بتديه أنوثة عالية.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>فواكه حمراء - ورد - بيوني - فانيليا - مسك</p>
+      <p><strong>الثبات:</strong> من 7 إلى 9 ساعات.</p>
+      <p><strong>الفوحان:</strong> من متوسط إلى عالي.</p>
+      <p><strong>الاستخدام:</strong> يومي - خروجات - ربيع.</p>
+      <p><strong>اللي يميزه:</strong><br>أنثوي جدًا ومناسب لكل الأوقات.</p>
+    `
+  },
+  "Assaf Arrogate Pink": {
+    type: "Fruity / Sweet / Musk",
+    longevity: "7-9h",
+    sillage: "Moderate to high",
+    rating: "4.8",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر حريمي فاكهي حلو بلمسة مسك ناعمة، جذاب ومرح ومناسب للخروجات.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>فواكه - توت - فانيليا - مسك</p>
+      <p><strong>الثبات:</strong> من 7 إلى 9 ساعات.</p>
+      <p><strong>الفوحان:</strong> من متوسط إلى عالي.</p>
+      <p><strong>الاستخدام:</strong> خروجات - يومي - ربيع.</p>
+      <p><strong>اللي يميزه:</strong><br>حلو وخفيف وبيدي إحساس دلع.</p>
+    `
+  },
+  "Assaf Arrogate Lipstick Perfume": {
+    type: "Floral / Sweet / Powdery",
+    longevity: "6-8h",
+    sillage: "Moderate",
+    rating: "4.7",
+    detailsHtml: `
+      <p><strong>الوصف:</strong><br>عطر بتصميم روج مميز، ريحة زهرية حلوة بودري ناعمة وسهل تحمله معاك في الشنطة.</p>
+      <p><strong>النوع:</strong> حريمي</p>
+      <p><strong>النوتس:</strong><br>ورد - فانيليا - بودرة - مسك أبيض</p>
+      <p><strong>الثبات:</strong> من 6 إلى 8 ساعات.</p>
+      <p><strong>الفوحان:</strong> متوسط.</p>
+      <p><strong>الاستخدام:</strong> يومي - شغل - خروجات.</p>
+      <p><strong>اللي يميزه:</strong><br>شكله أنيق وريحته ناعمة ومناسبة لكل يوم.</p>
+    `
   }
 };
