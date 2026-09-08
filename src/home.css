@@ -9462,11 +9462,15 @@
         top center / cover no-repeat !important;
     }
 
-    /* --- 2. Cards stop being boxes and start floating --- */
+    /* --- 2. Cards stop being boxes and start floating ---
+       Solid white rather than transparent: several ancestors still carry warm
+       tints, and a transparent card lets those through as a visible panel
+       around the bottle. */
     .product-card,
     .br-card,
     .na-card {
-      background: transparent !important;
+      background: #fff !important;
+      background-image: none !important;
       border: none !important;
       box-shadow: none !important;
       backdrop-filter: none !important;
@@ -9499,27 +9503,38 @@
       border: none !important;
       border-radius: 0 !important;
       box-shadow: none !important;
-      filter: drop-shadow(0 26px 30px rgba(38, 24, 14, 0.22))
-              drop-shadow(0 6px 12px rgba(38, 24, 14, 0.10));
+      /* A tight shadow that hugs the bottle. The previous 30px blur spread so
+         far on a small rendered card that it filled the whole image box and
+         read as a grey square rather than a floating bottle. */
+      filter: drop-shadow(0 5px 5px rgba(38, 24, 14, 0.22)) !important;
       transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.55s ease;
     }
 
-    /* Any wrapper that framed the bottle goes flat too. */
+    /* Any wrapper that framed the bottle goes flat too. Painted solid white
+       rather than transparent: transparent would let the card's own gradient
+       (and the brand rail's) show through as the very tint we are removing. */
     .product-card .product-img-wrap,
     .product-card .product-image,
     .product-card .product-media,
+    .br-card,
     .br-card .br-card-media,
     .br-card-thumb {
-      background: transparent !important;
+      background: #fff !important;
+      background-image: none !important;
       border: none !important;
       box-shadow: none !important;
+    }
+
+    /* The gilded hairline across the top of every brand card. */
+    .br-card::before,
+    .br-card::after {
+      display: none !important;
     }
 
     .product-card:hover img,
     .br-card:hover img,
     .na-card.is-active img {
-      filter: drop-shadow(0 38px 42px rgba(38, 24, 14, 0.26))
-              drop-shadow(0 0 26px rgba(232, 201, 138, 0.34));
+      filter: drop-shadow(0 9px 8px rgba(38, 24, 14, 0.26)) !important;
     }
 
     /* --- 3. Strip the clutter: keep name, price and the two buttons --- */
