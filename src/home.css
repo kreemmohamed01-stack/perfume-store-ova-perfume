@@ -7120,6 +7120,53 @@
       text-decoration: none;
     }
 
+    .kreemaly-credit {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: rgba(243, 233, 216, 0.55);
+    }
+
+    .kreemaly-credit a {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      color: inherit;
+      transition: filter 0.28s ease;
+    }
+
+    .kreemaly-credit .kreemaly-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.8px;
+      background: linear-gradient(90deg, #e8c98a, #fff3d6, #e8c98a);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: kreemalyShine 3.2s linear infinite;
+    }
+
+    .kreemaly-credit a:hover .kreemaly-name {
+      filter: brightness(1.25) drop-shadow(0 0 6px rgba(232, 201, 138, 0.6));
+    }
+
+    @keyframes kreemalyShine {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .kreemaly-credit-menu {
+      margin: 6px 0 0;
+      padding: 12px 16px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      color: rgba(0, 0, 0, 0.45);
+      text-align: center;
+    }
+
     footer .footer-shimmer-hover {
       transition: text-shadow 0.3s ease, transform 0.3s ease;
     }
@@ -7641,6 +7688,15 @@
         font-size: 11px;
         margin-top: 16px;
         color: rgba(243, 233, 216, 0.5);
+      }
+
+      .kreemaly-credit {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+
+      .kreemaly-credit .kreemaly-name {
+        font-size: 14px;
       }
 
       .brand-card img {
