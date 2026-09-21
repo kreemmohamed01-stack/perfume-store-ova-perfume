@@ -9780,3 +9780,1138 @@
     footer {
       background: initial;
     }
+
+    /* ==========================================================================
+       OVA LUXURY REDESIGN LAYER
+       Appended so every rule above keeps working; these refine the visual
+       language only. Tokens first, then the shared product card, then the
+       sections reworked to match the reference art direction.
+       ========================================================================== */
+
+    :root {
+      --ova-ivory: #f8f5ef;
+      --ova-cream: #f2ece1;
+      --ova-warm-white: #fcfbf8;
+      --ova-beige: #e8ded0;
+      --ova-champagne: #c9a66b;
+      --ova-soft-gold: #d5b77a;
+      --ova-charcoal: #171513;
+      --ova-black: #0d0c0b;
+      --ova-gray: #77716a;
+      --ova-line: rgba(23, 21, 19, 0.12);
+      --ova-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+      --ova-shadow-lift: 0 28px 70px rgba(23, 21, 19, 0.12);
+      --ova-backdrop: url("../images/site-assets/backdrops/product-backdrop.webp");
+      --ova-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* --------------------------------------------------------------------
+       PRODUCT CARD - the single reference card used across the whole site.
+       Stone-podium backdrop behind the bottle, ivory body, charcoal CTA.
+       -------------------------------------------------------------------- */
+
+    .product-grid .product-card,
+    .best-seller-slider .product-card,
+    #quizResults .product-card {
+      text-align: left;
+      padding: 0;
+      border-radius: 24px;
+      background: var(--ova-warm-white);
+      border: 1px solid var(--ova-line);
+      box-shadow: var(--ova-shadow);
+      backdrop-filter: none;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.45s var(--ova-ease), box-shadow 0.45s var(--ova-ease),
+        border-color 0.35s ease;
+    }
+
+    /* the decorative glows from the old card would fight the photo backdrop */
+    .product-grid .product-card::before,
+    .product-grid .product-card::after,
+    .best-seller-slider .product-card::before,
+    .best-seller-slider .product-card::after {
+      content: none !important;
+    }
+
+    .product-grid .product-card:hover,
+    .best-seller-slider .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--ova-shadow-lift);
+      border-color: rgba(201, 166, 107, 0.45);
+    }
+
+    /* IMAGE AREA - the perfume sits on the stone backdrop, never cropped. */
+    .product-grid .product-card > img,
+    .best-seller-slider .product-card > img,
+    #quizResults .product-card > img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      display: block;
+      margin: 0;
+      padding: 30px 26px;
+      border-radius: 0;
+      /* !important is required: an earlier rule flattens every card image
+         with `background: transparent !important` to kill the old white
+         plate. The luxury card wants the stone backdrop instead. */
+      background-image: var(--ova-backdrop) !important;
+      background-size: cover !important;
+      background-position: center 62% !important;
+      background-repeat: no-repeat !important;
+      background-color: var(--ova-cream) !important;
+      height: auto !important;
+      max-width: none !important;
+      filter: drop-shadow(0 14px 18px rgba(38, 24, 14, 0.26)) !important;
+      transition: transform 0.6s var(--ova-ease);
+    }
+
+    .product-grid .product-card:hover > img,
+    .best-seller-slider .product-card:hover > img {
+      transform: scale(1.04);
+    }
+
+    /* BODY - editorial serif name, price row, then the actions. */
+    .product-grid .product-card h4,
+    .best-seller-slider .product-card h4,
+    #quizResults .product-card h4 {
+      font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--ova-charcoal);
+      margin: 0;
+      padding: 16px 16px 0;
+      min-height: 0;
+      text-align: left;
+      /* never clip a product name - wrap it instead */
+      overflow: visible;
+      white-space: normal;
+      display: block;
+    }
+
+    .product-grid .product-card .product-type,
+    .best-seller-slider .product-card .product-type {
+      order: 3;
+      margin: 0;
+      padding: 4px 16px 0;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ova-gray);
+      background: none;
+      border: 0;
+      border-radius: 0;
+      text-align: left;
+      width: auto;
+      display: block;
+    }
+
+    .product-grid .product-card .product-price,
+    .best-seller-slider .product-card .product-price,
+    #quizResults .product-card .product-price {
+      order: 4;
+      margin: 0;
+      padding: 10px 16px 0;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ova-charcoal);
+      text-align: left;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .product-grid .product-card .product-price .old-price,
+    .product-grid .product-card .product-price del,
+    .best-seller-slider .product-card .product-price del {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ova-gray);
+      text-decoration: line-through;
+    }
+
+    /* ACTIONS - charcoal primary, outlined secondary. */
+    .product-grid .product-card .product-card-actions,
+    .best-seller-slider .product-card .product-card-actions,
+    #quizResults .product-card .product-card-actions {
+      order: 5;
+      margin: 0;
+      padding: 14px 16px 16px;
+      margin-top: auto;
+      display: grid;
+      /* overrides an earlier `grid-template-columns: 1fr !important` that
+         stacked the two CTAs; the reference card sets them side by side. */
+      grid-template-columns: 1fr 1fr !important;
+      gap: 8px !important;
+    }
+
+    .product-grid .product-card .product-add-btn,
+    .best-seller-slider .product-card .product-add-btn,
+    #quizResults .product-card .product-add-btn {
+      background-color: var(--ova-charcoal) !important;
+      background-image: none !important;
+      color: var(--ova-ivory) !important;
+      border: 1px solid var(--ova-charcoal) !important;
+      border-radius: 999px !important;
+      padding: 11px 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: none;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s var(--ova-ease);
+    }
+
+    .product-grid .product-card .product-add-btn:hover,
+    .best-seller-slider .product-card .product-add-btn:hover {
+      background: var(--ova-black);
+      transform: translateY(-1px);
+    }
+
+    .product-grid .product-card .product-buy-btn,
+    .best-seller-slider .product-card .product-buy-btn,
+    #quizResults .product-card .product-buy-btn {
+      /* The secondary CTA is outlined in the reference. An earlier rule
+         paints every .product-buy-btn with a dark gradient using
+         !important, so each property has to be reclaimed the same way. */
+      background-color: transparent !important;
+      background-image: none !important;
+      color: var(--ova-charcoal) !important;
+      border: 1px solid var(--ova-line) !important;
+      border-radius: 999px !important;
+      padding: 11px 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: none !important;
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s var(--ova-ease);
+    }
+
+    .product-grid .product-card .product-buy-btn:hover,
+    .best-seller-slider .product-card .product-buy-btn:hover {
+      border-color: var(--ova-champagne) !important;
+      background-color: var(--ova-cream) !important;
+      background-image: none !important;
+      transform: translateY(-1px);
+    }
+
+    /* the repeated offer line under every card was visual noise at grid scale */
+    .product-grid .product-card .product-action-note,
+    .best-seller-slider .product-card .product-action-note {
+      display: none;
+    }
+
+    /* BADGES - small pill, top corners, matching the reference. */
+    .product-grid .product-card .stock-badge,
+    .best-seller-slider .product-card .stock-badge,
+    #quizResults .product-card .stock-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: auto;
+      z-index: 3;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(252, 251, 248, 0.92);
+      color: var(--ova-charcoal);
+      border: 1px solid var(--ova-line);
+      box-shadow: none;
+      backdrop-filter: blur(6px);
+    }
+
+    .product-grid .product-card .stock-badge.out-stock {
+      background: rgba(23, 21, 19, 0.88);
+      color: var(--ova-ivory);
+      border-color: transparent;
+    }
+
+    .product-grid .product-card .product-highlight-badge,
+    .best-seller-slider .product-card .product-highlight-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      left: auto;
+      z-index: 3;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      background: var(--ova-champagne);
+      color: #fff;
+      border: 0;
+      box-shadow: none;
+      animation: none;
+    }
+
+    /* RTL keeps the same card, mirrored. */
+    html[dir="rtl"] .product-grid .product-card h4,
+    html[dir="rtl"] .product-grid .product-card .product-price,
+    html[dir="rtl"] .product-grid .product-card .product-type {
+      text-align: right;
+    }
+
+    html[dir="rtl"] .product-grid .product-card .stock-badge {
+      left: auto;
+      right: 12px;
+    }
+
+    html[dir="rtl"] .product-grid .product-card .product-highlight-badge {
+      right: auto;
+      left: 12px;
+    }
+
+    /* Mobile: two columns stay comfortable, nothing overlaps or clips. */
+    @media (max-width: 700px) {
+      .product-grid .product-card {
+        border-radius: 20px;
+      }
+
+      .product-grid .product-card > img {
+        padding: 18px 14px;
+      }
+
+      .product-grid .product-card h4 {
+        font-size: 14px;
+        padding: 12px 12px 0;
+        min-height: 0;
+      }
+
+      .product-grid .product-card .product-type {
+        font-size: 9.5px;
+        padding: 3px 12px 0;
+      }
+
+      .product-grid .product-card .product-price {
+        font-size: 15.5px;
+        padding: 8px 12px 0;
+        gap: 6px;
+      }
+
+      .product-grid .product-card .product-price del,
+      .product-grid .product-card .product-price .old-price {
+        font-size: 12px;
+      }
+
+      .product-grid .product-card .product-card-actions {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+        padding: 12px;
+      }
+
+      .product-grid .product-card .product-add-btn,
+      .product-grid .product-card .product-buy-btn {
+        padding: 10px 8px;
+        font-size: 9.5px;
+        letter-spacing: 0.1em;
+      }
+    }
+
+    /* --------------------------------------------------------------------
+       NEW ARRIVALS + BEST SELLERS
+       Both sections lost their photographic backdrops: the stone backdrop
+       now lives inside each product card, so the section itself is a plain
+       ivory canvas with an editorial header above a normal grid.
+       -------------------------------------------------------------------- */
+
+    .new-arrivals,
+    .best-seller-v2 {
+      background: var(--ova-ivory) !important;
+      overflow: visible;
+      padding: 68px 0 64px;
+      margin: 0;
+    }
+
+    /* the old stage/podium/carousel furniture is gone from the markup, but
+       kill any stragglers so nothing reserves empty space */
+    .new-arrivals .na-stage,
+    .new-arrivals .na-carousel-wrap,
+    .new-arrivals .na-podium,
+    .new-arrivals .na-pill,
+    .best-seller-v2 .bs-stage,
+    .best-seller-v2 .bs-more {
+      display: none !important;
+    }
+
+    .na-head {
+      max-width: 1240px;
+      margin: 0 auto 34px;
+      padding: 0 clamp(20px, 5vw, 44px);
+      text-align: left;
+    }
+
+    .na-eyebrow {
+      margin: 0 0 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ova-champagne);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .na-eyebrow::after {
+      content: "";
+      flex: 0 0 76px;
+      height: 1px;
+      background: var(--ova-champagne);
+      opacity: 0.55;
+    }
+
+    .na-heading {
+      margin: 0;
+      font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(38px, 7vw, 68px);
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      color: var(--ova-charcoal);
+    }
+
+    .na-heading span {
+      font-style: italic;
+      color: var(--ova-charcoal);
+    }
+
+    .na-sub {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ova-gray);
+      max-width: 52ch;
+    }
+
+    .na-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 44px);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+      /* it is a grid now, not a scroller */
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+
+    @media (max-width: 1100px) {
+      .na-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .na-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .new-arrivals,
+      .best-seller-v2 {
+        padding: 44px 0 40px;
+      }
+
+      .na-head {
+        margin-bottom: 24px;
+        padding: 0 16px;
+      }
+
+      .na-eyebrow::after {
+        flex-basis: 40px;
+      }
+
+      .na-sub {
+        font-size: 13.5px;
+      }
+
+      .na-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 12px;
+        padding: 0 16px;
+      }
+    }
+
+    html[dir="rtl"] .na-head {
+      text-align: right;
+    }
+
+    /* --------------------------------------------------------------------
+       BRAND RAILS - three cards across on mobile, the rest on scroll.
+       -------------------------------------------------------------------- */
+
+    @media (max-width: 700px) {
+      .br-rail {
+        --br-gap: 10px;
+      }
+
+      .br-card {
+        width: calc((100vw - 40px - (2 * var(--br-gap, 10px))) / 3);
+      }
+    }
+
+    /* --------------------------------------------------------------------
+       FIND YOUR SIGNATURE - the three collection doors.
+       -------------------------------------------------------------------- */
+
+    .collections-editorial {
+      background: var(--ova-cream);
+      padding: 72px 0 76px;
+    }
+
+    .ce-head {
+      max-width: 1240px;
+      margin: 0 auto 32px;
+      padding: 0 clamp(20px, 5vw, 44px);
+    }
+
+    .ce-eyebrow {
+      margin: 0 0 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ova-champagne);
+    }
+
+    .ce-head-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .ce-heading {
+      margin: 0;
+      font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      color: var(--ova-charcoal);
+    }
+
+    .ce-heading span {
+      font-style: italic;
+    }
+
+    .ce-sub {
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--ova-gray);
+      max-width: 34ch;
+    }
+
+    .ce-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 44px);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .ce-card {
+      position: relative;
+      display: block;
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      background: var(--ova-beige);
+      box-shadow: var(--ova-shadow);
+      isolation: isolate;
+    }
+
+    .ce-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ova-ease);
+    }
+
+    /* readable type over any photograph, without a heavy scrim */
+    .ce-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(13, 12, 11, 0) 38%,
+        rgba(13, 12, 11, 0.52) 78%,
+        rgba(13, 12, 11, 0.78) 100%
+      );
+      transition: opacity 0.45s ease;
+    }
+
+    .ce-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .ce-card-body {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 26px 24px 24px;
+      color: #fff;
+    }
+
+    .ce-card-title {
+      font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .ce-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .ce-card-cta em {
+      font-style: normal;
+    }
+
+    .ce-card-cta i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      font-style: normal;
+      transition: background 0.35s ease, color 0.35s ease, transform 0.35s var(--ova-ease);
+    }
+
+    .ce-card:hover .ce-card-cta i {
+      background: #fff;
+      color: var(--ova-charcoal);
+      transform: translateX(3px);
+    }
+
+    html[dir="rtl"] .ce-card:hover .ce-card-cta i {
+      transform: translateX(-3px) scaleX(-1);
+    }
+
+    html[dir="rtl"] .ce-card-cta i {
+      transform: scaleX(-1);
+    }
+
+    @media (max-width: 860px) {
+      .ce-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .ce-card {
+        aspect-ratio: 2 / 3;
+        border-radius: 16px;
+      }
+
+      .ce-card-body {
+        padding: 14px 12px 14px;
+        gap: 6px;
+      }
+
+      .ce-card-title {
+        font-size: 15px;
+        letter-spacing: 0.04em;
+      }
+
+      /* the pill arrow does not fit three-up on a phone */
+      .ce-card-cta {
+        font-size: 8.5px;
+        letter-spacing: 0.12em;
+        gap: 6px;
+      }
+
+      .ce-card-cta i {
+        display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .collections-editorial {
+        padding: 44px 0 46px;
+      }
+
+      .ce-head {
+        margin-bottom: 20px;
+        padding: 0 16px;
+      }
+
+      .ce-grid {
+        padding: 0 16px;
+      }
+
+      .ce-sub {
+        font-size: 13px;
+        max-width: none;
+      }
+    }
+
+    /* The "You saved" line is kept in the markup (product pages use it) but
+       hidden on grid cards: the reference card shows price + strikethrough. */
+    .product-grid .product-card .product-savings,
+    .best-seller-slider .product-card .product-savings,
+    .products-grid .product-card .product-savings {
+      display: none !important;
+    }
+
+    /* Round the image's top corners so the backdrop sits inside the card. */
+    .product-grid .product-card > img,
+    .best-seller-slider .product-card > img {
+      border-top-left-radius: 23px !important;
+      border-top-right-radius: 23px !important;
+    }
+
+    @media (max-width: 700px) {
+      .product-grid .product-card > img,
+      .best-seller-slider .product-card > img {
+        border-top-left-radius: 19px !important;
+        border-top-right-radius: 19px !important;
+      }
+    }
+
+
+    /* --------------------------------------------------------------------
+       BRAND RAIL CARD - restyled to match the reference card language
+       (stone backdrop, serif name, charcoal accent) while keeping the
+       compact rail proportions and all existing markup/JS untouched.
+       -------------------------------------------------------------------- */
+
+    .br-card {
+      background: var(--ova-warm-white) !important;
+      border: 1px solid var(--ova-line) !important;
+      box-shadow: var(--ova-shadow) !important;
+    }
+
+    .br-card::before {
+      /* the thin gilded top edge read as a cheap gradient against the new
+         warm-white body; the reference card has no such accent line */
+      content: none !important;
+    }
+
+    .br-card:hover {
+      transform: translateY(-4px) !important;
+      border-color: rgba(201, 166, 107, 0.45) !important;
+      box-shadow: var(--ova-shadow-lift) !important;
+    }
+
+    .br-card .br-card-media,
+    .br-card-media {
+      background-image: var(--ova-backdrop) !important;
+      background-size: cover !important;
+      background-position: center 62% !important;
+      background-color: var(--ova-cream) !important;
+    }
+
+    .br-card-media img {
+      padding: 10px !important;
+      filter: drop-shadow(0 10px 14px rgba(38, 24, 14, 0.22));
+    }
+
+    .br-card-tag {
+      background: var(--ova-champagne) !important;
+      color: #fff !important;
+      letter-spacing: 0.08em !important;
+    }
+
+    .br-card-name {
+      font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif !important;
+      font-weight: 600 !important;
+      color: var(--ova-charcoal) !important;
+      font-size: 11.5px !important;
+    }
+
+    .br-card-price {
+      color: var(--ova-charcoal) !important;
+      font-weight: 700 !important;
+    }
+
+    .br-card-add {
+      background: var(--ova-charcoal) !important;
+      color: var(--ova-ivory) !important;
+      font-weight: 400 !important;
+    }
+
+    .br-card-add:hover {
+      background: var(--ova-black) !important;
+      filter: none !important;
+    }
+
+    @media (min-width: 701px) {
+      .br-card-name {
+        font-size: 13.5px !important;
+      }
+    }
+
+
+    /* --------------------------------------------------------------------
+       HERO BUTTONS - the reference shows a solid charcoal primary with an
+       arrow, and a plain outlined secondary. The base .hml-btn rules above
+       gave both an identical frosted-glass look with no hierarchy and let
+       "Discover Collection" wrap to two lines; this restores both.
+       -------------------------------------------------------------------- */
+
+    .hml-btn {
+      max-width: none !important;
+      white-space: nowrap !important;
+      padding: 17px 30px !important;
+    }
+
+    .hml-btn.primary {
+      background: var(--ova-charcoal) !important;
+      border: 1px solid var(--ova-charcoal) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      color: var(--ova-ivory) !important;
+      text-shadow: none !important;
+      box-shadow: 0 18px 36px rgba(13, 12, 11, 0.24) !important;
+    }
+
+    .hml-btn.primary::before {
+      content: none !important;
+    }
+
+    .hml-btn.primary:hover,
+    .hml-btn.primary:active,
+    .hml-btn.primary.is-near {
+      background: var(--ova-black) !important;
+      border-color: var(--ova-black) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 22px 44px rgba(13, 12, 11, 0.3) !important;
+    }
+
+    .hml-btn.primary i {
+      position: relative;
+      z-index: 1;
+      font-style: normal;
+      display: inline-flex;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .hml-btn.primary:hover i {
+      transform: translateX(4px);
+    }
+
+    html[dir="rtl"] .hml-btn.primary i {
+      transform: scaleX(-1);
+    }
+
+    html[dir="rtl"] .hml-btn.primary:hover i {
+      transform: scaleX(-1) translateX(4px);
+    }
+
+    .hml-btn.secondary {
+      background: transparent !important;
+      border: 1px solid rgba(23, 21, 19, 0.28) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      color: var(--ova-charcoal) !important;
+      text-shadow: none !important;
+      box-shadow: none !important;
+    }
+
+    .hml-btn.secondary::before {
+      content: none !important;
+    }
+
+    .hml-btn.secondary:hover,
+    .hml-btn.secondary:active,
+    .hml-btn.secondary.is-near {
+      background: var(--ova-cream) !important;
+      border-color: var(--ova-champagne) !important;
+      transform: translateY(-3px);
+      box-shadow: none !important;
+    }
+
+    @media (max-width: 480px) {
+      .hml-btn {
+        padding: 15px 22px !important;
+        font-size: 10px !important;
+        letter-spacing: 2px !important;
+      }
+    }
+
+
+    /* --------------------------------------------------------------------
+       MEN / WOMEN "SHOP ALL" - the gold-gradient pill above clashed with
+       the restrained ivory/charcoal palette used everywhere else. This
+       matches the reference's solid charcoal CTA instead.
+       -------------------------------------------------------------------- */
+
+    .perfumes-section .shop-all-btn {
+      border: 1px solid var(--ova-charcoal) !important;
+      background-image: none !important;
+      background-color: var(--ova-charcoal) !important;
+      color: var(--ova-ivory) !important;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      box-shadow: 0 18px 36px rgba(13, 12, 11, 0.2) !important;
+    }
+
+    .perfumes-section .shop-all-btn:hover {
+      background-color: var(--ova-black) !important;
+      filter: none;
+      box-shadow: 0 22px 44px rgba(13, 12, 11, 0.26) !important;
+    }
+
+
+    /* --------------------------------------------------------------------
+       BRANDS HEADING - the bold gold-gradient treatment clashed with the
+       restrained charcoal + champagne-accent language used by every other
+       section heading (New Arrivals, Best Sellers, Find Your Signature).
+       -------------------------------------------------------------------- */
+
+    .br-head {
+      text-align: left;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 44px) 6px;
+    }
+
+    .br-eyebrow {
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      color: var(--ova-champagne);
+    }
+
+    .br-eyebrow span::before,
+    .br-eyebrow span::after {
+      content: none;
+    }
+
+    .br-heading {
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: var(--ova-charcoal) !important;
+      color: var(--ova-charcoal) !important;
+      font-style: italic;
+    }
+
+    .br-diamond {
+      display: none;
+    }
+
+    @media (max-width: 700px) {
+      .br-head {
+        padding: 0 16px 6px;
+      }
+    }
+
+    html[dir="rtl"] .br-head {
+      text-align: right;
+    }
+
+
+    /* --------------------------------------------------------------------
+       PROMO BANNER FIX - .video-box had no intrinsic size (height:auto on
+       its <img>), so the browser could not calculate whether the lazy-load
+       viewport threshold was crossed and the image request never fired,
+       collapsing the whole banner to 0 height. A fixed aspect-ratio gives
+       the box real geometry before the image arrives.
+       -------------------------------------------------------------------- */
+
+    .video-box {
+      aspect-ratio: 16 / 9;
+      background: var(--ova-cream, #f2ece1);
+    }
+
+    .video-box img,
+    .video-box video {
+      height: 100% !important;
+      object-fit: cover;
+    }
+
+    @media (max-width: 700px) {
+      .video-box {
+        aspect-ratio: 4 / 5;
+      }
+    }
+
+
+    /* --------------------------------------------------------------------
+       KHAMRAH VIDEO SECTION FIX - `height: 100svh` made this section as
+       tall as the viewport, which (a) breaks any tool/browser feature that
+       resizes the viewport to the full document height, ballooning the
+       whole page's scrollHeight, and (b) reads as a jarring full-black
+       block interrupting the ivory flow between Best Sellers and New
+       Arrivals. A fixed cinematic aspect-ratio keeps the film feel while
+       sitting in the page like every other section.
+       -------------------------------------------------------------------- */
+
+    .khamrah-video-section {
+      height: auto !important;
+      aspect-ratio: 21 / 9;
+    }
+
+    @media (max-width: 700px) {
+      .khamrah-video-section {
+        aspect-ratio: 4 / 5;
+      }
+    }
+
+
+    /* --------------------------------------------------------------------
+       HERO HEIGHT CAP - `min-height: 100svh` with no ceiling meant that in
+       any context where the reported viewport height balloons (a full-page
+       screenshot/print tool resizing the window to the document's height,
+       some embedded WebViews reporting an inflated viewport), the hero -
+       being the very first section - grew to match it and dragged every
+       section below it down by the same amount, reading as a giant blank
+       gap in the page. A sane max-height keeps the hero cinematic on real
+       screens without letting it runaway.
+       -------------------------------------------------------------------- */
+
+    .hero-mobile-luxury {
+      /* `max-height` alongside `min-height: 100svh` does not reliably cap
+         the box in every engine once the reported viewport height grows
+         very large - min() is the version that actually holds. */
+      min-height: min(100svh, 900px);
+    }
+
+    @media (min-width: 701px) {
+      .hero-mobile-luxury {
+        min-height: min(100svh, 820px);
+      }
+    }
+
+
+    /* --------------------------------------------------------------------
+       HERO BUTTON WIDTH - `max-width: 190px` clipped "Discover Collection"
+       once the button became solid + nowrap. Let the primary button size
+       to its (short, uppercase) text instead of a fixed cap.
+       -------------------------------------------------------------------- */
+
+    .hml-actions .hml-btn {
+      flex: 0 1 auto;
+      min-width: 0;
+      max-width: none;
+    }
+
+    @media (max-width: 480px) {
+      .hml-actions {
+        flex-wrap: nowrap;
+        gap: 8px;
+      }
+
+      .hml-actions .hml-btn {
+        flex: 1 1 0;
+        min-width: 0;
+        overflow: visible;
+      }
+
+      .hml-btn {
+        padding: 14px 10px !important;
+        font-size: 9px !important;
+        letter-spacing: 1px !important;
+        gap: 6px !important;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hml-actions {
+        flex-wrap: wrap;
+      }
+
+      .hml-actions .hml-btn {
+        flex: 1 1 100%;
+      }
+    }
+
+
+    /* --------------------------------------------------------------------
+       SHOP NOW HERO BUTTON - single primary CTA. Adds a champagne glow that
+       sweeps in under the pointer on hover/proximity (reusing the --mx/--my
+       vars the hero JS already updates on pointermove) and a shimmering
+       gradient shift, so the one remaining button reads as unmistakably
+       the hero's main action.
+       -------------------------------------------------------------------- */
+
+    .hml-actions-single {
+      justify-content: flex-start;
+    }
+
+    .hml-shop-now {
+      position: relative;
+      isolation: isolate;
+      background: linear-gradient(135deg, var(--ova-charcoal) 0%, #2a2420 50%, var(--ova-charcoal) 100%) !important;
+      background-size: 220% 220% !important;
+      background-position: 0% 50% !important;
+      transition: background-position 0.6s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease !important;
+    }
+
+    .hml-shop-now::before {
+      /* the proximity glow: a warm champagne halo that tracks the pointer,
+         invisible at rest and revealed on hover/near-approach */
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      border-radius: inherit;
+      background: radial-gradient(160px circle at var(--mx, 50%) var(--my, 50%), rgba(213, 183, 122, 0.85), rgba(213, 183, 122, 0.25) 55%, transparent 78%);
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .hml-shop-now:hover,
+    .hml-shop-now:focus-visible,
+    .hml-shop-now.is-near {
+      background-position: 100% 50% !important;
+      transform: translateY(-3px);
+      box-shadow: 0 24px 48px rgba(13, 12, 11, 0.32), 0 0 32px rgba(213, 183, 122, 0.28) !important;
+    }
+
+    .hml-shop-now:hover::before,
+    .hml-shop-now:focus-visible::before,
+    .hml-shop-now.is-near::before {
+      opacity: 1;
+    }
+
+    .hml-shop-now:hover i,
+    .hml-shop-now:focus-visible i {
+      transform: translateX(4px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hml-shop-now {
+        transition: none !important;
+      }
+      .hml-shop-now::before {
+        transition: none !important;
+      }
+    }

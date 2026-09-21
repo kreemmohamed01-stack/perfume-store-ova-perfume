@@ -543,6 +543,7 @@ body,
   filter: brightness(1.06);
 }
 </style>
+<link rel="stylesheet" href="css/ova-card.css?v=87675324" />
 </head>
 <body>
 <div class="page-shell">
@@ -553,8 +554,13 @@ body,
 
   <div class="page-top">
     <a class="back-link" id="backLink" href="index.html">&larr; Back To Home</a>
-    <button class="cart-trigger" id="cartTrigger" onclick="toggleCart()">
-      &#128722; <span id="cartLabel">Cart</span>
+    <button class="cart-trigger" id="cartTrigger" onclick="toggleCart()" aria-label="Cart">
+      <svg class="cart-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 5H5L7.2 14.2C7.31 14.67 7.73 15 8.21 15H17.4C17.87 15 18.29 14.69 18.41 14.24L20 8H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <circle cx="9" cy="19" r="1.7" fill="currentColor"></circle>
+        <circle cx="17" cy="19" r="1.7" fill="currentColor"></circle>
+      </svg>
+      <span id="cartLabel" hidden>Cart</span>
       <span class="cart-count-badge" id="cartCountBadge">0</span>
     </button>
     <div class="controls">
@@ -615,9 +621,9 @@ body,
   <button class="checkout-btn" id="checkoutBtn" type="button" onclick="goToCheckout()">Checkout</button>
 </aside>
 
-<script src="js/catalog.js?v=24e60d59"></script>
+<script src="js/catalog.js?v=ee7e11c0"></script>
 <script src="js/remote-catalog.js?v=9816d387"></script>
-<script src="js/unisex-catalog.js?v=62af0114"></script>
+<script src="js/unisex-catalog.js?v=e290effb"></script>
 <script src="js/features.js?v=197cb98a"></script>
 <script>
 const unisexProducts = Array.isArray(window.ovaUnisexProducts) ? window.ovaUnisexProducts : [];

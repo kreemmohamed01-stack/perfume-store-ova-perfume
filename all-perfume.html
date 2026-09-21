@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Products | Ova Store</title>
+<title>Shop Now | Ova Store</title>
 <meta name="description" content="Browse all perfume products at Ova Store, including luxury fragrances, best sellers, designer perfumes, and premium scent collections." />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-title" content="Ova Store" />
 <link rel="canonical" href="https://ovaperfume.com/all-perfume.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="All Products | Ova Store" />
+<meta property="og:title" content="Shop Now | Ova Store" />
 <meta property="og:description" content="Explore the full perfume catalog at Ova Store with premium fragrances, designer scents, and curated perfume collections." />
 <meta property="og:url" content="https://ovaperfume.com/all-perfume.html" />
 <meta property="og:image" content="https://ovaperfume.com/images/site-assets/logooo-2.webp" />
@@ -32,7 +32,7 @@
 <meta property="og:image:alt" content="Ova Store logo" />
 <meta property="og:site_name" content="Ova Store" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="All Products | Ova Store" />
+<meta name="twitter:title" content="Shop Now | Ova Store" />
 <meta name="twitter:description" content="See all perfumes available at Ova Store in one premium fragrance catalog." />
 <meta name="twitter:image" content="https://ovaperfume.com/images/site-assets/logooo-2.webp" />
 <meta name="twitter:image:alt" content="Ova Store logo" />
@@ -41,7 +41,7 @@
   "@context":"https://schema.org",
   "@type":"CollectionPage",
   "@id":"https://ovaperfume.com/all-perfume.html#webpage",
-  "name":"All Products | Ova Store",
+  "name":"Shop Now | Ova Store",
   "url":"https://ovaperfume.com/all-perfume.html",
   "description":"Full perfume catalog featuring luxury fragrances, best sellers, and designer perfumes.",
   "about":{"@id":"https://ovaperfume.com/#organization"},
@@ -1761,12 +1761,13 @@ body,
   filter: brightness(1.06);
 }
 </style>
+<link rel="stylesheet" href="css/ova-card.css?v=87675324" />
 </head>
 <body>
 <div class="page-shell">
   <section class="hero">
     <div class="eyebrow">Ova Collection</div>
-    <h1><span class="hero-kicker">Ova Store</span><span class="hero-main">All Products</span></h1>
+    <h1><span class="hero-kicker">Ova Store</span><span class="hero-main">Shop Now</span></h1>
     <p class="hero-note">All Ova perfumes in one place.</p>
   </section>
 
@@ -1776,17 +1777,39 @@ body,
       <span aria-hidden="true">⌕</span>
       <input type="text" id="productSearch" placeholder="Search perfume...">
     </label>
-    <button class="cart-trigger" id="cartTrigger" onclick="toggleCart()">Cart <span class="cart-count-badge" id="cartCountBadge">0</span></button>
+    <button class="cart-trigger" id="cartTrigger" onclick="toggleCart()" aria-label="Cart">
+      <svg class="cart-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 5H5L7.2 14.2C7.31 14.67 7.73 15 8.21 15H17.4C17.87 15 18.29 14.69 18.41 14.24L20 8H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <circle cx="9" cy="19" r="1.7" fill="currentColor"></circle>
+        <circle cx="17" cy="19" r="1.7" fill="currentColor"></circle>
+      </svg>
+      <span class="cart-count-badge" id="cartCountBadge">0</span>
+    </button>
   </div>
 
-  <div class="filter-section">
-    <h3>Perfume Type</h3>
-    <div class="filter-tabs" id="typeFilters"></div>
-    <h3 style="margin-top:16px;">Category</h3>
-    <div class="filter-tabs" id="categoryFilters"></div>
-    <h3 style="margin-top:16px;">Price Range</h3>
-    <div class="filter-tabs" id="priceFilters"></div>
-  </div>
+  <details class="ova-filter-panel" id="ovaFilterPanel">
+    <summary class="ova-filter-toggle" aria-label="Filter perfumes">
+      <span class="ova-filter-toggle-icon" aria-hidden="true">
+        <svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h14M6 10h8M8.5 15h3" stroke-linecap="round"/></svg>
+      </span>
+      <span>Filter</span>
+      <span class="ova-filter-count" id="ovaFilterCount" hidden>0</span>
+    </summary>
+    <div class="ova-filter-body">
+      <div class="ova-filter-group">
+        <h3>Perfume Type</h3>
+        <div class="filter-tabs" id="typeFilters"></div>
+      </div>
+      <div class="ova-filter-group" style="display:none;">
+        <h3>Category</h3>
+        <div class="filter-tabs" id="categoryFilters"></div>
+      </div>
+      <div class="ova-filter-group">
+        <h3>Price Range</h3>
+        <div class="filter-tabs" id="priceFilters"></div>
+      </div>
+    </div>
+  </details>
 
   <div class="products-grid" id="allProductsGrid"></div>
   <div class="empty-state" id="emptyState"><strong>No Products Found</strong><span>Try another search or filter.</span></div>
@@ -1825,9 +1848,9 @@ body,
   <button class="checkout-btn" onclick="checkout()">Checkout</button>
 </aside>
 
-<script src="js/catalog.js?v=24e60d59"></script>
+<script src="js/catalog.js?v=ee7e11c0"></script>
 <script src="js/remote-catalog.js?v=9816d387"></script>
-<script src="js/unisex-catalog.js?v=62af0114"></script>
+<script src="js/unisex-catalog.js?v=e290effb"></script>
 <script src="js/features.js?v=197cb98a"></script>
 <script>
 let allProducts = [];
@@ -2782,7 +2805,7 @@ function goBack(){
 
 const translations = {
   en: {
-    title: "All Products",
+    title: "Shop Now",
     offerHeadline: "Buy 3 Perfumes, Get 50% Off",
     offerSubline: "Mix and match.",
     offerHint: "Add 3, get 1 free.",
@@ -2887,7 +2910,6 @@ function applyLanguage(){
   document.querySelector(".hero-note").innerText = currentLang === "ar" ? "كل برفانات أوفا في مكان واحد." : "All Ova perfumes in one place.";
   document.getElementById("backButton").innerText = (currentLang === "ar" ? "→ " : "← ") + t("back");
   document.getElementById("productSearch").placeholder = t("search");
-  document.querySelector(".cart-trigger:last-of-type").childNodes[0].textContent = t("cart") + " ";
   if (allProducts.length) {
     document.getElementById("emptyState").innerText = t("searchEmpty");
   } else {
@@ -2905,10 +2927,21 @@ function applyLanguage(){
   renderCart();
 }
 
+// Honour ?category=men|women|unisex so the homepage collection cards can
+// deep-link straight into a pre-filtered grid.
+function getInitialAllProductsCategory(){
+  try {
+    const raw = String(new URLSearchParams(window.location.search).get("category") || "").toLowerCase();
+    return ["men", "women", "unisex"].includes(raw) ? raw : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 const allProductsPageFilters = {
   search: "",
   type: null,
-  category: null,
+  category: getInitialAllProductsCategory(),
   priceRange: null,
   sort: "featured"
 };
@@ -3124,7 +3157,7 @@ openPendingProductFromQuery();
 </script>
 <script src="js/ova-analytics.js?v=2fc3055f"></script>
 <script src="js/help-assistant.js?v=3317fa5a"></script>
-<script src="js/all-products-rescue.js?v=909c5675"></script>
+<script src="js/all-products-rescue.js?v=4bd6e5b1"></script>
 <script src="js/scroll-reveal.js?v=47ef797d"></script>
 <script defer src="js/nav-prefetch.js?v=0f5c25c7"></script>
   <script src="js/pwa.js?v=d6057a66"></script>

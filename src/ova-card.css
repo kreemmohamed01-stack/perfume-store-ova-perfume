@@ -1,0 +1,782 @@
+/* ==========================================================================
+   OVA SHARED LUXURY PRODUCT CARD
+   One card definition for every page (all products, brands, unisex, men,
+   women). Loaded after each page's own <style>, so it refines the look
+   without touching any page's markup or JavaScript.
+   ========================================================================== */
+
+:root{
+  --ova-ivory:#f8f5ef;
+  --ova-cream:#f2ece1;
+  --ova-warm-white:#fcfbf8;
+  --ova-beige:#e8ded0;
+  --ova-champagne:#c9a66b;
+  --ova-charcoal:#171513;
+  --ova-black:#0d0c0b;
+  --ova-gray:#77716a;
+  --ova-line:rgba(23,21,19,0.12);
+  --ova-shadow:0 20px 60px rgba(0,0,0,0.06);
+  --ova-shadow-lift:0 28px 70px rgba(23,21,19,0.12);
+  --ova-backdrop:url("../images/site-assets/backdrops/product-backdrop.webp");
+  --ova-ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* ---------- the card shell ---------- */
+.products-grid .product-card,
+.product-grid .product-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  padding:0;
+  border-radius:24px;
+  background:var(--ova-warm-white);
+  border:1px solid var(--ova-line);
+  box-shadow:var(--ova-shadow);
+  backdrop-filter:none;
+  overflow:hidden;
+  transition:transform .45s var(--ova-ease), box-shadow .45s var(--ova-ease), border-color .35s ease;
+}
+
+/* the old decorative glows fight the photographic backdrop */
+.products-grid .product-card::before,
+.products-grid .product-card::after,
+.product-grid .product-card::before,
+.product-grid .product-card::after{
+  content:none !important;
+}
+
+.products-grid .product-card:hover,
+.product-grid .product-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--ova-shadow-lift);
+  border-color:rgba(201,166,107,.45);
+}
+
+/* ---------- image on the stone backdrop, never cropped ---------- */
+.products-grid .product-card > img,
+.product-grid .product-card > img{
+  width:100%;
+  aspect-ratio:1/1;
+  height:auto;
+  max-height:none;
+  min-height:0;
+  object-fit:contain;
+  display:block;
+  margin:0;
+  padding:30px 26px;
+  border-radius:0;
+  /* !important: the per-page stylesheets flatten card images with
+     `background:transparent!important`. The luxury card wants the stone. */
+  background-image:var(--ova-backdrop) !important;
+  background-size:cover !important;
+  background-position:center 62% !important;
+  background-repeat:no-repeat !important;
+  background-color:var(--ova-cream) !important;
+  height:auto !important;
+  max-width:none !important;
+  filter:drop-shadow(0 14px 18px rgba(38,24,14,.26)) !important;
+  cursor:pointer;
+  transition:transform .6s var(--ova-ease);
+}
+
+.products-grid .product-card:hover > img,
+.product-grid .product-card:hover > img{
+  transform:scale(1.04);
+}
+
+/* ---------- typography ---------- */
+.products-grid .product-card h3,
+.products-grid .product-card h4,
+.product-grid .product-card h3,
+.product-grid .product-card h4{
+  font-family:"Playfair Display","Cormorant Garamond",Georgia,serif;
+  font-size:17px;
+  line-height:1.28;
+  font-weight:600;
+  letter-spacing:.01em;
+  color:var(--ova-charcoal);
+  margin:0;
+  padding:16px 16px 0;
+  min-height:0;
+  max-height:none;
+  text-align:left;
+  /* a product name must never be clipped - it wraps instead */
+  overflow:visible;
+  white-space:normal;
+  text-overflow:clip;
+  display:block;
+}
+
+.products-grid .product-card .product-price,
+.product-grid .product-card .product-price{
+  margin:0;
+  padding:10px 16px 0;
+  font-size:19px;
+  font-weight:700;
+  color:var(--ova-charcoal);
+  text-align:left;
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.products-grid .product-card .product-old-price,
+.product-grid .product-card .product-old-price,
+.products-grid .product-card .product-price del,
+.product-grid .product-card .product-price del{
+  font-size:14px;
+  font-weight:500;
+  color:var(--ova-gray);
+  text-decoration:line-through;
+}
+
+.products-grid .product-card .product-current-price,
+.product-grid .product-card .product-current-price{
+  color:var(--ova-charcoal);
+}
+
+.products-grid .product-card .product-rating,
+.product-grid .product-card .product-rating{
+  margin:0;
+  padding:8px 16px 0;
+  font-size:12px;
+  color:var(--ova-champagne);
+  letter-spacing:.04em;
+  text-align:left;
+  background:none;
+  border:0;
+}
+
+.products-grid .product-card .product-type,
+.product-grid .product-card .product-type{
+  margin:0;
+  padding:6px 16px 0;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ova-gray);
+  background:none;
+  border:0;
+  border-radius:0;
+  width:auto;
+  text-align:left;
+  display:block;
+}
+
+/* the metadata row reads as quiet accord tags */
+.products-grid .product-card .product-stats,
+.product-grid .product-card .product-stats{
+  margin:0;
+  padding:10px 16px 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  background:none;
+  border:0;
+}
+
+.products-grid .product-card .product-stats span,
+.product-grid .product-card .product-stats span{
+  padding:5px 10px;
+  border-radius:999px;
+  background:var(--ova-cream);
+  border:1px solid var(--ova-line);
+  color:var(--ova-gray);
+  font-size:9.5px;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+/* ---------- actions ---------- */
+/* The actions row spans the card, so its inset is padding. A horizontal
+   margin here would push a full-width child past the card edge. */
+.products-grid .product-card .product-card-actions,
+.product-grid .product-card .product-card-actions{
+  margin:auto 0 0;
+  padding:14px 16px 16px;
+}
+
+/* all-perfume renders a lone <button>, which is not full-width */
+.products-grid .product-card > button{
+  margin:14px 16px 16px;
+  margin-top:auto;
+  width:calc(100% - 32px);
+}
+
+.product-grid .product-card .product-card-actions,
+.products-grid .product-card .product-card-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr !important;
+  gap:8px !important;
+}
+
+/* all-perfume renders a single bare <button> as the CTA */
+.products-grid .product-card > button,
+.products-grid .product-card .product-card-actions button:last-child,
+.product-grid .product-card .product-add-btn{
+  background-color:var(--ova-charcoal) !important;
+  background-image:none !important;
+  color:var(--ova-ivory) !important;
+  border:1px solid var(--ova-charcoal) !important;
+  border-radius:999px !important;
+  padding:12px 14px;
+  width:auto;
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:none;
+  transition:background .3s ease, transform .3s var(--ova-ease);
+}
+
+.products-grid .product-card > button:hover,
+.product-grid .product-card .product-add-btn:hover{
+  background:var(--ova-black);
+  transform:translateY(-1px);
+}
+
+.products-grid .product-card .product-more-btn,
+.product-grid .product-card .product-buy-btn{
+  /* reclaimed with !important: page stylesheets paint these dark */
+  background-color:transparent !important;
+  background-image:none !important;
+  color:var(--ova-charcoal) !important;
+  border:1px solid var(--ova-line) !important;
+  border-radius:999px !important;
+  padding:12px 14px;
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:none;
+  transition:border-color .3s ease, background .3s ease, transform .3s var(--ova-ease);
+}
+
+.products-grid .product-card .product-more-btn:hover,
+.product-grid .product-card .product-buy-btn:hover{
+  border-color:var(--ova-champagne) !important;
+  background-color:var(--ova-cream) !important;
+  transform:translateY(-1px);
+}
+
+.products-grid .product-card .product-action-note,
+.product-grid .product-card .product-action-note{
+  display:none;
+}
+
+/* ---------- badges ---------- */
+.products-grid .product-card .stock-badge,
+.product-grid .product-card .stock-badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  right:auto;
+  z-index:3;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:rgba(252,251,248,.92);
+  color:var(--ova-charcoal);
+  border:1px solid var(--ova-line);
+  box-shadow:none;
+  backdrop-filter:blur(6px);
+}
+
+.products-grid .product-card .stock-badge.out-stock,
+.product-grid .product-card .stock-badge.out-stock{
+  background:rgba(23,21,19,.88);
+  color:var(--ova-ivory);
+  border-color:transparent;
+}
+
+.products-grid .product-card .product-highlight-badge,
+.product-grid .product-card .product-highlight-badge{
+  position:absolute;
+  top:12px;
+  right:12px;
+  left:auto;
+  z-index:3;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.1em;
+  background:var(--ova-champagne);
+  color:#fff;
+  border:0;
+  box-shadow:none;
+  animation:none;
+}
+
+/* ---------- RTL ---------- */
+html[dir="rtl"] .products-grid .product-card h3,
+html[dir="rtl"] .products-grid .product-card .product-price,
+html[dir="rtl"] .products-grid .product-card .product-rating,
+html[dir="rtl"] .product-grid .product-card h4,
+html[dir="rtl"] .product-grid .product-card .product-price{
+  text-align:right;
+}
+
+html[dir="rtl"] .products-grid .product-card .stock-badge,
+html[dir="rtl"] .product-grid .product-card .stock-badge{
+  left:auto;
+  right:12px;
+}
+
+html[dir="rtl"] .products-grid .product-card .product-highlight-badge,
+html[dir="rtl"] .product-grid .product-card .product-highlight-badge{
+  right:auto;
+  left:12px;
+}
+
+/* ---------- mobile: two clean columns, nothing clipped ---------- */
+@media (max-width:700px){
+  .products-grid .product-card,
+  .product-grid .product-card{
+    border-radius:20px;
+  }
+
+  .products-grid .product-card > img,
+  .product-grid .product-card > img{
+    padding:18px 14px;
+  }
+
+  .products-grid .product-card h3,
+  .products-grid .product-card h4,
+  .product-grid .product-card h3,
+  .product-grid .product-card h4{
+    font-size:14px;
+    padding:12px 12px 0;
+  }
+
+  .products-grid .product-card .product-price,
+  .product-grid .product-card .product-price{
+    font-size:15.5px;
+    padding:8px 12px 0;
+    gap:6px;
+  }
+
+  .products-grid .product-card .product-old-price,
+  .product-grid .product-card .product-old-price{
+    font-size:12px;
+  }
+
+  .products-grid .product-card .product-rating,
+  .product-grid .product-card .product-rating{
+    font-size:11px;
+    padding:6px 12px 0;
+  }
+
+  .products-grid .product-card .product-stats,
+  .product-grid .product-card .product-stats{
+    padding:8px 12px 0;
+    gap:4px;
+  }
+
+  .products-grid .product-card .product-stats span,
+  .product-grid .product-card .product-stats span{
+    font-size:8.5px;
+    padding:4px 8px;
+    letter-spacing:.06em;
+  }
+
+  /* padding, not margin: the actions row is already full-width, so a
+     horizontal margin pushed its content 12px past the card and scrolled
+     the whole page sideways. */
+  .products-grid .product-card .product-card-actions,
+  .product-grid .product-card .product-card-actions{
+    margin:auto 0 0;
+    padding:12px;
+  }
+
+  .products-grid .product-card > button{
+    margin:12px;
+    width:calc(100% - 24px);
+  }
+
+  .product-grid .product-card .product-card-actions,
+  .products-grid .product-card .product-card-actions{
+    grid-template-columns:1fr !important;
+    gap:6px !important;
+  }
+
+  .products-grid .product-card > button,
+  .products-grid .product-card .product-more-btn,
+  .product-grid .product-card .product-add-btn,
+  .product-grid .product-card .product-buy-btn{
+    padding:11px 10px;
+    font-size:9.5px;
+    letter-spacing:.1em;
+  }
+}
+
+.products-grid .product-card .product-savings,
+.product-grid .product-card .product-savings{
+  display:none !important;
+}
+
+.products-grid .product-card > img,
+.product-grid .product-card > img{
+  border-top-left-radius:23px !important;
+  border-top-right-radius:23px !important;
+}
+
+@media (max-width:700px){
+  .products-grid .product-card > img,
+  .product-grid .product-card > img{
+    border-top-left-radius:19px !important;
+    border-top-right-radius:19px !important;
+  }
+}
+
+/* Cards must never push past the viewport: the shell owns the width and
+   every child stays inside it. Fixes a 2px overflow on brand.html at 390px. */
+.products-grid .product-card,
+.product-grid .product-card{
+  max-width:100%;
+  min-width:0;
+  overflow:hidden;
+}
+
+.products-grid .product-card > *,
+.product-grid .product-card > *{
+  max-width:100%;
+  min-width:0;
+}
+
+.products-grid .product-card .product-card-actions,
+.product-grid .product-card .product-card-actions{
+  box-sizing:border-box;
+  max-width:100%;
+}
+
+.products-grid .product-card .product-card-actions > button,
+.product-grid .product-card .product-card-actions > button{
+  min-width:0;
+  max-width:100%;
+}
+
+/* Page stylesheets set `white-space:nowrap` on the mobile CTAs. With the
+   uppercase tracking of the luxury card, "Add to Cart" then overhangs its
+   column by a couple of pixels and the page scrolls sideways. Let it wrap
+   and keep the label centred instead. */
+@media (max-width:700px){
+  .products-grid .product-card .product-card-actions button,
+  .product-grid .product-card .product-card-actions button,
+  .products-grid .product-card > button{
+    white-space:normal !important;
+    overflow-wrap:anywhere;
+    text-align:center;
+    line-height:1.25;
+  }
+}
+
+
+/* --------------------------------------------------------------------
+   BRAND PAGE 4-BUTTON CARD - brand.html's card adds Details + Compare
+   above Add to Cart / Buy Now. Same reference language, just two rows
+   of actions instead of one.
+   -------------------------------------------------------------------- */
+
+.products-grid .product-card .product-card-actions{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-auto-rows: auto;
+  gap: 8px !important;
+}
+
+.products-grid .product-card .product-card-actions.single-action{
+  grid-template-columns: 1fr !important;
+}
+
+/* Details + Compare: quiet outlined row, same footprint as "Buy Now" */
+.products-grid .product-card .product-more-btn,
+.products-grid .product-card .compare-btn{
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--ova-charcoal) !important;
+  border: 1px solid var(--ova-line) !important;
+  border-radius: 999px !important;
+  padding: 11px 10px !important;
+  font-size: 10.5px !important;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: none !important;
+  white-space: normal !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.products-grid .product-card .product-more-btn:hover,
+.products-grid .product-card .compare-btn:hover{
+  border-color: var(--ova-champagne) !important;
+  background-color: var(--ova-cream) !important;
+}
+
+.products-grid .product-card .product-more-btn.is-hidden{
+  display: none !important;
+}
+
+/* Add to Cart: the solid charcoal primary, third button in the grid */
+.products-grid .product-card .product-card-actions button:nth-child(3){
+  background-color: var(--ova-charcoal) !important;
+  background-image: none !important;
+  color: var(--ova-ivory) !important;
+  border: 1px solid var(--ova-charcoal) !important;
+  border-radius: 999px !important;
+  padding: 11px 10px !important;
+  font-size: 10.5px !important;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: none !important;
+  white-space: normal !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.products-grid .product-card .product-card-actions button:nth-child(3):hover{
+  background-color: var(--ova-black) !important;
+}
+
+/* Buy Now: outlined secondary, matches every other page's card */
+.products-grid .product-card .product-buy-btn{
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--ova-charcoal) !important;
+  border: 1px solid var(--ova-line) !important;
+  border-radius: 999px !important;
+  padding: 11px 10px !important;
+  font-size: 10.5px !important;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: none !important;
+  white-space: normal !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.products-grid .product-card .product-buy-btn:hover{
+  border-color: var(--ova-champagne) !important;
+  background-color: var(--ova-cream) !important;
+}
+
+.products-grid .product-card button::after{
+  content: none !important;
+}
+
+.products-grid .product-card .product-btn-inner{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.products-grid .product-card .product-btn-icon{
+  display: none !important;
+}
+
+/* ==========================================================================
+   OVA FILTER PANEL - collapses the raw pill-button wall behind one
+   "Filter" trigger. Native <details>/<summary> so it works with zero JS
+   changes: the existing #typeFilters/#categoryFilters/#priceFilters ids
+   stay exactly where the page's own script already looks for them.
+   ========================================================================== */
+
+.ova-filter-panel{
+  margin: 0 0 20px;
+  border: 1px solid var(--ova-line);
+  border-radius: 18px;
+  background: var(--ova-warm-white);
+  box-shadow: var(--ova-shadow);
+  overflow: hidden;
+}
+
+.ova-filter-toggle{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ova-charcoal);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ova-filter-toggle::-webkit-details-marker{
+  display: none;
+}
+
+.ova-filter-toggle-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--ova-line);
+  color: var(--ova-champagne);
+  flex-shrink: 0;
+}
+
+.ova-filter-toggle::after{
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-inline-start: auto;
+  border-right: 1.5px solid var(--ova-gray);
+  border-bottom: 1.5px solid var(--ova-gray);
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+.ova-filter-panel[open] .ova-filter-toggle::after{
+  transform: rotate(225deg);
+}
+
+.ova-filter-count{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--ova-champagne);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.ova-filter-body{
+  padding: 4px 18px 18px;
+  border-top: 1px solid var(--ova-line);
+}
+
+.ova-filter-group{
+  padding-top: 14px;
+}
+
+.ova-filter-group h3{
+  margin: 0 0 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ova-gray);
+}
+
+.ova-filter-group .filter-tabs{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ova-filter-group .filter-tab{
+  border-radius: 999px !important;
+  border: 1px solid var(--ova-line) !important;
+  background: var(--ova-ivory) !important;
+  color: var(--ova-charcoal) !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  font-size: 12px !important;
+  box-shadow: none !important;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.ova-filter-group .filter-tab.active,
+.ova-filter-group .filter-tab:hover{
+  border-color: var(--ova-champagne) !important;
+  background: var(--ova-cream) !important;
+}
+
+.ova-filter-group .filter-tab.active{
+  background: var(--ova-charcoal) !important;
+  border-color: var(--ova-charcoal) !important;
+  color: var(--ova-ivory) !important;
+}
+
+@media (max-width: 700px){
+  .ova-filter-toggle{
+    padding: 12px 14px;
+    font-size: 11px;
+  }
+  .ova-filter-body{
+    padding: 4px 14px 14px;
+  }
+}
+
+/* ==========================================================================
+   CART TRIGGER - ICON ONLY
+   The plain-text "Cart 0" rectangle read as an odd leftover box in the
+   toolbar. This makes it a compact round icon button with the badge count,
+   matching the icon cart already used on brand.html, everywhere else.
+   ========================================================================== */
+
+.cart-trigger{
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0 !important;
+  position: relative;
+  width: 46px !important;
+  height: 46px !important;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  background: var(--ova-charcoal) !important;
+  background-image: none !important;
+  color: var(--ova-ivory) !important;
+  border: 1px solid var(--ova-charcoal) !important;
+  box-shadow: 0 12px 26px rgba(13, 12, 11, 0.18) !important;
+}
+
+.cart-trigger:hover{
+  background: var(--ova-black) !important;
+}
+
+.cart-trigger .cart-icon{
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
+.cart-trigger #cartLabel{
+  display: none !important;
+}
+
+.cart-trigger .cart-count-badge{
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--ova-champagne);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  border: 2px solid var(--ova-warm-white);
+}

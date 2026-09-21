@@ -132,8 +132,8 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
-<link rel="preload" as="style" href="css/home.css?v=721ba6a2" />
-  <link rel="stylesheet" href="css/home.css?v=721ba6a2" />
+<link rel="preload" as="style" href="css/home.css?v=6ccc99b1" />
+  <link rel="stylesheet" href="css/home.css?v=6ccc99b1" />
 </head>
 <body>
   <div class="promo-topbar" id="promoTopbar" role="button" tabindex="0" onclick="copyFloatingCouponCode()" onkeydown="handlePromoTopbarKeydown(event)">
@@ -186,7 +186,7 @@
             <span id="navProductsArrow">+</span>
           </button>
           <div class="dropdown-submenu" id="productsSubmenu">
-            <a href="all-perfume.html" id="navAllProducts">All Products</a>
+            <a href="all-perfume.html" id="navAllProducts">Shop Now</a>
             <a href="unisex.html" id="navUnisex">Unisex</a>
             <a href="#perfumesSection" id="navMen">Men Perfume</a>
             <a href="#womensPerfumesSection" id="navWomen">Women Perfume</a>
@@ -245,7 +245,7 @@
           <span id="bottomNavProductsArrow">+</span>
         </button>
         <div class="dropdown-submenu" id="bottomProductsSubmenu">
-          <a href="all-perfume.html" id="bottomNavAllProducts">All Products</a>
+          <a href="all-perfume.html" id="bottomNavAllProducts">Shop Now</a>
           <a href="unisex.html" id="bottomNavUnisex">Unisex</a>
           <a href="#perfumesSection" id="bottomNavMen">Men Perfume</a>
           <a href="#womensPerfumesSection" id="bottomNavWomen">Women Perfume</a>
@@ -318,9 +318,8 @@
       <h1 class="hml-title"><span class="hml-title-main">In Every</span><em>Detail</em></h1>
       <div class="hml-rule"></div>
       <p class="hml-subtitle">Experience the art of fine fragrances crafted to leave a lasting impression.</p>
-      <div class="hml-actions">
-        <button type="button" class="hml-btn primary" onclick="window.location.href='all-perfume.html';"><span>Discover Collection</span></button>
-        <button type="button" class="hml-btn secondary" onclick="document.getElementById('bestSellerSection').scrollIntoView({ behavior: 'smooth' });"><span>Explore</span></button>
+      <div class="hml-actions hml-actions-single">
+        <button type="button" class="hml-btn primary hml-shop-now" onclick="window.location.href='all-perfume.html';"><span>Shop Now</span><i aria-hidden="true">&rarr;</i></button>
       </div>
     </div>
     <div class="hml-stage" id="heroMobileStage">
@@ -338,6 +337,42 @@
     </div>
     <div class="hml-scroll-hint"></div>
   </section>
+
+  <!-- Find Your Signature: the three collection doors, using the artwork
+       supplied for Men / Women / Unisex. Each links to its own page. -->
+  <section class="collections-editorial" id="collectionsSection" aria-label="Shop by collection">
+    <div class="ce-head">
+      <p class="ce-eyebrow"><span id="collectionsKicker">Our Collections</span></p>
+      <div class="ce-head-row">
+        <h2 class="ce-heading">Find Your <span>Signature</span></h2>
+        <p class="ce-sub" id="collectionsSubtitle">Distinct fragrances for every story, every mood, every you.</p>
+      </div>
+    </div>
+    <div class="ce-grid">
+      <a class="ce-card" href="men.html">
+        <img src="images/site-assets/backdrops/collection-men.webp" alt="Men's fragrance collection" loading="lazy" decoding="async" />
+        <span class="ce-card-body">
+          <span class="ce-card-title" id="collectionsMen">Men</span>
+          <span class="ce-card-cta"><em id="collectionsMenCta">Shop Collection</em><i aria-hidden="true">&rarr;</i></span>
+        </span>
+      </a>
+      <a class="ce-card" href="women.html">
+        <img src="images/site-assets/backdrops/collection-women.webp" alt="Women's fragrance collection" loading="lazy" decoding="async" />
+        <span class="ce-card-body">
+          <span class="ce-card-title" id="collectionsWomen">Women</span>
+          <span class="ce-card-cta"><em id="collectionsWomenCta">Shop Collection</em><i aria-hidden="true">&rarr;</i></span>
+        </span>
+      </a>
+      <a class="ce-card" href="unisex.html">
+        <img src="images/site-assets/backdrops/collection-unisex.webp" alt="Unisex fragrance collection" loading="lazy" decoding="async" />
+        <span class="ce-card-body">
+          <span class="ce-card-title" id="collectionsUnisex">Unisex</span>
+          <span class="ce-card-cta"><em id="collectionsUnisexCta">Shop Collection</em><i aria-hidden="true">&rarr;</i></span>
+        </span>
+      </a>
+    </div>
+  </section>
+
 
   <script>
     window.addEventListener("DOMContentLoaded", function () {
@@ -464,63 +499,12 @@
 
   <section class="section best-seller-v2" id="bestSellerSection">
     <span id="bestSellerTitle" class="bs-sr-only">Best Seller</span>
-    <div class="bs-stage" id="bsStage">
-      <div class="bs-header">
-        <p class="bs-kicker"><span>Our Most Loved</span></p>
-        <h2 class="bs-title"><span class="bs-title-line" data-bs-letters>Best</span><span class="bs-title-line bs-title-gold" data-bs-letters>Seller</span></h2>
-        <div class="bs-diamond">✦</div>
-      </div>
-
-      <p class="bs-desc">Discover the fragrance loved by thousands. A perfect blend of luxury and sophistication.</p>
-
-      <div class="bs-panel">
-        <div class="bs-info">
-          <h3 class="bs-name" id="bsName">Khamrah Waha</h3>
-          <p class="bs-sub" id="bsSub">100ml &middot; Eau de Parfum</p>
-          <div class="bs-rating"><span class="bs-stars">★★★★★</span><span class="bs-reviews" id="bsReviews">(125)</span></div>
-          <div class="bs-price-row">
-            <span class="bs-price" id="bsPrice">850 EGP</span>
-            <span class="bs-original" id="bsOriginal">1214 EGP</span>
-            <span class="bs-off-badge" id="bsOffBadge">-30%</span>
-          </div>
-          <div class="bs-features">
-            <div class="bs-feature">
-              <span class="bs-feature-icon">⏳</span>
-              <div><strong>Long Lasting</strong><small>Up to 12 Hours</small></div>
-            </div>
-            <div class="bs-feature">
-              <span class="bs-feature-icon">🌿</span>
-              <div><strong>Premium Ingredients</strong><small>Finest quality</small></div>
-            </div>
-            <div class="bs-feature">
-              <span class="bs-feature-icon">💎</span>
-              <div><strong>Luxury Experience</strong><small>For every moment</small></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bs-hero-wrap">
-          <div class="bs-hero-glow"></div>
-          <img class="bs-hero-img" id="bsHeroImg" src="" alt="" />
-        </div>
-      </div>
-
-      <button type="button" class="bs-add-btn" id="bsAddBtn"><span>🛍</span> Add To Cart</button>
-      <div class="bs-actions-row">
-        <button type="button" class="bs-outline-btn" id="bsWishlistBtn"><span>♡</span> Wishlist</button>
-        <button type="button" class="bs-outline-btn" id="bsQuickViewBtn"><span>👁</span> Quick View</button>
-      </div>
+    <div class="na-head">
+      <p class="na-eyebrow"><span>Our Most Loved</span></p>
+      <h2 class="na-heading">Best <span>Sellers</span></h2>
+      <p class="na-sub">The fragrances our customers return to, again and again.</p>
     </div>
-
-    <div class="bs-more">
-      <p class="bs-more-label"><span>More Best Sellers</span></p>
-      <div class="bs-more-wrap">
-        <button type="button" class="bs-arrow bs-arrow-left" id="bsArrowLeft" aria-label="Previous">&lsaquo;</button>
-        <div class="best-seller-slider" id="bestSellerSlider"></div>
-        <button type="button" class="bs-arrow bs-arrow-right" id="bsArrowRight" aria-label="Next">&rsaquo;</button>
-      </div>
-      <div class="bs-dots" id="bsDots"></div>
-    </div>
+    <div class="product-grid na-grid best-seller-slider" id="bestSellerSlider"></div>
   </section>
 
   <script>
@@ -569,273 +553,36 @@
     }
 
     (function () {
-      var initialized = false;
-
-      function splitLetters() {
-        document.querySelectorAll("[data-bs-letters]:not([data-bs-split])").forEach(function (el) {
-          el.setAttribute("data-bs-split", "1");
-          var text = el.textContent;
-          el.textContent = "";
-          text.split("").forEach(function (ch, i) {
-            var span = document.createElement("span");
-            span.textContent = ch === " " ? " " : ch;
-            span.style.animationDelay = (i * 0.045) + "s";
-            el.appendChild(span);
-          });
-        });
-      }
-
+      // The old panel wiring (bsHeroImg/bsName/bsPrice/etc.) drove a large
+      // "featured product" hero that the redesign removed in favour of a
+      // plain grid, matching New Arrivals. All that is needed now is to
+      // reveal the section once it scrolls into view and let the shared
+      // drag-scroll helper work on the slider, same as any other grid.
+      var revealed = false;
       window.initBestSellerCarousel = function () {
         var section = document.getElementById("bestSellerSection");
         var slider = document.getElementById("bestSellerSlider");
-        var heroImg = document.getElementById("bsHeroImg");
-        var nameEl = document.getElementById("bsName");
-        var priceEl = document.getElementById("bsPrice");
-        var originalEl = document.getElementById("bsOriginal");
-        var offBadgeEl = document.getElementById("bsOffBadge");
-        var reviewsEl = document.getElementById("bsReviews");
-        var addBtn = document.getElementById("bsAddBtn");
-        var wishlistBtn = document.getElementById("bsWishlistBtn");
-        var quickViewBtn = document.getElementById("bsQuickViewBtn");
-        var dotsWrap = document.getElementById("bsDots");
-        var arrowLeft = document.getElementById("bsArrowLeft");
-        var arrowRight = document.getElementById("bsArrowRight");
-        if (!section || !slider || !heroImg || !nameEl || !dotsWrap) return;
+        if (!section || !slider) return;
 
-        splitLetters();
+        if (typeof window.enableDragScroll === "function") window.enableDragScroll(slider);
 
-        var cards = Array.prototype.slice.call(slider.querySelectorAll(".product-card"));
-        if (!cards.length) return;
+        if (revealed) return;
+        revealed = true;
 
-        function readProductFromCard(card) {
-          var h4 = card.querySelector("h4");
-          var img = card.querySelector("img");
-          var priceEl2 = card.querySelector(".product-current-price") || card.querySelector(".product-price");
-          var priceText = priceEl2 ? priceEl2.textContent : "";
-          var priceMatch = priceText.match(/\d[\d,]*/);
-          var price = priceMatch ? parseInt(priceMatch[0].replace(/,/g, ""), 10) : 0;
-          return {
-            name: h4 ? h4.textContent.trim() : "",
-            img: img ? img.getAttribute("src") : "",
-            price: price
-          };
-        }
-
-        function centerCard(card, smooth) {
-          var target = card.offsetLeft - (slider.clientWidth - card.offsetWidth) / 2;
-          slider.scrollTo({ left: Math.max(0, target), behavior: smooth ? "smooth" : "auto" });
-        }
-
-        var currentProduct = null;
-
-        function setFeatured(product, animate) {
-          currentProduct = product;
-          var original = Math.round(product.price / 0.7);
-          function apply() {
-            heroImg.src = product.img;
-            heroImg.alt = product.name;
-            nameEl.textContent = product.name;
-            if (priceEl) priceEl.textContent = product.price + " EGP";
-            if (originalEl) originalEl.textContent = original + " EGP";
-            if (reviewsEl) reviewsEl.textContent = "(" + (100 + (product.price % 90)) + ")";
-            if (offBadgeEl) offBadgeEl.textContent = "-30%";
-            if (heroImg.style) {
-              heroImg.style.opacity = "1";
-              heroImg.style.scale = "1";
-              heroImg.style.rotate = "0deg";
-              window.setTimeout(function () {
-                heroImg.style.removeProperty("scale");
-                heroImg.style.removeProperty("rotate");
-                heroImg.style.removeProperty("transition");
-              }, 520);
-            }
-            if (wishlistBtn) {
-              var list = [];
-              try { list = JSON.parse(localStorage.getItem("ovaWishlist") || "[]"); } catch (e) {}
-              wishlistBtn.classList.toggle("is-active", list.indexOf(product.name) >= 0);
-            }
-          }
-          if (!animate) { apply(); return; }
-          heroImg.style.transition = "opacity .32s ease, scale .5s cubic-bezier(.22,1,.36,1), rotate .5s cubic-bezier(.22,1,.36,1)";
-          heroImg.style.opacity = "0";
-          heroImg.style.scale = "0.86";
-          heroImg.style.rotate = "-6deg";
-          window.setTimeout(apply, 170);
-        }
-
-        var dots = [];
-        var activeIndex = -1;
-
-        function buildDots() {
-          dotsWrap.innerHTML = "";
-          dots = [];
-          cards.forEach(function (card, i) {
-            var dot = document.createElement("span");
-            dot.className = "bs-dot";
-            dot.addEventListener("click", function () {
-              centerCard(card, true);
-              setActive(i);
+        if ("IntersectionObserver" in window) {
+          var revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                section.classList.add("is-visible");
+                revealObserver.disconnect();
+              }
             });
-            dotsWrap.appendChild(dot);
-            dots.push(dot);
-          });
-        }
-
-        /* Cheap part of setActive: only toggles classes on the card that changed,
-           so a scroll frame touches 2 elements instead of all of them. */
-        var highlightIndex = -1;
-        function setActiveHighlightOnly(index) {
-          if (index === highlightIndex || index < 0 || index >= cards.length) return;
-          if (cards[highlightIndex]) cards[highlightIndex].classList.remove("is-active");
-          if (dots[highlightIndex]) dots[highlightIndex].classList.remove("is-active");
-          cards[index].classList.add("is-active");
-          if (dots[index]) dots[index].classList.add("is-active");
-          highlightIndex = index;
-        }
-
-        function setActive(index) {
-          if (index === activeIndex || index < 0 || index >= cards.length) return;
-          activeIndex = index;
-          setActiveHighlightOnly(index);
-          setFeatured(readProductFromCard(cards[index]), true);
-        }
-
-        /* Card geometry is measured once (and on resize) instead of calling
-           getBoundingClientRect() on every card on every scroll frame - that
-           forced a full layout per frame and was what made this slider stick. */
-        var metrics = null;
-        function measureCards() {
-          metrics = cards.map(function (card) {
-            return card.offsetLeft + card.offsetWidth / 2;
-          });
-        }
-
-        function getCenterMostCardIndex() {
-          if (!metrics || metrics.length !== cards.length) measureCards();
-          // scrollLeft is negative in RTL; abs() keeps the math direction-agnostic
-          var center = Math.abs(slider.scrollLeft) + slider.clientWidth / 2;
-          var closestIndex = 0;
-          var closestDist = Infinity;
-          for (var i = 0; i < metrics.length; i++) {
-            var dist = Math.abs(metrics[i] - center);
-            if (dist < closestDist) { closestDist = dist; closestIndex = i; }
-          }
-          return closestIndex;
-        }
-
-        var resizeTimer = 0;
-        window.addEventListener("resize", function () {
-          clearTimeout(resizeTimer);
-          resizeTimer = window.setTimeout(measureCards, 150);
-        }, { passive: true });
-
-        /* During a flick we only move the highlight (cheap class toggles). The
-           featured panel - which swaps the big hero image - is updated once the
-           scroll has settled, so image decoding never lands mid-gesture. */
-        var scrollTicking = false;
-        var settleTimer = 0;
-        slider.addEventListener("scroll", function () {
-          if (!scrollTicking) {
-            scrollTicking = true;
-            window.requestAnimationFrame(function () {
-              setActiveHighlightOnly(getCenterMostCardIndex());
-              scrollTicking = false;
-            });
-          }
-          clearTimeout(settleTimer);
-          settleTimer = window.setTimeout(function () {
-            setActive(getCenterMostCardIndex());
-          }, 110);
-        }, { passive: true });
-
-        slider.addEventListener("click", function (event) {
-          if (event.target.closest("button")) return;
-          var card = event.target.closest(".product-card");
-          if (!card) return;
-          var idx = cards.indexOf(card);
-          if (idx === -1 || idx === activeIndex) return;
-          event.stopImmediatePropagation();
-          event.preventDefault();
-          centerCard(card, true);
-          setActive(idx);
-        }, true);
-
-        window.enableDragScroll(slider);
-
-        if (arrowLeft) arrowLeft.onclick = function () {
-          var next = Math.max(0, activeIndex - 1);
-          centerCard(cards[next], true);
-          setActive(next);
-        };
-        if (arrowRight) arrowRight.onclick = function () {
-          var next = Math.min(cards.length - 1, activeIndex + 1);
-          centerCard(cards[next], true);
-          setActive(next);
-        };
-
-        var wheelLock = false;
-        function handleBsWheel(event) {
-          if (Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
-          event.preventDefault();
-          if (wheelLock) return;
-          wheelLock = true;
-          var next = activeIndex + (event.deltaY > 0 ? 1 : -1);
-          next = Math.max(0, Math.min(cards.length - 1, next));
-          centerCard(cards[next], true);
-          setActive(next);
-          window.setTimeout(function () { wheelLock = false; }, 260);
-        }
-        [document.querySelector(".bs-hero-wrap"), document.querySelector(".bs-panel"), document.querySelector(".bs-more")].forEach(function (el) {
-          if (el) el.addEventListener("wheel", handleBsWheel, { passive: false });
-        });
-
-        if (addBtn) addBtn.onclick = function () {
-          if (currentProduct && typeof addToCart === "function") addToCart(currentProduct.name, heroImg);
-        };
-
-        if (quickViewBtn) quickViewBtn.onclick = function () {
-          if (currentProduct && typeof openModal === "function") openModal(currentProduct.name);
-        };
-
-        if (wishlistBtn) wishlistBtn.onclick = function () {
-          if (!currentProduct) return;
-          try {
-            var list = JSON.parse(localStorage.getItem("ovaWishlist") || "[]");
-            var idx = list.indexOf(currentProduct.name);
-            if (idx >= 0) { list.splice(idx, 1); wishlistBtn.classList.remove("is-active"); }
-            else { list.push(currentProduct.name); wishlistBtn.classList.add("is-active"); }
-            localStorage.setItem("ovaWishlist", JSON.stringify(list));
-          } catch (e) {}
-        };
-
-        buildDots();
-        activeIndex = -1;
-        setActive(0);
-        window.setTimeout(function () { centerCard(cards[0], false); }, 60);
-
-        if (!initialized) {
-          initialized = true;
-          if ("IntersectionObserver" in window) {
-            var revealObserver = new IntersectionObserver(function (entries) {
-              entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                  section.classList.add("is-visible");
-                  revealObserver.disconnect();
-                }
-              });
-            }, { threshold: 0.12 });
-            revealObserver.observe(section);
-          } else {
-            section.classList.add("is-visible");
-          }
+          }, { threshold: 0.12 });
+          revealObserver.observe(section);
+        } else {
+          section.classList.add("is-visible");
         }
       };
-
-      window.addEventListener("DOMContentLoaded", function () {
-        window.setTimeout(function () {
-          if (typeof window.initBestSellerCarousel === "function") window.initBestSellerCarousel();
-        }, 60);
-      });
     })();
   </script>
 
@@ -891,177 +638,41 @@
       }
     });
 
+    // New Arrivals now uses the shared luxury product card via renderGrid,
+    // so the card, backdrop and cart wiring stay identical to the rest of
+    // the site. The old bespoke carousel + podium stage was removed.
     window.addEventListener("DOMContentLoaded", function () {
       var section = document.getElementById("newArrivalsSection");
-      var carousel = document.getElementById("naCarousel");
-      var dotsWrap = document.getElementById("naDots");
-      var heroImg = document.getElementById("naHeroImg");
-      if (!section || !carousel || !dotsWrap || !heroImg) return;
+      var grid = document.getElementById("newArrivalsGrid");
+      if (!section || !grid) return;
 
-      // The 2026 Assaf drop, exported by js/home.js.
-      var naProducts = window.ovaNewArrivals || [];
-      if (!naProducts.length) return;
-
-      var isAr = document.documentElement.lang === "ar";
-      var cards = [];
-      var dots = [];
-      var activeIndex = -1;
-
-      naProducts.forEach(function (product, index) {
-        var card = document.createElement("div");
-        card.className = "na-card";
-        card.dataset.index = String(index);
-        card.innerHTML =
-          '<span class="na-card-tag">New <span>✦</span></span>' +
-          '<img src="' + product.img + '" alt="' + product.name + '" loading="lazy" decoding="async">' +
-          '<h3>' + product.name + '</h3>' +
-          '<p class="na-card-type">Eau De Parfum</p>' +
-          '<p class="na-card-price">' + product.price + (isAr ? ' ج.م' : ' EGP') + '</p>' +
-          '<button type="button" class="na-card-add" aria-label="Add ' + product.name + '">+</button>';
-
-        card.addEventListener("click", function (event) {
-          if (event.target.closest(".na-card-add")) {
-            event.stopPropagation();
-            if (typeof addToCart === "function") {
-              var img = card.querySelector("img");
-              addToCart(product.name, img);
-            }
-            return;
-          }
-          if (index === activeIndex) {
-            if (typeof openModal === "function") openModal(product.name);
-            return;
-          }
-          centerCard(card, true);
-          setActiveIndex(index);
-        });
-
-        carousel.appendChild(card);
-        cards.push(card);
-
-        var dot = document.createElement("span");
-        dot.className = "na-dot";
-        dot.addEventListener("click", function () {
-          centerCard(card, true);
-        });
-        dotsWrap.appendChild(dot);
-        dots.push(dot);
-      });
-
-      function setActiveIndex(index) {
-        if (index === activeIndex || index < 0 || index >= naProducts.length) return;
-        activeIndex = index;
-        cards.forEach(function (card, i) { card.classList.toggle("is-active", i === index); });
-        dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
-
-        var product = naProducts[index];
-        heroImg.hidden = false;
-        if (heroImg.src !== new URL(product.img, window.location.href).href) {
-          heroImg.style.opacity = "0";
-          window.setTimeout(function () {
-            heroImg.src = product.img;
-            heroImg.alt = product.name;
-            heroImg.style.opacity = "1";
-          }, 180);
-        }
+      function paint() {
+        var naProducts = window.ovaNewArrivals || [];
+        if (!naProducts.length) return false;
+        if (typeof window.renderGrid !== "function") return false;
+        window.renderGrid("newArrivalsGrid", naProducts);
+        return true;
       }
 
-      function getCenterMostCardIndex() {
-        var wrapRect = carousel.getBoundingClientRect();
-        var center = wrapRect.left + wrapRect.width / 2;
-        var closestIndex = 0;
-        var closestDist = Infinity;
-        cards.forEach(function (card, i) {
-          var rect = card.getBoundingClientRect();
-          var cardCenter = rect.left + rect.width / 2;
-          var dist = Math.abs(cardCenter - center);
-          if (dist < closestDist) {
-            closestDist = dist;
-            closestIndex = i;
-          }
-        });
-        return closestIndex;
+      if (!paint()) {
+        // home.js is deferred, so retry briefly until the catalog is ready.
+        var tries = 0;
+        var timer = window.setInterval(function () {
+          if (paint() || ++tries > 40) window.clearInterval(timer);
+        }, 120);
       }
 
-      var scrollTicking = false;
-      carousel.addEventListener("scroll", function () {
-        if (scrollTicking) return;
-        scrollTicking = true;
-        window.requestAnimationFrame(function () {
-          setActiveIndex(getCenterMostCardIndex());
-          scrollTicking = false;
-        });
-      }, { passive: true });
-
-      window.addEventListener("resize", function () {
-        setActiveIndex(getCenterMostCardIndex());
-      }, { passive: true });
-
-      if (typeof window.enableDragScroll === "function") window.enableDragScroll(carousel);
-
-      var naWheelLock = false;
-      function handleNaWheel(event) {
-        if (Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
-        event.preventDefault();
-        if (naWheelLock) return;
-        naWheelLock = true;
-        var next = activeIndex + (event.deltaY > 0 ? 1 : -1);
-        next = Math.max(0, Math.min(cards.length - 1, next));
-        centerCard(cards[next], true);
-        setActiveIndex(next);
-        window.setTimeout(function () { naWheelLock = false; }, 420);
-      }
-      [document.querySelector(".na-podium"), document.querySelector(".na-carousel-wrap")].forEach(function (el) {
-        if (el) el.addEventListener("wheel", handleNaWheel, { passive: false });
-      });
-
-      function centerCard(card, smooth) {
-        var target = card.offsetLeft - (carousel.clientWidth - card.offsetWidth) / 2;
-        carousel.scrollTo({ left: Math.max(0, target), behavior: smooth ? "smooth" : "auto" });
-      }
-
-      setActiveIndex(0);
-      window.setTimeout(function () {
-        centerCard(cards[0], false);
-      }, 60);
-
-      if ("IntersectionObserver" in window) {
-        var revealObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              section.classList.add("is-visible");
-              revealObserver.disconnect();
-            }
-          });
-        }, { threshold: 0.15 });
-        revealObserver.observe(section);
-      } else {
-        section.classList.add("is-visible");
-      }
+      section.classList.add("is-visible");
     });
   </script>
 
   <section class="new-arrivals" id="newArrivalsSection">
-    <div class="na-stage" id="naStage">
-      <div class="na-header">
-        <p class="na-kicker" id="naKicker">Discover Our</p>
-        <h2 class="na-title">New<span>Arrivals</span></h2>
-        <div class="na-diamond">&#10022;</div>
-        <p class="na-subtitle" id="naSubtitle">The latest Assaf additions to our collection, crafted for those who appreciate the extraordinary.</p>
-      </div>
-      <div class="na-pill">NEW <span>&#10022;</span></div>
-      <div class="na-podium">
-        <!-- src is set by the carousel script; start hidden so the browser is
-             never asked to fetch an empty URL. -->
-        <img class="na-hero-img" id="naHeroImg" alt="" decoding="async" hidden />
-      </div>
+    <div class="na-head">
+      <p class="na-eyebrow"><span id="naKicker">Discover The Latest</span></p>
+      <h2 class="na-heading">New <span>Arrivals</span></h2>
+      <p class="na-sub" id="naSubtitle">Fresh fragrances. New stories. Always extraordinary.</p>
     </div>
-
-    <div class="na-carousel-wrap">
-      <div class="na-carousel" id="naCarousel"></div>
-      <div class="na-dots" id="naDots"></div>
-      <div class="na-swipe-hint"><span>&larr;</span> <span id="naSwipeHint">Swipe to explore</span> <span>&rarr;</span></div>
-    </div>
+    <div class="product-grid na-grid" id="newArrivalsGrid"></div>
   </section>
 
   <section class="brand-rails" id="brandsSection">
@@ -1077,9 +688,9 @@
     <div class="video-box">
       <div class="promo-badge" id="menPromoTag">3 for 50% Off</div>
       <img
-        src="ولد.webp"
+        src="%D9%88%D9%84%D8%AF.webp"
         alt="Perfume banner"
-        loading="lazy"
+        loading="eager"
         decoding="async"
         onerror="this.onerror=null;this.src='images/site-assets/men-banner.webp?v=20260423b';"
       />
@@ -1124,9 +735,9 @@
     <div class="video-box">
       <div class="promo-badge" id="womenPromoTag">3 for 50% Off</div>
       <img
-        src="بنت.webp"
+        src="%D8%A8%D9%86%D8%AA.webp"
         alt="Perfume banner"
-        loading="lazy"
+        loading="eager"
         decoding="async"
         onerror="this.onerror=null;this.src='images/site-assets/women-banner.webp?v=20260423b';"
       />
@@ -1450,13 +1061,13 @@
     </div>
   </footer>
 
-  <script defer src="js/catalog.js?v=24e60d59"></script>
+  <script defer src="js/catalog.js?v=ee7e11c0"></script>
   <script defer src="js/remote-catalog.js?v=9816d387"></script>
   <script defer src="js/features.js?v=197cb98a"></script>
   <!-- Product detail copy shared with brand.html. Deferred: it is only needed for
        modal/detail content, never for first paint. -->
   <script defer src="js/product-details.js?v=128bc9da"></script>
-  <script defer src="js/home.js?v=174f21e5"></script>
+  <script defer src="js/home.js?v=baaae368"></script>
 <script defer src="js/ova-analytics.js?v=2fc3055f"></script>
 <script defer src="js/help-assistant-v2.js?v=1242f617"></script>
 <script defer src="js/scroll-reveal.js?v=47ef797d"></script>

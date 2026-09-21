@@ -651,6 +651,179 @@ body.rtl #couponCode{
     padding-top:20px;
   }
 }
+
+/* ==========================================================================
+   OVA LUXURY CHECKOUT
+   Appended last so it refines the existing checkout without touching any of
+   the form wiring, validation or payment logic above.
+   ========================================================================== */
+
+:root{
+  --ova-ivory:#f8f5ef;
+  --ova-cream:#f2ece1;
+  --ova-warm-white:#fcfbf8;
+  --ova-champagne:#c9a66b;
+  --ova-charcoal:#171513;
+  --ova-black:#0d0c0b;
+  --ova-gray:#77716a;
+  --ova-line:rgba(23,21,19,0.12);
+  --ova-shadow:0 20px 60px rgba(0,0,0,0.06);
+}
+
+body{
+  background:var(--ova-ivory) !important;
+  color:var(--ova-charcoal);
+}
+
+.checkout-shell{
+  max-width:1180px;
+}
+
+.checkout-header h1{
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(34px,6vw,54px);
+  font-weight:500;
+  letter-spacing:-0.015em;
+  color:var(--ova-charcoal);
+}
+
+.checkout-header .eyebrow,
+.checkout-header [data-i18n="eyebrow"]{
+  font-size:11px;
+  letter-spacing:0.26em;
+  text-transform:uppercase;
+  color:var(--ova-champagne);
+}
+
+/* Cards: warm white, hairline border, the one soft shadow. */
+.panel{
+  background:var(--ova-warm-white);
+  border:1px solid var(--ova-line);
+  border-radius:24px;
+  box-shadow:var(--ova-shadow);
+}
+
+.section-title,
+.panel h2{
+  font-family:"Playfair Display",Georgia,serif;
+  font-weight:500;
+  letter-spacing:-0.01em;
+  color:var(--ova-charcoal);
+}
+
+/* Inputs: calm, generous, one accent on focus. */
+.panel input,
+.panel select,
+.panel textarea{
+  background:var(--ova-ivory);
+  border:1px solid var(--ova-line);
+  border-radius:14px;
+  color:var(--ova-charcoal);
+  transition:border-color .3s ease, box-shadow .3s ease, background .3s ease;
+}
+
+.panel input::placeholder,
+.panel textarea::placeholder{
+  color:var(--ova-gray);
+}
+
+.panel input:focus,
+.panel select:focus,
+.panel textarea:focus{
+  outline:none;
+  background:#fff;
+  border-color:var(--ova-champagne);
+  box-shadow:0 0 0 3px rgba(201,166,107,0.16);
+}
+
+.panel label{
+  color:var(--ova-gray);
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+/* Summary rows read as a receipt, with the discount in champagne. */
+.summary-offer{
+  color:var(--ova-gray);
+  font-size:14px;
+  border-bottom:1px solid var(--ova-line);
+}
+
+#summaryDiscount,
+#summaryCouponDiscount{
+  color:var(--ova-champagne);
+  font-weight:700;
+}
+
+.summary-total{
+  border-top:1px solid var(--ova-line);
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(20px,3vw,26px);
+  font-weight:600;
+  color:var(--ova-charcoal);
+}
+
+.offer-line{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:var(--ova-cream);
+  border:1px solid rgba(201,166,107,0.4);
+  color:var(--ova-champagne);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+
+/* Primary action: full-width charcoal pill, like the reference. */
+.submit-btn,
+.confirm-btn{
+  background:var(--ova-charcoal) !important;
+  color:var(--ova-ivory) !important;
+  border:1px solid var(--ova-charcoal) !important;
+  border-radius:999px !important;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  box-shadow:none !important;
+  transition:background .3s ease, transform .3s cubic-bezier(.22,1,.36,1);
+}
+
+.submit-btn:hover,
+.confirm-btn:hover{
+  background:var(--ova-black) !important;
+  transform:translateY(-1px);
+}
+
+.continue-shopping-btn{
+  background:transparent !important;
+  color:var(--ova-charcoal) !important;
+  border:1px solid var(--ova-line) !important;
+  border-radius:999px !important;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  box-shadow:none !important;
+}
+
+.continue-shopping-btn:hover{
+  border-color:var(--ova-champagne) !important;
+  background:var(--ova-cream) !important;
+}
+
+/* Summary line items get the same restrained treatment as the cards. */
+#summaryItems img{
+  border-radius:12px;
+  background:var(--ova-cream);
+  object-fit:contain;
+}
+
 </style>
 </head>
 <body>
