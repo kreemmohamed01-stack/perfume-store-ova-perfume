@@ -2540,6 +2540,76 @@ function renderModalGallery(images, activeIndex = 0){
   });
 }
 
+const PRODUCTS_BATCH_SIZE = 24;
+let renderProductsState = { list: [], rendered: 0 };
+let renderProductsObserver = null;
+
+function buildProductCard(product){
+  const card = document.createElement("div");
+  card.className = "product-card";
+  let stockClass = "out-stock";
+  let stockText = currentLang === "ar" ? "نفد" : "Out of Stock";
+  if (product.stock > 5) {
+    stockClass = "in-stock";
+    stockText = currentLang === "ar" ? "متوفر" : "In Stock";
+  } else if (product.stock > 0) {
+    stockClass = "low-stock";
+    stockText = currentLang === "ar" ? "آخر قطع" : "Low Stock";
+  }
+
+  card.innerHTML = `
+    <div class="stock-badge ${stockClass}">${stockText}</div>
+    ${mostRequestedProductNames.has(product.name) ? '<div class="product-highlight-badge">&#1575;&#1604;&#1571;&#1603;&#1579;&#1585; &#1591;&#1604;&#1576;&#1575;</div>' : ""}
+    <img src="${product.img}" alt="${product.name}" loading="lazy" decoding="async" onclick="openModal('${product.name.replace(/'/g, "\\'")}')">
+    <h3>${product.name}</h3>
+    <p class="product-price">${getPriceMarkup(product)}</p>
+    <div class="product-rating">${getStars(product.rating)} ${product.rating}</div>
+    <div class="product-stats">
+      <span>${product.longevity}</span>
+      <span>${product.sillage}</span>
+      <span>${getDisplayType(product)}</span>
+    </div>
+    <button type="button">${t("add")}</button>
+  `;
+  const img = card.querySelector("img");
+  const button = card.querySelector("button");
+  button.onclick = () => quickAdd(product.name, img);
+  return card;
+}
+
+function ensureLoadMoreSentinel(grid){
+  let sentinel = document.getElementById("productsLoadMoreSentinel");
+  if (!sentinel) {
+    sentinel = document.createElement("div");
+    sentinel.id = "productsLoadMoreSentinel";
+    sentinel.style.cssText = "grid-column:1/-1;height:1px;";
+    grid.parentNode.insertBefore(sentinel, grid.nextSibling);
+  }
+  return sentinel;
+}
+
+function renderNextProductsBatch(){
+  const grid = document.getElementById("allProductsGrid");
+  if (!grid) return;
+  const { list, rendered } = renderProductsState;
+  const next = list.slice(rendered, rendered + PRODUCTS_BATCH_SIZE);
+  if (!next.length) return;
+
+  const fragment = document.createDocumentFragment();
+  next.forEach((product) => fragment.appendChild(buildProductCard(product)));
+  grid.appendChild(fragment);
+  renderProductsState.rendered += next.length;
+
+  if(typeof window.refreshOvaScrollReveal === "function"){
+    window.refreshOvaScrollReveal();
+  }
+
+  if (renderProductsState.rendered >= list.length && renderProductsObserver) {
+    renderProductsObserver.disconnect();
+    renderProductsObserver = null;
+  }
+}
+
 function renderProducts(filter = ""){
   const grid = document.getElementById("allProductsGrid");
   const emptyState = document.getElementById("emptyState");
@@ -2547,47 +2617,33 @@ function renderProducts(filter = ""){
   if(!grid || !emptyState) return;
   grid.innerHTML = "";
 
+  if (renderProductsObserver) {
+    renderProductsObserver.disconnect();
+    renderProductsObserver = null;
+  }
+
   const visibleProducts = allProducts.filter((product) =>
     product.name.toLowerCase().includes(normalizedFilter)
   );
 
-  visibleProducts.forEach((product) => {
-    const card = document.createElement("div");
-    card.className = "product-card";
-    let stockClass = "out-stock";
-    let stockText = currentLang === "ar" ? "نفد" : "Out of Stock";
-    if (product.stock > 5) {
-      stockClass = "in-stock";
-      stockText = currentLang === "ar" ? "متوفر" : "In Stock";
-    } else if (product.stock > 0) {
-      stockClass = "low-stock";
-      stockText = currentLang === "ar" ? "آخر قطع" : "Low Stock";
-    }
+  renderProductsState = { list: visibleProducts, rendered: 0 };
+  renderNextProductsBatch();
 
-    card.innerHTML = `
-      <div class="stock-badge ${stockClass}">${stockText}</div>
-      ${mostRequestedProductNames.has(product.name) ? '<div class="product-highlight-badge">&#1575;&#1604;&#1571;&#1603;&#1579;&#1585; &#1591;&#1604;&#1576;&#1575;</div>' : ""}
-      <img src="${product.img}" alt="${product.name}" loading="lazy" decoding="async" onclick="openModal('${product.name.replace(/'/g, "\\'")}')">
-      <h3>${product.name}</h3>
-      <p class="product-price">${getPriceMarkup(product)}</p>
-      <div class="product-rating">${getStars(product.rating)} ${product.rating}</div>
-      <div class="product-stats">
-        <span>${product.longevity}</span>
-        <span>${product.sillage}</span>
-        <span>${getDisplayType(product)}</span>
-      </div>
-      <button type="button">${t("add")}</button>
-    `;
-    const img = card.querySelector("img");
-    const button = card.querySelector("button");
-    button.onclick = () => quickAdd(product.name, img);
-    grid.appendChild(card);
-  });
+  const sentinel = ensureLoadMoreSentinel(grid);
+  if ("IntersectionObserver" in window) {
+    renderProductsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) renderNextProductsBatch();
+      });
+    }, { rootMargin: "800px 0px" });
+    renderProductsObserver.observe(sentinel);
+  } else {
+    while (renderProductsState.rendered < renderProductsState.list.length) {
+      renderNextProductsBatch();
+    }
+  }
 
   emptyState.style.display = visibleProducts.length ? "none" : "block";
-  if(typeof window.refreshOvaScrollReveal === "function"){
-    window.refreshOvaScrollReveal();
-  }
 }
 
 function getProductByName(productName){
@@ -3068,10 +3124,89 @@ function getFilteredAllProducts(){
   return filtered;
 }
 
+const ALL_PRODUCTS_BATCH_SIZE = 24;
+let allProductsGridState = { list: [], rendered: 0 };
+let allProductsGridObserver = null;
+
+function buildAllProductsCard(product){
+  const card = document.createElement("div");
+  card.className = "product-card";
+  let stockClass = "out-stock";
+  let stockText = currentLang === "ar" ? "نفد" : "Out of Stock";
+  if (product.stock > 5) {
+    stockClass = "in-stock";
+    stockText = currentLang === "ar" ? "متوفر" : "In Stock";
+  } else if (product.stock > 0) {
+    stockClass = "low-stock";
+    stockText = currentLang === "ar" ? "آخر قطع" : "Low Stock";
+  }
+
+  card.innerHTML = `
+    <div class="stock-badge ${stockClass}">${stockText}</div>
+    ${mostRequestedProductNames.has(product.name) ? '<div class="product-highlight-badge">&#1575;&#1604;&#1571;&#1603;&#1579;&#1585; &#1591;&#1604;&#1576;&#1575;</div>' : ""}
+    <img src="${product.img}" alt="${product.name}" loading="lazy" decoding="async" onclick="openModal('${product.name.replace(/'/g, "\\'")}')">
+    <h3>${product.name}</h3>
+    <p class="product-price">${getPriceMarkup(product)}</p>
+    <div class="product-rating">${getStars(product.rating)} ${product.rating}</div>
+    <div class="product-stats">
+      <span>${product.longevity}</span>
+      <span>${product.sillage}</span>
+      <span>${getDisplayType(product)}</span>
+    </div>
+    <div class="product-card-actions${product.detailsHtml ? "" : " single-action"}">
+      <button class="product-more-btn" type="button"><span class="product-btn-inner"><span class="product-btn-icon details-icon" aria-hidden="true">i</span><span class="product-btn-label">${getCardDetailsButtonText()}</span></span></button>
+      <button type="button">${t("add")}</button>
+    </div>
+  `;
+
+  const img = card.querySelector("img");
+  const moreButton = card.querySelector(".product-more-btn");
+  const addButton = card.querySelector(".product-card-actions button:last-child");
+  if(moreButton){
+    moreButton.onclick = () => openModal(product.name);
+  }
+  addButton.onclick = () => quickAdd(product.name, img);
+  return card;
+}
+
+function ensureAllProductsSentinel(grid){
+  let sentinel = document.getElementById("allProductsLoadMoreSentinel");
+  if (!sentinel) {
+    sentinel = document.createElement("div");
+    sentinel.id = "allProductsLoadMoreSentinel";
+    sentinel.style.cssText = "grid-column:1/-1;height:1px;";
+    grid.parentNode.insertBefore(sentinel, grid.nextSibling);
+  }
+  return sentinel;
+}
+
+function renderNextAllProductsBatch(){
+  const grid = document.getElementById("allProductsGrid");
+  if (!grid) return;
+  const { list, rendered } = allProductsGridState;
+  const next = list.slice(rendered, rendered + ALL_PRODUCTS_BATCH_SIZE);
+  if (!next.length) return;
+
+  const fragment = document.createDocumentFragment();
+  next.forEach((product) => fragment.appendChild(buildAllProductsCard(product)));
+  grid.appendChild(fragment);
+  allProductsGridState.rendered += next.length;
+
+  if (allProductsGridState.rendered >= list.length && allProductsGridObserver) {
+    allProductsGridObserver.disconnect();
+    allProductsGridObserver = null;
+  }
+}
+
 function renderAllProductsGrid(products){
   const grid = document.getElementById("allProductsGrid");
   const emptyState = document.getElementById("emptyState");
   grid.innerHTML = "";
+
+  if (allProductsGridObserver) {
+    allProductsGridObserver.disconnect();
+    allProductsGridObserver = null;
+  }
 
   if(!products.length){
     emptyState.style.display = "block";
@@ -3083,46 +3218,22 @@ function renderAllProductsGrid(products){
 
   emptyState.style.display = "none";
 
-  products.forEach((product) => {
-    const card = document.createElement("div");
-    card.className = "product-card";
-    let stockClass = "out-stock";
-    let stockText = currentLang === "ar" ? "نفد" : "Out of Stock";
-    if (product.stock > 5) {
-      stockClass = "in-stock";
-      stockText = currentLang === "ar" ? "متوفر" : "In Stock";
-    } else if (product.stock > 0) {
-      stockClass = "low-stock";
-      stockText = currentLang === "ar" ? "آخر قطع" : "Low Stock";
-    }
+  allProductsGridState = { list: products, rendered: 0 };
+  renderNextAllProductsBatch();
 
-    card.innerHTML = `
-      <div class="stock-badge ${stockClass}">${stockText}</div>
-      ${mostRequestedProductNames.has(product.name) ? '<div class="product-highlight-badge">&#1575;&#1604;&#1571;&#1603;&#1579;&#1585; &#1591;&#1604;&#1576;&#1575;</div>' : ""}
-      <img src="${product.img}" alt="${product.name}" loading="lazy" decoding="async" onclick="openModal('${product.name.replace(/'/g, "\\'")}')">
-      <h3>${product.name}</h3>
-      <p class="product-price">${getPriceMarkup(product)}</p>
-      <div class="product-rating">${getStars(product.rating)} ${product.rating}</div>
-      <div class="product-stats">
-        <span>${product.longevity}</span>
-        <span>${product.sillage}</span>
-        <span>${getDisplayType(product)}</span>
-      </div>
-      <div class="product-card-actions${product.detailsHtml ? "" : " single-action"}">
-        <button class="product-more-btn" type="button"><span class="product-btn-inner"><span class="product-btn-icon details-icon" aria-hidden="true">i</span><span class="product-btn-label">${getCardDetailsButtonText()}</span></span></button>
-        <button type="button">${t("add")}</button>
-      </div>
-    `;
-
-    const img = card.querySelector("img");
-    const moreButton = card.querySelector(".product-more-btn");
-    const addButton = card.querySelector(".product-card-actions button:last-child");
-    if(moreButton){
-      moreButton.onclick = () => openModal(product.name);
+  const sentinel = ensureAllProductsSentinel(grid);
+  if ("IntersectionObserver" in window) {
+    allProductsGridObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) renderNextAllProductsBatch();
+      });
+    }, { rootMargin: "800px 0px" });
+    allProductsGridObserver.observe(sentinel);
+  } else {
+    while (allProductsGridState.rendered < allProductsGridState.list.length) {
+      renderNextAllProductsBatch();
     }
-    addButton.onclick = () => quickAdd(product.name, img);
-    grid.appendChild(card);
-  });
+  }
 }
 
 function updateFilters(){

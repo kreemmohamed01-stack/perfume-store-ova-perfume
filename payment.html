@@ -252,6 +252,140 @@ body.rtl .wallet-option-number,body.rtl #headerTotal,body.rtl #summaryDiscount,b
 .success-screen p{font-size:16px;line-height:1.9;color:#1e5f34;max-width:720px;margin:0 auto 10px}
 @media (max-width:860px){.layout{grid-template-columns:1fr}.summary-panel{position:static}.methods{grid-template-columns:1fr}.wallet-options{grid-template-columns:1fr}}
 @media (max-width:640px){.shell{padding-top:20px}.method-card{padding:14px 12px}.wallet-options{gap:12px}.wallet-logo{padding:10px 12px;font-size:13px}.wallet-option{padding:16px;min-height:auto;border-radius:24px}.wallet-option-topline,.wallet-option-head{flex-direction:column;align-items:flex-start}.wallet-option-badge{min-width:auto}.wallet-option-name{font-size:21px}.wallet-feature-list{gap:6px}.wallet-option-number{font-size:22px;padding:14px 16px}.copy-wallet-btn{width:auto;padding:7px 10px}.wallet-icon{width:28px;height:28px}.wallet-icon svg{width:15px;height:15px}.orange .wallet-icon svg{width:19px;height:19px}.confirm-btn{font-size:14px;padding:16px 18px}}
+
+/* ==========================================================================
+   OVA LUXURY PAYMENT PAGE
+   This page never received the ivory/charcoal/champagne redesign the rest
+   of the site got - the navy Wallet card and blue PayPal card clashed
+   with everything else. Appended last so it wins without touching any of
+   the payment logic above.
+   ========================================================================== */
+:root{
+  --ova-ivory:#f8f5ef;
+  --ova-cream:#f2ece1;
+  --ova-warm-white:#fcfbf8;
+  --ova-champagne:#c9a66b;
+  --ova-charcoal:#171513;
+  --ova-black:#0d0c0b;
+  --ova-gray:#77716a;
+  --ova-line:rgba(23,21,19,0.12);
+  --ova-shadow:0 20px 60px rgba(0,0,0,0.06);
+}
+
+body{background:var(--ova-ivory) !important;color:var(--ova-charcoal)}
+
+.header h1,.section-title,.summary-panel h2{color:var(--ova-charcoal) !important}
+.header p,.section-note{color:var(--ova-gray) !important}
+
+.total-box{background:var(--ova-charcoal) !important;box-shadow:var(--ova-shadow) !important}
+
+/* Cards: same warm-white/hairline-border language as every other page,
+   regardless of which payment method they represent. */
+.method-card,
+.wallet-method-card,
+.paypal-method-card,
+.cash-method-card{
+  background:var(--ova-warm-white) !important;
+  background-image:none !important;
+  border:1px solid var(--ova-line) !important;
+  box-shadow:var(--ova-shadow) !important;
+  color:var(--ova-charcoal) !important;
+}
+
+.method-card h3,
+.wallet-method-card h3,
+.paypal-method-card h3,
+.method-card p,
+.wallet-method-card p,
+.paypal-method-card p{
+  color:var(--ova-charcoal) !important;
+}
+
+.method-card p,
+.wallet-method-card p,
+.paypal-method-card p{
+  color:var(--ova-gray) !important;
+}
+
+.method-badge,
+.wallet-method-card .method-badge,
+.paypal-method-card .method-badge{
+  background:var(--ova-cream) !important;
+  color:var(--ova-charcoal) !important;
+  border:1px solid var(--ova-line) !important;
+  box-shadow:none !important;
+}
+
+.method-chip,
+.wallet-method-chip{
+  background:var(--ova-cream) !important;
+  border:1px solid var(--ova-line) !important;
+  color:var(--ova-gray) !important;
+}
+
+.method-card.active,
+.wallet-method-card.active,
+.paypal-method-card.active{
+  border-color:var(--ova-champagne) !important;
+  box-shadow:0 22px 44px rgba(201,166,107,0.18) !important;
+}
+
+.payment-box{
+  background:var(--ova-warm-white) !important;
+  border:1px solid var(--ova-line) !important;
+}
+
+.paypal-chip{
+  background:var(--ova-cream) !important;
+  color:var(--ova-charcoal) !important;
+  border:1px solid var(--ova-line) !important;
+}
+
+.field label{color:var(--ova-gray) !important}
+.field input,.field select{
+  background:var(--ova-ivory) !important;
+  border:1px solid var(--ova-line) !important;
+  color:var(--ova-charcoal) !important;
+}
+
+/* Primary action: solid charcoal pill, same as every Add to Cart / Checkout
+   button on the rest of the site - was previously an unstyled white
+   rectangle that barely read as a button. */
+.confirm-btn{
+  background:var(--ova-charcoal) !important;
+  background-image:none !important;
+  color:var(--ova-ivory) !important;
+  border:1px solid var(--ova-charcoal) !important;
+  border-radius:999px !important;
+  font-weight:600;
+  letter-spacing:0.14em;
+  box-shadow:0 18px 36px rgba(13,12,11,0.22) !important;
+}
+.confirm-btn:hover{background:var(--ova-black) !important}
+
+.paypal-btn,.copy-wallet-btn{
+  background:var(--ova-charcoal) !important;
+  background-image:none !important;
+  color:var(--ova-ivory) !important;
+  border:1px solid var(--ova-charcoal) !important;
+  border-radius:999px !important;
+}
+.paypal-btn:hover,.copy-wallet-btn:hover{background:var(--ova-black) !important}
+
+.summary-panel,.order-summary,.summary-item{
+  background:var(--ova-warm-white) !important;
+  border-color:var(--ova-line) !important;
+}
+
+.summary-total,.summary-total span{color:var(--ova-charcoal) !important}
+.summary-offer{color:var(--ova-gray) !important}
+
+.wallet-option{
+  background:var(--ova-warm-white) !important;
+  border:1px solid var(--ova-line) !important;
+}
+.wallet-option-name,.wallet-option-number{color:var(--ova-charcoal) !important}
+.wallet-option-caption,.wallet-option-note,.wallet-feature{color:var(--ova-gray) !important}
 </style>
 </head>
 <body>
