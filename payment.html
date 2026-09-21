@@ -622,7 +622,9 @@ const t = pageLang.t;
 const savedCart = JSON.parse(localStorage.getItem("ovaCart") || "[]");
 const checkoutDetails = JSON.parse(localStorage.getItem("ovaCheckoutDetails") || "{}");
 const FIRST_ORDER_COUPON_CODE = "OVA22";
-const FIRST_ORDER_COUPON_RATE = 0.10;
+// Disabled: the coupon field stays visible and still validates the code,
+// but the discount no longer applies (rate forced to 0 per request).
+const FIRST_ORDER_COUPON_RATE = 0;
 const appliedCouponCode = String(localStorage.getItem("ovaAppliedCouponCode") || "").trim().toUpperCase();
 const STORE_NOTIFICATION_EMAIL = window.OVA_STORE_NOTIFICATION_EMAIL || "a.salem8812@gmail.com";
 let selectedMethod = "cash";

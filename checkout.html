@@ -1082,7 +1082,9 @@ const currentLang = pageLang.lang;
 const t = pageLang.t;
 const savedCart = JSON.parse(localStorage.getItem("ovaCart") || "[]");
 const FIRST_ORDER_COUPON_CODE = "OVA22";
-const FIRST_ORDER_COUPON_RATE = 0.10;
+// Disabled: the coupon field stays visible and still validates the code,
+// but the discount no longer applies (rate forced to 0 per request).
+const FIRST_ORDER_COUPON_RATE = 0;
 let appliedCouponCode = String(localStorage.getItem("ovaAppliedCouponCode") || "").trim().toUpperCase();
 
 function getCartOfferSummary(items){
