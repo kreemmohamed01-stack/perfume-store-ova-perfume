@@ -10907,3 +10907,142 @@
         transition: none !important;
       }
     }
+
+    /* --------------------------------------------------------------------
+       YOU MAY ALSO LIKE - related products under the product detail page.
+       Reuses .product-grid/.product-card exactly, just a fresh heading.
+       -------------------------------------------------------------------- */
+    .product-related {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--ova-line, rgba(23,21,19,0.12));
+    }
+
+    .product-related .product-detail-heading {
+      margin-bottom: 20px;
+    }
+
+    .product-related-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .product-related-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* --------------------------------------------------------------------
+       CART DRAWER - lighter, premium ivory panel instead of the dark
+       charcoal-gradient background; bolder charcoal checkout button and
+       clearer, larger price/quantity typography.
+       -------------------------------------------------------------------- */
+    #cart.side-panel {
+      background: var(--ova-warm-white, #fcfbf8) !important;
+      color: var(--ova-charcoal, #171513) !important;
+      border-left: 1px solid var(--ova-line, rgba(23,21,19,0.12));
+    }
+
+    #cart .panel-back {
+      color: var(--ova-charcoal, #171513) !important;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    #cart .cart-item,
+    #cart #cartItems > * {
+      border-bottom: 1px solid var(--ova-line, rgba(23,21,19,0.1));
+    }
+
+    #cart .cart-item h3,
+    #cart h4,
+    #cart .cart-item-name {
+      color: var(--ova-charcoal, #171513) !important;
+      font-size: 15.5px;
+      font-weight: 700;
+    }
+
+    #cart .cart-item p,
+    #cart .cart-info p,
+    #cart .cart-item span,
+    #cart .qty-controls span {
+      color: var(--ova-charcoal, #171513) !important;
+      opacity: 1 !important;
+    }
+
+    #cart .cart-footer {
+      background: var(--ova-cream, #f2ece1) !important;
+      border-top: 1px solid var(--ova-line, rgba(23,21,19,0.12));
+    }
+
+    #cart #total {
+      color: var(--ova-charcoal, #171513) !important;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    #cart .cart-offer-hint,
+    #cart .cart-delivery-note {
+      color: var(--ova-charcoal, #171513) !important;
+      opacity: 1 !important;
+      font-size: 12.5px;
+    }
+
+    #cart .cart-offer-hint strong,
+    #cart .cart-delivery-note strong {
+      color: var(--ova-champagne, #c9a66b);
+    }
+
+    #cartCheckoutBtn {
+      background: var(--ova-charcoal, #171513) !important;
+      background-image: none !important;
+      color: var(--ova-ivory, #f8f5ef) !important;
+      border: 1px solid var(--ova-charcoal, #171513) !important;
+      border-radius: 999px !important;
+      font-size: 13px !important;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 15px 24px !important;
+      box-shadow: 0 16px 32px rgba(13,12,11,0.2) !important;
+    }
+
+    #cartCheckoutBtn:hover {
+      background: var(--ova-black, #0d0c0b) !important;
+    }
+
+    #cartContinueBtn.cart-continue-btn {
+      background: transparent !important;
+      color: var(--ova-charcoal, #171513) !important;
+      border: 1px solid var(--ova-line, rgba(23,21,19,0.2)) !important;
+      border-radius: 999px !important;
+      font-size: 12px !important;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 20px !important;
+    }
+
+    #cartContinueBtn.cart-continue-btn:hover {
+      border-color: var(--ova-champagne, #c9a66b) !important;
+      background: var(--ova-ivory, #f8f5ef) !important;
+    }
+
+    /* quantity +/- controls: bigger, clearer numerals */
+    #cart .qty-controls button,
+    #cart .cart-item button {
+      background: var(--ova-ivory, #f8f5ef) !important;
+      color: var(--ova-charcoal, #171513) !important;
+      border: 1px solid var(--ova-line, rgba(23,21,19,0.16)) !important;
+      font-size: 15px !important;
+      font-weight: 700 !important;
+    }
+
+    #cart .cart-item img {
+      border-radius: 14px;
+      background: #fff;
+    }

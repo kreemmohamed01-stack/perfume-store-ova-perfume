@@ -2867,6 +2867,40 @@
       return [...saved, ...defaults].slice(0, 5);
     }
 
+    // Picks up to 4 other products to suggest under "You May Also Like":
+    // same fragrance type when available, otherwise any other product,
+    // reusing the exact same card + add-to-cart wiring as every other grid.
+    function renderRelatedProducts(product) {
+      const grid = document.getElementById("productRelatedGrid");
+      if (!grid || !product) return;
+
+      const pool = getAllHomepageProductPools().filter((item) => item && item.name && item.name !== product.name);
+      const seen = new Set();
+      const uniquePool = pool.filter((item) => {
+        const key = normalizeSearchTerm(item.name);
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      const sameType = uniquePool.filter((item) =>
+        Array.isArray(item.filterTypes) && Array.isArray(product.filterTypes) &&
+        item.filterTypes.some((type) => product.filterTypes.includes(type))
+      );
+
+      const ranked = [...sameType, ...uniquePool.filter((item) => !sameType.includes(item))];
+      const picks = ranked.slice(0, 4);
+
+      if (!picks.length) {
+        grid.replaceChildren();
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      picks.forEach((item) => fragment.appendChild(createProductCard(item)));
+      grid.replaceChildren(fragment);
+    }
+
     function renderReviewsInModal(name) {
       const wrap = document.getElementById("modalReviews");
       if (!wrap) return;
@@ -4709,6 +4743,7 @@
       document.getElementById("modalDetails").innerHTML = product.detailsHtml || "";
       document.getElementById("modalQty").innerText = modalQty;
       renderReviewsInModal(name);
+      renderRelatedProducts(product);
       syncCompareButtons();
       const productUrl = buildProductPageUrl(product);
       if (`${window.location.pathname}${window.location.search}` !== resolveRelativePageUrl(productUrl)) {
