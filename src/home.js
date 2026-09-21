@@ -3350,7 +3350,35 @@
       renderHeroTopSellerStrip();
       renderBestSellerHero();
       renderQuizState();
-      renderGrid("bestSellerSlider", [...bestSellerProducts, ...extraBestSellerProducts]);
+      // Deferred like New Arrivals: on first load this renders 6+ product
+      // images that sit only ~1 screen down, which is close enough that
+      // the browser fetches them immediately despite loading="lazy",
+      // competing with the hero for bandwidth. Skip the very first paint
+      // until the section is actually near the viewport; every later call
+      // (language switch, etc.) still paints immediately since the section
+      // is already visible by then.
+      if (window.__bsDeferredPaintDone || !document.getElementById("bestSellerSection")) {
+        renderGrid("bestSellerSlider", [...bestSellerProducts, ...extraBestSellerProducts]);
+      } else if (!window.__bsDeferredPaintArmed) {
+        window.__bsDeferredPaintArmed = true;
+        const paintBestSellers = () => {
+          window.__bsDeferredPaintDone = true;
+          renderGrid("bestSellerSlider", [...bestSellerProducts, ...extraBestSellerProducts]);
+        };
+        if ("IntersectionObserver" in window) {
+          const bsObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                paintBestSellers();
+                bsObserver.disconnect();
+              }
+            });
+          }, { rootMargin: "600px 0px" });
+          bsObserver.observe(document.getElementById("bestSellerSection"));
+        } else {
+          paintBestSellers();
+        }
+      }
       if (menSectionRendered) applyFilters("men");
       if (womenSectionRendered) applyFilters("women");
       if (quizSectionRendered) refreshQuizResultsForLanguage();

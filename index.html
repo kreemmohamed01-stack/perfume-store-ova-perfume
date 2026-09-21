@@ -641,25 +641,51 @@
     // New Arrivals now uses the shared luxury product card via renderGrid,
     // so the card, backdrop and cart wiring stay identical to the rest of
     // the site. The old bespoke carousel + podium stage was removed.
+    //
+    // Painting is deferred until the section is actually near the viewport:
+    // 16 product images (each already loading="lazy") sitting fully built
+    // in the DOM this early on the page still get treated as "near enough"
+    // by the browser's own lazy-load heuristic and fetch immediately,
+    // competing with everything above the fold for bandwidth on a slow
+    // connection. Not building the cards at all until the section is
+    // genuinely approaching removes that competition entirely.
     window.addEventListener("DOMContentLoaded", function () {
       var section = document.getElementById("newArrivalsSection");
       var grid = document.getElementById("newArrivalsGrid");
       if (!section || !grid) return;
 
+      var painted = false;
       function paint() {
+        if (painted) return true;
         var naProducts = window.ovaNewArrivals || [];
         if (!naProducts.length) return false;
         if (typeof window.renderGrid !== "function") return false;
         window.renderGrid("newArrivalsGrid", naProducts);
+        painted = true;
         return true;
       }
 
-      if (!paint()) {
-        // home.js is deferred, so retry briefly until the catalog is ready.
-        var tries = 0;
-        var timer = window.setInterval(function () {
-          if (paint() || ++tries > 40) window.clearInterval(timer);
-        }, 120);
+      function tryPaintWithRetry() {
+        if (!paint()) {
+          var tries = 0;
+          var timer = window.setInterval(function () {
+            if (paint() || ++tries > 40) window.clearInterval(timer);
+          }, 120);
+        }
+      }
+
+      if ("IntersectionObserver" in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              tryPaintWithRetry();
+              observer.disconnect();
+            }
+          });
+        }, { rootMargin: "600px 0px" });
+        observer.observe(section);
+      } else {
+        tryPaintWithRetry();
       }
 
       section.classList.add("is-visible");
@@ -1067,7 +1093,7 @@
   <!-- Product detail copy shared with brand.html. Deferred: it is only needed for
        modal/detail content, never for first paint. -->
   <script defer src="js/product-details.js?v=128bc9da"></script>
-  <script defer src="js/home.js?v=baaae368"></script>
+  <script defer src="js/home.js?v=74fd935f"></script>
 <script defer src="js/ova-analytics.js?v=2fc3055f"></script>
 <script defer src="js/help-assistant-v2.js?v=1242f617"></script>
 <script defer src="js/scroll-reveal.js?v=47ef797d"></script>
