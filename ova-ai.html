@@ -32,23 +32,36 @@ body{
   min-height:100vh;
   min-height:100dvh;
   overflow-x:hidden;
-  padding-bottom:calc(72px + env(safe-area-inset-bottom));
 }
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
 
 .ai-wrap{max-width:900px;margin:0 auto}
 
-/* ---------- header ---------- */
+/* ---------- header (mirrors the site navbar) ---------- */
 .ai-head{
   position:relative;
-  z-index:5;
+  z-index:60;
   display:flex;align-items:center;justify-content:space-between;
-  padding:18px 20px 14px;
+  padding:16px 20px 14px;
 }
-.ai-burger{display:flex;flex-direction:column;gap:5px;padding:4px}
-.ai-burger span{display:block;width:26px;height:2px;background:var(--ink);border-radius:2px}
-.ai-logo{text-align:center;line-height:1}
+.ai-head-side{display:flex;align-items:center;gap:10px;flex:1}
+.ai-head-side.right{justify-content:flex-end}
+.ai-ibtn{
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:50%;
+  color:var(--ink);
+  transition:background .25s ease;
+}
+.ai-ibtn:hover{background:rgba(20,18,16,0.06)}
+.ai-ibtn svg{width:22px;height:22px}
+.ai-lang{
+  min-width:38px;height:34px;padding:0 10px;
+  border-radius:999px;border:1px solid var(--line);
+  font-size:12px;font-weight:600;letter-spacing:.06em;
+  color:var(--ink);
+}
+.ai-logo{text-align:center;line-height:1;flex:0 0 auto}
 .ai-logo b{
   display:block;
   font-family:"Playfair Display",serif;
@@ -61,21 +74,45 @@ button{font-family:inherit;cursor:pointer;background:none;border:none;color:inhe
   font-size:8.5px;letter-spacing:0.42em;
   color:var(--muted);text-transform:uppercase;
 }
-.ai-head-right{display:flex;align-items:center;gap:14px}
-.ai-bag{position:relative;display:flex}
-.ai-bag svg{width:23px;height:23px}
-.ai-bag-dot{
-  position:absolute;top:-1px;right:-2px;
-  width:9px;height:9px;border-radius:50%;
-  background:#d64545;border:1.5px solid var(--page);
+.ai-cartbtn{position:relative}
+.ai-cart-badge{
+  position:absolute;top:0;right:0;
+  min-width:17px;height:17px;padding:0 4px;
+  border-radius:999px;
+  background:var(--gold);color:#fff;
+  font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--page);
 }
-.ai-user{
-  width:34px;height:34px;border-radius:50%;
+
+/* dropdown menu, same links as the site nav */
+.ai-menu-wrap{position:relative}
+.ai-menu{
+  position:absolute;top:calc(100% + 10px);left:0;
+  min-width:210px;
   background:var(--card);
   border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:600;
+  border-radius:16px;
+  box-shadow:0 18px 44px rgba(20,18,16,0.14);
+  padding:8px;
+  display:none;
+  z-index:70;
 }
+html[dir="rtl"] .ai-menu{left:auto;right:0}
+.ai-menu.open{display:block}
+.ai-menu a,.ai-menu button{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;
+  padding:11px 13px;border-radius:10px;
+  font-size:14px;color:var(--ink);
+  text-align:left;
+}
+html[dir="rtl"] .ai-menu a,html[dir="rtl"] .ai-menu button{text-align:right}
+.ai-menu a:hover,.ai-menu button:hover{background:#f2eee6}
+.ai-submenu{display:none;padding:2px 0 6px 10px}
+html[dir="rtl"] .ai-submenu{padding:2px 10px 6px 0}
+.ai-submenu.open{display:block}
+.ai-submenu a{font-size:13.5px;color:var(--ink-2)}
 
 /* ---------- hero ---------- */
 .ai-hero{
@@ -195,7 +232,13 @@ html[dir="rtl"] .ai-tile-ico{left:auto;right:13px}
 html[dir="rtl"] .ai-tile-arw svg{transform:scaleX(-1)}
 
 /* ---------- composer ---------- */
-.ai-composer-block{padding:16px 20px 0}
+.ai-composer-block{
+  position:sticky;
+  bottom:0;
+  z-index:40;
+  padding:12px 20px calc(14px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(244,241,234,0) 0%,rgba(244,241,234,0.94) 26%,var(--page) 58%);
+}
 .ai-composer{
   display:flex;align-items:center;gap:10px;
   padding:9px 9px 9px 20px;
@@ -328,31 +371,12 @@ html[dir="rtl"] .ai-prod svg{transform:scaleX(-1)}
 }
 html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
 
-/* ---------- bottom nav ---------- */
-.ai-nav{
-  position:fixed;left:0;right:0;bottom:0;z-index:50;
-  display:grid;grid-template-columns:repeat(5,1fr);
-  background:#efece4;
-  border-top:1px solid var(--line);
-  padding-bottom:env(safe-area-inset-bottom);
-}
-.ai-nav a{
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  padding:11px 4px 10px;
-  font-size:11.5px;color:var(--ink-2);
-  position:relative;
-}
-.ai-nav a svg{width:21px;height:21px}
-.ai-nav a.on{color:var(--ink);font-weight:600}
-.ai-nav a.on::after{
-  content:"";position:absolute;bottom:5px;
-  width:26px;height:2px;border-radius:2px;background:var(--ink);
-}
 
 @media (min-width:760px){
   .ai-hero-in{padding:60px 40px}
   .ai-tiles{padding:18px 40px 4px;gap:14px}
-  .ai-composer-block,.ai-try,.ai-thread{padding-left:40px;padding-right:40px}
+  .ai-try,.ai-thread{padding-left:40px;padding-right:40px}
+  .ai-composer-block{padding-left:40px;padding-right:40px}
   .ai-banner{margin-left:40px;margin-right:40px}
   .ai-head{padding:22px 40px 16px}
 }
@@ -372,14 +396,44 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
 <div class="ai-wrap">
 
   <header class="ai-head">
-    <a class="ai-burger" href="index.html" aria-label="Home"><span></span><span></span><span></span></a>
+    <div class="ai-head-side">
+      <div class="ai-menu-wrap">
+        <button class="ai-ibtn" type="button" id="aiMenuBtn" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="ai-menu" id="aiMenu">
+          <a href="index.html" data-k="mHome">Home</a>
+          <a href="ova-ai.html" data-k="mAi">OVA AI</a>
+          <button type="button" id="aiMenuProducts"><span data-k="mProducts">Products</span><span>+</span></button>
+          <div class="ai-submenu" id="aiSubProducts">
+            <a href="all-perfume.html" data-k="mShop">Shop Now</a>
+            <a href="men.html" data-k="mMen">Men Perfume</a>
+            <a href="women.html" data-k="mWomen">Women Perfume</a>
+            <a href="unisex.html" data-k="mUnisex">Unisex</a>
+            <a href="brand.html" data-k="mBrands">Brands</a>
+          </div>
+          <button type="button" id="aiMenuContact"><span data-k="mContact">Contact Us</span><span>+</span></button>
+          <div class="ai-submenu" id="aiSubContact">
+            <a href="https://wa.me/201099136720" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="https://www.facebook.com/share/1BQfQ7iagG/" target="_blank" rel="me noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/ova_store.11/" target="_blank" rel="me noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@ova_store.11" target="_blank" rel="me noopener noreferrer">TikTok</a>
+          </div>
+        </div>
+      </div>
+      <button class="ai-lang" type="button" id="aiLang">AR</button>
+    </div>
+
     <div class="ai-logo"><b>OVA</b><small>Perfume</small></div>
-    <div class="ai-head-right">
-      <a class="ai-bag" href="all-perfume.html" aria-label="Shop">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M6 8h12l-1 12H7L6 8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <span class="ai-bag-dot" id="aiBagDot" hidden></span>
+
+    <div class="ai-head-side right">
+      <a class="ai-ibtn" href="all-perfume.html" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </a>
-      <span class="ai-user">K</span>
+      <a class="ai-ibtn ai-cartbtn" href="checkout.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 5H5L7.2 14.2C7.31 14.67 7.73 15 8.21 15H17.4C17.87 15 18.29 14.69 18.41 14.24L20 8H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="19" r="1.7" fill="currentColor"/><circle cx="17" cy="19" r="1.7" fill="currentColor"/></svg>
+        <span class="ai-cart-badge" id="aiCartBadge" hidden>0</span>
+      </a>
     </div>
   </header>
 
@@ -425,16 +479,6 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
     </button>
   </div>
 
-  <div class="ai-composer-block">
-    <div class="ai-composer">
-      <span class="ai-spark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6l1.5 4.4 4.4 1.5-4.4 1.5L12 14.4l-1.5-4.4L6.1 8.5l4.4-1.5L12 2.6z" fill="currentColor"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z" fill="currentColor"/></svg></span>
-      <textarea class="ai-input" id="aiInput" rows="1" placeholder="Ask OVA AI anything..."></textarea>
-      <button type="button" class="ai-send" id="aiSend" aria-label="Send" disabled>
-        <svg viewBox="0 0 24 24" fill="none"><path d="M4.5 11.5L20 4.5l-7 15.5-2.3-6.2-6.2-2.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
-  </div>
-
   <div class="ai-try">
     <div class="ai-try-label" id="aiTryLabel">TRY ASKING</div>
     <div class="ai-chips" id="aiChips"></div>
@@ -451,35 +495,25 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
     <div class="ai-banner-side" id="aiBannerSide">EXPLORE<br>DISCOVER<br>BELONG</div>
   </section>
 
+  <!-- Composer is pinned to the bottom of the viewport so it always sits
+       directly under the newest message - you never scroll back up to type. -->
+  <div class="ai-composer-block">
+    <div class="ai-composer">
+      <span class="ai-spark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6l1.5 4.4 4.4 1.5-4.4 1.5L12 14.4l-1.5-4.4L6.1 8.5l4.4-1.5L12 2.6z" fill="currentColor"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z" fill="currentColor"/></svg></span>
+      <textarea class="ai-input" id="aiInput" rows="1" placeholder="Ask OVA AI anything..."></textarea>
+      <button type="button" class="ai-send" id="aiSend" aria-label="Send" disabled>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4.5 11.5L20 4.5l-7 15.5-2.3-6.2-6.2-2.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
 </div>
 
-<nav class="ai-nav">
-  <a href="index.html" id="nvHome">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5L12 4l8 6.5V20h-5v-5.5H9V20H4v-9.5z" fill="currentColor"/></svg>
-    <span>Home</span>
-  </a>
-  <a href="all-perfume.html" id="nvDiscover">
-    <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-    <span>Discover</span>
-  </a>
-  <a href="ova-ai.html" class="on" id="nvAi">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5C4 4.7 4.7 4 5.5 4h13c.8 0 1.5.7 1.5 1.5v9c0 .8-.7 1.5-1.5 1.5H9l-4 3.3V16H5.5A1.5 1.5 0 014 14.5v-9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.5" cy="10" r="1" fill="currentColor"/><circle cx="14.5" cy="10" r="1" fill="currentColor"/></svg>
-    <span>OVA AI</span>
-  </a>
-  <a href="all-perfume.html" id="nvWish">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.4-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.6-7 9-7 9z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-    <span>Wishlist</span>
-  </a>
-  <a href="account.html" id="nvProfile">
-    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="currentColor" stroke-width="1.7"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-    <span>Profile</span>
-  </a>
-</nav>
 
 <script src="js/catalog.js?v=82caa220"></script>
 <script src="js/remote-catalog.js?v=9816d387"></script>
 <script src="js/product-details.js?v=128bc9da"></script>
-<script src="js/help-assistant-v2.js?v=d0b4df29"></script>
+<script src="js/help-assistant-v2.js?v=ea65f756"></script>
 <script>
 (function(){
   const isAr = () => localStorage.getItem("ovaLang") === "ar";
@@ -495,7 +529,8 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
       bannerT:"A smarter way<br>to experience fragrance.", bannerS:"POWERED BY OVA AI",
       bannerSide:"EXPLORE<br>DISCOVER<br>BELONG",
       t1:"Find<br>My Scent", t2:"Explore<br>Notes", t3:"Gift<br>Suggestions", t4:"Learn About<br>Perfumes",
-      nav:["Home","Discover","OVA AI","Wishlist","Profile"],
+      mHome:"Home", mAi:"OVA AI", mProducts:"Products", mShop:"Shop Now",
+      mMen:"Men Perfume", mWomen:"Women Perfume", mUnisex:"Unisex", mBrands:"Brands", mContact:"Contact Us",
       view:"View ",
       morning:"Good morning", afternoon:"Good afternoon", evening:"Good evening", night:"Good evening",
       hi:(g)=>`${g} \u{1F642} How can I help you today?`,
@@ -511,7 +546,8 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
       bannerT:"طريقة أذكى<br>تعيش بيها تجربة العطر.", bannerS:"مدعوم بـ OVA AI",
       bannerSide:"اكتشف<br>جرّب<br>انتمِ",
       t1:"لاقي<br>عطرك", t2:"استكشف<br>النوتات", t3:"اقتراحات<br>هدايا", t4:"اتعلّم عن<br>البرفانات",
-      nav:["الرئيسية","تصفّح","OVA AI","المفضلة","حسابي"],
+      mHome:"الرئيسية", mAi:"OVA AI", mProducts:"المنتجات", mShop:"تسوق الآن",
+      mMen:"برفانات رجالي", mWomen:"برفانات حريمي", mUnisex:"يونيسكس", mBrands:"الماركات", mContact:"تواصل معنا",
       view:"افتح ",
       morning:"صباح الخير", afternoon:"مساء الخير", evening:"مساء الخير", night:"مساء الخير",
       hi:(g)=>`${g} \u{1F642} أقدر أساعدك في إيه النهاردة؟`,
@@ -551,10 +587,11 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
       const k = el.getAttribute("data-k");
       if (t[k]) el.innerHTML = t[k];
     });
-    ["nvHome","nvDiscover","nvAi","nvWish","nvProfile"].forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (el) el.querySelector("span").textContent = t.nav[i];
+    document.querySelectorAll("[data-k]").forEach((el) => {
+      const k = el.getAttribute("data-k");
+      if (t[k] && !el.classList.contains("ai-tile-name")) el.textContent = t[k];
     });
+    document.getElementById("aiLang").textContent = isAr() ? "EN" : "AR";
     const chips = document.getElementById("aiChips");
     chips.innerHTML = "";
     t.chips.forEach((label) => {
@@ -569,7 +606,8 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
     try {
       const cart = JSON.parse(localStorage.getItem("ovaCart") || "[]");
       const n = cart.reduce((s,i)=> s + (i.qty||1), 0);
-      document.getElementById("aiBagDot").hidden = n <= 0;
+      const b = document.getElementById("aiCartBadge");
+      if (n > 0) { b.hidden = false; b.textContent = n; } else { b.hidden = true; }
     } catch(e){}
   }
 
@@ -663,8 +701,12 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
     const data = await res.json();
     history.push({ role:"user", text });
     history.push({ role:"model", text:data.text });
-    const p = data.product ? (lookup(data.product.name) || data.product) : null;
-    return { text:data.text, actions: p ? [{ product:p }] : [] };
+    // Show a card for every product the reply named, not just the first.
+    const list = Array.isArray(data.products) && data.products.length
+      ? data.products
+      : (data.product ? [data.product] : []);
+    const actions = list.map((raw) => ({ product: lookup(raw.name) || raw }));
+    return { text:data.text, actions };
   }
 
   async function sendMessage(text){
@@ -689,6 +731,23 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
     if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendMessage(); }
   });
   sendBtn.addEventListener("click", ()=> sendMessage());
+
+  // --- header menu / language ---
+  const menu = document.getElementById("aiMenu");
+  document.getElementById("aiMenuBtn").addEventListener("click", (e)=>{
+    e.stopPropagation();
+    menu.classList.toggle("open");
+  });
+  menu.addEventListener("click", (e)=> e.stopPropagation());
+  document.addEventListener("click", ()=> menu.classList.remove("open"));
+  document.getElementById("aiMenuProducts").addEventListener("click", ()=>
+    document.getElementById("aiSubProducts").classList.toggle("open"));
+  document.getElementById("aiMenuContact").addEventListener("click", ()=>
+    document.getElementById("aiSubContact").classList.toggle("open"));
+  document.getElementById("aiLang").addEventListener("click", ()=>{
+    localStorage.setItem("ovaLang", isAr() ? "en" : "ar");
+    location.reload();
+  });
 
   document.getElementById("aiStart").addEventListener("click", ()=>{
     document.querySelector(".ai-composer-block").scrollIntoView({behavior:"smooth", block:"center"});

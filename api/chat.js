@@ -48,17 +48,32 @@ ${catalogBlock}
 ${isAr ? "Reply in Arabic (Egyptian colloquial by default, matching the customer)." : "Reply in English."}`;
 }
 
-function findMentionedProduct(text) {
-  if (!text) return null;
+// Returns every catalog product named in the reply, in the order the model
+// mentioned them, so the page can show a card for each one instead of
+// singling out just the first match.
+function findMentionedProducts(text) {
+  if (!text) return [];
   const lower = text.toLowerCase();
-  let best = null;
+
+  const hits = [];
   for (const p of catalog) {
-    const nameLower = p.name.toLowerCase();
-    if (lower.includes(nameLower)) {
-      if (!best || nameLower.length > best.name.length) best = p;
-    }
+    const at = lower.indexOf(p.name.toLowerCase());
+    if (at !== -1) hits.push({ product: p, at, len: p.name.length });
   }
-  return best;
+  // Longest name first so "Khamrah Qahwa" wins over "Khamrah" at the same spot.
+  hits.sort((a, b) => b.len - a.len);
+
+  const taken = [];
+  const chosen = [];
+  for (const h of hits) {
+    const end = h.at + h.len;
+    // Skip a match sitting inside a longer name already claimed.
+    if (taken.some((r) => h.at < r.end && end > r.at)) continue;
+    taken.push({ at: h.at, end });
+    chosen.push(h);
+  }
+
+  return chosen.sort((a, b) => a.at - b.at).map((h) => h.product).slice(0, 6);
 }
 
 module.exports = async (req, res) => {
@@ -169,9 +184,10 @@ module.exports = async (req, res) => {
       return;
     }
 
-    const product = findMentionedProduct(text);
+    const products = findMentionedProducts(text);
 
-    res.status(200).json({ text: text.trim(), product });
+    // `product` stays for backwards compatibility with any cached page.
+    res.status(200).json({ text: text.trim(), products, product: products[0] || null });
   } catch (error) {
     console.error("OVA AI chat function error:", error);
     res.status(500).json({ error: "Something went wrong reaching the assistant." });
