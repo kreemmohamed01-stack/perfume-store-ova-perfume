@@ -19,7 +19,7 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GE
 // instead of inventing perfumes that do not exist on the site.
 function buildCatalogBlock() {
   return catalog
-    .map((p) => `${p.name} | ${p.brand} | ${p.price} EGP`)
+    .map((p) => `${p.name} | ${p.brand} | ${p.price} EGP | ${p.gender || "unisex"}`)
     .join("\n");
 }
 
@@ -45,7 +45,7 @@ What you actually do:
 - If asked something unrelated to perfume/the store (weather, math, etc.), answer briefly and kindly, then steer back to how you can help with their fragrance choice.
 - Keep replies reasonably short - a few sentences, not an essay - unless the customer explicitly asks for detail.
 
-Catalog (name | brand | price in EGP):
+Catalog (name | brand | price in EGP | who it is for). Match the gender the customer asked for - never suggest a men's scent when they asked for a women's one, or the reverse. Unisex suits either:
 ${catalogBlock}
 
 ${isAr ? "Reply in Arabic (Egyptian colloquial by default, matching the customer)." : "Reply in English."}`;
