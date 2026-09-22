@@ -191,7 +191,8 @@ html[dir="rtl"] .ai-composer{padding:9px 20px 9px 9px}
 .ai-composer.is-focused{box-shadow:0 6px 28px rgba(0,0,0,0.34),0 0 0 1px rgba(255,255,255,.12) inset,0 0 22px rgba(155,114,242,.35)}
 @keyframes ovaComposerSpin{to{transform:rotate(360deg)}}
 @keyframes ovaAiPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(155,114,242,.5))}50%{filter:drop-shadow(0 0 12px rgba(155,114,242,.95)) drop-shadow(0 0 20px rgba(66,133,244,.5))}}
-.ai-spark{width:23px;height:23px;flex:0 0 auto;color:#fff;filter:drop-shadow(0 0 6px rgba(155,114,242,.75));animation:ovaAiPulse 3s ease-in-out infinite}
+.ai-spark{width:23px;height:23px;flex:0 0 auto;display:flex;filter:drop-shadow(0 0 6px rgba(155,114,242,.75));animation:ovaAiPulse 3s ease-in-out infinite}
+.ai-spark img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
 .ai-input{
   flex:1;min-width:0;
   border:none;outline:none;background:none;resize:none;
@@ -245,7 +246,7 @@ html[dir="rtl"] .ai-send svg{transform:scaleX(-1)}
   background:#0c0b0a;
   box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset;
 }
-.ai-av svg{width:16px;height:16px;filter:drop-shadow(0 0 5px rgba(155,114,242,.7));animation:ovaAiPulse 3s ease-in-out infinite}
+.ai-av svg,.ai-av img{width:16px;height:16px;border-radius:50%;object-fit:cover;filter:drop-shadow(0 0 5px rgba(155,114,242,.7));animation:ovaAiPulse 3s ease-in-out infinite}
 .ai-av.user{background:#e7e3da;color:var(--ink);box-shadow:none}
 .ai-av.user svg{filter:none;animation:none}
 .ai-col{display:flex;flex-direction:column;gap:9px;max-width:80%}
@@ -342,7 +343,7 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
 @media (prefers-reduced-motion:reduce){
   .ai-tile,.ai-tile img,.ai-send{transition:none!important}
   .ai-typing span,.ai-cursor{animation:none!important}
-  .ai-row,.ai-tile,.ai-spark,.ai-av svg,.ai-composer::before{animation:none!important}
+  .ai-row,.ai-tile,.ai-spark,.ai-av svg,.ai-av img,.ai-composer::before{animation:none!important}
 }
 </style>
 </head>
@@ -412,7 +413,7 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
        directly under the newest message - you never scroll back up to type. -->
   <div class="ai-composer-block">
     <div class="ai-composer">
-      <span class="ai-spark"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="ovaComposerG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285f4"/><stop offset=".42" stop-color="#9b72f2"/><stop offset=".74" stop-color="#d96570"/><stop offset="1" stop-color="#f2a600"/></linearGradient></defs><path d="M12 1.6c0 5.05 4.09 9.14 9.14 9.14v2.52c-5.05 0-9.14 4.09-9.14 9.14h-2.52c0-5.05-4.09-9.14-9.14-9.14v-2.52c5.05 0 9.14-4.09 9.14-9.14H12z" fill="url(#ovaComposerG)"/></svg></span>
+      <span class="ai-spark"><img src="images/ai-agent/agent-icon.webp" alt="" width="23" height="23" /></span>
       <textarea class="ai-input" id="aiInput" rows="1" placeholder="Ask OVA AI anything..."></textarea>
       <button type="button" class="ai-send" id="aiSend" aria-label="Send" disabled>
         <svg viewBox="0 0 24 24" fill="none"><path d="M4.5 11.5L20 4.5l-7 15.5-2.3-6.2-6.2-2.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -426,7 +427,7 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
 <script src="js/catalog.js?v=82caa220"></script>
 <script src="js/remote-catalog.js?v=9816d387"></script>
 <script src="js/product-details.js?v=128bc9da"></script>
-<script src="js/help-assistant-v2.js?v=58211dce"></script>
+<script src="js/help-assistant-v2.js?v=8617b4e9"></script>
 <script>
 (function(){
   const isAr = () => localStorage.getItem("ovaLang") === "ar";
@@ -511,7 +512,7 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
   }
 
   const down = () => window.scrollTo({ top: document.body.scrollHeight, behavior:"smooth" });
-  const botIco  = '<svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="ovaAvG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285f4"/><stop offset=".42" stop-color="#9b72f2"/><stop offset=".74" stop-color="#d96570"/><stop offset="1" stop-color="#f2a600"/></linearGradient></defs><path d="M12 1.6c0 5.05 4.09 9.14 9.14 9.14v2.52c-5.05 0-9.14 4.09-9.14 9.14h-2.52c0-5.05-4.09-9.14-9.14-9.14v-2.52c5.05 0 9.14-4.09 9.14-9.14H12z" fill="url(#ovaAvG)"/></svg>';
+  const botIco  = '<img src="images/ai-agent/agent-icon.webp" alt="" width="16" height="16" />';
   const userIco = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 19.5c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
 
   function addUser(text){
