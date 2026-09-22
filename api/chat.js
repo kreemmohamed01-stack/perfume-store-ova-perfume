@@ -10,7 +10,7 @@
 
 const catalog = require("./_data/catalog.json");
 
-const GEMINI_MODEL = "gemini-2.0-flash";
+const GEMINI_MODEL = "gemini-3.6-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 // A compact catalog listing the model can ground its answers in. Keeping it
