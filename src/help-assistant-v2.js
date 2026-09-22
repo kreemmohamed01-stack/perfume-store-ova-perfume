@@ -850,9 +850,9 @@
     const offset = document.getElementById("whatsappFloat") ? 66 : 18;
     const style = document.createElement("style");
     style.textContent = `
-      .ova-help-float{position:fixed;right:16px;bottom:${offset + 16}px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:44px;height:56px;font-size:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+      .ova-help-float{position:fixed;right:12px;bottom:${offset + 16}px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:72px;height:88px;font-size:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;transition:transform .3s cubic-bezier(.22,1,.36,1)}
       .ova-help-float:hover{transform:translateY(-3px) scale(1.06)}
-      .ova-help-float::before{content:"";display:block;width:38px;height:38px;flex:0 0 auto;background:center/cover no-repeat url("images/ai-agent/agent-icon.webp");border-radius:50%;filter:drop-shadow(0 0 7px rgba(155,114,242,.62)) drop-shadow(0 2px 5px rgba(0,0,0,.32));animation:ovaAiPulse 3s ease-in-out infinite,ovaAiZoom 3s ease-in-out infinite;transform-origin:center;overflow:visible;clip-path:none;-webkit-clip-path:none}
+      .ova-help-float::before{content:"";display:block;width:68px;height:68px;flex:0 0 auto;background:center/contain no-repeat url("images/ai-agent/agent-icon.webp");filter:drop-shadow(0 0 10px rgba(155,114,242,.68)) drop-shadow(0 2px 6px rgba(0,0,0,.32));animation:ovaAiPulse 3s ease-in-out infinite,ovaAiZoom 3s ease-in-out infinite;transform-origin:center;overflow:visible;clip-path:none;-webkit-clip-path:none}
       @keyframes ovaAiPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(155,114,242,.5)) drop-shadow(0 2px 5px rgba(0,0,0,.32))}50%{filter:drop-shadow(0 0 14px rgba(155,114,242,.9)) drop-shadow(0 0 22px rgba(66,133,244,.5)) drop-shadow(0 2px 5px rgba(0,0,0,.32))}}
       @keyframes ovaAiZoom{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
       .ova-help-float::after{content:attr(data-label);display:block;font:700 8px/1 'Manrope',sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#1f1a14;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.55)}
@@ -868,7 +868,7 @@
       .ova-help-action-btn{border:none;border-radius:999px;padding:8px 12px;background:rgba(22,146,255,.18);color:#cfe5ff;cursor:pointer;font:700 11px/1.2 "Manrope",sans-serif;border:1px solid rgba(105,173,255,.24)}
       .ova-help-form{display:flex;gap:10px;padding:14px;border-top:1px solid rgba(255,255,255,.08);background:rgba(6,14,28,.92)} .ova-help-input{flex:1;border:none;outline:none;border-radius:16px;padding:14px;background:rgba(255,255,255,.08);color:#fff;font:600 13px/1.2 "Manrope",sans-serif}
       .ova-help-send{border:none;border-radius:16px;padding:0 16px;background:linear-gradient(135deg,#1692ff 0%,#0a66ff 100%);color:#fff;font:800 13px/1 "Manrope",sans-serif;cursor:pointer}
-      @media (max-width:640px){.ova-help-float{right:14px;bottom:max(230px,calc(env(safe-area-inset-bottom) + 230px));width:40px;height:52px}.ova-help-panel{right:8px;left:8px;width:auto;bottom:max(112px,calc(env(safe-area-inset-bottom) + 90px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
+      @media (max-width:640px){.ova-help-float{right:10px;bottom:max(230px,calc(env(safe-area-inset-bottom) + 230px));width:64px;height:78px}.ova-help-float::before{width:60px;height:60px}.ova-help-panel{right:8px;left:8px;width:auto;bottom:max(112px,calc(env(safe-area-inset-bottom) + 90px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
     `;
     document.head.appendChild(style);
 
