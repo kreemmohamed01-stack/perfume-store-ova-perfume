@@ -850,8 +850,8 @@
     const offset = document.getElementById("whatsappFloat") ? 66 : 18;
     const style = document.createElement("style");
     style.textContent = `
-      .ova-help-float{position:fixed;right:16px;bottom:${offset}px;z-index:5200;border:none;border-radius:50%;width:40px;height:40px;padding:0;overflow:hidden;background:linear-gradient(150deg,#f6dfb7 0%,#c79f62 60%,#8f6427 100%);color:#fff;font-size:0;box-shadow:0 10px 22px rgba(58,39,27,.28),0 0 0 2px rgba(255,255,255,.85);cursor:pointer;display:flex;align-items:center;justify-content:center;clip-path:circle(50%);-webkit-clip-path:circle(50%);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease}
-      .ova-help-float:hover{transform:translateY(-2px) scale(1.06);box-shadow:0 14px 28px rgba(58,39,27,.32),0 0 18px rgba(241,223,190,.55),0 0 0 2px rgba(255,255,255,.9)} .ova-help-float::before{content:"";width:56%;height:56%;display:block;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M4 5.5C4 4.67 4.67 4 5.5 4h13c.83 0 1.5.67 1.5 1.5v10c0 .83-.67 1.5-1.5 1.5H9l-4 3.5v-3.5H5.5A1.5 1.5 0 0 1 4 15.5v-10z' stroke='%231f140d' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M12 8.2l.95 2.2 2.2.95-2.2.95-.95 2.2-.95-2.2-2.2-.95 2.2-.95.95-2.2z' fill='%231f140d'/%3E%3C/svg%3E");border-radius:0;transform:none;overflow:visible;clip-path:none;-webkit-clip-path:none;filter:none}
+      .ova-help-float{position:fixed;right:16px;bottom:${offset}px;z-index:5200;border:1.5px solid rgba(255,255,255,.14);border-radius:50%;width:44px;height:44px;padding:0;overflow:hidden;background:radial-gradient(circle at 32% 28%,#2a2a2a 0%,#0d0c0b 62%);color:#fff;font-size:0;box-shadow:0 12px 26px rgba(0,0,0,.38),0 0 0 2px rgba(255,255,255,.06);cursor:pointer;display:flex;align-items:center;justify-content:center;clip-path:circle(50%);-webkit-clip-path:circle(50%);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease}
+      .ova-help-float:hover{transform:translateY(-2px) scale(1.06);box-shadow:0 16px 32px rgba(0,0,0,.46),0 0 22px rgba(201,166,107,.28),0 0 0 2px rgba(255,255,255,.1)} .ova-help-float::before{content:"";width:52%;height:52%;display:block;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 3.5c-.9 3-1.3 4.9-3.3 6.9-2 2-3.9 2.4-6.9 3.3 3 .9 4.9 1.3 6.9 3.3 2 2 2.4 3.9 3.3 6.9.9-3 1.3-4.9 3.3-6.9 2-2 3.9-2.4 6.9-3.3-3-.9-4.9-1.3-6.9-3.3-2-2-2.4-3.9-3.3-6.9z' fill='%23c9a66b'/%3E%3C/svg%3E");border-radius:0;transform:none;overflow:visible;clip-path:none;-webkit-clip-path:none;filter:none}
       .ova-help-panel{position:fixed;right:18px;bottom:${offset + 52}px;z-index:5201;width:min(380px,calc(100vw - 24px));height:min(560px,calc(var(--ova-help-vh,100vh) - 130px));display:none;flex-direction:column;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,rgba(10,18,34,.98) 0%,rgba(11,25,52,.98) 100%);border:1px solid rgba(105,173,255,.22);box-shadow:0 24px 70px rgba(0,0,0,.32),0 0 40px rgba(18,112,255,.22)}
       .ova-help-panel.open{display:flex} .ova-help-head{display:flex;align-items:center;justify-content:space-between;padding:16px;color:#fff;background:linear-gradient(135deg,rgba(22,146,255,.24) 0%,rgba(10,102,255,.14) 100%);border-bottom:1px solid rgba(255,255,255,.08)}
       .ova-help-title{font:800 16px/1.2 "Manrope",sans-serif} .ova-help-sub{font:500 12px/1.4 "Manrope",sans-serif;color:rgba(255,255,255,.76);margin-top:4px}
@@ -909,7 +909,14 @@
       setTimeout(() => { body.appendChild(bot(r)); scrollDown(); }, 120); scrollDown();
     };
 
+    // The floating icon now opens the full OVA AI page instead of the small
+    // popup - the popup markup/logic above stays as the fallback used by
+    // any page that has not linked to ova-ai.html yet.
     btn.addEventListener("click", () => {
+      if (!location.pathname.toLowerCase().includes("ova-ai.html")) {
+        location.href = "ova-ai.html";
+        return;
+      }
       ui(); panel.classList.toggle("open");
       if (panel.classList.contains("open")) {
         if (!body.children.length) body.appendChild(bot(reply(arUi() ? "مرحبا" : "hello", products)));
@@ -930,4 +937,11 @@
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
+
+  // Exposed so the dedicated OVA AI page (ova-ai.html) can reuse the exact
+  // same catalog-aware brain - product index, fuzzy matching, comparisons,
+  // vibe-based recommendations, bilingual replies - instead of duplicating
+  // any of this logic. Nothing here changes how the floating widget itself
+  // behaves.
+  window.OvaAssistantBrain = { collect, reply, go, intent, hasAr, arUi, lang };
 })();

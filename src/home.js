@@ -2053,6 +2053,7 @@
     const translations = {
       en: {
         navHome: "Home",
+        navOvaAi: "OVA AI",
         navProducts: "Products",
         navAllProducts: "All Products",
         navUnisex: "Unisex",
@@ -2208,6 +2209,7 @@
       },
       ar: {
         navHome: "الرئيسية",
+        navOvaAi: "OVA AI",
         navProducts: "المنتجات",
         navAllProducts: "كل المنتجات",
         navUnisex: "يونيسكس",
@@ -3267,6 +3269,7 @@
       document.getElementById("bottomLangToggle").innerText = currentLang === "ar" ? "EN" : "AR";
       document.getElementById("navHome").innerText = t("navHome");
       document.getElementById("bottomNavHome").innerText = t("navHome");
+      { const ovaAiLink = document.getElementById("bottomNavOvaAi"); if (ovaAiLink) ovaAiLink.innerText = t("navOvaAi"); }
       document.getElementById("navProducts").innerText = t("navProducts");
       document.getElementById("bottomNavProducts").innerText = t("navProducts");
       document.getElementById("navAllProducts").innerText = t("navAllProducts");
