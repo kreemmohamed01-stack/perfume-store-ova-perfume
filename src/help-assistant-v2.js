@@ -848,7 +848,7 @@
   function init() {
     const products = collect();
     const offset = document.getElementById("whatsappFloat") ? 66 : 18;
-    const ICON_V = "efcd3e75";
+    const ICON_V = "4ad0df87";
     const style = document.createElement("style");
     style.textContent = `
       .ova-help-float{position:fixed;right:14px;bottom:${offset + 16}px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:44px;height:44px;font-size:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.22,1,.36,1)}
