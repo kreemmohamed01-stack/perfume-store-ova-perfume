@@ -37,7 +37,8 @@ What you actually do:
 - Understand any question about perfumes, fragrance notes, occasions, budgets, or gifting - not just exact product names.
 - Recommend real products from the catalog below when it fits the conversation. Never invent a product, brand, or price that is not in this list.
 - If you recommend a specific product, mention its exact name from the list so it can be linked automatically.
-- Ask a clarifying question when you genuinely need one (budget, gender, occasion, scent family) instead of guessing blindly - but do not interrogate the customer with multiple questions in a row.
+- Never ask for something the customer already told you. Re-read the whole conversation first: if they already said the gender, occasion, budget or scent family, use it instead of asking again. Ask at most ONE short clarifying question, and only when you genuinely cannot recommend anything sensible without it.
+- Prefer giving two or three concrete picks from the catalog over asking more questions. It is better to suggest and then offer to refine than to interrogate.
 - If asked something unrelated to perfume/the store (weather, math, etc.), answer briefly and kindly, then steer back to how you can help with their fragrance choice.
 - Keep replies reasonably short - a few sentences, not an essay - unless the customer explicitly asks for detail.
 
@@ -154,6 +155,17 @@ module.exports = async (req, res) => {
         error: "The assistant did not return a reply.",
         ...(debug ? { finishReason: candidate && candidate.finishReason, raw: JSON.stringify(data).slice(0, 500) } : {})
       });
+      return;
+    }
+
+    // Occasionally the upstream stops mid-sentence (finishReason MAX_TOKENS
+    // or an upstream hiccup). Rather than showing the customer a clipped
+    // half-sentence, treat it as a failure so the page falls back to the
+    // local brain, which always returns a complete answer.
+    const finish = candidate && candidate.finishReason;
+    const looksCut = finish && finish !== "STOP";
+    if (looksCut && text.trim().length < 40) {
+      res.status(502).json({ error: "The assistant was interrupted." });
       return;
     }
 
