@@ -850,9 +850,9 @@
     const offset = document.getElementById("whatsappFloat") ? 66 : 18;
     const style = document.createElement("style");
     style.textContent = `
-      .ova-help-float{position:fixed;right:12px;bottom:${offset + 16}px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:68px;height:68px;font-size:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+      .ova-help-float{position:fixed;right:16px;bottom:${offset + 16}px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:34px;height:34px;font-size:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.22,1,.36,1)}
       .ova-help-float:hover{transform:translateY(-3px) scale(1.06)}
-      .ova-help-float::before{content:"";display:block;width:68px;height:68px;flex:0 0 auto;background:center/contain no-repeat url("images/ai-agent/agent-icon.webp?v=0e4c7212");filter:drop-shadow(0 3px 8px rgba(20,18,16,.26));animation:ovaAiZoom 3.4s ease-in-out infinite;transform-origin:center;overflow:visible;clip-path:none;-webkit-clip-path:none}
+      .ova-help-float::before{content:"";display:block;width:34px;height:34px;flex:0 0 auto;background:center/contain no-repeat url("images/ai-agent/agent-icon.webp?v=0e4c7212");filter:drop-shadow(0 3px 6px rgba(20,18,16,.26));animation:ovaAiZoom 3.4s ease-in-out infinite;transform-origin:center;overflow:visible;clip-path:none;-webkit-clip-path:none}
       @keyframes ovaAiZoom{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
       .ova-help-panel{position:fixed;right:18px;bottom:${offset + 52}px;z-index:5201;width:min(380px,calc(100vw - 24px));height:min(560px,calc(var(--ova-help-vh,100vh) - 130px));display:none;flex-direction:column;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,rgba(10,18,34,.98) 0%,rgba(11,25,52,.98) 100%);border:1px solid rgba(105,173,255,.22);box-shadow:0 24px 70px rgba(0,0,0,.32),0 0 40px rgba(18,112,255,.22)}
       .ova-help-panel.open{display:flex} .ova-help-head{display:flex;align-items:center;justify-content:space-between;padding:16px;color:#fff;background:linear-gradient(135deg,rgba(22,146,255,.24) 0%,rgba(10,102,255,.14) 100%);border-bottom:1px solid rgba(255,255,255,.08)}
@@ -866,7 +866,11 @@
       .ova-help-action-btn{border:none;border-radius:999px;padding:8px 12px;background:rgba(22,146,255,.18);color:#cfe5ff;cursor:pointer;font:700 11px/1.2 "Manrope",sans-serif;border:1px solid rgba(105,173,255,.24)}
       .ova-help-form{display:flex;gap:10px;padding:14px;border-top:1px solid rgba(255,255,255,.08);background:rgba(6,14,28,.92)} .ova-help-input{flex:1;border:none;outline:none;border-radius:16px;padding:14px;background:rgba(255,255,255,.08);color:#fff;font:600 13px/1.2 "Manrope",sans-serif}
       .ova-help-send{border:none;border-radius:16px;padding:0 16px;background:linear-gradient(135deg,#1692ff 0%,#0a66ff 100%);color:#fff;font:800 13px/1 "Manrope",sans-serif;cursor:pointer}
-      @media (max-width:640px){.ova-help-float{right:10px;bottom:max(230px,calc(env(safe-area-inset-bottom) + 230px));width:60px;height:60px}.ova-help-float::before{width:60px;height:60px}.ova-help-panel{right:8px;left:8px;width:auto;bottom:max(112px,calc(env(safe-area-inset-bottom) + 90px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
+      @media (max-width:640px){.ova-help-float{right:16px;bottom:max(58px,calc(env(safe-area-inset-bottom) + 58px));width:34px;height:34px}.ova-help-float::before{width:34px;height:34px}.ova-help-panel{right:8px;left:8px;width:auto;bottom:max(112px,calc(env(safe-area-inset-bottom) + 90px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
+      #ovaIntroOverlay{position:fixed;inset:0;z-index:9999;background:#0b0a09;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:ovaIntroFade .3s ease}
+      #ovaIntroVideo{width:100%;height:100%;object-fit:cover}
+      @keyframes ovaIntroFade{from{opacity:0}to{opacity:1}}
+      @media (min-width:640px){#ovaIntroVideo{width:min(92vw,420px);height:min(92vh,668px);object-fit:contain;border-radius:20px}}
     `;
     document.head.appendChild(style);
 
@@ -913,10 +917,38 @@
 
     // The floating icon now opens the full OVA AI page instead of the small
     // popup - the popup markup/logic above stays as the fallback used by
-    // any page that has not linked to ova-ai.html yet.
+    // any page that has not linked to ova-ai.html yet. Before leaving, it
+    // plays a short full-screen intro of the assistant's own character so
+    // the jump to the AI page feels like an entrance rather than a plain
+    // page load. A tap or the video ending both continue straight through.
+    const playIntroThenGo = () => {
+      const already = sessionStorage.getItem("ovaIntroSeen") === "1";
+      if (already) { location.href = "ova-ai.html"; return; }
+
+      const wrap = document.createElement("div");
+      wrap.id = "ovaIntroOverlay";
+      wrap.innerHTML = '<video id="ovaIntroVideo" playsinline muted autoplay src="images/ai-agent/agent-intro.mp4"></video>';
+      document.body.appendChild(wrap);
+      document.body.style.overflow = "hidden";
+
+      let done = false;
+      const go = () => {
+        if (done) return;
+        done = true;
+        sessionStorage.setItem("ovaIntroSeen", "1");
+        location.href = "ova-ai.html";
+      };
+      const video = wrap.querySelector("#ovaIntroVideo");
+      video.addEventListener("ended", go);
+      video.addEventListener("error", go);
+      wrap.addEventListener("click", go);
+      // Safety net: never let a stalled video trap the customer here.
+      setTimeout(go, 4500);
+    };
+
     btn.addEventListener("click", () => {
       if (!location.pathname.toLowerCase().includes("ova-ai.html")) {
-        location.href = "ova-ai.html";
+        playIntroThenGo();
         return;
       }
       ui(); panel.classList.toggle("open");
