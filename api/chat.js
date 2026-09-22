@@ -109,7 +109,13 @@ module.exports = async (req, res) => {
     contents,
     generationConfig: {
       temperature: 0.8,
-      maxOutputTokens: 400
+      // This model reasons before answering, and that reasoning is billed
+      // against maxOutputTokens - with a small budget it burned the whole
+      // allowance thinking and returned a truncated half-sentence. Short
+      // chat replies need no internal reasoning, so it is switched off and
+      // the ceiling raised to leave room for a complete answer.
+      thinkingConfig: { thinkingBudget: 0 },
+      maxOutputTokens: 800
     }
   };
 
@@ -135,12 +141,19 @@ module.exports = async (req, res) => {
     }
 
     const data = await upstream.json();
-    const text = (data.candidates && data.candidates[0] && data.candidates[0].content &&
-      data.candidates[0].content.parts && data.candidates[0].content.parts[0] &&
-      data.candidates[0].content.parts[0].text) || "";
+    const candidate = (data.candidates && data.candidates[0]) || null;
+    const text = (candidate && candidate.content && candidate.content.parts &&
+      candidate.content.parts[0] && candidate.content.parts[0].text) || "";
 
     if (!text) {
-      res.status(502).json({ error: "The assistant did not return a reply." });
+      // Includes the MAX_TOKENS case, where the model spent its whole
+      // budget and returned no usable text. Failing here lets the page
+      // fall back to the local brain instead of rendering nothing.
+      const debug = String(req.query && req.query.debug || "") === "1";
+      res.status(502).json({
+        error: "The assistant did not return a reply.",
+        ...(debug ? { finishReason: candidate && candidate.finishReason, raw: JSON.stringify(data).slice(0, 500) } : {})
+      });
       return;
     }
 
