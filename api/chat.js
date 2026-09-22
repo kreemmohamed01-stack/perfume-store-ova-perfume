@@ -123,7 +123,14 @@ module.exports = async (req, res) => {
     if (!upstream.ok) {
       const errText = await upstream.text().catch(() => "");
       console.error("Gemini API error:", upstream.status, errText);
-      res.status(502).json({ error: "The assistant is temporarily unavailable." });
+      // `debug=1` surfaces the upstream reason so a misconfigured key or
+      // quota problem can be diagnosed without guessing. It never leaks the
+      // key itself - only Google's error message.
+      const debug = String(req.query && req.query.debug || "") === "1";
+      res.status(502).json({
+        error: "The assistant is temporarily unavailable.",
+        ...(debug ? { upstreamStatus: upstream.status, upstream: errText.slice(0, 500) } : {})
+      });
       return;
     }
 

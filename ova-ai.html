@@ -2,551 +2,480 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>OVA AI | Ova Perfume</title>
 <meta name="description" content="Meet OVA AI - your personal fragrance assistant. Ask anything about perfumes in Arabic or English and get real recommendations." />
 <meta name="robots" content="noindex, follow" />
-<meta name="theme-color" content="#0d0c0b" />
+<meta name="theme-color" content="#f4f1ea" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="images/site-assets/logooo-2.webp" />
 <link rel="icon" type="image/jpeg" href="images/site-assets/logooo-2.webp" />
 <link rel="shortcut icon" href="favicon.png" />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#0d0c0b;
-  --charcoal:#171513;
-  --panel:#141311;
-  --panel-2:#1b1917;
-  --line:rgba(255,255,255,0.10);
-  --line-soft:rgba(255,255,255,0.06);
-  --ivory:#f8f5ef;
-  --paper:#fcfbf8;
-  --muted:rgba(248,245,239,0.58);
-  --muted-2:rgba(248,245,239,0.4);
-  --gold:#c9a66b;
-  --gold-soft:#d5b77a;
+  --page:#f4f1ea;
+  --card:#ffffff;
+  --ink:#141210;
+  --ink-2:#3a352f;
+  --muted:#7d7469;
+  --line:rgba(20,18,16,0.10);
+  --gold:#b08d57;
+  --dark:#111010;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--page)}
 body{
-  background:var(--ink);
-  color:var(--ivory);
+  background:var(--page);
+  color:var(--ink);
   font-family:"Inter",sans-serif;
   min-height:100vh;
   min-height:100dvh;
   overflow-x:hidden;
+  padding-bottom:calc(72px + env(safe-area-inset-bottom));
 }
 a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
 
-/* ---------- top bar ---------- */
-.ai-topbar{
-  position:sticky;
-  top:0;
-  z-index:40;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:16px clamp(16px,4vw,40px);
-  background:rgba(13,12,11,0.86);
-  backdrop-filter:blur(16px) saturate(140%);
-  -webkit-backdrop-filter:blur(16px) saturate(140%);
-  border-bottom:1px solid var(--line-soft);
-}
-.ai-topbar-left{display:flex;align-items:center;gap:14px}
-.ai-back{
-  width:38px;height:38px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,0.03);
-  color:var(--ivory);
-  transition:background .25s ease, border-color .25s ease;
-}
-.ai-back:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.22)}
-.ai-back svg{width:16px;height:16px}
-.ai-brand{
-  font-family:"Playfair Display",serif;
-  font-size:19px;
-  letter-spacing:0.02em;
-}
-.ai-brand em{font-style:italic;color:var(--gold)}
-.ai-topbar-right{display:flex;align-items:center;gap:10px}
-.ai-cart-link,.ai-account-link{
-  width:38px;height:38px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,0.03);
+.ai-wrap{max-width:900px;margin:0 auto}
+
+/* ---------- header ---------- */
+.ai-head{
   position:relative;
+  z-index:5;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 14px;
 }
-.ai-cart-link svg,.ai-account-link svg{width:16px;height:16px}
-.ai-cart-badge{
-  position:absolute;top:-3px;right:-3px;
-  min-width:15px;height:15px;padding:0 3px;
-  border-radius:999px;
-  background:var(--gold);
-  color:#0d0c0b;
-  font-size:9px;font-weight:800;
+.ai-burger{display:flex;flex-direction:column;gap:5px;padding:4px}
+.ai-burger span{display:block;width:26px;height:2px;background:var(--ink);border-radius:2px}
+.ai-logo{text-align:center;line-height:1}
+.ai-logo b{
+  display:block;
+  font-family:"Playfair Display",serif;
+  font-weight:500;
+  font-size:26px;
+  letter-spacing:0.06em;
+}
+.ai-logo small{
+  display:block;margin-top:3px;
+  font-size:8.5px;letter-spacing:0.42em;
+  color:var(--muted);text-transform:uppercase;
+}
+.ai-head-right{display:flex;align-items:center;gap:14px}
+.ai-bag{position:relative;display:flex}
+.ai-bag svg{width:23px;height:23px}
+.ai-bag-dot{
+  position:absolute;top:-1px;right:-2px;
+  width:9px;height:9px;border-radius:50%;
+  background:#d64545;border:1.5px solid var(--page);
+}
+.ai-user{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--card);
+  border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
-  border:2px solid var(--ink);
+  font-size:13px;font-weight:600;
 }
 
 /* ---------- hero ---------- */
 .ai-hero{
   position:relative;
-  min-height:min(560px,86vh);
-  display:flex;
-  align-items:center;
+  margin:0 0 6px;
+  min-height:520px;
+  display:flex;align-items:center;
   overflow:hidden;
-  background:
-    linear-gradient(100deg, rgba(13,12,11,0.94) 0%, rgba(13,12,11,0.72) 34%, rgba(13,12,11,0.18) 62%, rgba(13,12,11,0.55) 100%),
-    url("images/ai-agent/hero.webp") center 32% / cover no-repeat;
+  background:url("images/ai-agent/hero.webp") center/cover no-repeat;
 }
-.ai-hero-inner{
-  position:relative;
-  z-index:1;
-  width:100%;
-  max-width:1240px;
-  margin:0 auto;
-  padding:64px clamp(20px,5vw,44px) 56px;
+.ai-hero::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(95deg, rgba(18,15,13,0.90) 0%, rgba(18,15,13,0.66) 38%, rgba(18,15,13,0.12) 66%, rgba(18,15,13,0.30) 100%);
 }
+.ai-hero-in{position:relative;z-index:1;padding:44px 24px 46px;color:#fff;width:100%}
 .ai-hero-kicker{
-  display:block;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:0.32em;
-  text-transform:uppercase;
-  color:var(--gold-soft);
-  margin-bottom:18px;
+  font-size:12px;font-weight:400;
+  letter-spacing:0.42em;text-transform:uppercase;
+  color:rgba(255,255,255,0.88);
 }
 .ai-hero-title{
+  margin-top:10px;
   font-family:"Playfair Display",serif;
-  font-weight:600;
-  font-size:clamp(46px,9vw,92px);
-  line-height:0.98;
-  letter-spacing:-0.01em;
-  max-width:640px;
+  font-weight:400;
+  font-size:clamp(52px,14vw,74px);
+  line-height:1;
+  letter-spacing:0.01em;
 }
-.ai-hero-title .ai-hero-title-line{display:block}
-.ai-hero-title em{
-  font-style:italic;
-  color:var(--gold);
-  display:block;
+.ai-hero-role{
+  margin-top:16px;
+  font-size:12.5px;font-weight:400;
+  letter-spacing:0.30em;text-transform:uppercase;
+  line-height:1.9;
+  color:rgba(255,255,255,0.92);
 }
+.ai-hero-rule{width:54px;height:1px;background:rgba(255,255,255,0.5);margin:20px 0}
 .ai-hero-sub{
-  margin-top:22px;
-  font-size:15px;
-  line-height:1.8;
-  color:var(--muted);
-  max-width:380px;
+  font-size:16px;line-height:1.65;
+  color:rgba(255,255,255,0.95);
+  font-weight:300;
 }
 .ai-hero-cta{
-  margin-top:32px;
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  padding:16px 30px;
+  margin-top:26px;
+  display:inline-flex;align-items:center;gap:26px;
+  padding:15px 26px;
+  border:1px solid rgba(255,255,255,0.55);
   border-radius:999px;
-  background:var(--ivory);
-  color:var(--ink);
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  border:1px solid var(--ivory);
-  transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, background .35s ease;
+  color:#fff;
+  font-size:12px;font-weight:500;
+  letter-spacing:0.22em;text-transform:uppercase;
+  transition:background .3s ease,border-color .3s ease;
 }
-.ai-hero-cta:hover{
-  transform:translateY(-3px);
-  box-shadow:0 22px 44px rgba(0,0,0,0.4);
-}
-.ai-hero-cta svg{width:14px;height:14px;transition:transform .35s ease}
-.ai-hero-cta:hover svg{transform:translateX(4px)}
-html[dir="rtl"] .ai-hero-cta:hover svg{transform:translateX(-4px) scaleX(-1)}
+.ai-hero-cta:hover{background:rgba(255,255,255,0.12);border-color:#fff}
+.ai-hero-cta svg{width:17px;height:17px}
 html[dir="rtl"] .ai-hero-cta svg{transform:scaleX(-1)}
+.ai-hero-tag{
+  position:absolute;right:24px;bottom:44px;z-index:1;
+  text-align:right;
+  font-family:"Playfair Display",serif;
+  font-size:13px;line-height:1.7;
+  letter-spacing:0.16em;
+  color:rgba(255,255,255,0.82);
+  text-transform:uppercase;
+}
+html[dir="rtl"] .ai-hero-tag{right:auto;left:24px;text-align:left}
 
-/* ---------- category tiles ---------- */
+/* ---------- tiles ---------- */
 .ai-tiles{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:1px;
-  background:var(--line-soft);
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:14px 20px 4px;
 }
 .ai-tile{
   position:relative;
-  aspect-ratio:3/4;
+  aspect-ratio:37/60;
+  border-radius:16px;
   overflow:hidden;
-  background:var(--panel);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:20px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:14px 13px 15px;
+  text-align:left;
   isolation:isolate;
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
 }
+html[dir="rtl"] .ai-tile{text-align:right}
+.ai-tile:hover{transform:translateY(-4px)}
 .ai-tile img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-2;
+  position:absolute;inset:0;z-index:-2;
+  width:100%;height:100%;object-fit:cover;
   transition:transform .8s cubic-bezier(.22,1,.36,1);
 }
+.ai-tile:hover img{transform:scale(1.07)}
 .ai-tile::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  background:linear-gradient(180deg, rgba(13,12,11,0.05) 0%, rgba(13,12,11,0.75) 100%);
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.42) 72%,rgba(0,0,0,0.62) 100%);
 }
-.ai-tile:hover img{transform:scale(1.08)}
-.ai-tile-icon{
-  width:30px;height:30px;
-  margin-bottom:auto;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--ivory);
+.ai-tile.light::after{
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.45) 60%,rgba(255,255,255,0.72) 100%);
 }
-.ai-tile-icon svg{width:20px;height:20px}
+.ai-tile-ico{
+  position:absolute;top:14px;left:13px;z-index:1;
+  width:22px;height:22px;color:#fff;
+}
+html[dir="rtl"] .ai-tile-ico{left:auto;right:13px}
+.ai-tile.light .ai-tile-ico{color:var(--ink)}
+.ai-tile-ico svg{width:100%;height:100%}
 .ai-tile-name{
   font-family:"Playfair Display",serif;
-  font-size:19px;
-  font-weight:600;
-  line-height:1.2;
-  color:var(--ivory);
-}
-.ai-tile-arrow{
-  margin-top:10px;
-  display:flex;align-items:center;
-  color:var(--gold-soft);
-  transition:transform .35s var(--ease,cubic-bezier(.22,1,.36,1));
-}
-.ai-tile-arrow svg{width:15px;height:15px}
-.ai-tile:hover .ai-tile-arrow{transform:translateX(5px)}
-html[dir="rtl"] .ai-tile-arrow svg{transform:scaleX(-1)}
-html[dir="rtl"] .ai-tile:hover .ai-tile-arrow{transform:translateX(-5px)}
-
-/* ---------- chat shell ---------- */
-.ai-chat-shell{
-  max-width:820px;
-  margin:0 auto;
-  padding:40px clamp(16px,4vw,24px) 140px;
-}
-.ai-quick-label{
-  font-size:10.5px;
-  font-weight:600;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--muted-2);
-  margin:0 0 12px 4px;
-}
-.ai-quick-row{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-bottom:32px;
-}
-.ai-quick-chip{
-  padding:10px 16px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,0.03);
-  color:var(--ivory);
-  font-size:12.5px;
   font-weight:500;
-  transition:border-color .25s ease, background .25s ease, transform .25s ease;
+  font-size:17px;line-height:1.18;
+  color:#fff;
 }
-.ai-quick-chip:hover{
-  border-color:rgba(201,166,107,0.5);
-  background:rgba(201,166,107,0.08);
-  transform:translateY(-1px);
-}
-
-.ai-thread{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-.ai-row{display:flex;gap:12px;align-items:flex-start}
-.ai-row.user{flex-direction:row-reverse}
-.ai-avatar{
-  flex:0 0 auto;
-  width:32px;height:32px;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(150deg,#2a2a2a,#0d0c0b);
-  border:1px solid var(--line);
-}
-.ai-avatar svg{width:15px;height:15px}
-.ai-avatar.user{
-  background:var(--ivory);
-  color:var(--ink);
-}
-.ai-avatar.user svg{width:14px;height:14px}
-.ai-bubble-col{display:flex;flex-direction:column;gap:10px;max-width:78%}
-.ai-row.user .ai-bubble-col{align-items:flex-end}
-.ai-bubble{
-  padding:14px 18px;
-  border-radius:20px;
-  font-size:14.5px;
-  line-height:1.75;
-  white-space:pre-wrap;
-}
-.ai-row.bot .ai-bubble{
-  background:var(--panel);
-  border:1px solid var(--line-soft);
-  border-top-left-radius:6px;
-  color:var(--ivory);
-}
-html[dir="rtl"] .ai-row.bot .ai-bubble{border-top-left-radius:20px;border-top-right-radius:6px}
-.ai-row.user .ai-bubble{
-  background:var(--ivory);
-  color:var(--ink);
-  border-top-right-radius:6px;
-  font-weight:500;
-}
-html[dir="rtl"] .ai-row.user .ai-bubble{border-top-right-radius:20px;border-top-left-radius:6px}
-
-.ai-cursor{
-  display:inline-block;
-  width:2px;height:14px;
-  background:var(--gold-soft);
-  margin-inline-start:2px;
-  vertical-align:-2px;
-  animation:aiCursorBlink 0.9s steps(1) infinite;
-}
-@keyframes aiCursorBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
-
-.ai-typing{
-  display:inline-flex;
-  gap:4px;
-  padding:6px 2px;
-}
-.ai-typing span{
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--muted);
-  animation:aiTypingBounce 1.1s ease-in-out infinite;
-}
-.ai-typing span:nth-child(2){animation-delay:.15s}
-.ai-typing span:nth-child(3){animation-delay:.3s}
-@keyframes aiTypingBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
-
-.ai-suggest-row{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-.ai-suggest-btn{
-  padding:9px 14px;
-  border-radius:999px;
-  border:1px solid rgba(201,166,107,0.35);
-  background:rgba(201,166,107,0.08);
-  color:var(--gold-soft);
-  font-size:11.5px;
-  font-weight:600;
-  letter-spacing:0.02em;
-  transition:background .25s ease, transform .25s ease;
-}
-.ai-suggest-btn:hover{background:rgba(201,166,107,0.16);transform:translateY(-1px)}
-
-.ai-product-card{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  padding:12px;
-  border-radius:16px;
-  border:1px solid var(--line-soft);
-  background:var(--panel-2);
-  width:100%;
-  text-align:left;
-}
-html[dir="rtl"] .ai-product-card{text-align:right}
-.ai-product-card img{
-  width:52px;height:52px;
-  object-fit:contain;
-  background:#fff;
-  border-radius:10px;
-  flex:0 0 auto;
-  padding:4px;
-}
-.ai-product-card-info{flex:1;min-width:0}
-.ai-product-card-name{
-  font-size:13px;
-  font-weight:600;
-  color:var(--ivory);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.ai-product-card-price{
-  font-size:12px;
-  color:var(--gold-soft);
-  margin-top:2px;
-}
-.ai-product-card-arrow{
-  flex:0 0 auto;
-  color:var(--muted);
-  width:14px;height:14px;
-}
-html[dir="rtl"] .ai-product-card-arrow{transform:scaleX(-1)}
+.ai-tile.light .ai-tile-name{color:var(--ink)}
+.ai-tile-arw{margin-top:9px;color:#fff;display:flex}
+.ai-tile.light .ai-tile-arw{color:var(--ink)}
+.ai-tile-arw svg{width:20px;height:20px}
+html[dir="rtl"] .ai-tile-arw svg{transform:scaleX(-1)}
 
 /* ---------- composer ---------- */
-.ai-composer-wrap{
-  position:fixed;
-  left:0;right:0;bottom:0;
-  z-index:30;
-  padding:16px clamp(16px,4vw,24px) calc(16px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg, rgba(13,12,11,0) 0%, rgba(13,12,11,0.92) 30%, var(--ink) 62%);
-}
+.ai-composer-block{padding:16px 20px 0}
 .ai-composer{
-  max-width:820px;
-  margin:0 auto;
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-  padding:8px 8px 8px 20px;
-  border-radius:26px;
-  background:var(--panel);
-  border:1px solid var(--line);
-  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  display:flex;align-items:center;gap:10px;
+  padding:9px 9px 9px 20px;
+  background:var(--card);
+  border-radius:999px;
+  box-shadow:0 2px 14px rgba(20,18,16,0.05);
 }
-.ai-composer-input{
-  flex:1;
-  background:none;
-  border:none;
-  outline:none;
-  resize:none;
-  color:var(--ivory);
-  font-family:inherit;
-  font-size:14.5px;
-  line-height:1.6;
-  max-height:120px;
-  padding:10px 0;
-}
-.ai-composer-input::placeholder{color:var(--muted-2)}
-.ai-send-btn{
-  flex:0 0 auto;
-  width:42px;height:42px;
-  border-radius:50%;
-  border:none;
-  background:var(--ivory);
+html[dir="rtl"] .ai-composer{padding:9px 20px 9px 9px}
+.ai-spark{width:22px;height:22px;flex:0 0 auto;color:var(--ink)}
+.ai-input{
+  flex:1;min-width:0;
+  border:none;outline:none;background:none;resize:none;
+  font-family:inherit;font-size:15.5px;line-height:1.5;
   color:var(--ink);
+  max-height:110px;
+  padding:8px 0;
+}
+.ai-input::placeholder{color:#a49a8e}
+.ai-send{
+  flex:0 0 auto;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--dark);color:#fff;
   display:flex;align-items:center;justify-content:center;
-  transition:transform .25s cubic-bezier(.22,1,.36,1), background .25s ease, opacity .25s ease;
+  transition:transform .25s cubic-bezier(.22,1,.36,1),opacity .25s ease;
 }
-.ai-send-btn svg{width:16px;height:16px}
-html[dir="rtl"] .ai-send-btn svg{transform:scaleX(-1)}
-.ai-send-btn:hover{transform:scale(1.06)}
-.ai-send-btn:disabled{opacity:0.35;transform:none;cursor:default}
-.ai-composer-note{
-  max-width:820px;
-  margin:10px auto 0;
-  text-align:center;
-  font-size:10.5px;
-  color:var(--muted-2);
-  letter-spacing:0.02em;
+.ai-send svg{width:19px;height:19px}
+html[dir="rtl"] .ai-send svg{transform:scaleX(-1)}
+.ai-send:hover{transform:scale(1.06)}
+.ai-send:disabled{opacity:.34;transform:none;cursor:default}
+
+/* ---------- try asking ---------- */
+.ai-try{padding:24px 20px 0}
+.ai-try-label{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:13px;
+}
+.ai-chips{display:flex;gap:11px;flex-wrap:wrap}
+.ai-chip{
+  padding:13px 21px;
+  border-radius:999px;
+  background:#e7e3da;
+  color:var(--ink-2);
+  font-size:14.5px;font-weight:400;
+  transition:background .25s ease,transform .25s ease;
+}
+.ai-chip:hover{background:#ddd8cd;transform:translateY(-1px)}
+
+/* ---------- thread ---------- */
+.ai-thread{padding:6px 20px 0;display:flex;flex-direction:column;gap:18px}
+.ai-thread:not(:empty){padding-top:26px}
+.ai-row{display:flex;gap:10px;align-items:flex-start}
+.ai-row.user{flex-direction:row-reverse}
+.ai-av{
+  flex:0 0 auto;width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--dark);
+}
+.ai-av svg{width:15px;height:15px}
+.ai-av.user{background:#e7e3da;color:var(--ink)}
+.ai-col{display:flex;flex-direction:column;gap:9px;max-width:80%}
+.ai-row.user .ai-col{align-items:flex-end}
+.ai-bub{
+  padding:13px 17px;border-radius:18px;
+  font-size:15px;line-height:1.72;
+  white-space:pre-wrap;
+}
+.ai-row.bot .ai-bub{background:var(--card);border-top-left-radius:5px;box-shadow:0 2px 10px rgba(20,18,16,0.04)}
+html[dir="rtl"] .ai-row.bot .ai-bub{border-top-left-radius:18px;border-top-right-radius:5px}
+.ai-row.user .ai-bub{background:var(--dark);color:#fff;border-top-right-radius:5px}
+html[dir="rtl"] .ai-row.user .ai-bub{border-top-right-radius:18px;border-top-left-radius:5px}
+
+.ai-cursor{
+  display:inline-block;width:2px;height:15px;
+  background:var(--gold);margin-inline-start:2px;vertical-align:-3px;
+  animation:blink .9s steps(1) infinite;
+}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.ai-typing{display:inline-flex;gap:4px;padding:5px 2px}
+.ai-typing span{width:6px;height:6px;border-radius:50%;background:#b8b0a4;animation:bob 1.1s ease-in-out infinite}
+.ai-typing span:nth-child(2){animation-delay:.15s}
+.ai-typing span:nth-child(3){animation-delay:.3s}
+@keyframes bob{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+
+.ai-prod{
+  display:flex;align-items:center;gap:11px;
+  padding:10px;border-radius:14px;
+  background:var(--card);
+  box-shadow:0 2px 10px rgba(20,18,16,0.05);
+  width:100%;text-align:left;
+}
+html[dir="rtl"] .ai-prod{text-align:right}
+.ai-prod img{width:48px;height:48px;object-fit:contain;border-radius:9px;background:#fff;flex:0 0 auto}
+.ai-prod-i{flex:1;min-width:0}
+.ai-prod-n{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ai-prod-p{font-size:12.5px;color:var(--gold);margin-top:2px}
+.ai-prod svg{width:15px;height:15px;color:var(--muted);flex:0 0 auto}
+html[dir="rtl"] .ai-prod svg{transform:scaleX(-1)}
+
+/* ---------- banner ---------- */
+.ai-banner{
+  position:relative;
+  margin:30px 20px 0;
+  border-radius:18px;
+  overflow:hidden;
+  min-height:190px;
+  display:flex;align-items:center;
+  background:#100f0e url("images/ai-agent/banner-smoke.webp") right center/cover no-repeat;
+}
+.ai-banner::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(12,11,10,0.95) 0%,rgba(12,11,10,0.72) 46%,rgba(12,11,10,0.15) 100%);
+}
+.ai-banner-in{position:relative;z-index:1;padding:26px 22px;color:#fff;flex:1}
+.ai-banner-t{
+  font-family:"Playfair Display",serif;
+  font-weight:400;font-size:23px;line-height:1.35;
+}
+.ai-banner-rule{width:44px;height:1px;background:rgba(255,255,255,0.45);margin:16px 0 14px}
+.ai-banner-s{
+  font-size:9.5px;letter-spacing:0.26em;text-transform:uppercase;
+  color:rgba(255,255,255,0.75);
+}
+.ai-banner-side{
+  position:absolute;right:22px;top:50%;transform:translateY(-50%);z-index:1;
+  text-align:right;
+  font-size:10px;letter-spacing:0.26em;line-height:2.3;
+  text-transform:uppercase;color:rgba(255,255,255,0.88);
+}
+html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
+
+/* ---------- bottom nav ---------- */
+.ai-nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  background:#efece4;
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.ai-nav a{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:11px 4px 10px;
+  font-size:11.5px;color:var(--ink-2);
+  position:relative;
+}
+.ai-nav a svg{width:21px;height:21px}
+.ai-nav a.on{color:var(--ink);font-weight:600}
+.ai-nav a.on::after{
+  content:"";position:absolute;bottom:5px;
+  width:26px;height:2px;border-radius:2px;background:var(--ink);
 }
 
-/* scrollbar */
-.ai-chat-shell::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:999px}
-
-@media (max-width:900px){
-  .ai-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px){
+  .ai-hero-in{padding:60px 40px}
+  .ai-tiles{padding:18px 40px 4px;gap:14px}
+  .ai-composer-block,.ai-try,.ai-thread{padding-left:40px;padding-right:40px}
+  .ai-banner{margin-left:40px;margin-right:40px}
+  .ai-head{padding:22px 40px 16px}
 }
-@media (max-width:640px){
-  .ai-hero{min-height:420px}
-  .ai-hero-inner{padding:44px 18px 40px}
-  .ai-hero-sub{max-width:none}
-  .ai-bubble-col{max-width:86%}
-  .ai-topbar{padding:14px 16px}
+@media (max-width:420px){
+  .ai-tiles{grid-template-columns:repeat(2,1fr)}
+  .ai-hero-tag{display:none}
+  .ai-banner-side{display:none}
 }
-
-@media (prefers-reduced-motion: reduce){
-  .ai-tile img,.ai-tile-arrow,.ai-hero-cta,.ai-send-btn{transition:none !important}
-  .ai-typing span,.ai-cursor{animation:none !important}
+@media (prefers-reduced-motion:reduce){
+  .ai-tile,.ai-tile img,.ai-send{transition:none!important}
+  .ai-typing span,.ai-cursor{animation:none!important}
 }
 </style>
 </head>
 <body>
 
-<header class="ai-topbar">
-  <div class="ai-topbar-left">
-    <a class="ai-back" href="index.html" aria-label="Back to home">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <span class="ai-brand">OVA <em>AI</em></span>
-  </div>
-  <div class="ai-topbar-right">
-    <a class="ai-cart-link" href="all-perfume.html" aria-label="Shop">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M3 5H5L7.2 14.2C7.31 14.67 7.73 15 8.21 15H17.4C17.87 15 18.29 14.69 18.41 14.24L20 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="19" r="1.5" fill="currentColor"/><circle cx="17" cy="19" r="1.5" fill="currentColor"/></svg>
-      <span class="ai-cart-badge" id="aiCartBadge" hidden>0</span>
-    </a>
-  </div>
-</header>
+<div class="ai-wrap">
 
-<section class="ai-hero">
-  <div class="ai-hero-inner">
-    <span class="ai-hero-kicker" id="aiHeroKicker">MEET</span>
-    <h1 class="ai-hero-title">
-      <span class="ai-hero-title-line">OVA</span>
-      <em id="aiHeroEm">AI</em>
-    </h1>
-    <p class="ai-hero-sub" id="aiHeroSub">Discover. Ask. Find. Your perfect scent, made personal.</p>
-    <button type="button" class="ai-hero-cta" id="aiStartChatting">
-      <span id="aiStartChattingLabel">Start Chatting</span>
-      <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <header class="ai-head">
+    <a class="ai-burger" href="index.html" aria-label="Home"><span></span><span></span><span></span></a>
+    <div class="ai-logo"><b>OVA</b><small>Perfume</small></div>
+    <div class="ai-head-right">
+      <a class="ai-bag" href="all-perfume.html" aria-label="Shop">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 8h12l-1 12H7L6 8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span class="ai-bag-dot" id="aiBagDot" hidden></span>
+      </a>
+      <span class="ai-user">K</span>
+    </div>
+  </header>
+
+  <section class="ai-hero">
+    <div class="ai-hero-in">
+      <div class="ai-hero-kicker" id="aiKicker">MEET</div>
+      <h1 class="ai-hero-title">OVA AI</h1>
+      <div class="ai-hero-role" id="aiRole">YOUR PERSONAL<br>FRAGRANCE ASSISTANT</div>
+      <div class="ai-hero-rule"></div>
+      <p class="ai-hero-sub" id="aiSub">Discover. Ask. Find.<br>Your perfect scent,<br>made personal.</p>
+      <button type="button" class="ai-hero-cta" id="aiStart">
+        <span id="aiStartLabel">START CHATTING</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="ai-hero-tag" id="aiTag">MORE<br>THAN A SCENT</div>
+  </section>
+
+  <div class="ai-tiles">
+    <button type="button" class="ai-tile light" data-en="Help me find my scent" data-ar="ساعدني ألاقي البرفان المناسب ليا">
+      <img src="images/ai-agent/tile-scent.webp" alt="" loading="lazy" decoding="async">
+      <span class="ai-tile-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.5l1.1 3.2 3.2 1.1-3.2 1.1L12 11.1l-1.1-3.2-3.2-1.1 3.2-1.1L12 2.5z" fill="currentColor"/><path d="M18 13l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7.7-2z" fill="currentColor"/></svg></span>
+      <span class="ai-tile-name" data-k="t1">Find<br>My Scent</span>
+      <span class="ai-tile-arw"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </button>
+    <button type="button" class="ai-tile" data-en="Explain fragrance notes to me" data-ar="اشرحلي نوتات العطور">
+      <img src="images/ai-agent/tile-notes.webp" alt="" loading="lazy" decoding="async">
+      <span class="ai-tile-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M20 4c-9 0-14 4.5-14 10.5 0 2 .6 3.6 1.6 4.8M4 20c4-8 9-11 15-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      <span class="ai-tile-name" data-k="t2">Explore<br>Notes</span>
+      <span class="ai-tile-arw"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </button>
+    <button type="button" class="ai-tile" data-en="Suggest a perfume gift" data-ar="اقترحلي هدية برفان">
+      <img src="images/ai-agent/tile-gift.webp" alt="" loading="lazy" decoding="async">
+      <span class="ai-tile-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 11h16v9H4v-9zM3 7.5h18V11H3V7.5zM12 7.5V20" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 7.5S10.5 3.5 8 4.2c-2 .6-1.6 3.3 1 3.3h3zm0 0s1.5-4 4-3.3c2 .6 1.6 3.3-1 3.3h-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+      <span class="ai-tile-name" data-k="t3">Gift<br>Suggestions</span>
+      <span class="ai-tile-arw"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </button>
+    <button type="button" class="ai-tile" data-en="Teach me about perfumes" data-ar="علمني عن أنواع البرفانات">
+      <img src="images/ai-agent/tile-learn.webp" alt="" loading="lazy" decoding="async">
+      <span class="ai-tile-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 6.5S10 4.5 6.5 4.5 3 5.5 3 5.5v13S4 17.5 6.5 17.5 12 19.5 12 19.5m0-13S14 4.5 17.5 4.5 21 5.5 21 5.5v13s-1-1-3.5-1-5.5 2-5.5 2m0-13v13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="ai-tile-name" data-k="t4">Learn About<br>Perfumes</span>
+      <span class="ai-tile-arw"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </button>
   </div>
-</section>
 
-<div class="ai-tiles" id="aiTiles">
-  <button type="button" class="ai-tile" data-prompt-en="Help me find my scent" data-prompt-ar="ساعدني ألاقي البرفان المناسب ليا">
-    <img src="images/ai-agent/tile-scent.webp" alt="" loading="lazy" decoding="async">
-    <span class="ai-tile-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.4 3.2L17 7l-2.6 2.4L15 13l-3-1.8L9 13l.6-3.6L7 7l3.6-.8L12 3z" fill="currentColor"/></svg></span>
-    <span class="ai-tile-name" data-i18n="tileScent">Find My<br>Scent</span>
-    <span class="ai-tile-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-  </button>
-  <button type="button" class="ai-tile" data-prompt-en="Explain fragrance notes to me" data-prompt-ar="اشرحلي نوتات العطور">
-    <img src="images/ai-agent/tile-notes.webp" alt="" loading="lazy" decoding="async">
-    <span class="ai-tile-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C7 6 5 9 5 13a7 7 0 0014 0c0-4-2-7-7-11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
-    <span class="ai-tile-name" data-i18n="tileNotes">Explore<br>Notes</span>
-    <span class="ai-tile-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-  </button>
-  <button type="button" class="ai-tile" data-prompt-en="Suggest a perfume gift" data-prompt-ar="اقترحلي هدية برفان">
-    <img src="images/ai-agent/tile-gift.webp" alt="" loading="lazy" decoding="async">
-    <span class="ai-tile-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20 8H4v12h16V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 8h20v4H2V8zM12 8v12M12 8c-1.5-4-6-4-6-1s3 1 6 1zm0 0c1.5-4 6-4 6-1s-3 1-6 1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
-    <span class="ai-tile-name" data-i18n="tileGift">Gift<br>Suggestions</span>
-    <span class="ai-tile-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-  </button>
-  <button type="button" class="ai-tile" data-prompt-en="Teach me about perfumes" data-prompt-ar="علمني عن أنواع البرفانات">
-    <img src="images/ai-agent/tile-learn.webp" alt="" loading="lazy" decoding="async">
-    <span class="ai-tile-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5C4 5.1 5.1 4 6.5 4H20v14H6.5A2.5 2.5 0 004 20.5v-14z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 17.5A2.5 2.5 0 016.5 15H20" stroke="currentColor" stroke-width="1.6"/></svg></span>
-    <span class="ai-tile-name" data-i18n="tileLearn">Learn About<br>Perfumes</span>
-    <span class="ai-tile-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-  </button>
-</div>
+  <div class="ai-composer-block">
+    <div class="ai-composer">
+      <span class="ai-spark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6l1.5 4.4 4.4 1.5-4.4 1.5L12 14.4l-1.5-4.4L6.1 8.5l4.4-1.5L12 2.6z" fill="currentColor"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z" fill="currentColor"/></svg></span>
+      <textarea class="ai-input" id="aiInput" rows="1" placeholder="Ask OVA AI anything..."></textarea>
+      <button type="button" class="ai-send" id="aiSend" aria-label="Send" disabled>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4.5 11.5L20 4.5l-7 15.5-2.3-6.2-6.2-2.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
 
-<main class="ai-chat-shell">
-  <p class="ai-quick-label" id="aiTryLabel">TRY ASKING</p>
-  <div class="ai-quick-row" id="aiQuickRow"></div>
+  <div class="ai-try">
+    <div class="ai-try-label" id="aiTryLabel">TRY ASKING</div>
+    <div class="ai-chips" id="aiChips"></div>
+  </div>
+
   <div class="ai-thread" id="aiThread"></div>
-</main>
 
-<div class="ai-composer-wrap">
-  <div class="ai-composer">
-    <textarea class="ai-composer-input" id="aiInput" rows="1" placeholder="Ask OVA AI anything..."></textarea>
-    <button type="button" class="ai-send-btn" id="aiSendBtn" aria-label="Send" disabled>
-      <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
-  <p class="ai-composer-note" id="aiComposerNote">A smarter way to experience fragrance &mdash; explore, discover, belong.</p>
+  <section class="ai-banner">
+    <div class="ai-banner-in">
+      <div class="ai-banner-t" id="aiBannerT">A smarter way<br>to experience fragrance.</div>
+      <div class="ai-banner-rule"></div>
+      <div class="ai-banner-s" id="aiBannerS">POWERED BY OVA AI</div>
+    </div>
+    <div class="ai-banner-side" id="aiBannerSide">EXPLORE<br>DISCOVER<br>BELONG</div>
+  </section>
+
 </div>
 
-<script src="js/page-language.js?v=e8c6ba53"></script>
-<!-- Same safe combination brand.html loads: full catalog data
-     (window.ovaBrandCatalog) and product detail text, without home.js,
-     which assumes homepage-only elements exist and would throw here. -->
+<nav class="ai-nav">
+  <a href="index.html" id="nvHome">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5L12 4l8 6.5V20h-5v-5.5H9V20H4v-9.5z" fill="currentColor"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="all-perfume.html" id="nvDiscover">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    <span>Discover</span>
+  </a>
+  <a href="ova-ai.html" class="on" id="nvAi">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5C4 4.7 4.7 4 5.5 4h13c.8 0 1.5.7 1.5 1.5v9c0 .8-.7 1.5-1.5 1.5H9l-4 3.3V16H5.5A1.5 1.5 0 014 14.5v-9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.5" cy="10" r="1" fill="currentColor"/><circle cx="14.5" cy="10" r="1" fill="currentColor"/></svg>
+    <span>OVA AI</span>
+  </a>
+  <a href="all-perfume.html" id="nvWish">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.4-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.6-7 9-7 9z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+    <span>Wishlist</span>
+  </a>
+  <a href="account.html" id="nvProfile">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="currentColor" stroke-width="1.7"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    <span>Profile</span>
+  </a>
+</nav>
+
 <script src="js/catalog.js?v=82caa220"></script>
 <script src="js/remote-catalog.js?v=9816d387"></script>
 <script src="js/product-details.js?v=128bc9da"></script>
@@ -557,28 +486,42 @@ html[dir="rtl"] .ai-send-btn svg{transform:scaleX(-1)}
 
   const TXT = {
     en: {
-      kicker: "MEET", em: "AI", sub: "Discover. Ask. Find. Your perfect scent, made personal.",
-      start: "Start Chatting", tryLabel: "TRY ASKING",
-      quick: ["Best men's perfumes?", "Long lasting scents", "Gifts under 1000 EGP", "Something sweet for winter"],
-      placeholder: "Ask OVA AI anything...",
-      note: "A smarter way to experience fragrance — explore, discover, belong.",
-      tileScent: "Find My<br>Scent", tileNotes: "Explore<br>Notes", tileGift: "Gift<br>Suggestions", tileLearn: "Learn About<br>Perfumes",
-      openProduct: "View", morning: "Good morning", evening: "Good evening", afternoon: "Good afternoon", night: "Good evening",
-      greeting: name => `${name} \u{1F44B} I'm OVA AI, your personal fragrance assistant. How can I help you today?`
+      kicker:"MEET", role:"YOUR PERSONAL<br>FRAGRANCE ASSISTANT",
+      sub:"Discover. Ask. Find.<br>Your perfect scent,<br>made personal.",
+      start:"START CHATTING", tag:"MORE<br>THAN A SCENT",
+      tryLabel:"TRY ASKING",
+      chips:["Best men's perfumes?","Long lasting scents","Gifts under 1000 EGP"],
+      ph:"Ask OVA AI anything...",
+      bannerT:"A smarter way<br>to experience fragrance.", bannerS:"POWERED BY OVA AI",
+      bannerSide:"EXPLORE<br>DISCOVER<br>BELONG",
+      t1:"Find<br>My Scent", t2:"Explore<br>Notes", t3:"Gift<br>Suggestions", t4:"Learn About<br>Perfumes",
+      nav:["Home","Discover","OVA AI","Wishlist","Profile"],
+      view:"View ",
+      morning:"Good morning", afternoon:"Good afternoon", evening:"Good evening", night:"Good evening",
+      hi:(g)=>`${g} \u{1F642} How can I help you today?`,
+      loading:"One moment, still warming up."
     },
     ar: {
-      kicker: "تعرف على", em: "الذكاء الاصطناعي", sub: "اكتشف. اسأل. لاقي عطرك اللي يناسبك بالظبط.",
-      start: "ابدأ المحادثة", tryLabel: "جرب تسأل",
-      quick: ["أفضل برفانات رجالي؟", "برفانات ثباتها عالي", "هدايا تحت 1000 جنيه", "حاجة سويت للشتا"],
-      placeholder: "اسأل OVA AI أي حاجة...",
-      note: "طريقة أذكى تعيش بيها تجربة العطور — اكتشف، جرب، وكن جزء منها.",
-      tileScent: "لاقي<br>عطرك", tileNotes: "استكشف<br>النوتات", tileGift: "اقتراحات<br>هدايا", tileLearn: "تعلم عن<br>البرفانات",
-      openProduct: "افتح", morning: "صباح الخير", evening: "مساء الخير", afternoon: "مساء الخير", night: "مساء الخير",
-      greeting: name => `${name} \u{1F60A} أنا OVA AI، مساعدك الشخصي للعطور. أقدر أساعدك ازاي النهاردة؟`
+      kicker:"تعرّف على", role:"مساعدك الشخصي<br>لاختيار العطور",
+      sub:"اكتشف. اسأل. لاقي<br>عطرك المثالي،<br>على مزاجك إنت.",
+      start:"ابدأ المحادثة", tag:"أكتر<br>من مجرد عطر",
+      tryLabel:"جرّب تسأل",
+      chips:["أحسن برفانات رجالي؟","برفانات ثباتها عالي","هدايا تحت 1000 جنيه"],
+      ph:"اسأل OVA AI أي حاجة...",
+      bannerT:"طريقة أذكى<br>تعيش بيها تجربة العطر.", bannerS:"مدعوم بـ OVA AI",
+      bannerSide:"اكتشف<br>جرّب<br>انتمِ",
+      t1:"لاقي<br>عطرك", t2:"استكشف<br>النوتات", t3:"اقتراحات<br>هدايا", t4:"اتعلّم عن<br>البرفانات",
+      nav:["الرئيسية","تصفّح","OVA AI","المفضلة","حسابي"],
+      view:"افتح ",
+      morning:"صباح الخير", afternoon:"مساء الخير", evening:"مساء الخير", night:"مساء الخير",
+      hi:(g)=>`${g} \u{1F642} أقدر أساعدك في إيه النهاردة؟`,
+      loading:"لحظة واحدة، لسه بجهّز."
     }
   };
 
-  function timeOfDayKey(){
+  const T = () => TXT[isAr() ? "ar" : "en"];
+
+  function timeKey(){
     const h = new Date().getHours();
     if (h < 5) return "night";
     if (h < 12) return "morning";
@@ -586,277 +529,191 @@ html[dir="rtl"] .ai-send-btn svg{transform:scaleX(-1)}
     return "evening";
   }
 
-  function applyStaticText(){
-    const ar = isAr();
-    const t = TXT[ar ? "ar" : "en"];
-    document.documentElement.dir = ar ? "rtl" : "ltr";
-    document.getElementById("aiHeroKicker").textContent = t.kicker;
-    document.getElementById("aiHeroEm").textContent = t.em;
-    document.getElementById("aiHeroSub").textContent = t.sub;
-    document.getElementById("aiStartChattingLabel").textContent = t.start;
-    document.getElementById("aiTryLabel").textContent = t.tryLabel;
-    document.getElementById("aiInput").placeholder = t.placeholder;
-    document.getElementById("aiComposerNote").textContent = t.note;
-    document.querySelectorAll(".ai-tile [data-i18n]").forEach((el) => {
-      const key = el.getAttribute("data-i18n");
-      if (t[key]) el.innerHTML = t[key];
-    });
+  const thread = document.getElementById("aiThread");
+  const input  = document.getElementById("aiInput");
+  const sendBtn= document.getElementById("aiSend");
 
-    const quickRow = document.getElementById("aiQuickRow");
-    quickRow.innerHTML = "";
-    t.quick.forEach((label) => {
+  function paintText(){
+    const t = T(), ar = isAr();
+    document.documentElement.dir = ar ? "rtl" : "ltr";
+    document.documentElement.lang = ar ? "ar" : "en";
+    document.getElementById("aiKicker").textContent = t.kicker;
+    document.getElementById("aiRole").innerHTML = t.role;
+    document.getElementById("aiSub").innerHTML = t.sub;
+    document.getElementById("aiStartLabel").textContent = t.start;
+    document.getElementById("aiTag").innerHTML = t.tag;
+    document.getElementById("aiTryLabel").textContent = t.tryLabel;
+    document.getElementById("aiBannerT").innerHTML = t.bannerT;
+    document.getElementById("aiBannerS").textContent = t.bannerS;
+    document.getElementById("aiBannerSide").innerHTML = t.bannerSide;
+    input.placeholder = t.ph;
+    document.querySelectorAll(".ai-tile-name[data-k]").forEach((el) => {
+      const k = el.getAttribute("data-k");
+      if (t[k]) el.innerHTML = t[k];
+    });
+    ["nvHome","nvDiscover","nvAi","nvWish","nvProfile"].forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el) el.querySelector("span").textContent = t.nav[i];
+    });
+    const chips = document.getElementById("aiChips");
+    chips.innerHTML = "";
+    t.chips.forEach((label) => {
       const b = document.createElement("button");
-      b.type = "button";
-      b.className = "ai-quick-chip";
-      b.textContent = label;
+      b.type = "button"; b.className = "ai-chip"; b.textContent = label;
       b.onclick = () => sendMessage(label);
-      quickRow.appendChild(b);
+      chips.appendChild(b);
     });
   }
 
-  function updateCartBadge(){
+  function paintBag(){
     try {
       const cart = JSON.parse(localStorage.getItem("ovaCart") || "[]");
-      const count = cart.reduce((s, i) => s + (i.qty || 1), 0);
-      const badge = document.getElementById("aiCartBadge");
-      if (count > 0) { badge.hidden = false; badge.textContent = count; }
-      else badge.hidden = true;
-    } catch (e) {}
+      const n = cart.reduce((s,i)=> s + (i.qty||1), 0);
+      document.getElementById("aiBagDot").hidden = n <= 0;
+    } catch(e){}
   }
 
-  const thread = document.getElementById("aiThread");
-  const input = document.getElementById("aiInput");
-  const sendBtn = document.getElementById("aiSendBtn");
+  const down = () => window.scrollTo({ top: document.body.scrollHeight, behavior:"smooth" });
+  const botIco  = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.4l1.4 4.1 4.1 1.4-4.1 1.4L12 14.4l-1.4-4.1L6.5 8.9l4.1-1.4L12 3.4z" fill="#b08d57"/></svg>';
+  const userIco = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 19.5c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
 
-  function scrollToBottom(){
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  function addUser(text){
+    const r = document.createElement("div");
+    r.className = "ai-row user";
+    r.innerHTML = `<div class="ai-av user">${userIco}</div><div class="ai-col"><div class="ai-bub"></div></div>`;
+    r.querySelector(".ai-bub").textContent = text;
+    thread.appendChild(r); down();
   }
 
-  function botAvatarSvg(){
-    return '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5c-.9 3-1.3 4.9-3.3 6.9-2 2-3.9 2.4-6.9 3.3 3 .9 4.9 1.3 6.9 3.3 2 2 2.4 3.9 3.3 6.9.9-3 1.3-4.9 3.3-6.9 2-2 3.9-2.4 6.9-3.3-3-.9-4.9-1.3-6.9-3.3-2-2-2.4-3.9-3.3-6.9z" fill="#c9a66b"/></svg>';
-  }
-  function userAvatarSvg(){
-    return '<svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM4 20c0-3.5 3.5-6 8-6s8 2.5 8 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
-  }
-
-  function addUserRow(text){
-    const row = document.createElement("div");
-    row.className = "ai-row user";
-    row.innerHTML = `<div class="ai-avatar user">${userAvatarSvg()}</div><div class="ai-bubble-col"><div class="ai-bubble"></div></div>`;
-    row.querySelector(".ai-bubble").textContent = text;
-    thread.appendChild(row);
-    scrollToBottom();
+  function addTyping(){
+    const r = document.createElement("div");
+    r.className = "ai-row bot";
+    r.innerHTML = `<div class="ai-av">${botIco}</div><div class="ai-col"><div class="ai-bub"><span class="ai-typing"><span></span><span></span><span></span></span></div></div>`;
+    thread.appendChild(r); down();
+    return r;
   }
 
-  function addTypingRow(){
-    const row = document.createElement("div");
-    row.className = "ai-row bot";
-    row.innerHTML = `<div class="ai-avatar">${botAvatarSvg()}</div><div class="ai-bubble-col"><div class="ai-bubble"><span class="ai-typing"><span></span><span></span><span></span></span></div></div>`;
-    thread.appendChild(row);
-    scrollToBottom();
-    return row;
-  }
-
-  // Streams text into a bubble one character at a time, ChatGPT-style,
-  // with a blinking cursor while it types.
-  function streamInto(bubbleEl, text, onDone){
-    bubbleEl.innerHTML = "";
-    const cursor = document.createElement("span");
-    cursor.className = "ai-cursor";
+  // Types the reply out one character at a time, ChatGPT-style.
+  function stream(el, text, done){
+    el.innerHTML = "";
+    const cur = document.createElement("span");
+    cur.className = "ai-cursor";
     let i = 0;
-    const speed = 14; // ms per character - fast enough to feel real, slow enough to read as typed
-    function step(){
+    (function step(){
       if (i <= text.length) {
-        bubbleEl.textContent = text.slice(0, i);
-        bubbleEl.appendChild(cursor);
-        i++;
-        scrollToBottom();
-        setTimeout(step, speed);
-      } else {
-        cursor.remove();
-        if (onDone) onDone();
-      }
-    }
-    step();
+        el.textContent = text.slice(0, i);
+        el.appendChild(cur);
+        i++; down();
+        setTimeout(step, 13);
+      } else { cur.remove(); if (done) done(); }
+    })();
   }
 
-  function buildProductCard(product){
+  function prodCard(p){
     const brain = window.OvaAssistantBrain;
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "ai-product-card";
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "ai-prod";
     const img = document.createElement("img");
-    img.src = product.img;
-    img.alt = product.name;
-    img.loading = "lazy";
-    const info = document.createElement("div");
-    info.className = "ai-product-card-info";
-    const name = document.createElement("div");
-    name.className = "ai-product-card-name";
-    name.textContent = product.name;
-    const price = document.createElement("div");
-    price.className = "ai-product-card-price";
-    price.textContent = (product.price || "") + (isAr() ? " ج.م" : " EGP");
-    info.append(name, price);
-    const arrow = document.createElement("span");
-    arrow.className = "ai-product-card-arrow";
-    arrow.innerHTML = '<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    card.append(img, info, arrow);
-    card.onclick = () => { if (brain && brain.go) brain.go(product); };
-    return card;
+    img.src = p.img; img.alt = p.name; img.loading = "lazy";
+    const info = document.createElement("div"); info.className = "ai-prod-i";
+    const nm = document.createElement("div"); nm.className = "ai-prod-n"; nm.textContent = p.name;
+    const pr = document.createElement("div"); pr.className = "ai-prod-p";
+    pr.textContent = (p.price || "") + (isAr() ? " ج.م" : " EGP");
+    info.append(nm, pr);
+    const arw = document.createElement("span");
+    arw.innerHTML = '<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    b.append(img, info, arw);
+    b.onclick = () => { if (brain && brain.go) brain.go(p); };
+    return b;
   }
 
-  function addBotResult(row, result){
-    const col = row.querySelector(".ai-bubble-col");
-    const bubble = col.querySelector(".ai-bubble");
-    streamInto(bubble, result.text, () => {
-      if (result.actions && result.actions.length) {
-        const wrap = document.createElement("div");
-        wrap.className = "ai-suggest-row";
-        result.actions.forEach((action) => {
-          if (action.product) {
-            wrap.appendChild(buildProductCard(action.product));
-          } else {
-            const b = document.createElement("button");
-            b.type = "button";
-            b.className = "ai-suggest-btn";
-            b.textContent = action.label;
-            b.onclick = () => sendMessage(action.label);
-            wrap.appendChild(b);
-          }
-        });
-        col.appendChild(wrap);
-        scrollToBottom();
-      }
+  function addBot(row, result){
+    const col = row.querySelector(".ai-col");
+    stream(col.querySelector(".ai-bub"), result.text, () => {
+      (result.actions || []).forEach((a) => {
+        if (a.product) { col.appendChild(prodCard(a.product)); down(); }
+      });
     });
   }
 
-  let productsIndex = null;
-  function getBrainReply(text){
-    // Local fallback: the catalog-aware keyword brain, used only if the
-    // real AI endpoint is unreachable (no key configured yet, network
-    // issue, quota hit) so the widget still answers something useful.
+  let idx = null;
+  function localReply(text){
     const brain = window.OvaAssistantBrain;
-    if (!brain) {
-      return { text: isAr() ? "المساعد بيتحمل، جرب تاني بعد لحظة." : "The assistant is still loading, try again in a moment.", actions: [] };
-    }
-    if (!productsIndex) productsIndex = brain.collect();
-    return brain.reply(text, productsIndex);
+    if (!brain) return { text: T().loading, actions: [] };
+    if (!idx) idx = brain.collect();
+    return brain.reply(text, idx);
   }
-
-  function findProductForCard(name){
+  function lookup(name){
     const brain = window.OvaAssistantBrain;
     if (!brain || !name) return null;
-    if (!productsIndex) productsIndex = brain.collect();
-    const target = String(name).trim().toLowerCase();
-    return productsIndex.find((p) => String(p.name || "").trim().toLowerCase() === target) || null;
+    if (!idx) idx = brain.collect();
+    const t = String(name).trim().toLowerCase();
+    return idx.find((p) => String(p.name||"").trim().toLowerCase() === t) || null;
   }
 
-  // Conversation history sent to the API so OVA AI remembers earlier turns
-  // in this session (kept in memory only, not persisted).
-  const conversationHistory = [];
+  const history = [];
 
-  async function getAiReply(text){
+  async function aiReply(text){
     const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: text,
-        history: conversationHistory,
-        lang: isAr() ? "ar" : "en"
-      })
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ message:text, history, lang: isAr() ? "ar" : "en" })
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error || "Request failed");
-    }
+    if (!res.ok) throw new Error("api");
     const data = await res.json();
-    conversationHistory.push({ role: "user", text });
-    conversationHistory.push({ role: "model", text: data.text });
-
-    const product = data.product ? findProductForCard(data.product.name) || data.product : null;
-    const brain = window.OvaAssistantBrain;
-    return {
-      text: data.text,
-      actions: product ? [{ label: (isAr() ? "افتح " : "View ") + product.name, product }] : []
-    };
+    history.push({ role:"user", text });
+    history.push({ role:"model", text:data.text });
+    const p = data.product ? (lookup(data.product.name) || data.product) : null;
+    return { text:data.text, actions: p ? [{ product:p }] : [] };
   }
 
   async function sendMessage(text){
-    const value = String(text || input.value || "").trim();
-    if (!value) return;
-    addUserRow(value);
-    input.value = "";
-    autoGrow();
-    updateSendState();
-
-    const typingRow = addTypingRow();
-    const minThinkTime = new Promise((resolve) => setTimeout(resolve, 420 + Math.random() * 380));
-
+    const v = String(text || input.value || "").trim();
+    if (!v) return;
+    addUser(v);
+    input.value = ""; grow(); syncSend();
+    const row = addTyping();
+    const wait = new Promise((r)=> setTimeout(r, 400 + Math.random()*300));
     let result;
-    try {
-      [result] = await Promise.all([getAiReply(value), minThinkTime]);
-    } catch (error) {
-      await minThinkTime;
-      // The real AI endpoint is unreachable - fall back to the local
-      // catalog-aware brain rather than showing an error state.
-      result = getBrainReply(value);
-    }
-    typingRow.querySelector(".ai-typing").remove();
-    addBotResult(typingRow, result);
+    try { [result] = await Promise.all([aiReply(v), wait]); }
+    catch(e){ await wait; result = localReply(v); }
+    row.querySelector(".ai-typing").remove();
+    addBot(row, result);
   }
 
-  function autoGrow(){
-    input.style.height = "auto";
-    input.style.height = Math.min(120, input.scrollHeight) + "px";
-  }
-  function updateSendState(){
-    sendBtn.disabled = !input.value.trim();
-  }
+  function grow(){ input.style.height="auto"; input.style.height = Math.min(110, input.scrollHeight)+"px"; }
+  function syncSend(){ sendBtn.disabled = !input.value.trim(); }
 
-  input.addEventListener("input", () => { autoGrow(); updateSendState(); });
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
+  input.addEventListener("input", ()=>{ grow(); syncSend(); });
+  input.addEventListener("keydown", (e)=>{
+    if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendMessage(); }
   });
-  sendBtn.addEventListener("click", () => sendMessage());
+  sendBtn.addEventListener("click", ()=> sendMessage());
 
-  document.getElementById("aiStartChatting").addEventListener("click", () => {
-    input.focus();
-    window.scrollTo({ top: document.querySelector(".ai-chat-shell").offsetTop - 90, behavior: "smooth" });
+  document.getElementById("aiStart").addEventListener("click", ()=>{
+    document.querySelector(".ai-composer-block").scrollIntoView({behavior:"smooth", block:"center"});
+    setTimeout(()=> input.focus(), 400);
   });
 
-  document.querySelectorAll(".ai-tile").forEach((tile) => {
-    tile.addEventListener("click", () => {
-      const prompt = isAr() ? tile.getAttribute("data-prompt-ar") : tile.getAttribute("data-prompt-en");
-      sendMessage(prompt);
-      window.scrollTo({ top: document.querySelector(".ai-chat-shell").offsetTop - 90, behavior: "smooth" });
+  document.querySelectorAll(".ai-tile").forEach((tile)=>{
+    tile.addEventListener("click", ()=>{
+      sendMessage(isAr() ? tile.getAttribute("data-ar") : tile.getAttribute("data-en"));
     });
   });
 
   function greet(){
-    const ar = isAr();
-    const t = TXT[ar ? "ar" : "en"];
-    const timeLabel = t[timeOfDayKey()];
-    const row = addTypingRow();
-    setTimeout(() => {
+    const t = T();
+    const row = addTyping();
+    setTimeout(()=>{
       row.querySelector(".ai-typing").remove();
-      addBotResult(row, { text: t.greeting(timeLabel), actions: [] });
-    }, 500);
+      addBot(row, { text: t.hi(t[timeKey()]), actions: [] });
+    }, 420);
   }
 
-  function boot(){
-    applyStaticText();
-    updateCartBadge();
-    greet();
-  }
-
+  function boot(){ paintText(); paintBag(); greet(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
-
-  window.addEventListener("storage", updateCartBadge);
+  window.addEventListener("storage", paintBag);
 })();
 </script>
 </body>
