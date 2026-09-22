@@ -17,10 +17,26 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GE
 // to name/brand/price (no long descriptions) keeps the prompt small and
 // fast while still letting the model recommend real, in-stock products
 // instead of inventing perfumes that do not exist on the site.
+// Grouped by who each scent is for, because a single trailing column was
+// easy for the model to skim past - it kept answering a request for a
+// women's perfume with men's ones. Separate headed lists make the wrong
+// section something it has to actively cross into.
 function buildCatalogBlock() {
-  return catalog
-    .map((p) => `${p.name} | ${p.brand} | ${p.price} EGP | ${p.gender || "unisex"}`)
-    .join("\n");
+  const groups = [
+    ["FOR WOMEN (suitable when the customer asks for a women's / حريمي perfume)", "women"],
+    ["FOR MEN (suitable when the customer asks for a men's / رجالي perfume)", "men"],
+    ["UNISEX (suitable for anyone)", "unisex"]
+  ];
+
+  return groups
+    .map(([heading, gender]) => {
+      const lines = catalog
+        .filter((p) => (p.gender || "unisex") === gender)
+        .map((p) => `${p.name} | ${p.brand} | ${p.price} EGP`)
+        .join("\n");
+      return `### ${heading}\n${lines}`;
+    })
+    .join("\n\n");
 }
 
 function buildSystemPrompt(lang) {
@@ -43,9 +59,16 @@ What you actually do:
 - Respect every constraint given. If they said winter, do not suggest summer scents. If they said women's, do not suggest men's. If they gave a budget, stay under it.
 - End with a brief offer to refine ("لو عايز أحلى منهم قولي") rather than a new question.
 - If asked something unrelated to perfume/the store (weather, math, etc.), answer briefly and kindly, then steer back to how you can help with their fragrance choice.
-- Keep replies reasonably short - a few sentences, not an essay - unless the customer explicitly asks for detail.
+- Keep replies reasonably short - a few sentences, not an essay - unless the customer explicitly asks for detail. Recommend at most three products, one short line each, and always finish your final sentence.
 
-Catalog (name | brand | price in EGP | who it is for). Match the gender the customer asked for - never suggest a men's scent when they asked for a women's one, or the reverse. Unisex suits either:
+GENDER RULE - THIS OVERRIDES EVERYTHING ELSE:
+The catalog below is split into three sections: FOR WOMEN, FOR MEN, and UNISEX.
+- If the customer asks for a women's perfume (حريمي / نسائي / for her / for my wife / for my mother / for a girl), you may ONLY name products from the FOR WOMEN or UNISEX sections. Naming anything from FOR MEN is a serious mistake.
+- If the customer asks for a men's perfume (رجالي / for him / for my husband / for a man), you may ONLY name products from the FOR MEN or UNISEX sections.
+- Before you send a reply, check every product you named appears in an allowed section. If one does not, replace it.
+- Never describe a perfume as رجالي when the customer asked for حريمي, or the reverse.
+
+Catalog (name | brand | price in EGP):
 ${catalogBlock}
 
 ${isAr ? "Reply in Arabic (Egyptian colloquial by default, matching the customer)." : "Reply in English."}`;
@@ -134,7 +157,10 @@ module.exports = async (req, res) => {
       // chat replies need no internal reasoning, so it is switched off and
       // the ceiling raised to leave room for a complete answer.
       thinkingConfig: { thinkingBudget: 0 },
-      maxOutputTokens: 800
+      // Arabic costs several times more tokens per word than English, so a
+      // normal three-pick reply was running out of budget and stopping
+      // mid-sentence. This leaves comfortable headroom.
+      maxOutputTokens: 2048
     }
   };
 
