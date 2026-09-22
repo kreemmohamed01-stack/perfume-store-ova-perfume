@@ -165,11 +165,27 @@ module.exports = async (req, res) => {
   };
 
   try {
-    const upstream = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+    // The free tier caps at 20 requests/minute. A single customer rarely
+    // hits that, but the window is shared across everyone on the site, so
+    // a burst of traffic can trip it. Rather than immediately falling back
+    // to the weaker local brain (which does not know the live catalog),
+    // wait out Google's own suggested delay and try once more - a request
+    // that would otherwise fail usually succeeds a second later.
+    const callGemini = () => fetch(`${GEMINI_URL}?key=${apiKey}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
+
+    let upstream = await callGemini();
+
+    if (upstream.status === 429) {
+      const errText = await upstream.text().catch(() => "");
+      const retryMatch = errText.match(/retry in ([\d.]+)s/i);
+      const waitMs = Math.min(retryMatch ? Math.ceil(parseFloat(retryMatch[1]) * 1000) : 1500, 4000);
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
+      upstream = await callGemini();
+    }
 
     if (!upstream.ok) {
       const errText = await upstream.text().catch(() => "");
@@ -179,7 +195,9 @@ module.exports = async (req, res) => {
       // key itself - only Google's error message.
       const debug = String(req.query && req.query.debug || "") === "1";
       res.status(502).json({
-        error: "The assistant is temporarily unavailable.",
+        error: upstream.status === 429
+          ? "The assistant is getting a lot of questions right now - please try again in a moment."
+          : "The assistant is temporarily unavailable.",
         ...(debug ? { upstreamStatus: upstream.status, upstream: errText.slice(0, 500) } : {})
       });
       return;

@@ -598,7 +598,14 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ message:text, history, lang: isAr() ? "ar" : "en" })
     });
-    if (!res.ok) throw new Error("api");
+    if (!res.ok) {
+      // A 429 means the assistant itself is fine but momentarily busy - the
+      // customer should be told to retry, not silently handed the weaker
+      // local brain's guess (which does not know live prices/stock).
+      const err = new Error("api");
+      err.busy = res.status === 429;
+      throw err;
+    }
     const data = await res.json();
     history.push({ role:"user", text });
     history.push({ role:"model", text:data.text });
@@ -619,7 +626,15 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
     const wait = new Promise((r)=> setTimeout(r, 400 + Math.random()*300));
     let result;
     try { [result] = await Promise.all([aiReply(v), wait]); }
-    catch(e){ await wait; result = localReply(v); }
+    catch(e){
+      await wait;
+      result = e && e.busy
+        ? { text: isAr()
+            ? "في زحمة أسئلة عليّا دلوقتي، هل ممكن تسأل تاني بعد كام ثانية؟ 🙏"
+            : "I'm getting a lot of questions right now - mind asking again in a few seconds? 🙏",
+            actions: [] }
+        : localReply(v);
+    }
     row.querySelector(".ai-typing").remove();
     addBot(row, result);
   }
