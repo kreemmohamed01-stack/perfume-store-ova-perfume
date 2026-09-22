@@ -11097,3 +11097,14 @@
       color: var(--ova-champagne, #c9a66b) !important;
       -webkit-text-fill-color: var(--ova-champagne, #c9a66b) !important;
     }
+
+    /* --------------------------------------------------------------------
+       CART ITEM PRICE CONTRAST - `.cart-info p:nth-child(2)` (the
+       "Price: X EGP" line on every cart row) is forced to the same pale
+       cream color as the old dark-theme shimmer text. Reclaimed with
+       matching !important so it reads clearly on the bright ivory cart.
+       -------------------------------------------------------------------- */
+    .cart-info p:nth-child(2) {
+      color: var(--ova-charcoal, #171513) !important;
+      -webkit-text-fill-color: var(--ova-charcoal, #171513) !important;
+    }
