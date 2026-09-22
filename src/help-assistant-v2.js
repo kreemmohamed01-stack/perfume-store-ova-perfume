@@ -850,10 +850,11 @@
     const offset = document.getElementById("whatsappFloat") ? 66 : 18;
     const style = document.createElement("style");
     style.textContent = `
-      .ova-help-float{position:fixed;right:18px;bottom:${offset}px;z-index:5200;border:none;border-radius:50%;width:66px;height:66px;padding:0;background:conic-gradient(from 210deg,#4285f4,#9b72f2,#d96570,#f2a600,#4285f4);color:#fff;font-size:0;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(66,133,244,.42),0 0 34px rgba(155,114,242,.40),0 4px 14px rgba(0,0,0,.28);animation:ovaAiGlow 3.2s ease-in-out infinite;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease}
-      @keyframes ovaAiGlow{0%,100%{box-shadow:0 10px 30px rgba(66,133,244,.42),0 0 30px rgba(155,114,242,.36),0 4px 14px rgba(0,0,0,.28)}50%{box-shadow:0 12px 36px rgba(66,133,244,.58),0 0 52px rgba(155,114,242,.60),0 4px 16px rgba(0,0,0,.30)}}
-      .ova-help-float::after{content:"";position:absolute;inset:3px;border-radius:50%;background:#0d0c0b;z-index:0}
-      .ova-help-float:hover{transform:translateY(-2px) scale(1.06);box-shadow:0 16px 32px rgba(0,0,0,.46),0 0 22px rgba(201,166,107,.28),0 0 0 2px rgba(255,255,255,.1)} .ova-help-float::before{content:"";position:relative;z-index:1;width:58%;height:58%;display:block;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234285f4'/%3E%3Cstop offset='.45' stop-color='%239b72f2'/%3E%3Cstop offset='.75' stop-color='%23d96570'/%3E%3Cstop offset='1' stop-color='%23f2a600'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 1.6c0 5.05 4.09 9.14 9.14 9.14v2.52c-5.05 0-9.14 4.09-9.14 9.14h-2.52c0-5.05-4.09-9.14-9.14-9.14v-2.52c5.05 0 9.14-4.09 9.14-9.14H12z' fill='url(%23g)'/%3E%3C/svg%3E");border-radius:0;transform:none;overflow:visible;clip-path:none;-webkit-clip-path:none;filter:drop-shadow(0 0 6px rgba(155,114,242,.5))}
+      .ova-help-float{position:fixed;right:16px;bottom:${offset + 16}px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:44px;height:56px;font-size:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+      .ova-help-float:hover{transform:translateY(-3px) scale(1.06)}
+      .ova-help-float::before{content:"";display:block;width:38px;height:38px;flex:0 0 auto;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234285f4'/%3E%3Cstop offset='.42' stop-color='%239b72f2'/%3E%3Cstop offset='.74' stop-color='%23d96570'/%3E%3Cstop offset='1' stop-color='%23f2a600'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 1.6c0 5.05 4.09 9.14 9.14 9.14v2.52c-5.05 0-9.14 4.09-9.14 9.14h-2.52c0-5.05-4.09-9.14-9.14-9.14v-2.52c5.05 0 9.14-4.09 9.14-9.14H12z' fill='url(%23g)'/%3E%3C/svg%3E");filter:drop-shadow(0 0 7px rgba(155,114,242,.62)) drop-shadow(0 2px 5px rgba(0,0,0,.32));animation:ovaAiPulse 3s ease-in-out infinite;border-radius:0;transform:none;overflow:visible;clip-path:none;-webkit-clip-path:none}
+      @keyframes ovaAiPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(155,114,242,.5)) drop-shadow(0 2px 5px rgba(0,0,0,.32))}50%{filter:drop-shadow(0 0 14px rgba(155,114,242,.9)) drop-shadow(0 0 22px rgba(66,133,244,.5)) drop-shadow(0 2px 5px rgba(0,0,0,.32))}}
+      .ova-help-float::after{content:attr(data-label);display:block;font:700 8px/1 'Manrope',sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#1f1a14;white-space:nowrap;text-shadow:0 1px 3px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.85)}
       .ova-help-panel{position:fixed;right:18px;bottom:${offset + 52}px;z-index:5201;width:min(380px,calc(100vw - 24px));height:min(560px,calc(var(--ova-help-vh,100vh) - 130px));display:none;flex-direction:column;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,rgba(10,18,34,.98) 0%,rgba(11,25,52,.98) 100%);border:1px solid rgba(105,173,255,.22);box-shadow:0 24px 70px rgba(0,0,0,.32),0 0 40px rgba(18,112,255,.22)}
       .ova-help-panel.open{display:flex} .ova-help-head{display:flex;align-items:center;justify-content:space-between;padding:16px;color:#fff;background:linear-gradient(135deg,rgba(22,146,255,.24) 0%,rgba(10,102,255,.14) 100%);border-bottom:1px solid rgba(255,255,255,.08)}
       .ova-help-title{font:800 16px/1.2 "Manrope",sans-serif} .ova-help-sub{font:500 12px/1.4 "Manrope",sans-serif;color:rgba(255,255,255,.76);margin-top:4px}
@@ -866,7 +867,7 @@
       .ova-help-action-btn{border:none;border-radius:999px;padding:8px 12px;background:rgba(22,146,255,.18);color:#cfe5ff;cursor:pointer;font:700 11px/1.2 "Manrope",sans-serif;border:1px solid rgba(105,173,255,.24)}
       .ova-help-form{display:flex;gap:10px;padding:14px;border-top:1px solid rgba(255,255,255,.08);background:rgba(6,14,28,.92)} .ova-help-input{flex:1;border:none;outline:none;border-radius:16px;padding:14px;background:rgba(255,255,255,.08);color:#fff;font:600 13px/1.2 "Manrope",sans-serif}
       .ova-help-send{border:none;border-radius:16px;padding:0 16px;background:linear-gradient(135deg,#1692ff 0%,#0a66ff 100%);color:#fff;font:800 13px/1 "Manrope",sans-serif;cursor:pointer}
-      @media (max-width:640px){.ova-help-float{right:14px;bottom:max(140px,calc(env(safe-area-inset-bottom) + 140px));width:60px;height:60px}.ova-help-panel{right:8px;left:8px;width:auto;bottom:max(112px,calc(env(safe-area-inset-bottom) + 90px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
+      @media (max-width:640px){.ova-help-float{right:14px;bottom:max(156px,calc(env(safe-area-inset-bottom) + 156px));width:40px;height:52px}.ova-help-panel{right:8px;left:8px;width:auto;bottom:max(112px,calc(env(safe-area-inset-bottom) + 90px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
     `;
     document.head.appendChild(style);
 
@@ -899,7 +900,10 @@
     };
     const ui = () => {
       const ar = arUi();
-      btn.innerHTML = `${ar ? "مساعدة" : "Help"}<span>${ar ? "اسأل عن البرفانات" : "Ask about perfumes"}</span>`;
+      // The caption is drawn by .ova-help-float::after from data-label,
+      // so the button itself stays empty apart from the gradient mark.
+      btn.setAttribute("data-label", ar ? "اسأل" : "Ask AI");
+      btn.setAttribute("aria-label", ar ? "اسأل مساعد البرفانات" : "Ask the perfume assistant");
       panel.querySelector(".ova-help-title").textContent = ar ? "مساعد البرفانات" : "Perfume Help";
       panel.querySelector(".ova-help-sub").textContent = ar ? "فاهم عربي وإنجليزي ويرشح حسب الطابع" : "Understands Arabic and English, and recommends by vibe";
       input.placeholder = ar ? "اكتب اسم البرفان أو سؤالك..." : "Type a perfume name or your question...";
