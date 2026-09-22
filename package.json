@@ -1,0 +1,9 @@
+{
+  "name": "ova-perfume",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Ova Perfume - static site with a Vercel serverless function for the OVA AI chat assistant.",
+  "engines": {
+    "node": ">=18"
+  }
+}

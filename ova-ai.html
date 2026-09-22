@@ -733,6 +733,9 @@ html[dir="rtl"] .ai-send-btn svg{transform:scaleX(-1)}
 
   let productsIndex = null;
   function getBrainReply(text){
+    // Local fallback: the catalog-aware keyword brain, used only if the
+    // real AI endpoint is unreachable (no key configured yet, network
+    // issue, quota hit) so the widget still answers something useful.
     const brain = window.OvaAssistantBrain;
     if (!brain) {
       return { text: isAr() ? "المساعد بيتحمل، جرب تاني بعد لحظة." : "The assistant is still loading, try again in a moment.", actions: [] };
@@ -741,7 +744,45 @@ html[dir="rtl"] .ai-send-btn svg{transform:scaleX(-1)}
     return brain.reply(text, productsIndex);
   }
 
-  function sendMessage(text){
+  function findProductForCard(name){
+    const brain = window.OvaAssistantBrain;
+    if (!brain || !name) return null;
+    if (!productsIndex) productsIndex = brain.collect();
+    const target = String(name).trim().toLowerCase();
+    return productsIndex.find((p) => String(p.name || "").trim().toLowerCase() === target) || null;
+  }
+
+  // Conversation history sent to the API so OVA AI remembers earlier turns
+  // in this session (kept in memory only, not persisted).
+  const conversationHistory = [];
+
+  async function getAiReply(text){
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: text,
+        history: conversationHistory,
+        lang: isAr() ? "ar" : "en"
+      })
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || "Request failed");
+    }
+    const data = await res.json();
+    conversationHistory.push({ role: "user", text });
+    conversationHistory.push({ role: "model", text: data.text });
+
+    const product = data.product ? findProductForCard(data.product.name) || data.product : null;
+    const brain = window.OvaAssistantBrain;
+    return {
+      text: data.text,
+      actions: product ? [{ label: (isAr() ? "افتح " : "View ") + product.name, product }] : []
+    };
+  }
+
+  async function sendMessage(text){
     const value = String(text || input.value || "").trim();
     if (!value) return;
     addUserRow(value);
@@ -750,12 +791,19 @@ html[dir="rtl"] .ai-send-btn svg{transform:scaleX(-1)}
     updateSendState();
 
     const typingRow = addTypingRow();
-    const delay = 420 + Math.random() * 380; // feels like real "thinking" time
-    setTimeout(() => {
-      const result = getBrainReply(value);
-      typingRow.querySelector(".ai-typing").remove();
-      addBotResult(typingRow, result);
-    }, delay);
+    const minThinkTime = new Promise((resolve) => setTimeout(resolve, 420 + Math.random() * 380));
+
+    let result;
+    try {
+      [result] = await Promise.all([getAiReply(value), minThinkTime]);
+    } catch (error) {
+      await minThinkTime;
+      // The real AI endpoint is unreachable - fall back to the local
+      // catalog-aware brain rather than showing an error state.
+      result = getBrainReply(value);
+    }
+    typingRow.querySelector(".ai-typing").remove();
+    addBotResult(typingRow, result);
   }
 
   function autoGrow(){
