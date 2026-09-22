@@ -9997,10 +9997,39 @@
       transform: translateY(-1px);
     }
 
-    /* the repeated offer line under every card was visual noise at grid scale */
+    /* Offer badge: a small champagne pill in the corner instead of the
+       old plain text line under every card - shows the 3-for-50%-off deal
+       on the card itself, and the discount already applies automatically
+       once 3+ qualifying items are in the cart. */
     .product-grid .product-card .product-action-note,
     .best-seller-slider .product-card .product-action-note {
-      display: none;
+      display: block;
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      margin: 0;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--ova-champagne, #c9a66b);
+      color: #fff;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(201, 166, 107, 0.35);
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .product-grid .product-card .product-action-note {
+        font-size: 7.5px;
+        padding: 4px 9px;
+        top: 10px;
+      }
     }
 
     /* BADGES - small pill, top corners, matching the reference. */
@@ -11045,4 +11074,26 @@
     #cart .cart-item img {
       border-radius: 14px;
       background: #fff;
+    }
+
+    /* --------------------------------------------------------------------
+       CART TOTAL / OFFER TEXT CONTRAST - an older rule forces every
+       `.cart-footer p` (this includes #total, the offer hint, and the
+       delivery note) to a pale cream color meant for a dark background
+       via a gradient-text fallback. On the new bright ivory cart drawer
+       this reads as almost invisible. Reclaimed with matching
+       !important so the numbers and offer text are actually legible.
+       -------------------------------------------------------------------- */
+    .cart-footer p,
+    #cart #total,
+    #cartOfferHint,
+    #cartDeliveryNote {
+      color: var(--ova-charcoal, #171513) !important;
+      -webkit-text-fill-color: var(--ova-charcoal, #171513) !important;
+    }
+
+    #cartOfferHint strong,
+    #cartDeliveryNote strong {
+      color: var(--ova-champagne, #c9a66b) !important;
+      -webkit-text-fill-color: var(--ova-champagne, #c9a66b) !important;
     }
