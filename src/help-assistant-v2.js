@@ -937,6 +937,11 @@
         if (done) return;
         done = true;
         sessionStorage.setItem("ovaIntroSeen", "1");
+        // A separate, one-shot marker (read and immediately cleared by
+        // ova-ai.html itself) so the page knows to play its own slow
+        // entrance animation only right after this intro, not on every
+        // ordinary visit/reload.
+        sessionStorage.setItem("ovaJustEnteredFromIntro", "1");
         location.href = "ova-ai.html";
       };
       const video = wrap.querySelector("#ovaIntroVideo");
