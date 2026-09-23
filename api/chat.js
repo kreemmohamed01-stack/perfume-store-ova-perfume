@@ -46,6 +46,26 @@ function buildCatalogBlock() {
     .join("\n\n");
 }
 
+// The free Groq model was still re-asking "for a man or woman?" after the
+// customer had already said رجالي/حريمي, no matter how the system prompt
+// was worded - it just wasn't reliably picking that signal out of a long
+// prompt. This scans the customer's own message (and recent history) for
+// an explicit gender word and, if found, injects one final, very short,
+// very literal instruction right before the model answers - the closer an
+// instruction sits to the actual answer, the harder it is for a small
+// model to drop it.
+const MEN_WORDS = /(رجالي|رجاله|للرجال|للراجل|for\s*him|for\s*a\s*man|men'?s|\bmale\b)/i;
+const WOMEN_WORDS = /(حريمي|نسائي|للستات|للمراه|للمرأة|for\s*her|for\s*a\s*woman|women'?s|\bfemale\b)/i;
+
+function detectGenderSignal(message, history) {
+  const recentText = [message, ...history.slice(-4).map((t) => t.text || "")].join(" \n ");
+  const saidMen = MEN_WORDS.test(recentText);
+  const saidWomen = WOMEN_WORDS.test(recentText);
+  if (saidMen && !saidWomen) return "men";
+  if (saidWomen && !saidMen) return "women";
+  return null;
+}
+
 // `compact: true` builds a much shorter prompt for the smaller free models
 // on Groq. Those models were losing track of the gender rule and other
 // instructions buried in the full-length prompt built for Gemini - putting
@@ -219,13 +239,24 @@ module.exports = async (req, res) => {
   async function tryGroq() {
     if (!groqKey) return null;
 
+    const genderSignal = detectGenderSignal(message, history);
+    const genderNudge = genderSignal
+      ? (genderSignal === "men"
+          ? "[system: the customer already specified MEN'S. Do not ask their gender again - recommend one product from FOR MEN or UNISEX only.]"
+          : "[system: the customer already specified WOMEN'S. Do not ask their gender again - recommend one product from FOR WOMEN or UNISEX only.]")
+      : null;
+
     const messages = [
       { role: "system", content: compactSystemPrompt },
       ...history.map((turn) => ({
         role: turn.role === "user" ? "user" : "assistant",
         content: String(turn.text || "")
       })),
-      { role: "user", content: message }
+      { role: "user", content: message },
+      // Placed after the user's own message, right before the model
+      // answers, since a short reminder here survives even when the same
+      // rule stated earlier in the system prompt gets lost.
+      ...(genderNudge ? [{ role: "system", content: genderNudge }] : [])
     ];
 
     const callGroq = () => fetch(GROQ_URL, {
