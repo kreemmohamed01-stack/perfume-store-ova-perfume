@@ -210,7 +210,11 @@ module.exports = async (req, res) => {
         model: GROQ_MODEL,
         messages,
         temperature: 0.8,
-        max_tokens: 1024
+        // This account's free tier caps at 1000 output tokens per minute for
+        // this model - asking for more than that in a single request gets
+        // rejected outright (rate_limit_exceeded) before anything is even
+        // generated. Staying under it keeps replies short but reliable.
+        max_tokens: 900
       })
     });
 
