@@ -312,7 +312,8 @@ module.exports = async (req, res) => {
   }
 
   try {
-    let result = await tryGroq();
+    const groqResult = await tryGroq();
+    let result = groqResult;
     let usedFallback = false;
 
     if (!result || result.failed) {
@@ -326,7 +327,13 @@ module.exports = async (req, res) => {
         error: status === 429
           ? "The assistant is getting a lot of questions right now - please try again in a moment."
           : "The assistant is temporarily unavailable.",
-        ...(debug ? { upstreamStatus: status, upstream: String((result && result.errText) || "").slice(0, 500), usedFallback } : {})
+        ...(debug ? {
+          upstreamStatus: status,
+          upstream: String((result && result.errText) || "").slice(0, 500),
+          usedFallback,
+          groqConfigured: !!groqKey,
+          groqError: groqResult ? String(groqResult.errText || "").slice(0, 500) : (groqKey ? "no result" : "GROQ_API_KEY not set")
+        } : {})
       });
       return;
     }
@@ -334,7 +341,12 @@ module.exports = async (req, res) => {
     const products = findMentionedProducts(result.text);
 
     // `product` stays for backwards compatibility with any cached page.
-    res.status(200).json({ text: result.text, products, product: products[0] || null });
+    res.status(200).json({
+      text: result.text,
+      products,
+      product: products[0] || null,
+      ...(debug ? { provider: usedFallback ? "gemini" : "groq" } : {})
+    });
   } catch (error) {
     console.error("OVA AI chat function error:", error);
     res.status(500).json({ error: "Something went wrong reaching the assistant." });
