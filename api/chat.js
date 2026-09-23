@@ -408,7 +408,7 @@ module.exports = async (req, res) => {
       text: result.text,
       products,
       product: products[0] || null,
-      ...(debug ? { provider: usedFallback ? "gemini" : "groq" } : {})
+      ...(debug ? { provider: usedFallback ? "gemini" : "groq", genderSignal: detectGenderSignal(message, history) } : {})
     });
   } catch (error) {
     console.error("OVA AI chat function error:", error);
