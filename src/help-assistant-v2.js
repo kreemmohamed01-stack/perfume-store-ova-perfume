@@ -928,7 +928,10 @@
 
       const wrap = document.createElement("div");
       wrap.id = "ovaIntroOverlay";
-      wrap.innerHTML = '<video id="ovaIntroVideo" playsinline muted autoplay src="images/ai-agent/agent-intro.mp4"></video>';
+      // Not muted: this whole call chain starts from the icon's own click
+      // handler, so it is still inside that user gesture and browsers allow
+      // audio to autoplay here. The video's own soundtrack plays as-is.
+      wrap.innerHTML = '<video id="ovaIntroVideo" playsinline src="images/ai-agent/agent-intro.mp4"></video>';
       document.body.appendChild(wrap);
       document.body.style.overflow = "hidden";
 
@@ -945,6 +948,14 @@
         location.href = "ova-ai.html";
       };
       const video = wrap.querySelector("#ovaIntroVideo");
+      // A handful of browsers (mostly iOS Safari in some states) still
+      // block sound-on autoplay even from a real click. If it gets
+      // rejected, retry muted rather than leaving the intro stuck on a
+      // paused first frame - a silent intro is better than none at all.
+      const playAttempt = video.play();
+      if (playAttempt && playAttempt.catch) {
+        playAttempt.catch(() => { video.muted = true; video.play().catch(() => {}); });
+      }
       video.addEventListener("ended", go);
       video.addEventListener("error", go);
       wrap.addEventListener("click", go);
