@@ -847,15 +847,15 @@
 
   function init() {
     const products = collect();
-    const offset = document.getElementById("whatsappFloat") ? 66 : 18;
     const ICON_V = "4ad0df87";
     const style = document.createElement("style");
     style.textContent = `
-      .ova-help-float{position:fixed;right:14px;bottom:${offset + 16}px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:44px;height:44px;font-size:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.22,1,.36,1)}
-      .ova-help-float:hover{transform:translateY(-3px) scale(1.06)}
-      .ova-help-float::before{content:"";display:block;width:44px;height:44px;flex:0 0 auto;background:center/contain no-repeat url("images/ai-agent/agent-icon.webp?v=${ICON_V}");filter:drop-shadow(0 3px 7px rgba(20,18,16,.3));animation:ovaAiZoom 3.4s ease-in-out infinite;transform-origin:center;overflow:visible;clip-path:none;-webkit-clip-path:none}
-      @keyframes ovaAiZoom{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
-      .ova-help-panel{position:fixed;right:18px;bottom:${offset + 52}px;z-index:5201;width:min(380px,calc(100vw - 24px));height:min(560px,calc(var(--ova-help-vh,100vh) - 130px));display:none;flex-direction:column;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,rgba(10,18,34,.98) 0%,rgba(11,25,52,.98) 100%);border:1px solid rgba(105,173,255,.22);box-shadow:0 24px 70px rgba(0,0,0,.32),0 0 40px rgba(18,112,255,.22)}
+      .ova-help-float{position:fixed;right:16px;bottom:84px;z-index:5200;border:none;background:none;box-shadow:none;padding:0;width:36px;height:36px;border-radius:50%;font-size:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.22,1,.36,1);animation:ovaAiFloat 2.4s ease-in-out infinite}
+      .ova-help-float:hover{transform:translateY(-3px) scale(1.08)}
+      .ova-help-float::before{content:"";display:block;width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:center/cover no-repeat url("images/ai-agent/agent-icon.webp?v=${ICON_V}");box-shadow:0 0 14px 4px rgba(90,170,255,.65),0 0 30px 8px rgba(90,170,255,.35),0 3px 10px rgba(20,18,16,.35);animation:ovaAiZoom 2.4s ease-in-out infinite;transform-origin:center;border-radius:50%;overflow:hidden}
+      @keyframes ovaAiZoom{0%,100%{transform:scale(1);box-shadow:0 0 14px 4px rgba(90,170,255,.65),0 0 30px 8px rgba(90,170,255,.35),0 3px 10px rgba(20,18,16,.35)}50%{transform:scale(1.12);box-shadow:0 0 22px 8px rgba(90,170,255,.85),0 0 44px 14px rgba(90,170,255,.5),0 3px 10px rgba(20,18,16,.35)}}
+      @keyframes ovaAiFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+      .ova-help-panel{position:fixed;right:18px;bottom:128px;z-index:5201;width:min(380px,calc(100vw - 24px));height:min(560px,calc(var(--ova-help-vh,100vh) - 130px));display:none;flex-direction:column;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,rgba(10,18,34,.98) 0%,rgba(11,25,52,.98) 100%);border:1px solid rgba(105,173,255,.22);box-shadow:0 24px 70px rgba(0,0,0,.32),0 0 40px rgba(18,112,255,.22)}
       .ova-help-panel.open{display:flex} .ova-help-head{display:flex;align-items:center;justify-content:space-between;padding:16px;color:#fff;background:linear-gradient(135deg,rgba(22,146,255,.24) 0%,rgba(10,102,255,.14) 100%);border-bottom:1px solid rgba(255,255,255,.08)}
       .ova-help-title{font:800 16px/1.2 "Manrope",sans-serif} .ova-help-sub{font:500 12px/1.4 "Manrope",sans-serif;color:rgba(255,255,255,.76);margin-top:4px}
       .ova-help-close{width:38px;height:38px;border:none;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:18px}
@@ -867,7 +867,7 @@
       .ova-help-action-btn{border:none;border-radius:999px;padding:8px 12px;background:rgba(22,146,255,.18);color:#cfe5ff;cursor:pointer;font:700 11px/1.2 "Manrope",sans-serif;border:1px solid rgba(105,173,255,.24)}
       .ova-help-form{display:flex;gap:10px;padding:14px;border-top:1px solid rgba(255,255,255,.08);background:rgba(6,14,28,.92)} .ova-help-input{flex:1;border:none;outline:none;border-radius:16px;padding:14px;background:rgba(255,255,255,.08);color:#fff;font:600 13px/1.2 "Manrope",sans-serif}
       .ova-help-send{border:none;border-radius:16px;padding:0 16px;background:linear-gradient(135deg,#1692ff 0%,#0a66ff 100%);color:#fff;font:800 13px/1 "Manrope",sans-serif;cursor:pointer}
-      @media (max-width:640px){.ova-help-float{right:14px;bottom:max(62px,calc(env(safe-area-inset-bottom) + 62px));width:42px;height:42px}.ova-help-float::before{width:42px;height:42px}.ova-help-panel{right:8px;left:8px;width:auto;bottom:max(112px,calc(env(safe-area-inset-bottom) + 90px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
+      @media (max-width:700px){.ova-help-float{right:14px;bottom:calc(228px + env(safe-area-inset-bottom, 0px));width:34px;height:34px}.ova-help-float::before{width:34px;height:34px;border-radius:50%}.ova-help-panel{right:8px;left:8px;width:auto;bottom:calc(268px + env(safe-area-inset-bottom, 0px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
       #ovaIntroOverlay{position:fixed;inset:0;z-index:9999;background:#0b0a09;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:ovaIntroFade .3s ease}
       #ovaIntroVideo{width:100%;height:100%;object-fit:cover}
       @keyframes ovaIntroFade{from{opacity:0}to{opacity:1}}
