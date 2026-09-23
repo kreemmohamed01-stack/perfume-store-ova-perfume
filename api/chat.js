@@ -17,7 +17,7 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GE
 // tried first when a key is configured - Gemini becomes the secondary
 // brain, and the client-side scripted brain stays the last-resort
 // fallback if both upstream APIs are unavailable.
-const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 // A compact catalog listing the model can ground its answers in. Keeping it
