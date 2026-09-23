@@ -931,7 +931,7 @@
       // Not muted: this whole call chain starts from the icon's own click
       // handler, so it is still inside that user gesture and browsers allow
       // audio to autoplay here. The video's own soundtrack plays as-is.
-      wrap.innerHTML = '<video id="ovaIntroVideo" playsinline src="images/ai-agent/agent-intro.mp4"></video>';
+      wrap.innerHTML = '<video id="ovaIntroVideo" playsinline src="images/ai-agent/agent-intro.mp4?v=music1"></video>';
       document.body.appendChild(wrap);
       document.body.style.overflow = "hidden";
 
