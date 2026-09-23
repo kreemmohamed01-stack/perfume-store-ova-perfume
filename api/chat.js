@@ -46,9 +46,36 @@ function buildCatalogBlock() {
     .join("\n\n");
 }
 
-function buildSystemPrompt(lang) {
+// `compact: true` builds a much shorter prompt for the smaller free models
+// on Groq. Those models were losing track of the gender rule and other
+// instructions buried in the full-length prompt built for Gemini - putting
+// the hard constraints first, in short imperative bullets, and trimming
+// the policy prose fixed that in testing. Gemini keeps the full version,
+// since it handles the longer prompt correctly.
+function buildSystemPrompt(lang, compact) {
   const isAr = lang === "ar";
   const catalogBlock = buildCatalogBlock();
+
+  if (compact) {
+    return `You are OVA AI, the fragrance assistant for Ova Perfume (ovaperfume.com), a perfume store in Egypt. Owner: Salem.
+
+HARD RULES - FOLLOW THESE EXACTLY, THEY OVERRIDE EVERYTHING ELSE:
+1. GENDER: the catalog below has 3 sections: FOR WOMEN, FOR MEN, UNISEX. If the customer said رجالي/for him/men's, pick ONLY from FOR MEN or UNISEX - never FOR WOMEN. If they said حريمي/نسائي/for her/women's, pick ONLY from FOR WOMEN or UNISEX - never FOR MEN. If they already told you the gender (even once, even earlier in the chat), NEVER ask "men's or women's?" again - just recommend.
+2. ONE PICK ONLY: when recommending, name exactly ONE real product from the catalog and sell them on why it fits - not a list of 2-3. Only give a second option if they push back.
+3. OFFERS: if asked about offers/discounts/عروض/خصم, answer ONLY with: "buy any 3 perfumes, get 50% off automatically in the cart" - do not recommend a product for this question.
+4. Never invent a product/brand/price not in the catalog below.
+5. Reply in the customer's language - natural Egyptian Arabic if they wrote Arabic, English if they wrote English.
+6. Be warm and conversational like a friend, not a script - vary your phrasing each time. Keep it short, a few sentences.
+
+Quick facts (use only if asked, answer from these exact facts):
+- Payment: Cash on Delivery, InstaPay transfer to 01151446372, Vodafone Cash transfer to 01099136720, or PayPal.
+- WhatsApp: +20 109 913 6720.
+- Delivery: usually 3-4 days after order confirmation, all over Egypt.
+- Returns: only for damaged/wrong/defective items, not change of mind, not after use.
+
+Catalog (name | brand | price in EGP):
+${catalogBlock}`;
+  }
 
   return `You are OVA AI, the personal fragrance assistant for Ova Perfume, a luxury perfume store in Egypt (ovaperfume.com). The store owner/founder is Salem.
 
@@ -182,7 +209,8 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const systemPrompt = buildSystemPrompt(lang);
+  const fullSystemPrompt = buildSystemPrompt(lang, false);
+  const compactSystemPrompt = buildSystemPrompt(lang, true);
   const debug = String(req.query && req.query.debug || "") === "1";
 
   // Tries Groq (higher free-tier limit) first, then falls back to Gemini
@@ -192,7 +220,7 @@ module.exports = async (req, res) => {
     if (!groqKey) return null;
 
     const messages = [
-      { role: "system", content: systemPrompt },
+      { role: "system", content: compactSystemPrompt },
       ...history.map((turn) => ({
         role: turn.role === "user" ? "user" : "assistant",
         content: String(turn.text || "")
@@ -250,7 +278,7 @@ module.exports = async (req, res) => {
     ];
 
     const payload = {
-      system_instruction: { parts: [{ text: systemPrompt }] },
+      system_instruction: { parts: [{ text: fullSystemPrompt }] },
       contents,
       generationConfig: {
         temperature: 0.8,
