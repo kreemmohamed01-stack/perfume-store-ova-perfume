@@ -868,7 +868,8 @@
       .ova-help-form{display:flex;gap:10px;padding:14px;border-top:1px solid rgba(255,255,255,.08);background:rgba(6,14,28,.92)} .ova-help-input{flex:1;border:none;outline:none;border-radius:16px;padding:14px;background:rgba(255,255,255,.08);color:#fff;font:600 13px/1.2 "Manrope",sans-serif}
       .ova-help-send{border:none;border-radius:16px;padding:0 16px;background:linear-gradient(135deg,#1692ff 0%,#0a66ff 100%);color:#fff;font:800 13px/1 "Manrope",sans-serif;cursor:pointer}
       @media (max-width:700px){.ova-help-float{right:14px;bottom:calc(228px + env(safe-area-inset-bottom, 0px));width:34px;height:34px}.ova-help-float::before{width:34px;height:34px;border-radius:50%}.ova-help-panel{right:8px;left:8px;width:auto;bottom:calc(268px + env(safe-area-inset-bottom, 0px));height:calc(var(--ova-help-vh,100dvh) - 138px);border-radius:22px}.ova-help-message{max-width:94%;font-size:12px;padding:11px 12px}.ova-help-input{font-size:16px}}
-      #ovaIntroOverlay{position:fixed;inset:0;z-index:9999;background:#0b0a09;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:ovaIntroFade .3s ease}
+      #ovaIntroOverlay{position:fixed;inset:0;z-index:9999;background:#0b0a09;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:ovaIntroFade .3s ease;transition:opacity .45s ease}
+      #ovaIntroOverlay.ova-intro-leaving{opacity:0}
       #ovaIntroVideo{width:100%;height:100%;object-fit:cover}
       @keyframes ovaIntroFade{from{opacity:0}to{opacity:1}}
       @media (min-width:640px){#ovaIntroVideo{width:min(92vw,420px);height:min(92vh,668px);object-fit:contain;border-radius:20px}}
@@ -931,7 +932,7 @@
       // Not muted: this whole call chain starts from the icon's own click
       // handler, so it is still inside that user gesture and browsers allow
       // audio to autoplay here. The video's own soundtrack plays as-is.
-      wrap.innerHTML = '<video id="ovaIntroVideo" playsinline src="images/ai-agent/agent-intro.mp4?v=music1"></video>';
+      wrap.innerHTML = '<video id="ovaIntroVideo" playsinline src="images/ai-agent/agent-intro.mp4?v=hq2"></video>';
       document.body.appendChild(wrap);
       document.body.style.overflow = "hidden";
 
@@ -945,7 +946,13 @@
         // entrance animation only right after this intro, not on every
         // ordinary visit/reload.
         sessionStorage.setItem("ovaJustEnteredFromIntro", "1");
-        location.href = "ova-ai.html";
+        // Fades the overlay to black instead of jump-cutting straight to
+        // the next page, so the video's own end-fade hands off into a
+        // brief held black frame that the destination page's entrance
+        // animation then rises out of - one continuous motion rather than
+        // a hard stop.
+        wrap.classList.add("ova-intro-leaving");
+        setTimeout(() => { location.href = "ova-ai.html"; }, 260);
       };
       const video = wrap.querySelector("#ovaIntroVideo");
       // A handful of browsers (mostly iOS Safari in some states) still
