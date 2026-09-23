@@ -13,6 +13,13 @@ const catalog = require("./_data/catalog.json");
 const GEMINI_MODEL = "gemini-3.6-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
+// Groq's free tier has a far higher rate limit than Gemini's, so it is
+// tried first when a key is configured - Gemini becomes the secondary
+// brain, and the client-side scripted brain stays the last-resort
+// fallback if both upstream APIs are unavailable.
+const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+
 // A compact catalog listing the model can ground its answers in. Keeping it
 // to name/brand/price (no long descriptions) keeps the prompt small and
 // fast while still letting the model recommend real, in-stock products
@@ -153,8 +160,9 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
+  const groqKey = process.env.GROQ_API_KEY;
+  const geminiKey = process.env.GEMINI_API_KEY;
+  if (!groqKey && !geminiKey) {
     res.status(500).json({ error: "Server is not configured with an API key yet." });
     return;
   }
@@ -174,40 +182,93 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const contents = [
-    ...history.map((turn) => ({
-      role: turn.role === "user" ? "user" : "model",
-      parts: [{ text: String(turn.text || "") }]
-    })),
-    { role: "user", parts: [{ text: message }] }
-  ];
+  const systemPrompt = buildSystemPrompt(lang);
+  const debug = String(req.query && req.query.debug || "") === "1";
 
-  const payload = {
-    system_instruction: { parts: [{ text: buildSystemPrompt(lang) }] },
-    contents,
-    generationConfig: {
-      temperature: 0.8,
-      // This model reasons before answering, and that reasoning is billed
-      // against maxOutputTokens - with a small budget it burned the whole
-      // allowance thinking and returned a truncated half-sentence. Short
-      // chat replies need no internal reasoning, so it is switched off and
-      // the ceiling raised to leave room for a complete answer.
-      thinkingConfig: { thinkingBudget: 0 },
-      // Arabic costs several times more tokens per word than English, so a
-      // normal three-pick reply was running out of budget and stopping
-      // mid-sentence. This leaves comfortable headroom.
-      maxOutputTokens: 2048
+  // Tries Groq (higher free-tier limit) first, then falls back to Gemini
+  // if Groq is not configured or fails. Either provider succeeding is
+  // treated the same way by the caller below.
+  async function tryGroq() {
+    if (!groqKey) return null;
+
+    const messages = [
+      { role: "system", content: systemPrompt },
+      ...history.map((turn) => ({
+        role: turn.role === "user" ? "user" : "assistant",
+        content: String(turn.text || "")
+      })),
+      { role: "user", content: message }
+    ];
+
+    const callGroq = () => fetch(GROQ_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${groqKey}`
+      },
+      body: JSON.stringify({
+        model: GROQ_MODEL,
+        messages,
+        temperature: 0.8,
+        max_tokens: 1024
+      })
+    });
+
+    let upstream = await callGroq();
+    if (upstream.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      upstream = await callGroq();
     }
-  };
 
-  try {
+    if (!upstream.ok) {
+      const errText = await upstream.text().catch(() => "");
+      console.error("Groq API error:", upstream.status, errText);
+      return { failed: true, status: upstream.status, errText };
+    }
+
+    const data = await upstream.json();
+    const text = (data.choices && data.choices[0] && data.choices[0].message &&
+      data.choices[0].message.content) || "";
+    if (!text.trim()) return { failed: true, status: 502, errText: "empty response" };
+
+    return { failed: false, text: text.trim() };
+  }
+
+  async function tryGemini() {
+    if (!geminiKey) return null;
+
+    const contents = [
+      ...history.map((turn) => ({
+        role: turn.role === "user" ? "user" : "model",
+        parts: [{ text: String(turn.text || "") }]
+      })),
+      { role: "user", parts: [{ text: message }] }
+    ];
+
+    const payload = {
+      system_instruction: { parts: [{ text: systemPrompt }] },
+      contents,
+      generationConfig: {
+        temperature: 0.8,
+        // This model reasons before answering, and that reasoning is billed
+        // against maxOutputTokens - with a small budget it burned the whole
+        // allowance thinking and returned a truncated half-sentence. Short
+        // chat replies need no internal reasoning, so it is switched off and
+        // the ceiling raised to leave room for a complete answer.
+        thinkingConfig: { thinkingBudget: 0 },
+        // Arabic costs several times more tokens per word than English, so a
+        // normal three-pick reply was running out of budget and stopping
+        // mid-sentence. This leaves comfortable headroom.
+        maxOutputTokens: 2048
+      }
+    };
+
     // The free tier caps at 20 requests/minute. A single customer rarely
     // hits that, but the window is shared across everyone on the site, so
-    // a burst of traffic can trip it. Rather than immediately falling back
-    // to the weaker local brain (which does not know the live catalog),
+    // a burst of traffic can trip it. Rather than immediately failing,
     // wait out Google's own suggested delay and try once more - a request
     // that would otherwise fail usually succeeds a second later.
-    const callGemini = () => fetch(`${GEMINI_URL}?key=${apiKey}`, {
+    const callGemini = () => fetch(`${GEMINI_URL}?key=${geminiKey}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -226,17 +287,7 @@ module.exports = async (req, res) => {
     if (!upstream.ok) {
       const errText = await upstream.text().catch(() => "");
       console.error("Gemini API error:", upstream.status, errText);
-      // `debug=1` surfaces the upstream reason so a misconfigured key or
-      // quota problem can be diagnosed without guessing. It never leaks the
-      // key itself - only Google's error message.
-      const debug = String(req.query && req.query.debug || "") === "1";
-      res.status(502).json({
-        error: upstream.status === 429
-          ? "The assistant is getting a lot of questions right now - please try again in a moment."
-          : "The assistant is temporarily unavailable.",
-        ...(debug ? { upstreamStatus: upstream.status, upstream: errText.slice(0, 500) } : {})
-      });
-      return;
+      return { failed: true, status: upstream.status, errText };
     }
 
     const data = await upstream.json();
@@ -245,32 +296,45 @@ module.exports = async (req, res) => {
       candidate.content.parts[0] && candidate.content.parts[0].text) || "";
 
     if (!text) {
-      // Includes the MAX_TOKENS case, where the model spent its whole
-      // budget and returned no usable text. Failing here lets the page
-      // fall back to the local brain instead of rendering nothing.
-      const debug = String(req.query && req.query.debug || "") === "1";
-      res.status(502).json({
-        error: "The assistant did not return a reply.",
-        ...(debug ? { finishReason: candidate && candidate.finishReason, raw: JSON.stringify(data).slice(0, 500) } : {})
-      });
-      return;
+      return { failed: true, status: 502, errText: "empty response", finishReason: candidate && candidate.finishReason };
     }
 
     // Occasionally the upstream stops mid-sentence (finishReason MAX_TOKENS
     // or an upstream hiccup). Rather than showing the customer a clipped
-    // half-sentence, treat it as a failure so the page falls back to the
-    // local brain, which always returns a complete answer.
+    // half-sentence, treat it as a failure so the page falls back further.
     const finish = candidate && candidate.finishReason;
     const looksCut = finish && finish !== "STOP";
     if (looksCut && text.trim().length < 40) {
-      res.status(502).json({ error: "The assistant was interrupted." });
+      return { failed: true, status: 502, errText: "response interrupted" };
+    }
+
+    return { failed: false, text: text.trim() };
+  }
+
+  try {
+    let result = await tryGroq();
+    let usedFallback = false;
+
+    if (!result || result.failed) {
+      usedFallback = true;
+      result = await tryGemini();
+    }
+
+    if (!result || result.failed) {
+      const status = (result && result.status) || 502;
+      res.status(502).json({
+        error: status === 429
+          ? "The assistant is getting a lot of questions right now - please try again in a moment."
+          : "The assistant is temporarily unavailable.",
+        ...(debug ? { upstreamStatus: status, upstream: String((result && result.errText) || "").slice(0, 500), usedFallback } : {})
+      });
       return;
     }
 
-    const products = findMentionedProducts(text);
+    const products = findMentionedProducts(result.text);
 
     // `product` stays for backwards compatibility with any cached page.
-    res.status(200).json({ text: text.trim(), products, product: products[0] || null });
+    res.status(200).json({ text: result.text, products, product: products[0] || null });
   } catch (error) {
     console.error("OVA AI chat function error:", error);
     res.status(500).json({ error: "Something went wrong reaching the assistant." });
