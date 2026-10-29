@@ -993,7 +993,9 @@
       if (e.target.closest("#ovaHelpPanel") || e.target.closest("#ovaHelpFloat")) return;
       panel.classList.remove("open");
     });
-    ui(); setVh();
+    // setVh runs when the panel opens; reading the viewport here forced a
+    // layout during page load for a panel that starts closed.
+    ui();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

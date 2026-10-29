@@ -209,12 +209,19 @@
       href: window.location.href || "",
       referrer: document.referrer || "",
       language: navigator.language || "",
+      // Resolving the timezone loads ICU data (~150ms on a mid-range phone),
+      // so it is computed once per browser and cached.
       timezone: (() => {
+        let cached = null;
+        try { cached = localStorage.getItem("ovaTimezone"); } catch (error) {}
+        if (cached !== null) return cached;
         try {
-          return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+          cached = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
         } catch (error) {
           return "";
         }
+        try { localStorage.setItem("ovaTimezone", cached); } catch (error) {}
+        return cached;
       })(),
       viewport: `${window.innerWidth || 0}x${window.innerHeight || 0}`,
       screen: `${window.screen && window.screen.width ? window.screen.width : 0}x${window.screen && window.screen.height ? window.screen.height : 0}`
@@ -538,14 +545,27 @@
     reset
   };
 
-  // Tracking is not needed for the first paint, so it waits until the page
-  // has loaded and the main thread is idle instead of competing with it.
+  // Tracking is not needed for the first paint, so it starts on the first
+  // interaction, 6s after load, or when the tab is hidden (so bounces still
+  // count) - whichever comes first - instead of competing with page load.
   function whenPageIdle(callback) {
-    const schedule = () => ("requestIdleCallback" in window
-      ? window.requestIdleCallback(callback, { timeout: 3000 })
-      : setTimeout(callback, 1));
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
+    const events = ["pointerdown", "keydown", "scroll", "touchstart"];
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      events.forEach((name) => window.removeEventListener(name, start, true));
+      document.removeEventListener("visibilitychange", onHidden);
+      callback();
+    };
+    const onHidden = () => { if (document.visibilityState === "hidden") start(); };
+    const arm = () => {
+      events.forEach((name) => window.addEventListener(name, start, { capture: true, passive: true, once: true }));
+      document.addEventListener("visibilitychange", onHidden);
+      setTimeout(start, 6000);
+    };
+    if (document.readyState === "complete") arm();
+    else window.addEventListener("load", arm, { once: true });
   }
 
   whenPageIdle(() => {

@@ -3,7 +3,7 @@
 
   const current = document.currentScript;
   const source = current && current.src ? current.src : new URL("js/help-assistant.js", window.location.href).href;
-  const nextSrc = new URL("help-assistant-v2.js?v=5bba4416", source).href;
+  const nextSrc = new URL("help-assistant-v2.js?v=917f3733", source).href;
   const existing = document.querySelector(`script[src="${nextSrc}"]`) || document.querySelector('script[data-ova-help-v2="true"]');
 
   if (existing) return;

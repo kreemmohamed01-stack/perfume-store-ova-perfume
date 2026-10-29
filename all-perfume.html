@@ -2207,10 +2207,11 @@ async function hydrateAllProductsFromSite(){
       }
     }
 
-    const [indexHtml, brandHtml] = await Promise.all([
-      loadPageMarkup("index.html"),
-      loadPageMarkup("brand.html")
-    ]);
+    // index.html and brand.html no longer carry these arrays/maps inline (they
+    // moved to js/home.js and js/product-details.js), so fetching both pages
+    // only cost ~35KB and two requests for nothing. Parse empty markup instead;
+    // the normalise/decorate/re-render steps below still run as before.
+    const [indexHtml, brandHtml] = ["", ""];
 
     const indexArrayNames = [
       "bestSellerProducts",
@@ -3281,10 +3282,10 @@ if (searchInput) {
 
 openPendingProductFromQuery();
 </script>
-<script defer src="js/ova-analytics.js?v=fb009934"></script>
-<script defer src="js/help-assistant.js?v=d5fdcf82"></script>
-<script defer src="js/all-products-rescue.js?v=97ac3bef"></script>
-<script defer src="js/scroll-reveal.js?v=f05b4798"></script>
+<script defer src="js/ova-analytics.js?v=a355e580"></script>
+<script defer src="js/help-assistant.js?v=fff67f07"></script>
+<script defer src="js/all-products-rescue.js?v=d414c2ac"></script>
+<script defer src="js/scroll-reveal.js?v=3ebd3f5b"></script>
 <script defer src="js/nav-prefetch.js?v=0f5c25c7"></script>
   <script defer src="js/pwa.js?v=d6057a66"></script>
 </body>
