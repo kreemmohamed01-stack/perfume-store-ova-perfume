@@ -1,3 +1,21 @@
+/* Product images ship at ~700px, but most cards show them at 90-200px.
+   images/thumbs/ mirrors images/ with 320px WebP copies, offered through
+   srcset so small cards fetch the thumb and large/high-DPR cards still get
+   the original. A missing thumb falls back to the original via onerror. */
+function ovaApplyThumb(img, src, sizes) {
+  if (src.indexOf("images/") !== 0 || src.indexOf("images/thumbs/") === 0) return;
+  const thumb = "images/thumbs/" + src.slice(7).replace(/[.](webp|jpe?g|png)$/i, ".webp");
+  img.sizes = sizes;
+  // srcset is comma/space separated, so those characters must be escaped
+  const esc = (url) => url.replace(/ /g, "%20").replace(/,/g, "%2C");
+  img.srcset = esc(thumb) + " 320w, " + esc(src) + " 700w";
+  img.addEventListener("error", function onThumbError() {
+    img.removeEventListener("error", onThumbError);
+    img.removeAttribute("srcset");
+    img.src = src;
+  });
+}
+
 
       const bestSellerProducts = [
         { name: "Khamrah Waha", price: 1000, img: "images/site-assets/خمره_واحه-removebg-preview.webp", img2: "images/site-assets/خمره واحه نوت.webp" },
@@ -281,7 +299,31 @@
        Replaces the old brand logo grid: one titled row per brand, with that brand's
        products laid out side by side in a horizontal scroller. Cards are built once
        and re-rendered only on language change. */
+    /* The rails are the bulk of the homepage DOM (~1,500 nodes) and sit well
+       below the fold, yet were built twice during boot. The first build now
+       waits until the section is approaching the viewport; once built, later
+       calls (language switch, catalogue hydration) re-render immediately. */
+    let brandRailsArmed = false;
+    let brandRailsReady = false;
     function renderBrandRails() {
+      const section = document.getElementById("brandsSection");
+      if (brandRailsReady || !section || !("IntersectionObserver" in window)) {
+        brandRailsReady = true;
+        renderBrandRailsNow();
+        return;
+      }
+      if (brandRailsArmed) return;
+      brandRailsArmed = true;
+      const railsObserver = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        railsObserver.disconnect();
+        brandRailsReady = true;
+        renderBrandRailsNow();
+      }, { rootMargin: "900px 0px" });
+      railsObserver.observe(section);
+    }
+
+    function renderBrandRailsNow() {
       const host = document.getElementById("brandRailsHost");
       if (!host) return;
 
@@ -332,6 +374,7 @@
 
           const img = document.createElement("img");
           img.src = product.img;
+          ovaApplyThumb(img, product.img, "auto, (min-width: 701px) 196px, 34vw");
           img.alt = product.name;
           // decode off the main thread; only the first couple per rail load eagerly
           img.decoding = "async";
@@ -4139,6 +4182,8 @@
       img.alt = product.name;
       img.loading = "lazy";
       img.decoding = "async";
+      // after loading=lazy, so sizes="auto" can use the rendered width
+      ovaApplyThumb(img, product.img, "auto, (min-width: 1100px) 280px, (min-width: 701px) 33vw, 40vw");
       if (product.img2) img.dataset.secondImg = product.img2;
 
       const h4 = document.createElement("h4");

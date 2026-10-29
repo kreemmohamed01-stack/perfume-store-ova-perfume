@@ -538,13 +538,18 @@
     reset
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      installAutoTracking();
-      startHeartbeat();
-    }, { once: true });
-  } else {
+  // Tracking is not needed for the first paint, so it waits until the page
+  // has loaded and the main thread is idle instead of competing with it.
+  function whenPageIdle(callback) {
+    const schedule = () => ("requestIdleCallback" in window
+      ? window.requestIdleCallback(callback, { timeout: 3000 })
+      : setTimeout(callback, 1));
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+  }
+
+  whenPageIdle(() => {
     installAutoTracking();
     startHeartbeat();
-  }
+  });
 })();
