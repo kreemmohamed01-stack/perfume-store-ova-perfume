@@ -1764,32 +1764,39 @@ body,
 <link rel="stylesheet" href="css/ova-card.css?v=da7c07a3" />
 </head>
 <body>
-<!-- Page loader: white screen with a ring counting 0-100% until the page has
-     loaded, then fades out. Inline so it paints before any other file. -->
+<!-- Page loader: warm white screen with a letter-spaced "LOADING" wordmark, a
+     gold shimmer and a hairline progress bar counting 0-100% until the page
+     has loaded, then fades out. Inline so it paints before any other file. -->
 <style>
-#ovaLoader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#fff;transition:opacity .45s ease,visibility .45s ease}
+#ovaLoader{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:radial-gradient(ellipse at 50% 42%,#fffdf9 0%,#fbf6ee 58%,#f5ecdd 100%);transition:opacity .6s ease,visibility .6s ease}
 #ovaLoader.is-done{opacity:0;visibility:hidden;pointer-events:none}
-#ovaLoader .ova-loader-ring{position:relative;width:96px;height:96px}
-#ovaLoader svg{width:100%;height:100%;transform:rotate(-90deg)}
-#ovaLoader circle{fill:none;stroke-width:4}
-#ovaLoader .ova-loader-track{stroke:#f1e8da}
-#ovaLoader .ova-loader-bar{stroke:#a07c3e;stroke-linecap:round;stroke-dasharray:276.46;stroke-dashoffset:276.46}
-#ovaLoader .ova-loader-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 19px/1 Manrope,"Segoe UI",Arial,sans-serif;color:#2b2118;letter-spacing:.02em}
-@media (prefers-reduced-motion:reduce){#ovaLoader{transition:none}}
+.ova-entrance-pending #ovaLoader{display:none}
+#ovaLoader .ova-loader-word{display:flex;padding-left:.62em;font:500 clamp(22px,6.4vw,34px)/1 "Cormorant Garamond","Playfair Display",Georgia,"Times New Roman",serif;letter-spacing:.62em;text-transform:uppercase;color:transparent;background:linear-gradient(100deg,#7a5a2b 0%,#7a5a2b 38%,#f3dfb2 50%,#7a5a2b 62%,#7a5a2b 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:ovaLoaderShine 2.4s ease-in-out infinite}
+#ovaLoader .ova-loader-word span{opacity:0;transform:translateY(10px);animation:ovaLoaderLetter .7s cubic-bezier(.22,1,.36,1) forwards}
+#ovaLoader .ova-loader-line{position:relative;width:min(190px,52vw);height:1px;background:rgba(160,124,62,.18);overflow:hidden}
+#ovaLoader .ova-loader-bar{position:absolute;inset:0;background:linear-gradient(90deg,#c9a466,#8a6630);transform:scaleX(0);transform-origin:left center}
+#ovaLoader .ova-loader-num{font:500 11px/1 Manrope,"Segoe UI",Arial,sans-serif;letter-spacing:.32em;color:#a08559;padding-left:.32em}
+@keyframes ovaLoaderShine{0%{background-position:100% 0}100%{background-position:0 0}}
+@keyframes ovaLoaderLetter{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#ovaLoader,#ovaLoader *{animation:none!important;transition:none!important}#ovaLoader .ova-loader-word span{opacity:1;transform:none}}
 </style>
 <div id="ovaLoader" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-  <div class="ova-loader-ring">
-    <svg viewBox="0 0 96 96" aria-hidden="true"><circle class="ova-loader-track" cx="48" cy="48" r="44"/><circle class="ova-loader-bar" cx="48" cy="48" r="44"/></svg>
-    <div class="ova-loader-num">0%</div>
-  </div>
+  <div class="ova-loader-word" aria-hidden="true"><span style="animation-delay:.05s">L</span><span style="animation-delay:.12s">o</span><span style="animation-delay:.19s">a</span><span style="animation-delay:.26s">d</span><span style="animation-delay:.33s">i</span><span style="animation-delay:.40s">n</span><span style="animation-delay:.47s">g</span></div>
+  <div class="ova-loader-line"><div class="ova-loader-bar"></div></div>
+  <div class="ova-loader-num">0%</div>
 </div>
 <script>
 (function () {
   var root = document.getElementById("ovaLoader");
   if (!root) return;
+  // arriving straight from the OVA AI intro video: that page plays its own entrance
+  if (document.documentElement.classList.contains("ova-entrance-pending")) {
+    root.parentNode.removeChild(root);
+    return;
+  }
   var bar = root.querySelector(".ova-loader-bar");
   var num = root.querySelector(".ova-loader-num");
-  var LEN = 276.46, shown = 0, finished = false, start = Date.now();
+  var shown = 0, finished = false, start = Date.now();
 
   /* Target progress: creeps toward 60% while the HTML parses, 60-95% as the
      images that are actually loading finish, 100% on window load. */
@@ -1809,15 +1816,17 @@ body,
 
   function paint() {
     var goal = target();
-    shown += (goal - shown) * (finished ? 0.35 : 0.12);
+    shown += (goal - shown) * (finished ? 0.3 : 0.1);
     if (goal - shown < 0.5) shown = goal;
     var p = Math.round(shown);
     num.textContent = p + "%";
-    bar.style.strokeDashoffset = String(LEN * (1 - shown / 100));
+    bar.style.transform = "scaleX(" + (shown / 100).toFixed(4) + ")";
     root.setAttribute("aria-valuenow", p);
     if (finished && p >= 100) {
-      root.classList.add("is-done");
-      setTimeout(function () { if (root.parentNode) root.parentNode.removeChild(root); }, 500);
+      setTimeout(function () {
+        root.classList.add("is-done");
+        setTimeout(function () { if (root.parentNode) root.parentNode.removeChild(root); }, 650);
+      }, 180);
       return;
     }
     requestAnimationFrame(paint);
