@@ -211,6 +211,8 @@ button,input{font:inherit}
 .product-stats span{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.74);border:1px solid rgba(139,106,51,.14);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#5b4a41;font-weight:700}
 .offer-note{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;background:#f3e3c7;color:#6b4423;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .product-card .product-card-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;margin-top:14px}
+.product-card-actions .product-add-wide{grid-column:1 / -1}
+.compare-floating-bar{display:none!important}
 .product-card .product-card-actions.single-action{grid-template-columns:1fr}
 .product-card button{position:relative;border:none;border-radius:999px;background:linear-gradient(135deg, #1c1715 0%, #453126 100%);color:#fff;padding:13px 16px;cursor:pointer;width:100%;margin-top:0;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 16px 30px rgba(24,17,14,.16);transition:transform .35s ease, box-shadow .35s ease, filter .35s ease}
 .product-card .product-more-btn{background:linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(245,238,228,.98) 100%);color:#4d3b2f;border:1px solid rgba(139,106,51,.18);box-shadow:0 12px 22px rgba(78,53,34,.08)}
@@ -787,7 +789,6 @@ body,
       <button type="button" onclick="changeModalQty(1)">+</button>
     </div>
     <div class="modal-action-row">
-      <button class="modal-secondary-btn" id="modalCompareBtn" type="button" onclick="toggleCompareCurrentProduct()">Compare</button>
       <button class="modal-buy-btn" id="modalBuyNowBtn" type="button" onclick="buyNowFromModal()">Buy Now</button>
       <button class="modal-add-btn" id="modalAddBtn" type="button" onclick="modalAddToCart()">Add To Cart</button>
     </div>
@@ -1204,21 +1205,18 @@ function renderProducts(filter = ""){
       <div class="product-type">${getDisplayType(product)}</div>
       <div class="product-card-actions">
         <button class="product-more-btn${product.detailsHtml ? "" : " is-hidden"}" type="button"><span class="product-btn-inner"><span class="product-btn-icon details-icon" aria-hidden="true">i</span><span class="product-btn-label">${getCardDetailsButtonText()}</span></span></button>
-        <button class="product-more-btn compare-btn" data-compare-product="${product.name}" type="button"><span class="product-btn-inner"><span class="product-btn-icon compare-icon" aria-hidden="true">+</span><span class="product-btn-label">${t("compare")}</span></span></button>
-        <button type="button">${t("add")}</button>
         <button class="product-buy-btn" type="button">${t("buyNow")}</button>
+        <button class="product-add-wide" type="button">${t("add")}</button>
       </div>
     `;
     const img = card.querySelector("img");
     const addButton = card.querySelector(".product-card-actions button:nth-child(3)");
-    const compareButton = card.querySelector("[data-compare-product]");
     const buyNowButton = card.querySelector(".product-buy-btn");
     const moreButton = card.querySelector(".product-more-btn");
     img.onclick = () => openModal(product.name);
     if(product.detailsHtml){
       moreButton.onclick = () => openModal(product.name);
     }
-    compareButton.onclick = () => toggleCompareProduct(product.name);
     addButton.onclick = () => addToCart(product.name, img);
     buyNowButton.onclick = () => buyNow(product.name, img);
     grid.appendChild(card);
@@ -1672,7 +1670,8 @@ function applyLanguage(){
   document.querySelector(".modal-offer").innerText = t("offer");
   document.getElementById("modalAddBtn").innerText = t("add");
   document.getElementById("modalBuyNowBtn").innerText = t("buyNow");
-  document.getElementById("modalCompareBtn").innerText = t("compare");
+  const modalCompareBtn = document.getElementById("modalCompareBtn");
+  if (modalCompareBtn) modalCompareBtn.innerText = t("compare");
   document.getElementById("compareBarTitle").innerText = t("compareBarTitle");
   document.getElementById("compareNowBtn").innerText = t("compareNow");
   document.getElementById("compareClearBtn").innerText = t("compareClear");
@@ -1734,6 +1733,7 @@ bootstrapBrandPage();
 <script defer src="js/scroll-reveal.js?v=3ebd3f5b"></script>
 <script defer src="js/nav-prefetch.js?v=0f5c25c7"></script>
   <script defer src="js/pwa.js?v=d6057a66"></script>
+<script defer src="js/ova-shop-ux.js?v=22853709" data-nav="1"></script>
 </body>
 </html>
 
