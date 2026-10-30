@@ -422,6 +422,77 @@
   </style>
 </head>
 <body>
+<!-- Page loader: white screen with a ring counting 0-100% until the page has
+     loaded, then fades out. Inline so it paints before any other file. -->
+<style>
+#ovaLoader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#fff;transition:opacity .45s ease,visibility .45s ease}
+#ovaLoader.is-done{opacity:0;visibility:hidden;pointer-events:none}
+#ovaLoader .ova-loader-ring{position:relative;width:96px;height:96px}
+#ovaLoader svg{width:100%;height:100%;transform:rotate(-90deg)}
+#ovaLoader circle{fill:none;stroke-width:4}
+#ovaLoader .ova-loader-track{stroke:#f1e8da}
+#ovaLoader .ova-loader-bar{stroke:#a07c3e;stroke-linecap:round;stroke-dasharray:276.46;stroke-dashoffset:276.46}
+#ovaLoader .ova-loader-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 19px/1 Manrope,"Segoe UI",Arial,sans-serif;color:#2b2118;letter-spacing:.02em}
+@media (prefers-reduced-motion:reduce){#ovaLoader{transition:none}}
+</style>
+<div id="ovaLoader" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="ova-loader-ring">
+    <svg viewBox="0 0 96 96" aria-hidden="true"><circle class="ova-loader-track" cx="48" cy="48" r="44"/><circle class="ova-loader-bar" cx="48" cy="48" r="44"/></svg>
+    <div class="ova-loader-num">0%</div>
+  </div>
+</div>
+<script>
+(function () {
+  var root = document.getElementById("ovaLoader");
+  if (!root) return;
+  var bar = root.querySelector(".ova-loader-bar");
+  var num = root.querySelector(".ova-loader-num");
+  var LEN = 276.46, shown = 0, finished = false, start = Date.now();
+
+  /* Target progress: creeps toward 60% while the HTML parses, 60-95% as the
+     images that are actually loading finish, 100% on window load. */
+  function target() {
+    if (finished) return 100;
+    var t = Math.min(1, (Date.now() - start) / 2500);
+    var base = 60 * (1 - Math.pow(1 - t, 2));
+    if (document.readyState === "loading") return base;
+    var imgs = document.images, total = 0, done = 0;
+    for (var i = 0; i < imgs.length; i++) {
+      if (imgs[i].loading === "lazy" || !imgs[i].getAttribute("src")) continue;
+      total++;
+      if (imgs[i].complete) done++;
+    }
+    return Math.max(base, 60 + 35 * (total ? done / total : 1));
+  }
+
+  function paint() {
+    var goal = target();
+    shown += (goal - shown) * (finished ? 0.35 : 0.12);
+    if (goal - shown < 0.5) shown = goal;
+    var p = Math.round(shown);
+    num.textContent = p + "%";
+    bar.style.strokeDashoffset = String(LEN * (1 - shown / 100));
+    root.setAttribute("aria-valuenow", p);
+    if (finished && p >= 100) {
+      root.classList.add("is-done");
+      setTimeout(function () { if (root.parentNode) root.parentNode.removeChild(root); }, 500);
+      return;
+    }
+    requestAnimationFrame(paint);
+  }
+
+  function finish() { finished = true; }
+  if (document.readyState === "complete") finish();
+  else window.addEventListener("load", finish, { once: true });
+  // never trap a visitor behind the loader on a slow or stalled request
+  setTimeout(finish, 8000);
+  // coming back via the back button restores a loaded page: skip the loader
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && root.parentNode) root.parentNode.removeChild(root);
+  });
+  requestAnimationFrame(paint);
+})();
+</script>
   <div class="navbar">
     <a href="index.html" class="navbar-logo">Ova Store</a>
     <div class="navbar-right">
