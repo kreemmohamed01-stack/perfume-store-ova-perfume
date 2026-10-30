@@ -417,6 +417,7 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
      loaded, then fades out. Inline so it paints before any other file. -->
 <style>
 #ovaLoader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#fff;transition:opacity .45s ease,visibility .45s ease}
+.ova-entrance-pending #ovaLoader{display:none}
 #ovaLoader.is-done{opacity:0;visibility:hidden;pointer-events:none}
 #ovaLoader .ova-loader-ring{position:relative;width:96px;height:96px}
 #ovaLoader svg{width:100%;height:100%;transform:rotate(-90deg)}
@@ -436,6 +437,11 @@ html[dir="rtl"] .ai-banner-side{right:auto;left:22px;text-align:left}
 (function () {
   var root = document.getElementById("ovaLoader");
   if (!root) return;
+  // arriving straight from the intro video: the page plays its own entrance
+  if (document.documentElement.classList.contains("ova-entrance-pending")) {
+    root.parentNode.removeChild(root);
+    return;
+  }
   var bar = root.querySelector(".ova-loader-bar");
   var num = root.querySelector(".ova-loader-num");
   var LEN = 276.46, shown = 0, finished = false, start = Date.now();
