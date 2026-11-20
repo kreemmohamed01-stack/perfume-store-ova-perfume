@@ -14,13 +14,6 @@
   var ar = function () { return (localStorage.getItem("ovaLang") || "") === "ar" || document.documentElement.lang === "ar"; };
   var L = function (en, a) { return ar() ? a : en; };
 
-  /* announcement bar */
-  var bar = document.createElement("div");
-  bar.className = "lx-announce";
-  var msg = [L("Buy 3 perfumes · Get 50% off", "اشترِ 3 عطور · خصم 50%"), L("Free delivery on your first order", "توصيل مجاني على أول طلب"), L("Delivery in 2–4 business days", "التوصيل خلال 2–4 أيام عمل"), L("100% original fragrances", "عطور أصلية 100%")];
-  var run = msg.map(function (m) { return "<span>" + m + "</span><i>✦</i>"; }).join("");
-  bar.innerHTML = '<div class="lx-announce-track">' + run + run + run + run + "</div>";
-  document.body.insertBefore(bar, document.body.firstChild);
   document.documentElement.classList.add("lx-site");
 
   /* smooth scroll */
