@@ -1,0 +1,56 @@
+/* OVA luxe site layer — pairs with js/ova-luxe-site.js */
+.lx-announce{position:relative;z-index:3500;height:32px;overflow:hidden;background:#1d110a;color:#f1dfbd;font:400 11px/32px Manrope,"IBM Plex Sans Arabic",sans-serif;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+.lx-announce-track{display:inline-flex;gap:28px;padding-inline-start:28px;animation:lxMarquee 38s linear infinite}
+.lx-announce:hover .lx-announce-track{animation-play-state:paused}
+.lx-announce i{font-style:normal;color:#b8893e}
+@keyframes lxMarquee{to{transform:translateX(-50%)}}
+html[dir="rtl"] .lx-announce-track,body[dir="rtl"] .lx-announce-track{animation-name:lxMarqueeRtl}
+@keyframes lxMarqueeRtl{to{transform:translateX(50%)}}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+
+/* header */
+.lx-site #navbar,.lx-site #ovaShopNav{transition:transform .6s cubic-bezier(.22,1,.36,1),background .4s,box-shadow .4s}
+.lx-site #navbar.lx-nav-hide,.lx-site #ovaShopNav.lx-nav-hide{transform:translateY(-110%)}
+.lx-scrolled #navbar{backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px)}
+
+/* section titles: uppercase, thin, line reveal */
+.lx-title-rv{clip-path:inset(0 0 100% 0);transform:translateY(24px);transition:clip-path 1.1s cubic-bezier(.22,1,.36,1),transform 1.1s cubic-bezier(.22,1,.36,1)}
+.lx-title-rv.lx-in{clip-path:inset(0 0 -10% 0);transform:none}
+
+/* product cards */
+.lx-card-rv{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1) var(--d,0s),transform .9s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+.lx-card-rv.lx-in{opacity:1;transform:none}
+.lx-site .product-card img,.lx-site .br-card img{transition:transform 1.2s cubic-bezier(.22,1,.36,1),opacity .6s ease}
+.lx-site .product-card:hover img:not(.lx-card-alt),.lx-site .br-card:hover img:not(.lx-card-alt){transform:scale(1.05)}
+.lx-card-alt{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;pointer-events:none;background:inherit}
+.lx-has-alt:hover .lx-card-alt{opacity:1}
+.lx-has-alt:hover img:not(.lx-card-alt){opacity:0}
+
+/* product page extras */
+.lx-ship{margin:4px 0 0;font:300 12px/1.6 Manrope,"IBM Plex Sans Arabic",sans-serif;color:#6f5c4c;text-align:center}
+.lx-ship i{font-style:normal;color:#b8893e;margin:0 6px}
+.lx-specs{margin:6px 0 0;border-top:1px solid rgba(74,44,29,.12)}
+.lx-specs div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(74,44,29,.12);font:300 13px Manrope,"IBM Plex Sans Arabic",sans-serif}
+.lx-specs dt{color:#a08f80;letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+.lx-specs dd{margin:0;color:#22170f;text-align:end}
+@media (prefers-reduced-motion:reduce){.lx-announce-track{animation:none}.lx-card-rv,.lx-title-rv{opacity:1;transform:none;clip-path:none}}
+
+/* page transition veil (ccopadel .page-transition, .6s sine.inOut) */
+.lx-veil{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:#1d110a;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .6s cubic-bezier(.37,0,.63,1),visibility 0s linear .6s}
+.lx-veil.is-on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s cubic-bezier(.37,0,.63,1)}
+.lx-veil.is-enter{transition:none}
+.lx-veil span{font-family:"Cormorant Lx","Cormorant Garamond",serif;font-weight:300;font-size:clamp(40px,8vw,90px);letter-spacing:.4em;color:#e2c287;clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.87,0,.13,1)}
+.lx-veil.is-on span{clip-path:inset(0 0 0 0)}
+.lx-word{display:inline}
+
+/* sn2 hero slow zoom (transform 10s ease-in-out) */
+@media (hover:hover){
+  #productDetailPage.lx #modalImg{transition:transform 10s ease-in-out,filter .6s}
+  #productDetailPage.lx .product-detail-gallery-card:hover #modalImg{transform:scale(1.06)}
+  .hero img,.best-seller-banner img{transition:transform 10s ease-in-out}
+  .hero:hover img,.best-seller-banner:hover img{transform:scale(1.06)}
+}
+/* ccopadel easing for UI */
+.lx-site .product-card,.lx-site .br-card{transition:transform .9s cubic-bezier(.165,.84,.44,1) var(--d,0s),opacity .9s cubic-bezier(.165,.84,.44,1) var(--d,0s),box-shadow .6s cubic-bezier(.165,.84,.44,1)}
+.lx-site .product-card:hover,.lx-site .br-card:hover{transform:translateY(-6px)}
