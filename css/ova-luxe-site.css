@@ -55,31 +55,29 @@ html.lenis,html.lenis body{height:auto}
 .lx-site .product-card,.lx-site .br-card{transition:transform .9s cubic-bezier(.165,.84,.44,1) var(--d,0s),opacity .9s cubic-bezier(.165,.84,.44,1) var(--d,0s),box-shadow .6s cubic-bezier(.165,.84,.44,1)}
 .lx-site .product-card:hover,.lx-site .br-card:hover{transform:translateY(-6px)}
 
-/* ===== Buttons: ccopadel label roll + sn2 armament fill ===== */
-.lxb{position:relative!important;overflow:hidden!important;isolation:isolate;text-transform:uppercase;letter-spacing:.06em!important;font-weight:500;
-  transition:color .5s cubic-bezier(.165,.84,.44,1),background-color .4s cubic-bezier(.165,.84,.44,1),border-color .4s,transform .4s cubic-bezier(.165,.84,.44,1)!important}
-html[lang="ar"] .lxb,body[dir="rtl"] .lxb{letter-spacing:0!important;text-transform:none}
-.lxb-l{display:inline-block;overflow:hidden;position:relative;vertical-align:top;line-height:1.4}
-.lxb-l>span{display:inline-block;transform:translateY(0);transition:transform .3s cubic-bezier(.165,.84,.44,1)}
-.lxb-l::after{content:attr(data-label);position:absolute;left:0;top:0;width:100%;white-space:nowrap;transform:translateY(100%);transition:transform .3s cubic-bezier(.165,.84,.44,1)}
-.lxb:hover .lxb-l>span,.lxb:focus-visible .lxb-l>span{transform:translateY(-100%)}
-.lxb:hover .lxb-l::after,.lxb:focus-visible .lxb-l::after{transform:translateY(0)}
+/* ===== Buttons: ccopadel label roll + sn2 armament fill (non-invasive) ===== */
+.lxb{isolation:isolate;transition:color .45s cubic-bezier(.165,.84,.44,1),border-color .4s,box-shadow .4s,transform .4s cubic-bezier(.165,.84,.44,1)}
+.lxb.lxb--pos{position:relative}
+.lxb-l{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;white-space:nowrap;line-height:1.3;height:1.3em}
+.lxb-l>span{display:block;transform:translateY(0);transition:transform .3s cubic-bezier(.165,.84,.44,1)}
+.lxb-l::after{content:attr(data-label);position:absolute;left:0;right:0;top:0;text-align:inherit;transform:translateY(105%);transition:transform .3s cubic-bezier(.165,.84,.44,1)}
+@media (hover:hover){
+  .lxb:hover .lxb-l>span{transform:translateY(-105%)}
+  .lxb:hover .lxb-l::after{transform:translateY(0)}
+}
 .lxb:active{transform:scale(.97)}
-/* fill layer (sn2 .armament-button before/after halves) */
-.lxb-f{position:absolute;inset:0;z-index:-1;pointer-events:none;display:block}
-.lxb-f b{position:absolute;top:0;bottom:0;width:50.5%;background:currentColor;transform:scaleX(0);transition:transform .3s ease-out}
+.lxb-f{position:absolute;inset:0;z-index:-1;pointer-events:none;display:block;border-radius:inherit;overflow:hidden}
+.lxb-f b{position:absolute;top:0;bottom:0;width:51%;transform:scaleX(0);transition:transform .3s ease-out}
 .lxb-f b:first-child{left:0;transform-origin:0 50%}
 .lxb-f b:last-child{right:0;transform-origin:100% 50%}
-/* outline: halves close in from both sides, text inverts */
 .lxb--outline .lxb-f b{background:#1d110a}
-.lxb--outline:hover{color:#f6e6c8!important;border-color:#1d110a!important}
-.lxb--outline:hover .lxb-f b{transform:scaleX(1)}
-/* filled: the colour wipes away to an outline, text inverts */
-.lxb--filled{border:1px solid currentColor}
 .lxb--filled .lxb-f b{background:#fffaf2}
-.lxb--filled:hover .lxb-f b{transform:scaleX(1)}
-.lxb--filled:hover{color:#1d110a!important;border-color:#1d110a!important;box-shadow:none!important}
-.lxb--filled:hover .lx-add-ico{color:#1d110a}
+@media (hover:hover){
+  .lxb--outline:hover{color:#f6e6c8!important}
+  .lxb--outline:hover .lxb-f b,.lxb--filled:hover .lxb-f b{transform:scaleX(1)}
+  .lxb--filled:hover{color:#1d110a!important;box-shadow:inset 0 0 0 1px #1d110a!important}
+  .lxb--filled:hover .lx-add-ico{color:#1d110a}
+}
 #productDetailPage.lx #modalAddBtn.lxb::after{display:none}
 .lxb:disabled .lxb-f b{transform:scaleX(0)!important}
 @media (prefers-reduced-motion:reduce){.lxb-l>span,.lxb-l::after,.lxb-f b{transition:none}}

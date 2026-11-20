@@ -30,8 +30,17 @@
       if (!labelHost) return;
     } else if (!textOnly(el)) return;
     var text = labelHost.textContent.replace(/\s+/g, " ").trim();
-    if (text.length < 2 || text.length > 48) return;
+    if (text.length < 2 || text.length > 28 || el.__lxBad === text) return;
+    var before = labelHost.innerHTML;
     labelHost.innerHTML = '<span class="lxb-l" data-label="' + text.replace(/"/g, "&quot;") + '"><span>' + text.replace(/</g, "&lt;") + "</span></span>";
+    // Undo if the one-line label no longer fits the button (would overlap)
+    var lab = labelHost.querySelector(".lxb-l");
+    if (el.offsetWidth && lab.offsetWidth > el.clientWidth - 6) {
+      labelHost.innerHTML = before;
+      el.__lxBad = text;
+      return;
+    }
+    if (getComputedStyle(el).position === "static") el.classList.add("lxb--pos");
     if (!el.querySelector(":scope > .lxb-f")) {
       var f = document.createElement("i");
       f.className = "lxb-f";
